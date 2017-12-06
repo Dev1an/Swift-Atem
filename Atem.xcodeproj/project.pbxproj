@@ -7,356 +7,327 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		"Atem R::Atem RPackageTests::ProductTarget" /* Atem RPackageTests */ = {
+		"Atem::AtemPackageTests::ProductTarget" /* AtemPackageTests */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_331 /* Build configuration list for PBXAggregateTarget "Atem RPackageTests" */;
+			buildConfigurationList = OBJ_335 /* Build configuration list for PBXAggregateTarget "AtemPackageTests" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_334 /* PBXTargetDependency */,
+				OBJ_338 /* PBXTargetDependency */,
 			);
-			name = "Atem RPackageTests";
-			productName = "Atem RPackageTests";
+			name = AtemPackageTests;
+			productName = AtemPackageTests;
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		743FB7C91FD20A3100ACF282 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743FB7C81FD20A3100ACF282 /* AppDelegate.swift */; };
-		743FB7CB1FD20A3100ACF282 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743FB7CA1FD20A3100ACF282 /* ViewController.swift */; };
-		743FB7CD1FD20A3100ACF282 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 743FB7CC1FD20A3100ACF282 /* Assets.xcassets */; };
-		743FB7D01FD20A3100ACF282 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 743FB7CE1FD20A3100ACF282 /* Main.storyboard */; };
-		743FB7DC1FD20A3100ACF282 /* AtemControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743FB7DB1FD20A3100ACF282 /* AtemControlTests.swift */; };
-		743FB7E71FD20A3100ACF282 /* AtemControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743FB7E61FD20A3100ACF282 /* AtemControlUITests.swift */; };
-		743FB7F31FD20A4500ACF282 /* Atem_R.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Atem R::Atem R::Product" /* Atem_R.framework */; };
 		OBJ_129 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_135 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Package.swift */; };
 		OBJ_141 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* Package.swift */; };
 		OBJ_147 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* Package.swift */; };
 		OBJ_153 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* Package.swift */; };
-		OBJ_159 /* Atem_RTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Atem_RTests.swift */; };
-		OBJ_161 /* Atem_R.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Atem R::Atem R::Product" /* Atem_R.framework */; };
+		OBJ_159 /* Atem_RTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Atem_RTests.swift */; };
+		OBJ_161 /* Atem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Atem::Atem::Product" /* Atem.framework */; };
 		OBJ_162 /* Sockets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Sockets::Sockets::Product" /* Sockets.framework */; };
 		OBJ_163 /* Transport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Sockets::Transport::Product" /* Transport.framework */; };
 		OBJ_164 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Core::Product" /* Core.framework */; };
 		OBJ_165 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
 		OBJ_166 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
 		OBJ_167 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
-		OBJ_186 /* Atem_R.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Atem_R.swift */; };
-		OBJ_188 /* Sockets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Sockets::Sockets::Product" /* Sockets.framework */; };
-		OBJ_189 /* Transport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Sockets::Transport::Product" /* Transport.framework */; };
-		OBJ_190 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Core::Product" /* Core.framework */; };
-		OBJ_191 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
-		OBJ_192 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
-		OBJ_193 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
-		OBJ_204 /* Address+C.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Address+C.swift */; };
-		OBJ_205 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Address.swift */; };
-		OBJ_206 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Buffer.swift */; };
-		OBJ_207 /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* Conversions.swift */; };
-		OBJ_208 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* Error.swift */; };
-		OBJ_209 /* FDSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* FDSet.swift */; };
-		OBJ_210 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Types.swift */; };
-		OBJ_211 /* Exports.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Exports.swift */; };
-		OBJ_212 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* Config.swift */; };
-		OBJ_213 /* Descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* Descriptor.swift */; };
-		OBJ_214 /* InternetSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* InternetSocket.swift */; };
-		OBJ_215 /* Pipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* Pipe.swift */; };
-		OBJ_216 /* RawSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* RawSocket.swift */; };
-		OBJ_217 /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Select.swift */; };
-		OBJ_218 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Socket.swift */; };
-		OBJ_219 /* SocketOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* SocketOptions.swift */; };
-		OBJ_220 /* TCPEstablishedSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* TCPEstablishedSocket.swift */; };
-		OBJ_221 /* TCPInternetSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* TCPInternetSocket.swift */; };
-		OBJ_222 /* TCPReadableSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* TCPReadableSocket.swift */; };
-		OBJ_223 /* TCPSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* TCPSocket.swift */; };
-		OBJ_224 /* TCPWriteableSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* TCPWriteableSocket.swift */; };
-		OBJ_225 /* UDPSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* UDPSocket.swift */; };
-		OBJ_227 /* Transport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Sockets::Transport::Product" /* Transport.framework */; };
-		OBJ_228 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Core::Product" /* Core.framework */; };
-		OBJ_229 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
-		OBJ_230 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
-		OBJ_231 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
-		OBJ_241 /* Exports.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Exports.swift */; };
-		OBJ_242 /* ClientStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* ClientStream.swift */; };
-		OBJ_243 /* InternetStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* InternetStream.swift */; };
-		OBJ_244 /* Port.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* Port.swift */; };
-		OBJ_245 /* ServerStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ServerStream.swift */; };
-		OBJ_246 /* FoundationStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* FoundationStream.swift */; };
-		OBJ_247 /* ReadableStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* ReadableStream.swift */; };
-		OBJ_248 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Stream.swift */; };
-		OBJ_249 /* StreamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* StreamError.swift */; };
-		OBJ_250 /* WriteableStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* WriteableStream.swift */; };
-		OBJ_252 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Core::Product" /* Core.framework */; };
-		OBJ_253 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
-		OBJ_254 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
-		OBJ_255 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
-		OBJ_264 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* Array.swift */; };
-		OBJ_265 /* Bits.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Bits.swift */; };
-		OBJ_266 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Cache.swift */; };
-		OBJ_267 /* Collection+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Collection+Safe.swift */; };
-		OBJ_268 /* DataFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* DataFile.swift */; };
-		OBJ_269 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Dispatch.swift */; };
-		OBJ_270 /* DispatchTime+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* DispatchTime+Utilities.swift */; };
-		OBJ_271 /* EmptyInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* EmptyInitializable.swift */; };
-		OBJ_272 /* Exports.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* Exports.swift */; };
-		OBJ_273 /* Extendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* Extendable.swift */; };
-		OBJ_274 /* FileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* FileProtocol.swift */; };
-		OBJ_275 /* Int+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* Int+Hex.swift */; };
-		OBJ_276 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* Lock.swift */; };
-		OBJ_277 /* Portal.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* Portal.swift */; };
-		OBJ_278 /* RFC1123.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* RFC1123.swift */; };
-		OBJ_279 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* Result.swift */; };
-		OBJ_280 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* Semaphore.swift */; };
-		OBJ_281 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* Sequence.swift */; };
-		OBJ_282 /* StaticDataBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* StaticDataBuffer.swift */; };
-		OBJ_283 /* String+CaseInsensitiveCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* String+CaseInsensitiveCompare.swift */; };
-		OBJ_284 /* String+Polymorphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* String+Polymorphic.swift */; };
-		OBJ_285 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* String.swift */; };
-		OBJ_286 /* WorkingDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* WorkingDirectory.swift */; };
-		OBJ_288 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
-		OBJ_289 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
-		OBJ_290 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
-		OBJ_298 /* Debuggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* Debuggable.swift */; };
-		OBJ_304 /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* Aliases.swift */; };
-		OBJ_305 /* Base64Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* Base64Encoder.swift */; };
-		OBJ_306 /* Byte+Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* Byte+Alphabet.swift */; };
-		OBJ_307 /* Byte+ControlCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* Byte+ControlCharacters.swift */; };
-		OBJ_308 /* Byte+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* Byte+Convenience.swift */; };
-		OBJ_309 /* Byte+PatternMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Byte+PatternMatching.swift */; };
-		OBJ_310 /* Byte+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* Byte+Random.swift */; };
-		OBJ_311 /* Byte+UTF8Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* Byte+UTF8Numbers.swift */; };
-		OBJ_312 /* ByteSequence+Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ByteSequence+Conversions.swift */; };
-		OBJ_313 /* Bytes+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* Bytes+Base64.swift */; };
-		OBJ_314 /* Bytes+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* Bytes+Hex.swift */; };
-		OBJ_315 /* Bytes+Percent.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* Bytes+Percent.swift */; };
-		OBJ_316 /* BytesConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* BytesConvertible.swift */; };
-		OBJ_317 /* Data+BytesConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* Data+BytesConvertible.swift */; };
-		OBJ_318 /* HexEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* HexEncoder.swift */; };
-		OBJ_319 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* Operators.swift */; };
-		OBJ_320 /* String+BytesConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* String+BytesConvertible.swift */; };
-		OBJ_321 /* UnsignedInteger+BytesConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* UnsignedInteger+BytesConvertible.swift */; };
-		OBJ_322 /* UnsignedInteger+Shifting.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* UnsignedInteger+Shifting.swift */; };
-		OBJ_328 /* libc.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* libc.swift */; };
+		OBJ_186 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Connection.swift */; };
+		OBJ_187 /* IntOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* IntOperators.swift */; };
+		OBJ_188 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Message.swift */; };
+		OBJ_189 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Packet.swift */; };
+		OBJ_190 /* PacketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* PacketTypes.swift */; };
+		OBJ_192 /* Sockets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Sockets::Sockets::Product" /* Sockets.framework */; };
+		OBJ_193 /* Transport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Sockets::Transport::Product" /* Transport.framework */; };
+		OBJ_194 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Core::Product" /* Core.framework */; };
+		OBJ_195 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
+		OBJ_196 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
+		OBJ_197 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
+		OBJ_208 /* Address+C.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Address+C.swift */; };
+		OBJ_209 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Address.swift */; };
+		OBJ_210 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Buffer.swift */; };
+		OBJ_211 /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* Conversions.swift */; };
+		OBJ_212 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* Error.swift */; };
+		OBJ_213 /* FDSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* FDSet.swift */; };
+		OBJ_214 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Types.swift */; };
+		OBJ_215 /* Exports.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Exports.swift */; };
+		OBJ_216 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* Config.swift */; };
+		OBJ_217 /* Descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* Descriptor.swift */; };
+		OBJ_218 /* InternetSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* InternetSocket.swift */; };
+		OBJ_219 /* Pipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* Pipe.swift */; };
+		OBJ_220 /* RawSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* RawSocket.swift */; };
+		OBJ_221 /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Select.swift */; };
+		OBJ_222 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Socket.swift */; };
+		OBJ_223 /* SocketOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* SocketOptions.swift */; };
+		OBJ_224 /* TCPEstablishedSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* TCPEstablishedSocket.swift */; };
+		OBJ_225 /* TCPInternetSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* TCPInternetSocket.swift */; };
+		OBJ_226 /* TCPReadableSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* TCPReadableSocket.swift */; };
+		OBJ_227 /* TCPSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* TCPSocket.swift */; };
+		OBJ_228 /* TCPWriteableSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* TCPWriteableSocket.swift */; };
+		OBJ_229 /* UDPSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* UDPSocket.swift */; };
+		OBJ_231 /* Transport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Sockets::Transport::Product" /* Transport.framework */; };
+		OBJ_232 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Core::Product" /* Core.framework */; };
+		OBJ_233 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
+		OBJ_234 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
+		OBJ_235 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
+		OBJ_245 /* Exports.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Exports.swift */; };
+		OBJ_246 /* ClientStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* ClientStream.swift */; };
+		OBJ_247 /* InternetStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* InternetStream.swift */; };
+		OBJ_248 /* Port.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* Port.swift */; };
+		OBJ_249 /* ServerStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ServerStream.swift */; };
+		OBJ_250 /* FoundationStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* FoundationStream.swift */; };
+		OBJ_251 /* ReadableStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* ReadableStream.swift */; };
+		OBJ_252 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Stream.swift */; };
+		OBJ_253 /* StreamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* StreamError.swift */; };
+		OBJ_254 /* WriteableStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* WriteableStream.swift */; };
+		OBJ_256 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Core::Product" /* Core.framework */; };
+		OBJ_257 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
+		OBJ_258 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
+		OBJ_259 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
+		OBJ_268 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* Array.swift */; };
+		OBJ_269 /* Bits.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Bits.swift */; };
+		OBJ_270 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Cache.swift */; };
+		OBJ_271 /* Collection+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Collection+Safe.swift */; };
+		OBJ_272 /* DataFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* DataFile.swift */; };
+		OBJ_273 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Dispatch.swift */; };
+		OBJ_274 /* DispatchTime+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* DispatchTime+Utilities.swift */; };
+		OBJ_275 /* EmptyInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* EmptyInitializable.swift */; };
+		OBJ_276 /* Exports.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* Exports.swift */; };
+		OBJ_277 /* Extendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* Extendable.swift */; };
+		OBJ_278 /* FileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* FileProtocol.swift */; };
+		OBJ_279 /* Int+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* Int+Hex.swift */; };
+		OBJ_280 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* Lock.swift */; };
+		OBJ_281 /* Portal.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* Portal.swift */; };
+		OBJ_282 /* RFC1123.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* RFC1123.swift */; };
+		OBJ_283 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* Result.swift */; };
+		OBJ_284 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* Semaphore.swift */; };
+		OBJ_285 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* Sequence.swift */; };
+		OBJ_286 /* StaticDataBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* StaticDataBuffer.swift */; };
+		OBJ_287 /* String+CaseInsensitiveCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* String+CaseInsensitiveCompare.swift */; };
+		OBJ_288 /* String+Polymorphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* String+Polymorphic.swift */; };
+		OBJ_289 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* String.swift */; };
+		OBJ_290 /* WorkingDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* WorkingDirectory.swift */; };
+		OBJ_292 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Debugging::Debugging::Product" /* Debugging.framework */; };
+		OBJ_293 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bits::Bits::Product" /* Bits.framework */; };
+		OBJ_294 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::libc::Product" /* libc.framework */; };
+		OBJ_302 /* Debuggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* Debuggable.swift */; };
+		OBJ_308 /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* Aliases.swift */; };
+		OBJ_309 /* Base64Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* Base64Encoder.swift */; };
+		OBJ_310 /* Byte+Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* Byte+Alphabet.swift */; };
+		OBJ_311 /* Byte+ControlCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* Byte+ControlCharacters.swift */; };
+		OBJ_312 /* Byte+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* Byte+Convenience.swift */; };
+		OBJ_313 /* Byte+PatternMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Byte+PatternMatching.swift */; };
+		OBJ_314 /* Byte+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* Byte+Random.swift */; };
+		OBJ_315 /* Byte+UTF8Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* Byte+UTF8Numbers.swift */; };
+		OBJ_316 /* ByteSequence+Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ByteSequence+Conversions.swift */; };
+		OBJ_317 /* Bytes+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* Bytes+Base64.swift */; };
+		OBJ_318 /* Bytes+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* Bytes+Hex.swift */; };
+		OBJ_319 /* Bytes+Percent.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* Bytes+Percent.swift */; };
+		OBJ_320 /* BytesConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* BytesConvertible.swift */; };
+		OBJ_321 /* Data+BytesConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* Data+BytesConvertible.swift */; };
+		OBJ_322 /* HexEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* HexEncoder.swift */; };
+		OBJ_323 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* Operators.swift */; };
+		OBJ_324 /* String+BytesConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* String+BytesConvertible.swift */; };
+		OBJ_325 /* UnsignedInteger+BytesConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* UnsignedInteger+BytesConvertible.swift */; };
+		OBJ_326 /* UnsignedInteger+Shifting.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* UnsignedInteger+Shifting.swift */; };
+		OBJ_332 /* libc.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* libc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		743FB7A81FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C5F1FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Sockets::Sockets";
 			remoteInfo = Sockets;
 		};
-		743FB7A91FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C601FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Sockets::Transport";
 			remoteInfo = Transport;
 		};
-		743FB7AA1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C611FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::Core";
 			remoteInfo = Core;
 		};
-		743FB7AB1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C621FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Debugging::Debugging";
 			remoteInfo = Debugging;
 		};
-		743FB7AC1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C631FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Bits::Bits";
 			remoteInfo = Bits;
 		};
-		743FB7AD1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C641FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::libc";
 			remoteInfo = libc;
 		};
-		743FB7AE1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C651FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Debugging::Debugging";
 			remoteInfo = Debugging;
 		};
-		743FB7AF1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C661FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Bits::Bits";
 			remoteInfo = Bits;
 		};
-		743FB7B01FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C671FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::libc";
 			remoteInfo = libc;
 		};
-		743FB7B11FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C681FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::Core";
 			remoteInfo = Core;
 		};
-		743FB7B21FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C691FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Debugging::Debugging";
 			remoteInfo = Debugging;
 		};
-		743FB7B31FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C6A1FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Bits::Bits";
 			remoteInfo = Bits;
 		};
-		743FB7B41FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C6B1FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::libc";
 			remoteInfo = libc;
 		};
-		743FB7B51FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C6C1FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Sockets::Transport";
 			remoteInfo = Transport;
 		};
-		743FB7B61FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C6D1FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::Core";
 			remoteInfo = Core;
 		};
-		743FB7B71FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C6E1FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Debugging::Debugging";
 			remoteInfo = Debugging;
 		};
-		743FB7B81FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C6F1FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Bits::Bits";
 			remoteInfo = Bits;
 		};
-		743FB7B91FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C701FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::libc";
 			remoteInfo = libc;
 		};
-		743FB7BA1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C711FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = "Atem R::Atem R";
-			remoteInfo = "Atem R";
+			remoteGlobalIDString = "Atem::Atem";
+			remoteInfo = Atem;
 		};
-		743FB7BB1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C721FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Sockets::Sockets";
 			remoteInfo = Sockets;
 		};
-		743FB7BC1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C731FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Sockets::Transport";
 			remoteInfo = Transport;
 		};
-		743FB7BD1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C741FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::Core";
 			remoteInfo = Core;
 		};
-		743FB7BE1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C751FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Debugging::Debugging";
 			remoteInfo = Debugging;
 		};
-		743FB7BF1FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C761FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Bits::Bits";
 			remoteInfo = Bits;
 		};
-		743FB7C01FD209AE00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C771FD491D80090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Core::libc";
 			remoteInfo = libc;
 		};
-		743FB7C11FD209AF00ACF282 /* PBXContainerItemProxy */ = {
+		74AD5C781FD491DC0090B19F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = "Atem R::Atem RTests";
+			remoteGlobalIDString = "Atem::Atem RTests";
 			remoteInfo = "Atem RTests";
-		};
-		743FB7D81FD20A3100ACF282 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 743FB7C51FD20A3100ACF282;
-			remoteInfo = AtemControl;
-		};
-		743FB7E31FD20A3100ACF282 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 743FB7C51FD20A3100ACF282;
-			remoteInfo = AtemControl;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		743FB7C61FD20A3100ACF282 /* AtemControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtemControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		743FB7C81FD20A3100ACF282 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		743FB7CA1FD20A3100ACF282 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		743FB7CC1FD20A3100ACF282 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		743FB7CF1FD20A3100ACF282 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		743FB7D11FD20A3100ACF282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		743FB7D21FD20A3100ACF282 /* AtemControl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AtemControl.entitlements; sourceTree = "<group>"; };
-		743FB7D71FD20A3100ACF282 /* AtemControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtemControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		743FB7DB1FD20A3100ACF282 /* AtemControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtemControlTests.swift; sourceTree = "<group>"; };
-		743FB7DD1FD20A3100ACF282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		743FB7E21FD20A3100ACF282 /* AtemControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtemControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		743FB7E61FD20A3100ACF282 /* AtemControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtemControlUITests.swift; sourceTree = "<group>"; };
-		743FB7E81FD20A3100ACF282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		"Atem R::Atem R::Product" /* Atem_R.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Atem_R.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Atem R::Atem RTests::Product" /* Atem_RTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = Atem_RTests.xctest; path = "Atem RTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Atem::Atem RTests::Product" /* Atem_RTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = Atem_RTests.xctest; path = "Atem RTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Atem::Atem::Product" /* Atem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Atem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bits::Bits::Product" /* Bits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Core::Core::Product" /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Core::libc::Product" /* libc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Debugging::Debugging::Product" /* Debugging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Debugging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_10 /* IntOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntOperators.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Byte+PatternMatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Byte+PatternMatching.swift"; sourceTree = "<group>"; };
 		OBJ_101 /* Byte+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Byte+Random.swift"; sourceTree = "<group>"; };
 		OBJ_102 /* Byte+UTF8Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Byte+UTF8Numbers.swift"; sourceTree = "<group>"; };
@@ -367,12 +338,15 @@
 		OBJ_107 /* BytesConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytesConvertible.swift; sourceTree = "<group>"; };
 		OBJ_108 /* Data+BytesConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+BytesConvertible.swift"; sourceTree = "<group>"; };
 		OBJ_109 /* HexEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexEncoder.swift; sourceTree = "<group>"; };
+		OBJ_11 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		OBJ_110 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		OBJ_111 /* String+BytesConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BytesConvertible.swift"; sourceTree = "<group>"; };
 		OBJ_112 /* UnsignedInteger+BytesConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsignedInteger+BytesConvertible.swift"; sourceTree = "<group>"; };
 		OBJ_113 /* UnsignedInteger+Shifting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsignedInteger+Shifting.swift"; sourceTree = "<group>"; };
 		OBJ_114 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/damiaan/Documents/Projecten/Atem R/.build/checkouts/bits.git-9196587591774126515/Package.swift"; sourceTree = "<group>"; };
-		OBJ_12 /* Atem_RTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atem_RTests.swift; sourceTree = "<group>"; };
+		OBJ_12 /* Packet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
+		OBJ_13 /* PacketTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTypes.swift; sourceTree = "<group>"; };
+		OBJ_16 /* Atem_RTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atem_RTests.swift; sourceTree = "<group>"; };
 		OBJ_20 /* Exports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exports.swift; sourceTree = "<group>"; };
 		OBJ_22 /* ClientStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientStream.swift; sourceTree = "<group>"; };
 		OBJ_23 /* InternetStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetStream.swift; sourceTree = "<group>"; };
@@ -432,7 +406,7 @@
 		OBJ_86 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		OBJ_87 /* WorkingDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingDirectory.swift; sourceTree = "<group>"; };
 		OBJ_88 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/damiaan/Documents/Projecten/Atem R/.build/checkouts/core.git-9210800844849382486/Package.swift"; sourceTree = "<group>"; };
-		OBJ_9 /* Atem_R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atem_R.swift; sourceTree = "<group>"; };
+		OBJ_9 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		OBJ_91 /* Debuggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debuggable.swift; sourceTree = "<group>"; };
 		OBJ_92 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/damiaan/Documents/Projecten/Atem R/.build/checkouts/debugging.git-4365319567167379684/Package.swift"; sourceTree = "<group>"; };
 		OBJ_95 /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
@@ -445,33 +419,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		743FB7C31FD20A3100ACF282 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				743FB7F31FD20A4500ACF282 /* Atem_R.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		743FB7D41FD20A3100ACF282 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		743FB7DF1FD20A3100ACF282 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_160 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_161 /* Atem_R.framework in Frameworks */,
+				OBJ_161 /* Atem.framework in Frameworks */,
 				OBJ_162 /* Sockets.framework in Frameworks */,
 				OBJ_163 /* Transport.framework in Frameworks */,
 				OBJ_164 /* Core.framework in Frameworks */,
@@ -481,67 +433,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_187 /* Frameworks */ = {
+		OBJ_191 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_188 /* Sockets.framework in Frameworks */,
-				OBJ_189 /* Transport.framework in Frameworks */,
-				OBJ_190 /* Core.framework in Frameworks */,
-				OBJ_191 /* Debugging.framework in Frameworks */,
-				OBJ_192 /* Bits.framework in Frameworks */,
-				OBJ_193 /* libc.framework in Frameworks */,
+				OBJ_192 /* Sockets.framework in Frameworks */,
+				OBJ_193 /* Transport.framework in Frameworks */,
+				OBJ_194 /* Core.framework in Frameworks */,
+				OBJ_195 /* Debugging.framework in Frameworks */,
+				OBJ_196 /* Bits.framework in Frameworks */,
+				OBJ_197 /* libc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_226 /* Frameworks */ = {
+		OBJ_230 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_227 /* Transport.framework in Frameworks */,
-				OBJ_228 /* Core.framework in Frameworks */,
-				OBJ_229 /* Debugging.framework in Frameworks */,
-				OBJ_230 /* Bits.framework in Frameworks */,
-				OBJ_231 /* libc.framework in Frameworks */,
+				OBJ_231 /* Transport.framework in Frameworks */,
+				OBJ_232 /* Core.framework in Frameworks */,
+				OBJ_233 /* Debugging.framework in Frameworks */,
+				OBJ_234 /* Bits.framework in Frameworks */,
+				OBJ_235 /* libc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_251 /* Frameworks */ = {
+		OBJ_255 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_252 /* Core.framework in Frameworks */,
-				OBJ_253 /* Debugging.framework in Frameworks */,
-				OBJ_254 /* Bits.framework in Frameworks */,
-				OBJ_255 /* libc.framework in Frameworks */,
+				OBJ_256 /* Core.framework in Frameworks */,
+				OBJ_257 /* Debugging.framework in Frameworks */,
+				OBJ_258 /* Bits.framework in Frameworks */,
+				OBJ_259 /* libc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_287 /* Frameworks */ = {
+		OBJ_291 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_288 /* Debugging.framework in Frameworks */,
-				OBJ_289 /* Bits.framework in Frameworks */,
-				OBJ_290 /* libc.framework in Frameworks */,
+				OBJ_292 /* Debugging.framework in Frameworks */,
+				OBJ_293 /* Bits.framework in Frameworks */,
+				OBJ_294 /* libc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_299 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_323 /* Frameworks */ = {
+		OBJ_303 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_329 /* Frameworks */ = {
+		OBJ_327 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_333 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
@@ -551,78 +503,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		743FB7C71FD20A3100ACF282 /* AtemControl */ = {
-			isa = PBXGroup;
-			children = (
-				743FB7C81FD20A3100ACF282 /* AppDelegate.swift */,
-				743FB7CA1FD20A3100ACF282 /* ViewController.swift */,
-				743FB7CC1FD20A3100ACF282 /* Assets.xcassets */,
-				743FB7CE1FD20A3100ACF282 /* Main.storyboard */,
-				743FB7D11FD20A3100ACF282 /* Info.plist */,
-				743FB7D21FD20A3100ACF282 /* AtemControl.entitlements */,
-			);
-			path = AtemControl;
-			sourceTree = "<group>";
-		};
-		743FB7DA1FD20A3100ACF282 /* AtemControlTests */ = {
-			isa = PBXGroup;
-			children = (
-				743FB7DB1FD20A3100ACF282 /* AtemControlTests.swift */,
-				743FB7DD1FD20A3100ACF282 /* Info.plist */,
-			);
-			path = AtemControlTests;
-			sourceTree = "<group>";
-		};
-		743FB7E51FD20A3100ACF282 /* AtemControlUITests */ = {
-			isa = PBXGroup;
-			children = (
-				743FB7E61FD20A3100ACF282 /* AtemControlUITests.swift */,
-				743FB7E81FD20A3100ACF282 /* Info.plist */,
-			);
-			path = AtemControlUITests;
-			sourceTree = "<group>";
-		};
-		743FB7F21FD20A4500ACF282 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		OBJ_10 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_11 /* Atem RTests */,
-			);
-			name = Tests;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_11 /* Atem RTests */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_12 /* Atem_RTests.swift */,
-			);
-			name = "Atem RTests";
-			path = "Tests/Atem RTests";
-			sourceTree = SOURCE_ROOT;
-		};
 		OBJ_115 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"Atem R::Atem RTests::Product" /* Atem_RTests.xctest */,
-				"Atem R::Atem R::Product" /* Atem_R.framework */,
+				"Atem::Atem RTests::Product" /* Atem_RTests.xctest */,
+				"Atem::Atem::Product" /* Atem.framework */,
 				"Sockets::Sockets::Product" /* Sockets.framework */,
 				"Sockets::Transport::Product" /* Transport.framework */,
 				"Core::Core::Product" /* Core.framework */,
 				"Debugging::Debugging::Product" /* Debugging.framework */,
 				"Bits::Bits::Product" /* Bits.framework */,
 				"Core::libc::Product" /* libc.framework */,
-				743FB7C61FD20A3100ACF282 /* AtemControl.app */,
-				743FB7D71FD20A3100ACF282 /* AtemControlTests.xctest */,
-				743FB7E21FD20A3100ACF282 /* AtemControlUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_14 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_15 /* Atem RTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_15 /* Atem RTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_16 /* Atem_RTests.swift */,
+			);
+			name = "Atem RTests";
+			path = "Tests/Atem RTests";
+			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_17 /* Dependencies */ = {
 			isa = PBXGroup;
@@ -734,13 +645,9 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_10 /* Tests */,
+				OBJ_14 /* Tests */,
 				OBJ_17 /* Dependencies */,
-				743FB7C71FD20A3100ACF282 /* AtemControl */,
-				743FB7DA1FD20A3100ACF282 /* AtemControlTests */,
-				743FB7E51FD20A3100ACF282 /* AtemControlUITests */,
 				OBJ_115 /* Products */,
-				743FB7F21FD20A4500ACF282 /* Frameworks */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -818,18 +725,22 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* Atem R */,
+				OBJ_8 /* Atem */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_8 /* Atem R */ = {
+		OBJ_8 /* Atem */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* Atem_R.swift */,
+				OBJ_9 /* Connection.swift */,
+				OBJ_10 /* IntOperators.swift */,
+				OBJ_11 /* Message.swift */,
+				OBJ_12 /* Packet.swift */,
+				OBJ_13 /* PacketTypes.swift */,
 			);
-			name = "Atem R";
-			path = "Sources/Atem R";
+			name = Atem;
+			path = Sources/Atem;
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_89 /* Debugging 1.1.0 */ = {
@@ -889,82 +800,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		743FB7C51FD20A3100ACF282 /* AtemControl */ = {
+		"Atem::Atem" /* Atem */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 743FB7E91FD20A3100ACF282 /* Build configuration list for PBXNativeTarget "AtemControl" */;
-			buildPhases = (
-				743FB7C21FD20A3100ACF282 /* Sources */,
-				743FB7C31FD20A3100ACF282 /* Frameworks */,
-				743FB7C41FD20A3100ACF282 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AtemControl;
-			productName = AtemControl;
-			productReference = 743FB7C61FD20A3100ACF282 /* AtemControl.app */;
-			productType = "com.apple.product-type.application";
-		};
-		743FB7D61FD20A3100ACF282 /* AtemControlTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 743FB7EC1FD20A3100ACF282 /* Build configuration list for PBXNativeTarget "AtemControlTests" */;
-			buildPhases = (
-				743FB7D31FD20A3100ACF282 /* Sources */,
-				743FB7D41FD20A3100ACF282 /* Frameworks */,
-				743FB7D51FD20A3100ACF282 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				743FB7D91FD20A3100ACF282 /* PBXTargetDependency */,
-			);
-			name = AtemControlTests;
-			productName = AtemControlTests;
-			productReference = 743FB7D71FD20A3100ACF282 /* AtemControlTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		743FB7E11FD20A3100ACF282 /* AtemControlUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 743FB7EF1FD20A3100ACF282 /* Build configuration list for PBXNativeTarget "AtemControlUITests" */;
-			buildPhases = (
-				743FB7DE1FD20A3100ACF282 /* Sources */,
-				743FB7DF1FD20A3100ACF282 /* Frameworks */,
-				743FB7E01FD20A3100ACF282 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				743FB7E41FD20A3100ACF282 /* PBXTargetDependency */,
-			);
-			name = AtemControlUITests;
-			productName = AtemControlUITests;
-			productReference = 743FB7E21FD20A3100ACF282 /* AtemControlUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		"Atem R::Atem R" /* Atem R */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_182 /* Build configuration list for PBXNativeTarget "Atem R" */;
+			buildConfigurationList = OBJ_182 /* Build configuration list for PBXNativeTarget "Atem" */;
 			buildPhases = (
 				OBJ_185 /* Sources */,
-				OBJ_187 /* Frameworks */,
+				OBJ_191 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_194 /* PBXTargetDependency */,
-				OBJ_195 /* PBXTargetDependency */,
-				OBJ_196 /* PBXTargetDependency */,
-				OBJ_197 /* PBXTargetDependency */,
 				OBJ_198 /* PBXTargetDependency */,
 				OBJ_199 /* PBXTargetDependency */,
+				OBJ_200 /* PBXTargetDependency */,
+				OBJ_201 /* PBXTargetDependency */,
+				OBJ_202 /* PBXTargetDependency */,
+				OBJ_203 /* PBXTargetDependency */,
 			);
-			name = "Atem R";
-			productName = Atem_R;
-			productReference = "Atem R::Atem R::Product" /* Atem_R.framework */;
+			name = Atem;
+			productName = Atem;
+			productReference = "Atem::Atem::Product" /* Atem.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		"Atem R::Atem RTests" /* Atem RTests */ = {
+		"Atem::Atem RTests" /* Atem RTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_155 /* Build configuration list for PBXNativeTarget "Atem RTests" */;
 			buildPhases = (
@@ -984,12 +842,12 @@
 			);
 			name = "Atem RTests";
 			productName = Atem_RTests;
-			productReference = "Atem R::Atem RTests::Product" /* Atem_RTests.xctest */;
+			productReference = "Atem::Atem RTests::Product" /* Atem_RTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		"Atem R::SwiftPMPackageDescription" /* Atem RPackageDescription */ = {
+		"Atem::SwiftPMPackageDescription" /* AtemPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_125 /* Build configuration list for PBXNativeTarget "Atem RPackageDescription" */;
+			buildConfigurationList = OBJ_125 /* Build configuration list for PBXNativeTarget "AtemPackageDescription" */;
 			buildPhases = (
 				OBJ_128 /* Sources */,
 			);
@@ -997,16 +855,16 @@
 			);
 			dependencies = (
 			);
-			name = "Atem RPackageDescription";
-			productName = "Atem RPackageDescription";
+			name = AtemPackageDescription;
+			productName = AtemPackageDescription;
 			productType = "com.apple.product-type.framework";
 		};
 		"Bits::Bits" /* Bits */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_300 /* Build configuration list for PBXNativeTarget "Bits" */;
+			buildConfigurationList = OBJ_304 /* Build configuration list for PBXNativeTarget "Bits" */;
 			buildPhases = (
-				OBJ_303 /* Sources */,
-				OBJ_323 /* Frameworks */,
+				OBJ_307 /* Sources */,
+				OBJ_327 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1033,17 +891,17 @@
 		};
 		"Core::Core" /* Core */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_260 /* Build configuration list for PBXNativeTarget "Core" */;
+			buildConfigurationList = OBJ_264 /* Build configuration list for PBXNativeTarget "Core" */;
 			buildPhases = (
-				OBJ_263 /* Sources */,
-				OBJ_287 /* Frameworks */,
+				OBJ_267 /* Sources */,
+				OBJ_291 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_291 /* PBXTargetDependency */,
-				OBJ_292 /* PBXTargetDependency */,
-				OBJ_293 /* PBXTargetDependency */,
+				OBJ_295 /* PBXTargetDependency */,
+				OBJ_296 /* PBXTargetDependency */,
+				OBJ_297 /* PBXTargetDependency */,
 			);
 			name = Core;
 			productName = Core;
@@ -1066,10 +924,10 @@
 		};
 		"Core::libc" /* libc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_324 /* Build configuration list for PBXNativeTarget "libc" */;
+			buildConfigurationList = OBJ_328 /* Build configuration list for PBXNativeTarget "libc" */;
 			buildPhases = (
-				OBJ_327 /* Sources */,
-				OBJ_329 /* Frameworks */,
+				OBJ_331 /* Sources */,
+				OBJ_333 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1082,10 +940,10 @@
 		};
 		"Debugging::Debugging" /* Debugging */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_294 /* Build configuration list for PBXNativeTarget "Debugging" */;
+			buildConfigurationList = OBJ_298 /* Build configuration list for PBXNativeTarget "Debugging" */;
 			buildPhases = (
-				OBJ_297 /* Sources */,
-				OBJ_299 /* Frameworks */,
+				OBJ_301 /* Sources */,
+				OBJ_303 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1112,19 +970,19 @@
 		};
 		"Sockets::Sockets" /* Sockets */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_200 /* Build configuration list for PBXNativeTarget "Sockets" */;
+			buildConfigurationList = OBJ_204 /* Build configuration list for PBXNativeTarget "Sockets" */;
 			buildPhases = (
-				OBJ_203 /* Sources */,
-				OBJ_226 /* Frameworks */,
+				OBJ_207 /* Sources */,
+				OBJ_230 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_232 /* PBXTargetDependency */,
-				OBJ_233 /* PBXTargetDependency */,
-				OBJ_234 /* PBXTargetDependency */,
-				OBJ_235 /* PBXTargetDependency */,
 				OBJ_236 /* PBXTargetDependency */,
+				OBJ_237 /* PBXTargetDependency */,
+				OBJ_238 /* PBXTargetDependency */,
+				OBJ_239 /* PBXTargetDependency */,
+				OBJ_240 /* PBXTargetDependency */,
 			);
 			name = Sockets;
 			productName = Sockets;
@@ -1147,18 +1005,18 @@
 		};
 		"Sockets::Transport" /* Transport */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_237 /* Build configuration list for PBXNativeTarget "Transport" */;
+			buildConfigurationList = OBJ_241 /* Build configuration list for PBXNativeTarget "Transport" */;
 			buildPhases = (
-				OBJ_240 /* Sources */,
-				OBJ_251 /* Frameworks */,
+				OBJ_244 /* Sources */,
+				OBJ_255 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_256 /* PBXTargetDependency */,
-				OBJ_257 /* PBXTargetDependency */,
-				OBJ_258 /* PBXTargetDependency */,
-				OBJ_259 /* PBXTargetDependency */,
+				OBJ_260 /* PBXTargetDependency */,
+				OBJ_261 /* PBXTargetDependency */,
+				OBJ_262 /* PBXTargetDependency */,
+				OBJ_263 /* PBXTargetDependency */,
 			);
 			name = Transport;
 			productName = Transport;
@@ -1171,114 +1029,39 @@
 		OBJ_1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 9999;
-				TargetAttributes = {
-					743FB7C51FD20A3100ACF282 = {
-						CreatedOnToolsVersion = 9.1;
-						DevelopmentTeam = 7TD9A665TC;
-						ProvisioningStyle = Automatic;
-					};
-					743FB7D61FD20A3100ACF282 = {
-						CreatedOnToolsVersion = 9.1;
-						DevelopmentTeam = 7TD9A665TC;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 743FB7C51FD20A3100ACF282;
-					};
-					743FB7E11FD20A3100ACF282 = {
-						CreatedOnToolsVersion = 9.1;
-						DevelopmentTeam = 7TD9A665TC;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 743FB7C51FD20A3100ACF282;
-					};
-				};
 			};
-			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Atem R" */;
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Atem" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = OBJ_5 /*  */;
 			productRefGroup = OBJ_115 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				"Atem R::SwiftPMPackageDescription" /* Atem RPackageDescription */,
+				"Atem::SwiftPMPackageDescription" /* AtemPackageDescription */,
 				"Sockets::SwiftPMPackageDescription" /* SocketsPackageDescription */,
 				"Core::SwiftPMPackageDescription" /* CorePackageDescription */,
 				"Debugging::SwiftPMPackageDescription" /* DebuggingPackageDescription */,
 				"Bits::SwiftPMPackageDescription" /* BitsPackageDescription */,
-				"Atem R::Atem RTests" /* Atem RTests */,
-				"Atem R::Atem R" /* Atem R */,
+				"Atem::Atem RTests" /* Atem RTests */,
+				"Atem::Atem" /* Atem */,
 				"Sockets::Sockets" /* Sockets */,
 				"Sockets::Transport" /* Transport */,
 				"Core::Core" /* Core */,
 				"Debugging::Debugging" /* Debugging */,
 				"Bits::Bits" /* Bits */,
 				"Core::libc" /* libc */,
-				"Atem R::Atem RPackageTests::ProductTarget" /* Atem RPackageTests */,
-				743FB7C51FD20A3100ACF282 /* AtemControl */,
-				743FB7D61FD20A3100ACF282 /* AtemControlTests */,
-				743FB7E11FD20A3100ACF282 /* AtemControlUITests */,
+				"Atem::AtemPackageTests::ProductTarget" /* AtemPackageTests */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		743FB7C41FD20A3100ACF282 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				743FB7CD1FD20A3100ACF282 /* Assets.xcassets in Resources */,
-				743FB7D01FD20A3100ACF282 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		743FB7D51FD20A3100ACF282 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		743FB7E01FD20A3100ACF282 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		743FB7C21FD20A3100ACF282 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				743FB7CB1FD20A3100ACF282 /* ViewController.swift in Sources */,
-				743FB7C91FD20A3100ACF282 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		743FB7D31FD20A3100ACF282 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				743FB7DC1FD20A3100ACF282 /* AtemControlTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		743FB7DE1FD20A3100ACF282 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				743FB7E71FD20A3100ACF282 /* AtemControlUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_128 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -1331,632 +1114,268 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_186 /* Atem_R.swift in Sources */,
+				OBJ_186 /* Connection.swift in Sources */,
+				OBJ_187 /* IntOperators.swift in Sources */,
+				OBJ_188 /* Message.swift in Sources */,
+				OBJ_189 /* Packet.swift in Sources */,
+				OBJ_190 /* PacketTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_203 /* Sources */ = {
+		OBJ_207 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_204 /* Address+C.swift in Sources */,
-				OBJ_205 /* Address.swift in Sources */,
-				OBJ_206 /* Buffer.swift in Sources */,
-				OBJ_207 /* Conversions.swift in Sources */,
-				OBJ_208 /* Error.swift in Sources */,
-				OBJ_209 /* FDSet.swift in Sources */,
-				OBJ_210 /* Types.swift in Sources */,
-				OBJ_211 /* Exports.swift in Sources */,
-				OBJ_212 /* Config.swift in Sources */,
-				OBJ_213 /* Descriptor.swift in Sources */,
-				OBJ_214 /* InternetSocket.swift in Sources */,
-				OBJ_215 /* Pipe.swift in Sources */,
-				OBJ_216 /* RawSocket.swift in Sources */,
-				OBJ_217 /* Select.swift in Sources */,
-				OBJ_218 /* Socket.swift in Sources */,
-				OBJ_219 /* SocketOptions.swift in Sources */,
-				OBJ_220 /* TCPEstablishedSocket.swift in Sources */,
-				OBJ_221 /* TCPInternetSocket.swift in Sources */,
-				OBJ_222 /* TCPReadableSocket.swift in Sources */,
-				OBJ_223 /* TCPSocket.swift in Sources */,
-				OBJ_224 /* TCPWriteableSocket.swift in Sources */,
-				OBJ_225 /* UDPSocket.swift in Sources */,
+				OBJ_208 /* Address+C.swift in Sources */,
+				OBJ_209 /* Address.swift in Sources */,
+				OBJ_210 /* Buffer.swift in Sources */,
+				OBJ_211 /* Conversions.swift in Sources */,
+				OBJ_212 /* Error.swift in Sources */,
+				OBJ_213 /* FDSet.swift in Sources */,
+				OBJ_214 /* Types.swift in Sources */,
+				OBJ_215 /* Exports.swift in Sources */,
+				OBJ_216 /* Config.swift in Sources */,
+				OBJ_217 /* Descriptor.swift in Sources */,
+				OBJ_218 /* InternetSocket.swift in Sources */,
+				OBJ_219 /* Pipe.swift in Sources */,
+				OBJ_220 /* RawSocket.swift in Sources */,
+				OBJ_221 /* Select.swift in Sources */,
+				OBJ_222 /* Socket.swift in Sources */,
+				OBJ_223 /* SocketOptions.swift in Sources */,
+				OBJ_224 /* TCPEstablishedSocket.swift in Sources */,
+				OBJ_225 /* TCPInternetSocket.swift in Sources */,
+				OBJ_226 /* TCPReadableSocket.swift in Sources */,
+				OBJ_227 /* TCPSocket.swift in Sources */,
+				OBJ_228 /* TCPWriteableSocket.swift in Sources */,
+				OBJ_229 /* UDPSocket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_240 /* Sources */ = {
+		OBJ_244 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_241 /* Exports.swift in Sources */,
-				OBJ_242 /* ClientStream.swift in Sources */,
-				OBJ_243 /* InternetStream.swift in Sources */,
-				OBJ_244 /* Port.swift in Sources */,
-				OBJ_245 /* ServerStream.swift in Sources */,
-				OBJ_246 /* FoundationStream.swift in Sources */,
-				OBJ_247 /* ReadableStream.swift in Sources */,
-				OBJ_248 /* Stream.swift in Sources */,
-				OBJ_249 /* StreamError.swift in Sources */,
-				OBJ_250 /* WriteableStream.swift in Sources */,
+				OBJ_245 /* Exports.swift in Sources */,
+				OBJ_246 /* ClientStream.swift in Sources */,
+				OBJ_247 /* InternetStream.swift in Sources */,
+				OBJ_248 /* Port.swift in Sources */,
+				OBJ_249 /* ServerStream.swift in Sources */,
+				OBJ_250 /* FoundationStream.swift in Sources */,
+				OBJ_251 /* ReadableStream.swift in Sources */,
+				OBJ_252 /* Stream.swift in Sources */,
+				OBJ_253 /* StreamError.swift in Sources */,
+				OBJ_254 /* WriteableStream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_263 /* Sources */ = {
+		OBJ_267 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_264 /* Array.swift in Sources */,
-				OBJ_265 /* Bits.swift in Sources */,
-				OBJ_266 /* Cache.swift in Sources */,
-				OBJ_267 /* Collection+Safe.swift in Sources */,
-				OBJ_268 /* DataFile.swift in Sources */,
-				OBJ_269 /* Dispatch.swift in Sources */,
-				OBJ_270 /* DispatchTime+Utilities.swift in Sources */,
-				OBJ_271 /* EmptyInitializable.swift in Sources */,
-				OBJ_272 /* Exports.swift in Sources */,
-				OBJ_273 /* Extendable.swift in Sources */,
-				OBJ_274 /* FileProtocol.swift in Sources */,
-				OBJ_275 /* Int+Hex.swift in Sources */,
-				OBJ_276 /* Lock.swift in Sources */,
-				OBJ_277 /* Portal.swift in Sources */,
-				OBJ_278 /* RFC1123.swift in Sources */,
-				OBJ_279 /* Result.swift in Sources */,
-				OBJ_280 /* Semaphore.swift in Sources */,
-				OBJ_281 /* Sequence.swift in Sources */,
-				OBJ_282 /* StaticDataBuffer.swift in Sources */,
-				OBJ_283 /* String+CaseInsensitiveCompare.swift in Sources */,
-				OBJ_284 /* String+Polymorphic.swift in Sources */,
-				OBJ_285 /* String.swift in Sources */,
-				OBJ_286 /* WorkingDirectory.swift in Sources */,
+				OBJ_268 /* Array.swift in Sources */,
+				OBJ_269 /* Bits.swift in Sources */,
+				OBJ_270 /* Cache.swift in Sources */,
+				OBJ_271 /* Collection+Safe.swift in Sources */,
+				OBJ_272 /* DataFile.swift in Sources */,
+				OBJ_273 /* Dispatch.swift in Sources */,
+				OBJ_274 /* DispatchTime+Utilities.swift in Sources */,
+				OBJ_275 /* EmptyInitializable.swift in Sources */,
+				OBJ_276 /* Exports.swift in Sources */,
+				OBJ_277 /* Extendable.swift in Sources */,
+				OBJ_278 /* FileProtocol.swift in Sources */,
+				OBJ_279 /* Int+Hex.swift in Sources */,
+				OBJ_280 /* Lock.swift in Sources */,
+				OBJ_281 /* Portal.swift in Sources */,
+				OBJ_282 /* RFC1123.swift in Sources */,
+				OBJ_283 /* Result.swift in Sources */,
+				OBJ_284 /* Semaphore.swift in Sources */,
+				OBJ_285 /* Sequence.swift in Sources */,
+				OBJ_286 /* StaticDataBuffer.swift in Sources */,
+				OBJ_287 /* String+CaseInsensitiveCompare.swift in Sources */,
+				OBJ_288 /* String+Polymorphic.swift in Sources */,
+				OBJ_289 /* String.swift in Sources */,
+				OBJ_290 /* WorkingDirectory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_297 /* Sources */ = {
+		OBJ_301 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_298 /* Debuggable.swift in Sources */,
+				OBJ_302 /* Debuggable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_303 /* Sources */ = {
+		OBJ_307 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_304 /* Aliases.swift in Sources */,
-				OBJ_305 /* Base64Encoder.swift in Sources */,
-				OBJ_306 /* Byte+Alphabet.swift in Sources */,
-				OBJ_307 /* Byte+ControlCharacters.swift in Sources */,
-				OBJ_308 /* Byte+Convenience.swift in Sources */,
-				OBJ_309 /* Byte+PatternMatching.swift in Sources */,
-				OBJ_310 /* Byte+Random.swift in Sources */,
-				OBJ_311 /* Byte+UTF8Numbers.swift in Sources */,
-				OBJ_312 /* ByteSequence+Conversions.swift in Sources */,
-				OBJ_313 /* Bytes+Base64.swift in Sources */,
-				OBJ_314 /* Bytes+Hex.swift in Sources */,
-				OBJ_315 /* Bytes+Percent.swift in Sources */,
-				OBJ_316 /* BytesConvertible.swift in Sources */,
-				OBJ_317 /* Data+BytesConvertible.swift in Sources */,
-				OBJ_318 /* HexEncoder.swift in Sources */,
-				OBJ_319 /* Operators.swift in Sources */,
-				OBJ_320 /* String+BytesConvertible.swift in Sources */,
-				OBJ_321 /* UnsignedInteger+BytesConvertible.swift in Sources */,
-				OBJ_322 /* UnsignedInteger+Shifting.swift in Sources */,
+				OBJ_308 /* Aliases.swift in Sources */,
+				OBJ_309 /* Base64Encoder.swift in Sources */,
+				OBJ_310 /* Byte+Alphabet.swift in Sources */,
+				OBJ_311 /* Byte+ControlCharacters.swift in Sources */,
+				OBJ_312 /* Byte+Convenience.swift in Sources */,
+				OBJ_313 /* Byte+PatternMatching.swift in Sources */,
+				OBJ_314 /* Byte+Random.swift in Sources */,
+				OBJ_315 /* Byte+UTF8Numbers.swift in Sources */,
+				OBJ_316 /* ByteSequence+Conversions.swift in Sources */,
+				OBJ_317 /* Bytes+Base64.swift in Sources */,
+				OBJ_318 /* Bytes+Hex.swift in Sources */,
+				OBJ_319 /* Bytes+Percent.swift in Sources */,
+				OBJ_320 /* BytesConvertible.swift in Sources */,
+				OBJ_321 /* Data+BytesConvertible.swift in Sources */,
+				OBJ_322 /* HexEncoder.swift in Sources */,
+				OBJ_323 /* Operators.swift in Sources */,
+				OBJ_324 /* String+BytesConvertible.swift in Sources */,
+				OBJ_325 /* UnsignedInteger+BytesConvertible.swift in Sources */,
+				OBJ_326 /* UnsignedInteger+Shifting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_327 /* Sources */ = {
+		OBJ_331 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_328 /* libc.swift in Sources */,
+				OBJ_332 /* libc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		743FB7D91FD20A3100ACF282 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 743FB7C51FD20A3100ACF282 /* AtemControl */;
-			targetProxy = 743FB7D81FD20A3100ACF282 /* PBXContainerItemProxy */;
-		};
-		743FB7E41FD20A3100ACF282 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 743FB7C51FD20A3100ACF282 /* AtemControl */;
-			targetProxy = 743FB7E31FD20A3100ACF282 /* PBXContainerItemProxy */;
-		};
 		OBJ_168 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "Atem R::Atem R" /* Atem R */;
-			targetProxy = 743FB7BA1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			target = "Atem::Atem" /* Atem */;
+			targetProxy = 74AD5C711FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_170 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Sockets::Sockets" /* Sockets */;
-			targetProxy = 743FB7BB1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C721FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_172 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Sockets::Transport" /* Transport */;
-			targetProxy = 743FB7BC1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C731FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_174 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Core::Core" /* Core */;
-			targetProxy = 743FB7BD1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C741FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_176 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Debugging::Debugging" /* Debugging */;
-			targetProxy = 743FB7BE1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C751FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_178 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bits::Bits" /* Bits */;
-			targetProxy = 743FB7BF1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C761FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_180 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Core::libc" /* libc */;
-			targetProxy = 743FB7C01FD209AE00ACF282 /* PBXContainerItemProxy */;
-		};
-		OBJ_194 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Sockets::Sockets" /* Sockets */;
-			targetProxy = 743FB7A81FD209AE00ACF282 /* PBXContainerItemProxy */;
-		};
-		OBJ_195 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Sockets::Transport" /* Transport */;
-			targetProxy = 743FB7B51FD209AE00ACF282 /* PBXContainerItemProxy */;
-		};
-		OBJ_196 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Core::Core" /* Core */;
-			targetProxy = 743FB7B61FD209AE00ACF282 /* PBXContainerItemProxy */;
-		};
-		OBJ_197 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Debugging::Debugging" /* Debugging */;
-			targetProxy = 743FB7B71FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C771FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_198 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "Bits::Bits" /* Bits */;
-			targetProxy = 743FB7B81FD209AE00ACF282 /* PBXContainerItemProxy */;
+			target = "Sockets::Sockets" /* Sockets */;
+			targetProxy = 74AD5C5F1FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_199 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "Core::libc" /* libc */;
-			targetProxy = 743FB7B91FD209AE00ACF282 /* PBXContainerItemProxy */;
-		};
-		OBJ_232 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
 			target = "Sockets::Transport" /* Transport */;
-			targetProxy = 743FB7A91FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C6C1FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_233 /* PBXTargetDependency */ = {
+		OBJ_200 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Core::Core" /* Core */;
-			targetProxy = 743FB7B11FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C6D1FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_234 /* PBXTargetDependency */ = {
+		OBJ_201 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Debugging::Debugging" /* Debugging */;
-			targetProxy = 743FB7B21FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C6E1FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_235 /* PBXTargetDependency */ = {
+		OBJ_202 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bits::Bits" /* Bits */;
-			targetProxy = 743FB7B31FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C6F1FD491D80090B19F /* PBXContainerItemProxy */;
+		};
+		OBJ_203 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Core::libc" /* libc */;
+			targetProxy = 74AD5C701FD491D80090B19F /* PBXContainerItemProxy */;
 		};
 		OBJ_236 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "Core::libc" /* libc */;
-			targetProxy = 743FB7B41FD209AE00ACF282 /* PBXContainerItemProxy */;
+			target = "Sockets::Transport" /* Transport */;
+			targetProxy = 74AD5C601FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_256 /* PBXTargetDependency */ = {
+		OBJ_237 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Core::Core" /* Core */;
-			targetProxy = 743FB7AA1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C681FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_257 /* PBXTargetDependency */ = {
+		OBJ_238 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Debugging::Debugging" /* Debugging */;
-			targetProxy = 743FB7AE1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C691FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_258 /* PBXTargetDependency */ = {
+		OBJ_239 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bits::Bits" /* Bits */;
-			targetProxy = 743FB7AF1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C6A1FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_259 /* PBXTargetDependency */ = {
+		OBJ_240 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Core::libc" /* libc */;
-			targetProxy = 743FB7B01FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C6B1FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_291 /* PBXTargetDependency */ = {
+		OBJ_260 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Core::Core" /* Core */;
+			targetProxy = 74AD5C611FD491D80090B19F /* PBXContainerItemProxy */;
+		};
+		OBJ_261 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Debugging::Debugging" /* Debugging */;
-			targetProxy = 743FB7AB1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C651FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_292 /* PBXTargetDependency */ = {
+		OBJ_262 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bits::Bits" /* Bits */;
-			targetProxy = 743FB7AC1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C661FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_293 /* PBXTargetDependency */ = {
+		OBJ_263 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Core::libc" /* libc */;
-			targetProxy = 743FB7AD1FD209AE00ACF282 /* PBXContainerItemProxy */;
+			targetProxy = 74AD5C671FD491D80090B19F /* PBXContainerItemProxy */;
 		};
-		OBJ_334 /* PBXTargetDependency */ = {
+		OBJ_295 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "Atem R::Atem RTests" /* Atem RTests */;
-			targetProxy = 743FB7C11FD209AF00ACF282 /* PBXContainerItemProxy */;
+			target = "Debugging::Debugging" /* Debugging */;
+			targetProxy = 74AD5C621FD491D80090B19F /* PBXContainerItemProxy */;
+		};
+		OBJ_296 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bits::Bits" /* Bits */;
+			targetProxy = 74AD5C631FD491D80090B19F /* PBXContainerItemProxy */;
+		};
+		OBJ_297 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Core::libc" /* libc */;
+			targetProxy = 74AD5C641FD491D80090B19F /* PBXContainerItemProxy */;
+		};
+		OBJ_338 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Atem::Atem RTests" /* Atem RTests */;
+			targetProxy = 74AD5C781FD491DC0090B19F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		743FB7CE1FD20A3100ACF282 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				743FB7CF1FD20A3100ACF282 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		743FB7EA1FD20A3100ACF282 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = AtemControl/AtemControl.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7TD9A665TC;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = AtemControl/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devian.AtemControl;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		743FB7EB1FD20A3100ACF282 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = AtemControl/AtemControl.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 7TD9A665TC;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = AtemControl/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devian.AtemControl;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-		743FB7ED1FD20A3100ACF282 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7TD9A665TC;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = AtemControlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devian.AtemControlTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AtemControl.app/Contents/MacOS/AtemControl";
-			};
-			name = Debug;
-		};
-		743FB7EE1FD20A3100ACF282 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 7TD9A665TC;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = AtemControlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devian.AtemControlTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AtemControl.app/Contents/MacOS/AtemControl";
-			};
-			name = Release;
-		};
-		743FB7F01FD20A3100ACF282 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7TD9A665TC;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = AtemControlUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devian.AtemControlUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = AtemControl;
-			};
-			name = Debug;
-		};
-		743FB7F11FD20A3100ACF282 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 7TD9A665TC;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = AtemControlUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devian.AtemControlUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = AtemControl;
-			};
-			name = Release;
-		};
 		OBJ_126 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2056,7 +1475,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Atem_RTests_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Atem_RTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2074,7 +1493,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Atem_RTests_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Atem_RTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2092,16 +1511,16 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Atem_R_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Atem_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "Atem-R";
+				PRODUCT_BUNDLE_IDENTIFIER = Atem;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				TARGET_NAME = "Atem R";
+				TARGET_NAME = Atem;
 			};
 			name = Debug;
 		};
@@ -2114,20 +1533,20 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Atem_R_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Atem_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "Atem-R";
+				PRODUCT_BUNDLE_IDENTIFIER = Atem;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				TARGET_NAME = "Atem R";
+				TARGET_NAME = Atem;
 			};
 			name = Release;
 		};
-		OBJ_201 /* Debug */ = {
+		OBJ_205 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2136,7 +1555,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Sockets_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Sockets_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2149,7 +1568,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_202 /* Release */ = {
+		OBJ_206 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2158,7 +1577,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Sockets_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Sockets_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2171,7 +1590,7 @@
 			};
 			name = Release;
 		};
-		OBJ_238 /* Debug */ = {
+		OBJ_242 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2180,7 +1599,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Transport_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Transport_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2193,7 +1612,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_239 /* Release */ = {
+		OBJ_243 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2202,7 +1621,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Transport_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Transport_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2215,7 +1634,7 @@
 			};
 			name = Release;
 		};
-		OBJ_261 /* Debug */ = {
+		OBJ_265 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2224,7 +1643,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Core_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Core_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2237,7 +1656,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_262 /* Release */ = {
+		OBJ_266 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2246,7 +1665,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Core_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Core_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2259,7 +1678,7 @@
 			};
 			name = Release;
 		};
-		OBJ_295 /* Debug */ = {
+		OBJ_299 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2268,7 +1687,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Debugging_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Debugging_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2280,28 +1699,6 @@
 				TARGET_NAME = Debugging;
 			};
 			name = Debug;
-		};
-		OBJ_296 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Debugging_Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Debugging;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGET_NAME = Debugging;
-			};
-			name = Release;
 		};
 		OBJ_3 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2325,7 +1722,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_301 /* Debug */ = {
+		OBJ_300 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2334,7 +1731,29 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Bits_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Debugging_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Debugging;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Debugging;
+			};
+			name = Release;
+		};
+		OBJ_305 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Atem.xcodeproj/Bits_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2347,7 +1766,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_302 /* Release */ = {
+		OBJ_306 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2356,7 +1775,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/Bits_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/Bits_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2369,7 +1788,7 @@
 			};
 			name = Release;
 		};
-		OBJ_325 /* Debug */ = {
+		OBJ_329 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2378,7 +1797,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/libc_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/libc_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2391,7 +1810,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_326 /* Release */ = {
+		OBJ_330 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -2400,7 +1819,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Atem R.xcodeproj/libc_Info.plist";
+				INFOPLIST_FILE = Atem.xcodeproj/libc_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -2413,13 +1832,13 @@
 			};
 			name = Release;
 		};
-		OBJ_332 /* Debug */ = {
+		OBJ_336 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_333 /* Release */ = {
+		OBJ_337 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
@@ -2448,34 +1867,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		743FB7E91FD20A3100ACF282 /* Build configuration list for PBXNativeTarget "AtemControl" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				743FB7EA1FD20A3100ACF282 /* Debug */,
-				743FB7EB1FD20A3100ACF282 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		743FB7EC1FD20A3100ACF282 /* Build configuration list for PBXNativeTarget "AtemControlTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				743FB7ED1FD20A3100ACF282 /* Debug */,
-				743FB7EE1FD20A3100ACF282 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		743FB7EF1FD20A3100ACF282 /* Build configuration list for PBXNativeTarget "AtemControlUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				743FB7F01FD20A3100ACF282 /* Debug */,
-				743FB7F11FD20A3100ACF282 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		OBJ_125 /* Build configuration list for PBXNativeTarget "Atem RPackageDescription" */ = {
+		OBJ_125 /* Build configuration list for PBXNativeTarget "AtemPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_126 /* Debug */,
@@ -2529,7 +1921,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_182 /* Build configuration list for PBXNativeTarget "Atem R" */ = {
+		OBJ_182 /* Build configuration list for PBXNativeTarget "Atem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_183 /* Debug */,
@@ -2538,7 +1930,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_2 /* Build configuration list for PBXProject "Atem R" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "Atem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_3 /* Debug */,
@@ -2547,65 +1939,65 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_200 /* Build configuration list for PBXNativeTarget "Sockets" */ = {
+		OBJ_204 /* Build configuration list for PBXNativeTarget "Sockets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_201 /* Debug */,
-				OBJ_202 /* Release */,
+				OBJ_205 /* Debug */,
+				OBJ_206 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_237 /* Build configuration list for PBXNativeTarget "Transport" */ = {
+		OBJ_241 /* Build configuration list for PBXNativeTarget "Transport" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_238 /* Debug */,
-				OBJ_239 /* Release */,
+				OBJ_242 /* Debug */,
+				OBJ_243 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_260 /* Build configuration list for PBXNativeTarget "Core" */ = {
+		OBJ_264 /* Build configuration list for PBXNativeTarget "Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_261 /* Debug */,
-				OBJ_262 /* Release */,
+				OBJ_265 /* Debug */,
+				OBJ_266 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_294 /* Build configuration list for PBXNativeTarget "Debugging" */ = {
+		OBJ_298 /* Build configuration list for PBXNativeTarget "Debugging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_295 /* Debug */,
-				OBJ_296 /* Release */,
+				OBJ_299 /* Debug */,
+				OBJ_300 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_300 /* Build configuration list for PBXNativeTarget "Bits" */ = {
+		OBJ_304 /* Build configuration list for PBXNativeTarget "Bits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_301 /* Debug */,
-				OBJ_302 /* Release */,
+				OBJ_305 /* Debug */,
+				OBJ_306 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_324 /* Build configuration list for PBXNativeTarget "libc" */ = {
+		OBJ_328 /* Build configuration list for PBXNativeTarget "libc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_325 /* Debug */,
-				OBJ_326 /* Release */,
+				OBJ_329 /* Debug */,
+				OBJ_330 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_331 /* Build configuration list for PBXAggregateTarget "Atem RPackageTests" */ = {
+		OBJ_335 /* Build configuration list for PBXAggregateTarget "AtemPackageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_332 /* Debug */,
-				OBJ_333 /* Release */,
+				OBJ_336 /* Debug */,
+				OBJ_337 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

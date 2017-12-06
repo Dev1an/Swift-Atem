@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Atem R::Atem R"
-               BuildableName = "Atem_R.framework"
-               BlueprintName = "Atem R"
-               ReferencedContainer = "container:Atem R.xcodeproj">
+               BlueprintIdentifier = "Atem::Atem"
+               BuildableName = "Atem.framework"
+               BlueprintName = "Atem"
+               ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "Sockets::Sockets"
                BuildableName = "Sockets.framework"
                BlueprintName = "Sockets"
-               ReferencedContainer = "container:Atem R.xcodeproj">
+               ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "Sockets::Transport"
                BuildableName = "Transport.framework"
                BlueprintName = "Transport"
-               ReferencedContainer = "container:Atem R.xcodeproj">
+               ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -59,7 +59,7 @@
                BlueprintIdentifier = "Core::Core"
                BuildableName = "Core.framework"
                BlueprintName = "Core"
-               ReferencedContainer = "container:Atem R.xcodeproj">
+               ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -73,7 +73,7 @@
                BlueprintIdentifier = "Debugging::Debugging"
                BuildableName = "Debugging.framework"
                BlueprintName = "Debugging"
-               ReferencedContainer = "container:Atem R.xcodeproj">
+               ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -87,7 +87,7 @@
                BlueprintIdentifier = "Bits::Bits"
                BuildableName = "Bits.framework"
                BlueprintName = "Bits"
-               ReferencedContainer = "container:Atem R.xcodeproj">
+               ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -101,7 +101,7 @@
                BlueprintIdentifier = "Core::libc"
                BuildableName = "libc.framework"
                BlueprintName = "libc"
-               ReferencedContainer = "container:Atem R.xcodeproj">
+               ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -117,10 +117,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Atem R::Atem RTests"
+               BlueprintIdentifier = "Atem::Atem RTests"
                BuildableName = "Atem RTests.xctest"
                BlueprintName = "Atem RTests"
-               ReferencedContainer = "container:Atem R.xcodeproj">
+               ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -141,10 +141,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Atem R::Atem R"
-            BuildableName = "Atem_R.framework"
-            BlueprintName = "Atem R"
-            ReferencedContainer = "container:Atem R.xcodeproj">
+            BlueprintIdentifier = "Atem::Atem"
+            BuildableName = "Atem.framework"
+            BlueprintName = "Atem"
+            ReferencedContainer = "container:Atem.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
