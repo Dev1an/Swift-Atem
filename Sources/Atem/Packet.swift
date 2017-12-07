@@ -79,7 +79,7 @@ struct Packet: CustomDebugStringConvertible {
 	}
 }
 
-struct SerialAtemPacket {
+struct SerialPacket {
 	var bytes: [UInt8]
 	
 	init<C: Collection>(connectionUID: UID, data: C, number: UInt16? = nil, acknowledgement: UInt16? = nil) where C.Iterator.Element == UInt8 {
@@ -109,18 +109,27 @@ struct SerialAtemPacket {
 		self.init(connectionUID: connectionUID, data: messages.map { $0.serialize() } .joined(), number: number, acknowledgement: acknowledgement)
 	}
 	
+	private init(bytes: [UInt8]) {
+		self.bytes = bytes
+	}
+	
 	mutating func makeRetransmission() {
 		bytes[0] = bytes[0] | PacketTypes.retransmission.rawValue
 	}
 	
 	/// Creates a connect packet to send to an ATEM Switcher
-	static func connectToCore(uid: UID, type: PacketTypes) -> [UInt8] {
-		return [type.rawValue, 20, uid.first!, uid.last!, 0, 0, 0, 0, 0, 0, 0, 0] + controllerConnectMessageBytes
+	static func connectToCore(uid: UID, type: PacketTypes) -> SerialPacket {
+		return SerialPacket(bytes: [type.rawValue, 20, uid.first!, uid.last!, 0, 0, 0, 0, 0, 0, 0, 0] + controllerConnectMessageBytes)
+	}
+	
+	/// Packet number
+	var number: UInt16 {
+		return UInt16(from: bytes[numberPosition])
 	}
 	
 	/// Creates a connection packet to send to an ATEM Controller such as the PC software or the broadcast panel
-	static func connectToController(uid: UID, type: PacketTypes) -> [UInt8] {
-		return [type.rawValue, 20, uid.first!, uid.last!, 0, 0, 0, 0, 0, 0, 0, 0] + atemConnectMessageBytes
+	static func connectToController(uid: UID, type: PacketTypes) -> SerialPacket {
+		return SerialPacket(bytes: [type.rawValue, 20, uid.first!, uid.last!, 0, 0, 0, 0, 0, 0, 0, 0] + atemConnectMessageBytes)
 	}
 	
 	/// A textual representation of the packet

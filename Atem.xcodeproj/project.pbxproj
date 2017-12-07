@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		742A362F1FD89B0F00AF457F /* ArrayOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A362D1FD8926300AF457F /* ArrayOperations.swift */; };
+		74B3B7691FD8D39500CAB904 /* InitialStateMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B3B7671FD8D1CC00CAB904 /* InitialStateMessages.swift */; };
 		OBJ_129 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_135 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Package.swift */; };
 		OBJ_141 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* Package.swift */; };
@@ -321,6 +323,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		742A362D1FD8926300AF457F /* ArrayOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayOperations.swift; sourceTree = "<group>"; };
+		74B3B7671FD8D1CC00CAB904 /* InitialStateMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStateMessages.swift; sourceTree = "<group>"; };
 		"Atem::Atem RTests::Product" /* Atem_RTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = Atem_RTests.xctest; path = "Atem RTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Atem::Atem::Product" /* Atem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Atem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bits::Bits::Product" /* Bits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -640,7 +644,7 @@
 			path = Socket;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -649,7 +653,6 @@
 				OBJ_17 /* Dependencies */,
 				OBJ_115 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_52 /* TCP */ = {
@@ -734,10 +737,12 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* Connection.swift */,
-				OBJ_10 /* IntOperators.swift */,
 				OBJ_11 /* Message.swift */,
 				OBJ_12 /* Packet.swift */,
 				OBJ_13 /* PacketTypes.swift */,
+				OBJ_10 /* IntOperators.swift */,
+				742A362D1FD8926300AF457F /* ArrayOperations.swift */,
+				74B3B7671FD8D1CC00CAB904 /* InitialStateMessages.swift */,
 			);
 			name = Atem;
 			path = Sources/Atem;
@@ -1038,7 +1043,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_115 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1115,10 +1120,12 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_186 /* Connection.swift in Sources */,
+				74B3B7691FD8D39500CAB904 /* InitialStateMessages.swift in Sources */,
 				OBJ_187 /* IntOperators.swift in Sources */,
 				OBJ_188 /* Message.swift in Sources */,
 				OBJ_189 /* Packet.swift in Sources */,
 				OBJ_190 /* PacketTypes.swift in Sources */,
+				742A362F1FD89B0F00AF457F /* ArrayOperations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
