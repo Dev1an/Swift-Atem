@@ -2,7 +2,7 @@ import Foundation
 
 /// Stores all relevant information to keep an ATEM connection alive.
 /// Use this store to interprete incoming packets and construct new outgoing packets.
-struct ConnectionState {
+class ConnectionState {
 	/// Received packet id's. Contains all the packets that should still be acknowledged
 	var received📦IDs = [UInt16]()
 	
@@ -14,41 +14,28 @@ struct ConnectionState {
 	private var outBox: [SerialPacket]
 	
 	/// The id of the connection. At the initial connection phase this ID is temporarily set. After this phase a permanent ID is assigned.
-	private(set) var id: UID
-	
-	private init(firstIncoming📦: Packet) {
-		assert(firstIncoming📦.isConnect, "First packet should always be a connect packet")
-		id = firstIncoming📦.connectionUID
+	let id: UID
+
+	private init(initialPacket: Packet) {
+		id = initialPacket.connectionUID
 		outBox = [
 			SerialPacket.connectToController(uid: id, type: .connect),
 			SerialPacket(connectionUID: id, data: initialMessage1,  number:  1),
 			SerialPacket(connectionUID: id, data: initialMessage2,  number:  2),
 			SerialPacket(connectionUID: id, data: initialMessage3,  number:  3),
-			SerialPacket(connectionUID: id, data: initialMessage4,  number:  4),
-			SerialPacket(connectionUID: id, data: initialMessage5,  number:  5),
-			SerialPacket(connectionUID: id, data: initialMessage6,  number:  6),
-			SerialPacket(connectionUID: id, data: initialMessage7,  number:  7),
-			SerialPacket(connectionUID: id, data: initialMessage8,  number:  8),
-			SerialPacket(connectionUID: id, data: initialMessage9,  number:  9),
-			SerialPacket(connectionUID: id, data: initialMessage10, number: 10),
-			SerialPacket(connectionUID: id, data: initialMessage11, number: 11),
-			SerialPacket(connectionUID: id, data: initialMessage12, number: 12),
-			SerialPacket(connectionUID: id, data: initialMessage13, number: 13),
-			SerialPacket(connectionUID: id, data: initialMessage14, number: 14),
+			SerialPacket(connectionUID: id, data: initialMessage4,  number:  4)
 		]
-		lastSent📦ID = 14
-		received📦IDs.append(firstIncoming📦.number!)
+		lastSent📦ID = 4
 	}
 	
 	private init() {
-		let randomNumber = arc4random()
-		id = [UInt8((randomNumber & 0x0700) >> 8), UInt8(randomNumber & UInt32(0x00FF))]
-		outBox = [SerialPacket.connectToController(uid: id, type: .connect)]
+		id = ConnectionState.id(firstBit: false)
+		outBox = [SerialPacket.connectToCore(uid: id, type: .connect)]
 		lastSent📦ID = 0
 	}
 	
-	static func switcher(interpreting data: [UInt8]) -> ConnectionState {
-		return ConnectionState(firstIncoming📦: Packet(bytes: data))
+	static func switcher(initialPacket: Packet) -> ConnectionState {
+		return ConnectionState(initialPacket: initialPacket)
 	}
 	
 	static func controller() -> ConnectionState {
@@ -56,8 +43,7 @@ struct ConnectionState {
 	}
 	
 	/// Interprets data and returns the messages that it contains
-	mutating func interpret(_ bytes: [UInt8]) -> [ArraySlice<UInt8>] {
-		let packet = Packet(bytes: bytes)
+	func interpret(_ packet: Packet) -> [ArraySlice<UInt8>] {
 		if let packetID = packet.number {
 			received📦IDs.sortedInsert(packetID)
 		}
@@ -72,7 +58,7 @@ struct ConnectionState {
 	}
 	
 	/// Constructs a packet that should be sent to keep this connection alive
-	mutating func constructKeepAlivePackets() -> [SerialPacket] {
+	func constructKeepAlivePackets() -> [SerialPacket] {
 		let originalOutBox = outBox
 		for index in outBox.indices { outBox[index].makeRetransmission() }
 		let oldPackets: [SerialPacket]
@@ -103,5 +89,16 @@ struct ConnectionState {
 	/// Constructs a packet containing messages you want to send
 	func constructPacket(for messages: [Message]) -> SerialPacket {
 		fatalError("not implemented")
+	}
+
+	private static func id(firstBit: Bool) -> UID {
+		let randomNumber = arc4random()
+		let  firstByte = UInt8((randomNumber & 0x0700) >> 8)
+		let secondByte = UInt8( randomNumber & 0x00FF)
+		if firstBit {
+			return [firstByte, secondByte]
+		} else {
+			return [firstByte & 0b01111111, secondByte]
+		}
 	}
 }

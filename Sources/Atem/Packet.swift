@@ -54,25 +54,25 @@ struct Packet: CustomDebugStringConvertible {
 		
 	/// A textual representation of the packet
 	var debugDescription: String {
-		let uid = UInt16(from: connectionUID[connectionUID.startIndex ..< connectionUID.endIndex])
+		let uid = connectionUID.map{String($0, radix: 16)}.joined(separator: " ")
 		if isConnect {
 			if let _ = acknowledgement {
-				return "AtemPacket acknwoledgement for connect with ID \(uid)" + (isRepeated ? " (repeated)" : "")
+				return "Packet acknwoledgement for connect with ID \(uid)" + (isRepeated ? " (repeated)" : "")
 			} else {
-				return "AtemPacket connect with ID \(uid)" + (isRepeated ? " (repeated)" : "")
+				return "Packet #\(uid): connect" + (isRepeated ? " (repeated)" : "")
 			}
 		} else {
 			if let number = number {
 				if let acknowledgement = acknowledgement {
-					return "AtemPacket #\(uid):\(number) acknowledges: \(acknowledgement), messages: \(messages)"
+					return "Packet #\(uid):\(number) acknowledges: \(acknowledgement), messages: \(messages.count)"
 				} else {
-					return "AtemPacket #\(uid):\(number) messages: \(messages)"
+					return "Packet #\(uid):\(number) messages: \(messages.count)"
 				}
 			} else {
 				if let acknowledgement = acknowledgement {
-					return "AtemPacket #\(uid):/ acknowledges: \(acknowledgement)"
+					return "Packet #\(uid):/ acknowledges: \(acknowledgement)"
 				} else {
-					return "AtemPacket #\(uid):/"
+					return "Packet #\(uid):/"
 				}
 			}
 		}
