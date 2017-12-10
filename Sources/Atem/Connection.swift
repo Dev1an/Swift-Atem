@@ -14,18 +14,18 @@ class ConnectionState {
 	private var outBox: [SerialPacket]
 	
 	/// The id of the connection. At the initial connection phase this ID is temporarily set. After this phase a permanent ID is assigned.
-	let id: UID
+	private(set) var id: UID
 
 	private init(initialPacket: Packet) {
 		id = initialPacket.connectionUID
 		outBox = [
-			SerialPacket.connectToController(uid: id, type: .connect),
 			SerialPacket(connectionUID: id, data: initialMessage1,  number:  1),
 			SerialPacket(connectionUID: id, data: initialMessage2,  number:  2),
 			SerialPacket(connectionUID: id, data: initialMessage3,  number:  3),
-			SerialPacket(connectionUID: id, data: initialMessage4,  number:  4)
+			SerialPacket(connectionUID: id, data: initialMessage4,  number:  4),
+			SerialPacket(connectionUID: id, number: 5)
 		]
-		lastSent📦ID = 4
+		lastSent📦ID = 5
 	}
 	
 	private init() {
@@ -43,18 +43,20 @@ class ConnectionState {
 	}
 	
 	/// Interprets data and returns the messages that it contains
-	func interpret(_ packet: Packet) -> [ArraySlice<UInt8>] {
+	func interpret(_ packet: Packet) {
 		if let packetID = packet.number {
 			received📦IDs.sortedInsert(packetID)
+			if packetID == 1 && !packet.isConnect {
+				outBox.removeAll()
+				id = packet.connectionUID
+			}
 		}
 		if let acknowledgedID = packet.acknowledgement {
 			let upperBound = outBox.binarySearch { $0.number < acknowledgedID }
 			if upperBound < outBox.endIndex {
 				outBox.removeSubrange(0...upperBound)
 			}
-		}
-		
-		return packet.messages
+		}		
 	}
 	
 	/// Constructs a packet that should be sent to keep this connection alive
@@ -96,7 +98,7 @@ class ConnectionState {
 		let  firstByte = UInt8((randomNumber & 0x0700) >> 8)
 		let secondByte = UInt8( randomNumber & 0x00FF)
 		if firstBit {
-			return [firstByte, secondByte]
+			return [firstByte | 0b10000000, secondByte]
 		} else {
 			return [firstByte & 0b01111111, secondByte]
 		}

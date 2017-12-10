@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		742A362F1FD89B0F00AF457F /* ArrayOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A362D1FD8926300AF457F /* ArrayOperations.swift */; };
+		74441A3A1FDC775F008E4122 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74441A391FDC775F008E4122 /* Controller.swift */; };
 		74B3B7691FD8D39500CAB904 /* InitialStateMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B3B7671FD8D1CC00CAB904 /* InitialStateMessages.swift */; };
 		74B3B76C1FD951F100CAB904 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B3B76A1FD94F9100CAB904 /* Switcher.swift */; };
 		OBJ_129 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
@@ -325,6 +326,7 @@
 
 /* Begin PBXFileReference section */
 		742A362D1FD8926300AF457F /* ArrayOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayOperations.swift; sourceTree = "<group>"; };
+		74441A391FDC775F008E4122 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		74B3B7671FD8D1CC00CAB904 /* InitialStateMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStateMessages.swift; sourceTree = "<group>"; };
 		74B3B76A1FD94F9100CAB904 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
 		"Atem::Atem RTests::Product" /* Atem_RTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = Atem_RTests.xctest; path = "Atem RTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -739,6 +741,7 @@
 			isa = PBXGroup;
 			children = (
 				74B3B76A1FD94F9100CAB904 /* Switcher.swift */,
+				74441A391FDC775F008E4122 /* Controller.swift */,
 				OBJ_9 /* Connection.swift */,
 				OBJ_11 /* Message.swift */,
 				OBJ_12 /* Packet.swift */,
@@ -1122,6 +1125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				74441A3A1FDC775F008E4122 /* Controller.swift in Sources */,
 				OBJ_186 /* Connection.swift in Sources */,
 				74B3B7691FD8D39500CAB904 /* InitialStateMessages.swift in Sources */,
 				74B3B76C1FD951F100CAB904 /* Switcher.swift in Sources */,

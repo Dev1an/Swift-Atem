@@ -129,7 +129,7 @@ struct SerialPacket {
 	
 	/// Creates a connection packet to send to an ATEM Controller such as the PC software or the broadcast panel
 	static func connectToController(uid: UID, type: PacketTypes) -> SerialPacket {
-		return SerialPacket(bytes: [type.rawValue, 20, uid.first!, uid.last!, 0, 0, 0, 0, 0, 0, 0, 0] + atemConnectMessageBytes)
+		return SerialPacket(bytes: [type.rawValue, 20, uid.first!, uid.last!, 0, 0, 0, 0, 0, 0x22, 0, 0] + atemConnectMessageBytes)
 	}
 	
 	/// A textual representation of the packet
