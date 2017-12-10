@@ -81,7 +81,7 @@ class ConnectionState {
 		}
 		if oldPackets.isEmpty {
 			// If there are no packages to send, create an empty packet to keep the connection alive.
-			lastSent📦ID += 1
+			lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
 			return [SerialPacket(connectionUID: id, number: lastSent📦ID)]
 		} else {
 			return oldPackets

@@ -43,7 +43,7 @@ class Switcher {
 			if let switcher = self {
 				for (address, state) in switcher.connectionStates {
 					for packet in state.constructKeepAlivePackets() {
-						print("🕹 \(Packet(bytes: packet.bytes))")
+//						print("🕹 \(Packet(bytes: packet.bytes))")
 						try! switcher.socket.sendto(data: packet.bytes, address: address)
 					}
 				}
@@ -56,9 +56,9 @@ class Switcher {
 		keepAliveTimer.cancel()
 	}
 	
-	func interpret(_ data: [UInt8], from sender: ResolvedInternetAddress) {
+	final func interpret(_ data: [UInt8], from sender: ResolvedInternetAddress) {
 		let packet = Packet(bytes: data)
-		print("💻 \(packet)")
+//		print("💻 \(packet)")
 		if packet.isConnect {
 			networkQueue.async {
 				let connect = SerialPacket.connectToController(uid: packet.connectionUID, type: .connect)
@@ -68,10 +68,13 @@ class Switcher {
 		} else if let index = connectionStates.index(forKey: sender) {
 			let state = connectionStates[index].value
 			state.interpret(packet)
+			interpret(messages: packet.messages)
 		} else if packet.acknowledgement == 0 {
 			connectionStates[sender] = ConnectionState.switcher(initialPacket: packet)
 		}
 	}
+	
+	func interpret(messages: [ArraySlice<UInt8>]) {}
 }
 
 extension ResolvedInternetAddress: Hashable {
