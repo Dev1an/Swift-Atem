@@ -5,80 +5,101 @@
 //  Created by Damiaan on 7/12/17.
 //
 
-import Sockets
-import Dispatch
 import Foundation
+import NIO
 
-class Switcher {
-	
-	let socket: UDPInternetSocket
-	
-	let networkQueue = DispatchQueue.global(qos: .userInteractive)
-	let keepAliveTimer: DispatchSourceTimer
-	private var keepAlive = true
-
-	var connectionStates = [ResolvedInternetAddress: ConnectionState]()
-	
-	init() throws {
-		keepAliveTimer = DispatchSource.makeTimerSource(queue: networkQueue)
-		keepAliveTimer.schedule(deadline: .now(), repeating: .milliseconds(20), leeway: .milliseconds(10))
-		socket = try UDPInternetSocket(address: InternetAddress.localhost(port: 9910))
-		try startListening()
-	}
-	
-	func startListening() throws {
-		try socket.bind()
-		networkQueue.async {
-			while self.keepAlive {
-				do {
-					let (data, sender) = try self.socket.recvfrom()
-					self.interpret(data, from: sender)
-				} catch {
-					self.keepAlive = false
-					print(error)
-				}
-			}
-		}
-		keepAliveTimer.setEventHandler { [weak self] in
-			if let switcher = self {
-				for (address, state) in switcher.connectionStates {
-					for packet in state.constructKeepAlivePackets() {
-//						print("🕹 \(Packet(bytes: packet.bytes))")
-						try! switcher.socket.sendto(data: packet.bytes, address: address)
-					}
-				}
-			}
-		}
-		keepAliveTimer.resume()
-	}
-	
-	deinit {
-		keepAliveTimer.cancel()
-	}
-	
-	final func interpret(_ data: [UInt8], from sender: ResolvedInternetAddress) {
-		let packet = Packet(bytes: data)
-//		print("💻 \(packet)")
-		if packet.isConnect {
-			networkQueue.async {
-				let connect = SerialPacket.connectToController(uid: packet.connectionUID, type: .connect)
-				print("🕹 \(Packet(bytes: connect.bytes))")
-				try! self.socket.sendto(data: connect.bytes, address: sender)
-			}
-		} else if let index = connectionStates.index(forKey: sender) {
-			let state = connectionStates[index].value
-			state.interpret(packet)
-			interpret(messages: packet.messages)
-		} else if packet.acknowledgement == 0 {
-			connectionStates[sender] = ConnectionState.switcher(initialPacket: packet)
-		}
-	}
-	
-	func interpret(messages: [ArraySlice<UInt8>]) {}
+struct Client {
+	let address: SocketAddress
+	let state: ConnectionState
 }
 
-extension ResolvedInternetAddress: Hashable {
-	public var hashValue: Int {
-		return ("\(ipString()):\(port)").hashValue
+let sendInterval = TimeAmount.milliseconds(20)
+
+class SwitcherSimulator: MessageHandler {
+	func handle(messages: [ArraySlice<UInt8>]) {
+		for message in messages {
+			let name = message[message.startIndex.advanced(by: 4)..<message.startIndex.advanced(by: 8)]
+			print(String(bytes: name, encoding: .utf8))
+		}
+	}
+}
+
+class SwitcherHandler: ChannelInboundHandler {
+	var counter: UInt8 = 0
+	var clients = [UInt16: Client]()
+	var nextKeepAliveTask: Scheduled<Void>?
+	var outbox = [NIOAny]()
+	
+	typealias InboundIn = AddressedEnvelope<ByteBuffer>
+	typealias OutboundOut = AddressedEnvelope<ByteBuffer>
+	
+	func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+		var envelope = unwrapInboundIn(data)
+		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
+		
+		if packet.isConnect {
+			let initiationPacket = SerialPacket.connectToController(uid: packet.connectionUID, type: .connect)
+			var buffer = ctx.channel.allocator.buffer(capacity: initiationPacket.bytes.count)
+			buffer.write(bytes: initiationPacket.bytes)
+			let initiationEnvelope = AddressedEnvelope(remoteAddress: envelope.remoteAddress, data: buffer)
+			ctx.write(wrapOutboundOut(initiationEnvelope), promise: nil)
+		} else if let client = clients[UInt16(from: packet.connectionUID)] {
+			client.state.interpret(packet)
+		} else {
+			clients[UInt16(from: packet.connectionUID)] = Client(
+				address: envelope.remoteAddress,
+				state: ConnectionState.switcher(initialPacket: packet, messageHandler: SwitcherSimulator())
+			)
+		}
+	}
+	
+	func channelActive(ctx: ChannelHandlerContext) {
+		startLoop(in: ctx)
+	}
+	
+	func channelInactive(ctx: ChannelHandlerContext) {
+		nextKeepAliveTask?.cancel()
+	}
+	
+	func startLoop(in context: ChannelHandlerContext) {
+		nextKeepAliveTask = context.eventLoop.scheduleTask(in: sendInterval) {
+			self.keepClientsAwake(context: context)
+			self.startLoop(in: context)
+		}
+	}
+	
+	func keepClientsAwake(context: ChannelHandlerContext) {
+		for (_, client) in clients {
+			for packet in client.state.constructKeepAlivePackets() {
+				let data = encode(bytes: packet.bytes, for: client.address, in: context)
+				context.write(data, promise: nil)
+			}
+		}
+		context.flush()
+	}
+	
+	func encode(bytes: [UInt8], for client: SocketAddress, in context: ChannelHandlerContext) -> NIOAny {
+		var buffer = context.channel.allocator.buffer(capacity: bytes.count)
+		buffer.write(bytes: bytes)
+		return wrapOutboundOut(AddressedEnvelope(remoteAddress: client, data: buffer))
+	}
+}
+
+class Switcher {
+	init() throws {
+		let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
+		let bootstrap = DatagramBootstrap(group: 🔂)
+			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
+			.channelInitializer { $0.pipeline.add(handler: SwitcherHandler()) }
+		defer {
+			try! 🔂.syncShutdownGracefully()
+		}
+		
+		
+		try bootstrap
+			.bind(host: "127.0.0.1", port: 9910)
+			.wait()
+			.closeFuture
+			.wait()
 	}
 }

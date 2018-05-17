@@ -1,6 +1,5 @@
 import XCTest
 @testable import Atem
-import Sockets
 
 
 class Atem_RTests: XCTestCase {
@@ -34,19 +33,19 @@ class Atem_RTests: XCTestCase {
 		deadline.wait()
 	}
 	
-	func testUDPclient() {
-		do {
-			let c = try Controller(switcherAddress: "10.1.0.211")
-			print(c)
-		} catch {
-			print(error)
-		}
-		let deadline = DispatchSemaphore(value: 0)
-		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 60) {
-			deadline.signal()
-		}
-		deadline.wait()
-	}
+//	func testUDPclient() {
+//		do {
+//			let c = try Controller(switcherAddress: "10.1.0.211")
+//			print(c)
+//		} catch {
+//			print(error)
+//		}
+//		let deadline = DispatchSemaphore(value: 0)
+//		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 60) {
+//			deadline.signal()
+//		}
+//		deadline.wait()
+//	}
 
     static var allTests = [
         ("testConnectionLogic", testConnectionLogic),

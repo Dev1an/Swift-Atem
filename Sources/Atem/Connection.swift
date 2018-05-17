@@ -1,5 +1,9 @@
 import Foundation
 
+protocol MessageHandler {
+	func handle(messages: [ArraySlice<UInt8>])
+}
+
 /// Stores all relevant information to keep an ATEM connection alive.
 /// Use this store to interprete incoming packets and construct new outgoing packets.
 class ConnectionState {
@@ -15,37 +19,45 @@ class ConnectionState {
 	
 	/// The id of the connection. At the initial connection phase this ID is temporarily set. After this phase a permanent ID is assigned.
 	private(set) var id: UID
+	private let messageHandler: MessageHandler
 
-	private init(initialPacket: Packet) {
-		id = initialPacket.connectionUID
-		outBox = [
-			SerialPacket(connectionUID: id, data: initialMessage1,  number:  1),
-			SerialPacket(connectionUID: id, data: initialMessage2,  number:  2),
-			SerialPacket(connectionUID: id, data: initialMessage3,  number:  3),
-			SerialPacket(connectionUID: id, data: initialMessage4,  number:  4),
-			SerialPacket(connectionUID: id, number: 5)
-		]
-		lastSent📦ID = 5
+	private init(id: UID, outBox: [SerialPacket], lastSent📦ID: UInt16, messageHandler: MessageHandler) {
+		self.id = id
+		self.outBox = outBox
+		self.lastSent📦ID = lastSent📦ID
+		self.messageHandler = messageHandler
 	}
 	
-	private init() {
-		id = ConnectionState.id(firstBit: false)
-		outBox = [SerialPacket.connectToCore(uid: id, type: .connect)]
-		lastSent📦ID = 0
+	static func switcher(initialPacket: Packet, messageHandler: MessageHandler) -> ConnectionState {
+		return ConnectionState(
+			id: initialPacket.connectionUID,
+			outBox: [
+				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage1,  number:  1),
+				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage2,  number:  2),
+				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage3,  number:  3),
+				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage4,  number:  4),
+				SerialPacket(connectionUID: initialPacket.connectionUID, number: 5)
+			],
+			lastSent📦ID: 5,
+			messageHandler: messageHandler
+		)
 	}
 	
-	static func switcher(initialPacket: Packet) -> ConnectionState {
-		return ConnectionState(initialPacket: initialPacket)
-	}
-	
-	static func controller() -> ConnectionState {
-		return ConnectionState()
+	static func controller(messageHandler: MessageHandler) -> ConnectionState {
+		let connectionID = ConnectionState.id(firstBit: false)
+		return ConnectionState(
+			id: connectionID,
+			outBox: [SerialPacket.connectToCore(uid: connectionID, type: .connect)],
+			lastSent📦ID: 0,
+			messageHandler: messageHandler
+		)
 	}
 	
 	/// Interprets data and returns the messages that it contains
 	func interpret(_ packet: Packet) {
 		if let packetID = packet.number {
 			received📦IDs.sortedInsert(packetID)
+			messageHandler.handle(messages: packet.messages)
 			if packetID == 1 && !packet.isConnect {
 				outBox.removeAll()
 				id = packet.connectionUID
