@@ -1,9 +1,5 @@
 import Foundation
 
-protocol MessageHandler {
-	func handle(messages: [ArraySlice<UInt8>])
-}
-
 /// Stores all relevant information to keep an ATEM connection alive.
 /// Use this store to interprete incoming packets and construct new outgoing packets.
 class ConnectionState {
@@ -19,16 +15,14 @@ class ConnectionState {
 	
 	/// The id of the connection. At the initial connection phase this ID is temporarily set. After this phase a permanent ID is assigned.
 	private(set) var id: UID
-	private let messageHandler: MessageHandler
 
-	private init(id: UID, outBox: [SerialPacket], lastSent📦ID: UInt16, messageHandler: MessageHandler) {
+	private init(id: UID, outBox: [SerialPacket], lastSent📦ID: UInt16) {
 		self.id = id
 		self.outBox = outBox
 		self.lastSent📦ID = lastSent📦ID
-		self.messageHandler = messageHandler
 	}
 	
-	static func switcher(initialPacket: Packet, messageHandler: MessageHandler) -> ConnectionState {
+	static func switcher(initialPacket: Packet) -> ConnectionState {
 		return ConnectionState(
 			id: initialPacket.connectionUID,
 			outBox: [
@@ -38,26 +32,23 @@ class ConnectionState {
 				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage4,  number:  4),
 				SerialPacket(connectionUID: initialPacket.connectionUID, number: 5)
 			],
-			lastSent📦ID: 5,
-			messageHandler: messageHandler
+			lastSent📦ID: 5
 		)
 	}
 	
-	static func controller(messageHandler: MessageHandler) -> ConnectionState {
+	static func controller() -> ConnectionState {
 		let connectionID = ConnectionState.id(firstBit: false)
 		return ConnectionState(
 			id: connectionID,
 			outBox: [SerialPacket.connectToCore(uid: connectionID, type: .connect)],
-			lastSent📦ID: 0,
-			messageHandler: messageHandler
+			lastSent📦ID: 0
 		)
 	}
 	
 	/// Interprets data and returns the messages that it contains
-	func interpret(_ packet: Packet) {
+	func parse(_ packet: Packet) -> [ArraySlice<UInt8>] {
 		if let packetID = packet.number {
 			received📦IDs.sortedInsert(packetID)
-			messageHandler.handle(messages: packet.messages)
 			if packetID == 1 && !packet.isConnect {
 				outBox.removeAll()
 				id = packet.connectionUID
@@ -68,7 +59,8 @@ class ConnectionState {
 			if upperBound < outBox.endIndex {
 				outBox.removeSubrange(0...upperBound)
 			}
-		}		
+		}
+		return packet.messages
 	}
 	
 	/// Constructs a packet that should be sent to keep this connection alive
@@ -98,11 +90,6 @@ class ConnectionState {
 		} else {
 			return oldPackets
 		}
-	}
-	
-	/// Constructs a packet containing messages you want to send
-	func constructPacket(for messages: [Message]) -> SerialPacket {
-		fatalError("not implemented")
 	}
 
 	private static func id(firstBit: Bool) -> UID {

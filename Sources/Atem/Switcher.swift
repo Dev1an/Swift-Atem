@@ -15,15 +15,6 @@ struct Client {
 
 let sendInterval = TimeAmount.milliseconds(20)
 
-class SwitcherSimulator: MessageHandler {
-	func handle(messages: [ArraySlice<UInt8>]) {
-		for message in messages {
-			let name = message[message.startIndex.advanced(by: 4)..<message.startIndex.advanced(by: 8)]
-			print(String(bytes: name, encoding: .utf8))
-		}
-	}
-}
-
 class SwitcherHandler: ChannelInboundHandler {
 	var counter: UInt8 = 0
 	var clients = [UInt16: Client]()
@@ -44,11 +35,14 @@ class SwitcherHandler: ChannelInboundHandler {
 			let initiationEnvelope = AddressedEnvelope(remoteAddress: envelope.remoteAddress, data: buffer)
 			ctx.write(wrapOutboundOut(initiationEnvelope), promise: nil)
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
-			client.state.interpret(packet)
+			for message in client.state.parse(packet) {
+				let name = message[message.startIndex.advanced(by: 4)..<message.startIndex.advanced(by: 8)]
+				print(String(bytes: name, encoding: .utf8)!)
+			}
 		} else {
 			clients[UInt16(from: packet.connectionUID)] = Client(
 				address: envelope.remoteAddress,
-				state: ConnectionState.switcher(initialPacket: packet, messageHandler: SwitcherSimulator())
+				state: ConnectionState.switcher(initialPacket: packet)
 			)
 		}
 	}
