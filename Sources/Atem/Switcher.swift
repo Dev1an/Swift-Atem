@@ -36,8 +36,16 @@ class SwitcherHandler: ChannelInboundHandler {
 			ctx.write(wrapOutboundOut(initiationEnvelope), promise: nil)
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
 			for message in client.state.parse(packet) {
-				let name = message[message.startIndex.advanced(by: 4)..<message.startIndex.advanced(by: 8)]
-				print(String(bytes: name, encoding: .utf8)!)
+				let name = String(bytes: message[message.startIndex.advanced(by: 4)..<message.startIndex.advanced(by: 8)], encoding: .utf8)!
+				switch name {
+				case "CPgI":
+					let response = [0, 12, 246, 191, 0x50, 0x72, 0x67, 0x49] + message[(8..<12).advanced(by: message.startIndex)]
+					client.state.send(message: response)
+					print(message)
+					print(response)
+				default:
+					print(name)
+				}
 			}
 		} else {
 			clients[UInt16(from: packet.connectionUID)] = Client(
@@ -64,7 +72,7 @@ class SwitcherHandler: ChannelInboundHandler {
 	
 	func keepClientsAwake(context: ChannelHandlerContext) {
 		for (_, client) in clients {
-			for packet in client.state.constructKeepAlivePackets() {
+			for packet in client.state.assembleOutgoingPackets() {
 				let data = encode(bytes: packet.bytes, for: client.address, in: context)
 				context.write(data, promise: nil)
 			}

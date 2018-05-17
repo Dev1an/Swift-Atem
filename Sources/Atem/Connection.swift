@@ -13,6 +13,9 @@ class ConnectionState {
 	/// - Attention: adding packets to this list in the wrong order, may cause them never to be sent.
 	private var outBox: [SerialPacket]
 	
+	// List of messages that should be sent
+	private var messageOutBox = [UInt8]()
+	
 	/// The id of the connection. At the initial connection phase this ID is temporarily set. After this phase a permanent ID is assigned.
 	private(set) var id: UID
 
@@ -63,8 +66,13 @@ class ConnectionState {
 		return packet.messages
 	}
 	
-	/// Constructs a packet that should be sent to keep this connection alive
-	func constructKeepAlivePackets() -> [SerialPacket] {
+	func send(message: [UInt8]) {
+		messageOutBox.append(contentsOf: message)
+	}
+	
+	/// Returns packets that aren't acknowledged yet
+	/// and marks them as retransmission.
+	private func assembleOldPackets() -> [SerialPacket] {
 		let originalOutBox = outBox
 		for index in outBox.indices { outBox[index].makeRetransmission() }
 		let oldPackets: [SerialPacket]
@@ -81,15 +89,19 @@ class ConnectionState {
 				}
 			}
 			received📦IDs.removeSubrange(...index)
-			oldPackets = originalOutBox + [SerialPacket.init(connectionUID: id, number: nil, acknowledgement: lastSequentialId)]
+			oldPackets = originalOutBox + [SerialPacket(connectionUID: id, number: nil, acknowledgement: lastSequentialId)]
 		}
-		if oldPackets.isEmpty {
-			// If there are no packages to send, create an empty packet to keep the connection alive.
-			lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
-			return [SerialPacket(connectionUID: id, number: lastSent📦ID)]
-		} else {
-			return oldPackets
-		}
+		
+		return oldPackets
+	}
+	
+	func assembleOutgoingPackets() -> [SerialPacket] {
+		lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
+		let newPacket = SerialPacket(connectionUID: id, data: messageOutBox, number: lastSent📦ID)
+		messageOutBox.removeAll(keepingCapacity: true)
+		outBox.append(newPacket)
+		outBox[outBox.endIndex-1].makeRetransmission()
+		return assembleOldPackets() + [newPacket]
 	}
 
 	private static func id(firstBit: Bool) -> UID {

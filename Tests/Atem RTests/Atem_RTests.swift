@@ -25,12 +25,6 @@ class Atem_RTests: XCTestCase {
 
 	func testUDPserver() {
 		let s = try? Switcher()
-		print(s)
-		let deadline = DispatchSemaphore(value: 0)
-		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 60) {
-			deadline.signal()
-		}
-		deadline.wait()
 	}
 	
 //	func testUDPclient() {
