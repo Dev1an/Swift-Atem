@@ -19,7 +19,6 @@ let numberPosition          = 10..<12
 let messageTitlePosition    = 4 ..< 8
 
 let connectMessagePosition  = 12..<20
-let atemConnectMessageBytes: [UInt8] = [2,0,0,6,0,0,0,0]
 let controllerConnectMessageBytes: [UInt8] = [1,0,0,0,0,0,0,0]
 
 struct Packet: CustomDebugStringConvertible {
@@ -128,8 +127,9 @@ struct SerialPacket {
 	}
 	
 	/// Creates a connection packet to send to an ATEM Controller such as the PC software or the broadcast panel
-	static func connectToController(uid: UID, type: PacketTypes) -> SerialPacket {
-		return SerialPacket(bytes: [type.rawValue, 20, uid.first!, uid.last!, 0, 0, 0, 0, 0, 0x22, 0, 0] + atemConnectMessageBytes)
+	static func connectToController(oldUid: UID, newUid: [UInt8], type: PacketTypes) -> SerialPacket {
+		let atemConnectMessageBytes = [2,0] + newUid + [0,0,0,0]
+		return SerialPacket(bytes: [type.rawValue, 20, oldUid.first!, oldUid.last!, 0, 0, 0, 0, 0, 0x22, 0, 0] + atemConnectMessageBytes)
 	}
 	
 	/// A textual representation of the packet

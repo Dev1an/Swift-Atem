@@ -13,27 +13,35 @@ struct Client {
 	let state: ConnectionState
 }
 
-let sendInterval = TimeAmount.milliseconds(20)
-
-class SwitcherHandler: ChannelInboundHandler {
-	var counter: UInt8 = 0
+class SwitcherHandler: HandlerWithTimer {
+	var counter: UInt16 = 0
 	var clients = [UInt16: Client]()
-	var nextKeepAliveTask: Scheduled<Void>?
+	var connectionIdUpgrades = [UInt16: UInt16]()
 	var outbox = [NIOAny]()
-	
-	typealias InboundIn = AddressedEnvelope<ByteBuffer>
-	typealias OutboundOut = AddressedEnvelope<ByteBuffer>
-	
-	func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+		
+	override func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
 		var envelope = unwrapInboundIn(data)
 		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
 		
 		if packet.isConnect {
-			let initiationPacket = SerialPacket.connectToController(uid: packet.connectionUID, type: .connect)
-			var buffer = ctx.channel.allocator.buffer(capacity: initiationPacket.bytes.count)
-			buffer.write(bytes: initiationPacket.bytes)
-			let initiationEnvelope = AddressedEnvelope(remoteAddress: envelope.remoteAddress, data: buffer)
-			ctx.write(wrapOutboundOut(initiationEnvelope), promise: nil)
+			print("💋 receiving connection initiation request", packet.connectionUID)
+			let newId: UInt16
+			if let savedId = connectionIdUpgrades[UInt16(from: packet.connectionUID)] {
+				newId = savedId & 0b0111_1111_1111_1111
+			} else {
+				counter = (counter+1) % 0b0111_1111_1111_1111
+				newId = counter
+				connectionIdUpgrades[UInt16(from: packet.connectionUID)] = newId | 0b1000_0000_0000_0000
+			}
+			let initiationPacket = SerialPacket.connectToController(oldUid: packet.connectionUID, newUid: newId.bytes, type: .connect)
+			let data = encode(bytes: initiationPacket.bytes, for: envelope.remoteAddress, in: ctx)
+			ctx.write(data, promise: nil)
+		} else if let newId = connectionIdUpgrades[UInt16(from: packet.connectionUID)] {
+			print("💋 creating new connection state", packet.connectionUID)
+			clients[newId] = Client(
+				address: envelope.remoteAddress,
+				state: ConnectionState.switcher(id: newId)
+			)
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
 			for message in client.state.parse(packet) {
 				let name = String(bytes: message[message.startIndex.advanced(by: 4)..<message.startIndex.advanced(by: 8)], encoding: .utf8)!
@@ -47,43 +55,19 @@ class SwitcherHandler: ChannelInboundHandler {
 					print(name)
 				}
 			}
-		} else {
-			clients[UInt16(from: packet.connectionUID)] = Client(
-				address: envelope.remoteAddress,
-				state: ConnectionState.switcher(initialPacket: packet)
-			)
 		}
 	}
 	
-	func channelActive(ctx: ChannelHandlerContext) {
-		startLoop(in: ctx)
-	}
-	
-	func channelInactive(ctx: ChannelHandlerContext) {
-		nextKeepAliveTask?.cancel()
-	}
-	
-	func startLoop(in context: ChannelHandlerContext) {
-		nextKeepAliveTask = context.eventLoop.scheduleTask(in: sendInterval) {
-			self.keepClientsAwake(context: context)
-			self.startLoop(in: context)
-		}
-	}
-	
-	func keepClientsAwake(context: ChannelHandlerContext) {
+	override func executeTimerTask(context: ChannelHandlerContext) {
 		for (_, client) in clients {
 			for packet in client.state.assembleOutgoingPackets() {
 				let data = encode(bytes: packet.bytes, for: client.address, in: context)
-				context.write(data, promise: nil)
+				context.write(data).whenFailure{ error in
+					print(error)
+				}
 			}
 		}
 		context.flush()
-	}
-	
-	func encode(bytes: [UInt8], for client: SocketAddress, in context: ChannelHandlerContext) -> NIOAny {
-		var buffer = context.channel.allocator.buffer(capacity: bytes.count)
-		buffer.write(bytes: bytes)
-		return wrapOutboundOut(AddressedEnvelope(remoteAddress: client, data: buffer))
 	}
 }
 
@@ -96,7 +80,6 @@ class Switcher {
 		defer {
 			try! 🔂.syncShutdownGracefully()
 		}
-		
 		
 		try bootstrap
 			.bind(host: "127.0.0.1", port: 9910)

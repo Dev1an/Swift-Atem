@@ -25,25 +25,29 @@ class ConnectionState {
 		self.lastSent📦ID = lastSent📦ID
 	}
 	
-	static func switcher(initialPacket: Packet) -> ConnectionState {
+	static func switcher(id: UInt16) -> ConnectionState {
+		let idSlice = id.bytes[0..<2]
 		return ConnectionState(
-			id: initialPacket.connectionUID,
+			id: idSlice,
 			outBox: [
-				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage1,  number:  1),
-				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage2,  number:  2),
-				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage3,  number:  3),
-				SerialPacket(connectionUID: initialPacket.connectionUID, data: initialMessage4,  number:  4),
-				SerialPacket(connectionUID: initialPacket.connectionUID, number: 5)
+				SerialPacket(connectionUID: idSlice, data: initialMessage1,  number:  1),
+				SerialPacket(connectionUID: idSlice, data: initialMessage2,  number:  2),
+				SerialPacket(connectionUID: idSlice, data: initialMessage3,  number:  3),
+				SerialPacket(connectionUID: idSlice, data: initialMessage4,  number:  4),
+				SerialPacket(connectionUID: idSlice, data: initialMessage5,  number:  5),
+				SerialPacket(connectionUID: idSlice, data: initialMessage6,  number:  6),
+				SerialPacket(connectionUID: idSlice, data: initialMessage7,  number:  7),
+				SerialPacket(connectionUID: idSlice, data: initialMessage8,  number:  8),
+				SerialPacket(connectionUID: idSlice, number: 9)
 			],
-			lastSent📦ID: 5
+			lastSent📦ID: 9
 		)
 	}
 	
-	static func controller() -> ConnectionState {
-		let connectionID = ConnectionState.id(firstBit: false)
+	static func controller(id: UID) -> ConnectionState {
 		return ConnectionState(
-			id: connectionID,
-			outBox: [SerialPacket.connectToCore(uid: connectionID, type: .connect)],
+			id: id,
+			outBox: [],
 			lastSent📦ID: 0
 		)
 	}
@@ -52,8 +56,9 @@ class ConnectionState {
 	func parse(_ packet: Packet) -> [ArraySlice<UInt8>] {
 		if let packetID = packet.number {
 			received📦IDs.sortedInsert(packetID)
-			if packetID == 1 && !packet.isConnect {
+			if packet.isConnect {
 				outBox.removeAll()
+			} else if packetID == 1 {
 				id = packet.connectionUID
 			}
 		}
@@ -96,15 +101,19 @@ class ConnectionState {
 	}
 	
 	func assembleOutgoingPackets() -> [SerialPacket] {
-		lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
-		let newPacket = SerialPacket(connectionUID: id, data: messageOutBox, number: lastSent📦ID)
-		messageOutBox.removeAll(keepingCapacity: true)
-		outBox.append(newPacket)
-		outBox[outBox.endIndex-1].makeRetransmission()
-		return assembleOldPackets() + [newPacket]
+		if messageOutBox.isEmpty && outBox.isEmpty {
+			lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
+			let newPacket = SerialPacket(connectionUID: id, data: messageOutBox, number: lastSent📦ID)
+			messageOutBox.removeAll(keepingCapacity: true)
+			outBox.append(newPacket)
+			outBox[outBox.endIndex-1].makeRetransmission()
+			return assembleOldPackets() + [newPacket]
+		} else {
+			return assembleOldPackets()
+		}
 	}
 
-	private static func id(firstBit: Bool) -> UID {
+	static func id(firstBit: Bool) -> UID {
 		let randomNumber = arc4random()
 		let  firstByte = UInt8((randomNumber & 0x0700) >> 8)
 		let secondByte = UInt8( randomNumber & 0x00FF)

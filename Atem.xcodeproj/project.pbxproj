@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		742D6FE420B1B2190053D924 /* HandlerWithTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D6FE320B1B2190053D924 /* HandlerWithTimer.swift */; };
+		742D6FE620B1D0ED0053D924 /* EnvelopeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D6FE520B1D0ED0053D924 /* EnvelopeWrapper.swift */; };
 		OBJ_131 /* ArrayOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ArrayOperations.swift */; };
 		OBJ_132 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Connection.swift */; };
 		OBJ_133 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Controller.swift */; };
@@ -281,6 +283,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		742D6FE320B1B2190053D924 /* HandlerWithTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerWithTimer.swift; sourceTree = "<group>"; };
+		742D6FE520B1D0ED0053D924 /* EnvelopeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvelopeWrapper.swift; sourceTree = "<group>"; };
 		"Atem::Atem RTests::Product" /* Atem_RTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = Atem_RTests.xctest; path = "Atem RTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Atem::Atem::Product" /* Atem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Atem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
@@ -815,11 +819,13 @@
 				OBJ_10 /* Connection.swift */,
 				OBJ_11 /* Controller.swift */,
 				OBJ_17 /* Switcher.swift */,
+				742D6FE320B1B2190053D924 /* HandlerWithTimer.swift */,
 				OBJ_12 /* InitialStateMessages.swift */,
 				OBJ_13 /* IntOperators.swift */,
 				OBJ_14 /* Message.swift */,
 				OBJ_15 /* Packet.swift */,
 				OBJ_16 /* PacketTypes.swift */,
+				742D6FE520B1D0ED0053D924 /* EnvelopeWrapper.swift */,
 			);
 			name = Atem;
 			path = Sources/Atem;
@@ -1064,6 +1070,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_131 /* ArrayOperations.swift in Sources */,
+				742D6FE620B1D0ED0053D924 /* EnvelopeWrapper.swift in Sources */,
 				OBJ_132 /* Connection.swift in Sources */,
 				OBJ_133 /* Controller.swift in Sources */,
 				OBJ_134 /* InitialStateMessages.swift in Sources */,
@@ -1071,6 +1078,7 @@
 				OBJ_136 /* Message.swift in Sources */,
 				OBJ_137 /* Packet.swift in Sources */,
 				OBJ_138 /* PacketTypes.swift in Sources */,
+				742D6FE420B1B2190053D924 /* HandlerWithTimer.swift in Sources */,
 				OBJ_139 /* Switcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
