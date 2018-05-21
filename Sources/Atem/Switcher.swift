@@ -70,16 +70,14 @@ class SwitcherHandler: HandlerWithTimer {
 						// Construct TlIn
 						var TlInMessage = [UInt8(0), 20, 102, 101, 84, 108, 73, 110, 0, 8, 0, 0, 0, 0, 0, 2, 0, 0, 1, 120]
 						TlInMessage[9+Int(source)] = 1
-						print(source)
-						print(message)
-						print(timeMessage)
-						print(PrgIMessage)
-						print(TlInMessage)
-						print(TlSrMessage)
+						print("Change program to ", source)
 						
 						// Send 3 messages
 						client.state.send(message: timeMessage + TlInMessage + TlSrMessage + PrgIMessage)
 					}
+				case "CPvI":
+					print("Change preview")
+					client.state.send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(8..<12).advanced(by: message.startIndex)])
 				default:
 					print(name)
 				}
