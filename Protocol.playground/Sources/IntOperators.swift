@@ -26,7 +26,7 @@ extension UInt16 {
 }
 
 extension CountableRange {
-	func advanced(by stride: Bound.Stride) -> CountableRange<Bound> {
+	public func advanced(by stride: Bound.Stride) -> CountableRange<Bound> {
 		return CountableRange(uncheckedBounds: (lower: lowerBound.advanced(by: stride), upper: upperBound.advanced(by: stride)))
 	}
 }
