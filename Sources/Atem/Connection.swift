@@ -101,16 +101,12 @@ class ConnectionState {
 	}
 	
 	func assembleOutgoingPackets() -> [SerialPacket] {
-		if messageOutBox.isEmpty && outBox.isEmpty {
-			lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
-			let newPacket = SerialPacket(connectionUID: id, data: messageOutBox, number: lastSent📦ID)
-			messageOutBox.removeAll(keepingCapacity: true)
-			outBox.append(newPacket)
-			outBox[outBox.endIndex-1].makeRetransmission()
-			return assembleOldPackets() + [newPacket]
-		} else {
-			return assembleOldPackets()
-		}
+		lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
+		let newPacket = SerialPacket(connectionUID: id, data: messageOutBox, number: lastSent📦ID)
+		messageOutBox.removeAll(keepingCapacity: true)
+		outBox.append(newPacket)
+		outBox[outBox.endIndex-1].makeRetransmission()
+		return assembleOldPackets() + [newPacket]
 	}
 
 	static func id(firstBit: Bool) -> UID {

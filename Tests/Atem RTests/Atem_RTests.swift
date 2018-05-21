@@ -87,7 +87,6 @@ class Atem_RTests: XCTestCase {
 		
 	}
 	
-
 	func testUDPserver() {
 		let s = try? Switcher()
 	}
