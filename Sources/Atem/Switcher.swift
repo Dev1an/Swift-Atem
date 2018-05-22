@@ -25,7 +25,6 @@ class SwitcherHandler: HandlerWithTimer {
 		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
 		
 		if packet.isConnect {
-			print("💋 receiving connection initiation request", packet.connectionUID)
 			let newId: UInt16
 			if let savedId = connectionIdUpgrades[UInt16(from: packet.connectionUID)] {
 				newId = savedId & 0b0111_1111_1111_1111
@@ -38,7 +37,6 @@ class SwitcherHandler: HandlerWithTimer {
 			let data = encode(bytes: initiationPacket.bytes, for: envelope.remoteAddress, in: ctx)
 			ctx.write(data, promise: nil)
 		} else if let newId = connectionIdUpgrades[UInt16(from: packet.connectionUID)] {
-			print("💋 creating new connection state", packet.connectionUID)
 			clients[newId] = Client(
 				address: envelope.remoteAddress,
 				state: ConnectionState.switcher(id: newId)
@@ -98,20 +96,18 @@ class SwitcherHandler: HandlerWithTimer {
 	}
 }
 
-class Switcher {
-	init() throws {
-		let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
-		let bootstrap = DatagramBootstrap(group: 🔂)
+public class Switcher {
+	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
+	public let channel: EventLoopFuture<Channel>
+	
+	public init() throws {
+		channel = DatagramBootstrap(group: 🔂)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer { $0.pipeline.add(handler: SwitcherHandler()) }
-		defer {
-			try! 🔂.syncShutdownGracefully()
-		}
-		
-		try bootstrap
 			.bind(host: "127.0.0.1", port: 9910)
-			.wait()
-			.closeFuture
-			.wait()
+	}
+	
+	deinit {
+		try? 🔂.syncShutdownGracefully()
 	}
 }
