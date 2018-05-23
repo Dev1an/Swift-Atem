@@ -88,27 +88,17 @@ class Atem_RTests: XCTestCase {
 		
 	}
 	
-	func testPreconditionViolation() {
+	func testUdpConnection() {
 		do {
-			let queue = DispatchQueue.global(qos: .background)
 			let switcher = try Switcher()
-			var controllers = [Controller]()
-			let now = DispatchTime.now()
-			// Spin up 400 lot of UDP clients...
-			for _ in 1...400 {
-				queue.asyncAfter(deadline: now+0.001) {
-					if let controller = try? Controller(ipAddress: "127.0.0.1") {
-						controllers.append(controller)
-					}
-				}
-			}
-
+			let controller = try Controller(ipAddress: "0.0.0.0")
+			
 			let deadline = DispatchSemaphore(value: 0)
-			queue.asyncAfter(deadline: .now() + 10) {
+			DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 4) {
 				deadline.signal()
 			}
 			deadline.wait()
-			print(switcher)
+			print(switcher, controller)
 		} catch {
 			XCTFail(error.localizedDescription)
 		}

@@ -5,9 +5,9 @@
         "package": "swift-nio",
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
-          "branch": null,
-          "revision": "80363d9d8c1c572d228350ea87132bfa49c8ca03",
-          "version": "1.7.1"
+          "branch": "master",
+          "revision": "d53ee6dafc4d03a342aa32e79d5d282abc0c4f1a",
+          "version": null
         }
       },
       {

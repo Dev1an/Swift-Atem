@@ -81,6 +81,10 @@ class SwitcherHandler: HandlerWithTimer {
 				case "CPvI":
 					print("Change preview")
 					client.state.send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(8..<12).advanced(by: message.startIndex)])
+				case "CTPs":
+					let position = message[(10..<12).advanced(by: message.startIndex)]
+					let response = [0, 16, 1, 224, 0x54, 0x72, 0x50, 0x73, 0, 1, 5, 0] + position + [0, 0]
+					client.state.send(message: response)
 				default:
 					print("→", name)
 				}
@@ -109,7 +113,7 @@ public class Switcher {
 		channel = DatagramBootstrap(group: 🔂)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer { $0.pipeline.add(handler: SwitcherHandler()) }
-			.bind(host: "127.0.0.1", port: 9910)
+			.bind(host: "0.0.0.0", port: 9910)
 	}
 	
 	deinit {
