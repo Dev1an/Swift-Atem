@@ -23,7 +23,7 @@ let package = Package(
             name: "Atem",
             dependencies: ["NIO"]),
         .testTarget(
-            name: "Atem RTests",
+            name: "Atem Tests",
             dependencies: ["Atem"]),
     ]
 )
