@@ -39,7 +39,7 @@
 		OBJ_149 /* CNIOAtomics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIOAtomics::Product" /* CNIOAtomics.framework */; };
 		OBJ_150 /* CNIODarwin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIODarwin::Product" /* CNIODarwin.framework */; };
 		OBJ_151 /* CNIOLinux.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIOLinux::Product" /* CNIOLinux.framework */; };
-		OBJ_171 /* Atem_RTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Atem_RTests.swift */; };
+		OBJ_171 /* Atem_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Atem_Tests.swift */; };
 		OBJ_173 /* Atem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Atem::Atem::Product" /* Atem.framework */; };
 		OBJ_174 /* NIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::NIO::Product" /* NIO.framework */; };
 		OBJ_175 /* CNIOSHA1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIOSHA1::Product" /* CNIOSHA1.framework */; };
@@ -307,7 +307,7 @@
 		OBJ_17 /* Packet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 		OBJ_18 /* PacketTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTypes.swift; sourceTree = "<group>"; };
 		OBJ_19 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
-		OBJ_22 /* Atem_RTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atem_RTests.swift; sourceTree = "<group>"; };
+		OBJ_22 /* Atem_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atem_Tests.swift; sourceTree = "<group>"; };
 		OBJ_27 /* c-atomics.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "c-atomics.c"; sourceTree = "<group>"; };
 		OBJ_29 /* c-atomics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "c-atomics.h"; sourceTree = "<group>"; };
 		OBJ_30 /* cpp_magic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpp_magic.h; sourceTree = "<group>"; };
@@ -548,19 +548,19 @@
 		OBJ_20 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_21 /* Atem RTests */,
+				OBJ_21 /* Atem Tests */,
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_21 /* Atem RTests */ = {
+		OBJ_21 /* Atem Tests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_22 /* Atem_RTests.swift */,
+				OBJ_22 /* Atem_Tests.swift */,
 				OBJ_12 /* EnvelopeWrapper.swift */,
 			);
-			name = "Atem RTests";
-			path = "Tests/Atem RTests";
+			name = "Atem Tests";
+			path = "Tests/Atem Tests";
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_23 /* Dependencies */ = {
@@ -1094,7 +1094,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_171 /* Atem_RTests.swift in Sources */,
+				OBJ_171 /* Atem_Tests.swift in Sources */,
 				74D8D32720B5456F006EA471 /* EnvelopeWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

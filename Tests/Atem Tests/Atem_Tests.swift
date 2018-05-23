@@ -77,12 +77,13 @@ class Atem_RTests: XCTestCase {
 		
 		send(bytes: 📦3.raw, to: switcher)
 		sEventLoop.advanceTime(by: .milliseconds(20))
-		for number in UInt16(1)...9 {
+		for number in UInt16(1)...8 {
 			guard let 📦 = packet(from: switcher.readOutbound()) else {
-				XCTFail("No writes")
+				XCTFail("\(number - 1) instead of 9 initial state messages")
 				return
 			}
 			XCTAssertEqual(📦.content.number, number)
+			XCTAssertFalse(📦.content.isRepeated)
 		}
 		
 	}

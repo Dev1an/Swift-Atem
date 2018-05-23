@@ -29,7 +29,7 @@ class ControllerHandler: HandlerWithTimer {
 			if awaitingConnectionResponse {
 				awaitingConnectionResponse = false
 			} else {
-				let state = ConnectionState.controller(id: packet.connectionUID)
+				let state = ConnectionState(id: packet.connectionUID)
 				connectionState = state
 				handle(messages: state.parse(packet))
 			}

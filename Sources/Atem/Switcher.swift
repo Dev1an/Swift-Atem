@@ -38,9 +38,18 @@ class SwitcherHandler: HandlerWithTimer {
 			ctx.write(data, promise: nil)
 			ctx.flush()
 		} else if let newId = connectionIdUpgrades[UInt16(from: packet.connectionUID)] {
+			let newConnection = ConnectionState(id: newId.bytes[0...])
+			newConnection.send(message: initialMessage1)
+			newConnection.send(message: initialMessage2)
+			newConnection.send(message: initialMessage3)
+			newConnection.send(message: initialMessage4)
+			newConnection.send(message: initialMessage5)
+			newConnection.send(message: initialMessage6)
+			newConnection.send(message: initialMessage7)
+			newConnection.send(message: initialMessage8)
 			clients[newId] = Client(
 				address: envelope.remoteAddress,
-				state: ConnectionState.switcher(id: newId)
+				state: newConnection
 			)
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
 			for message in client.state.parse(packet) {

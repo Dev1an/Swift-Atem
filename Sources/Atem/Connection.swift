@@ -7,49 +7,21 @@ class ConnectionState {
 	var received📦IDs = [UInt16]()
 	
 	/// The id of the last packet that was sent from this connection
-	var lastSent📦ID: UInt16
+	var lastSent📦ID: UInt16 = 0
 	
 	/// List of packets that are ready to be sent, ordered by packet number.
 	/// - Attention: adding packets to this list in the wrong order, may cause them never to be sent.
-	private var outBox: [SerialPacket]
+	private var packetOutBox = [SerialPacket]()
 	
 	// List of messages that should be sent
 	private var messageOutBox = [UInt8]()
+	private var messageOutBoxPages = [Int]()
 	
 	/// The id of the connection. At the initial connection phase this ID is temporarily set. After this phase a permanent ID is assigned.
 	private(set) var id: UID
 
-	private init(id: UID, outBox: [SerialPacket], lastSent📦ID: UInt16) {
+	init(id: UID) {
 		self.id = id
-		self.outBox = outBox
-		self.lastSent📦ID = lastSent📦ID
-	}
-	
-	static func switcher(id: UInt16) -> ConnectionState {
-		let idSlice = id.bytes[0..<2]
-		return ConnectionState(
-			id: idSlice,
-			outBox: [
-				SerialPacket(connectionUID: idSlice, data: initialMessage1,  number:  1),
-				SerialPacket(connectionUID: idSlice, data: initialMessage2,  number:  2),
-				SerialPacket(connectionUID: idSlice, data: initialMessage3,  number:  3),
-				SerialPacket(connectionUID: idSlice, data: initialMessage4,  number:  4),
-				SerialPacket(connectionUID: idSlice, data: initialMessage5,  number:  5),
-				SerialPacket(connectionUID: idSlice, data: initialMessage6,  number:  6),
-				SerialPacket(connectionUID: idSlice, data: initialMessage7,  number:  7),
-				SerialPacket(connectionUID: idSlice, data: initialMessage8,  number:  8),
-				SerialPacket(connectionUID: idSlice, number: 9)
-			],
-			lastSent📦ID: 9
-		)
-	}
-	
-	static func controller(id: UID) -> ConnectionState {
-		return ConnectionState(
-			id: id,
-			outBox: [],
-			lastSent📦ID: 0
-		)
 	}
 	
 	/// Interprets data and returns the messages that it contains
@@ -57,32 +29,34 @@ class ConnectionState {
 		if let packetID = packet.number {
 			received📦IDs.sortedInsert(packetID)
 			if packet.isConnect {
-				outBox.removeAll()
+				packetOutBox.removeAll()
 			} else if packetID == 1 {
 				id = packet.connectionUID
 			}
 		}
 		if let acknowledgedID = packet.acknowledgement {
-			let upperBound = outBox.binarySearch { $0.number < acknowledgedID }
-			if upperBound < outBox.endIndex {
-				outBox.removeSubrange(0...upperBound)
+			let upperBound = packetOutBox.binarySearch { $0.number < acknowledgedID }
+			if upperBound < packetOutBox.endIndex {
+				packetOutBox.removeSubrange(0...upperBound)
 			}
 		}
 		return packet.messages
 	}
 	
 	func send(message: [UInt8]) {
+		let oldCount = messageOutBox.count
 		messageOutBox.append(contentsOf: message)
+		if messageOutBox.count > 1420 {
+			messageOutBoxPages.append(oldCount)
+		}
 	}
 	
-	/// Returns packets that aren't acknowledged yet
-	/// and marks them as retransmission.
-	private func assembleOldPackets() -> [SerialPacket] {
-		let originalOutBox = outBox
-		for index in outBox.indices { outBox[index].makeRetransmission() }
-		let oldPackets: [SerialPacket]
+	/// Returns old packets that aren't acknowledged yet together with new packets
+	func assembleOutgoingPackets() -> [SerialPacket] {
+		// Retreive the number of the first missing packet
+		let acknowledgementNumber: UInt16?
 		if received📦IDs.isEmpty {
-			oldPackets = originalOutBox
+			acknowledgementNumber = nil
 		} else {
 			var (index, lastSequentialId) = (0, received📦IDs.first!)
 			for id in received📦IDs[1...] {
@@ -94,19 +68,24 @@ class ConnectionState {
 				}
 			}
 			received📦IDs.removeSubrange(...index)
-			oldPackets = originalOutBox + [SerialPacket(connectionUID: id, number: nil, acknowledgement: lastSequentialId)]
+			acknowledgementNumber = lastSequentialId
 		}
-		
-		return oldPackets
-	}
-	
-	func assembleOutgoingPackets() -> [SerialPacket] {
-		lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
-		let newPacket = SerialPacket(connectionUID: id, data: messageOutBox, number: lastSent📦ID)
+		var newPackets = [SerialPacket]()
+		newPackets.reserveCapacity(messageOutBoxPages.count+1)
+		var startIndex = 0
+		for endIndex in messageOutBoxPages + [messageOutBox.endIndex] {
+			lastSent📦ID = (lastSent📦ID + 1) % UInt16.max
+			newPackets.append(SerialPacket(connectionUID: id, data: messageOutBox[startIndex..<endIndex], number: lastSent📦ID, acknowledgement: acknowledgementNumber))
+			startIndex = endIndex
+		}
 		messageOutBox.removeAll(keepingCapacity: true)
-		outBox.append(newPacket)
-		outBox[outBox.endIndex-1].makeRetransmission()
-		return assembleOldPackets() + [newPacket]
+		messageOutBoxPages.removeAll(keepingCapacity: true)
+		let result = packetOutBox + newPackets
+		for index in newPackets.indices {
+			newPackets[index].makeRetransmission()
+		}
+		packetOutBox.append(contentsOf: newPackets)
+		return result
 	}
 
 	static func id(firstBit: Bool) -> UID {
