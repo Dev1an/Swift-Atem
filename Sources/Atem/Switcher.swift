@@ -76,19 +76,25 @@ class SwitcherHandler: HandlerWithTimer {
 						print("Change program to ", source)
 						
 						// Send 3 messages
-						client.state.send(message: timeMessage + TlInMessage + TlSrMessage + PrgIMessage)
+						send(message: timeMessage + TlInMessage + TlSrMessage + PrgIMessage)
 					}
 				case "CPvI":
 					print("Change preview")
-					client.state.send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(8..<12).advanced(by: message.startIndex)])
+					send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(8..<12).advanced(by: message.startIndex)])
 				case "CTPs":
 					let position = message[(10..<12).advanced(by: message.startIndex)]
 					let response = [0, 16, 1, 224, 0x54, 0x72, 0x50, 0x73, 0, 1, 5, 0] + position + [0, 0]
-					client.state.send(message: response)
+					send(message: response)
 				default:
 					print("→", name)
 				}
 			}
+		}
+	}
+	
+	func send(message: [UInt8]) {
+		for (_, client) in clients {
+			client.state.send(message: message)
 		}
 	}
 	
