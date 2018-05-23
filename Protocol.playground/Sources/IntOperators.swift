@@ -21,7 +21,7 @@ extension FixedWidthInteger {
 extension UInt16 {
 	var bytes: [UInt8] {
 		var copy = self
-		return withUnsafeBytes(of: &copy, { [ $0[0], $0[1] ] })
+		return withUnsafeBytes(of: &copy, { [ $0[1], $0[0] ] })
 	}
 }
 
