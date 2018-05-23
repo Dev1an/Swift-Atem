@@ -19,9 +19,7 @@ class HandlerWithTimer: ChannelInboundHandler {
 		startLoop(in: ctx)
 	}
 	
-	func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
-		
-	}
+	func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {}
 	
 	func channelInactive(ctx: ChannelHandlerContext) {
 		nextKeepAliveTask?.cancel()

@@ -21,12 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		74D8D32720B5456F006EA471 /* EnvelopeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* EnvelopeWrapper.swift */; };
 		OBJ_133 /* ArrayOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ArrayOperations.swift */; };
 		OBJ_134 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Connection.swift */; };
 		OBJ_135 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Controller.swift */; };
-		OBJ_136 /* EnvelopeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* EnvelopeWrapper.swift */; };
 		OBJ_137 /* HandlerWithTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* HandlerWithTimer.swift */; };
-		OBJ_138 /* InitialStateMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* InitialStateMessages.swift */; };
+		OBJ_138 /* InitialSwitcherStateMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* InitialSwitcherStateMessages.swift */; };
 		OBJ_139 /* IntOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* IntOperators.swift */; };
 		OBJ_140 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Message.swift */; };
 		OBJ_141 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Packet.swift */; };
@@ -301,7 +301,7 @@
 		OBJ_117 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/.build/checkouts/swift-nio.git-3108475404973543938/Package.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* EnvelopeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvelopeWrapper.swift; sourceTree = "<group>"; };
 		OBJ_13 /* HandlerWithTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerWithTimer.swift; sourceTree = "<group>"; };
-		OBJ_14 /* InitialStateMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStateMessages.swift; sourceTree = "<group>"; };
+		OBJ_14 /* InitialSwitcherStateMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSwitcherStateMessages.swift; sourceTree = "<group>"; };
 		OBJ_15 /* IntOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntOperators.swift; sourceTree = "<group>"; };
 		OBJ_16 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		OBJ_17 /* Packet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
@@ -465,6 +465,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74D8D32620B5454B006EA471 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* ArrayOperations.swift */,
+				OBJ_15 /* IntOperators.swift */,
+				OBJ_13 /* HandlerWithTimer.swift */,
+				OBJ_14 /* InitialSwitcherStateMessages.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		OBJ_106 /* NIOHTTP1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +556,7 @@
 		OBJ_21 /* Atem RTests */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_12 /* EnvelopeWrapper.swift */,
 				OBJ_22 /* Atem_RTests.swift */,
 			);
 			name = "Atem RTests";
@@ -717,7 +729,7 @@
 			path = ".build/checkouts/swift-nio.git-3108475404973543938/Sources/CNIOSHA1";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -726,7 +738,6 @@
 				OBJ_23 /* Dependencies */,
 				OBJ_118 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* include */ = {
@@ -816,17 +827,13 @@
 		OBJ_8 /* Atem */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* ArrayOperations.swift */,
-				OBJ_10 /* Connection.swift */,
 				OBJ_11 /* Controller.swift */,
-				OBJ_12 /* EnvelopeWrapper.swift */,
-				OBJ_13 /* HandlerWithTimer.swift */,
-				OBJ_14 /* InitialStateMessages.swift */,
-				OBJ_15 /* IntOperators.swift */,
+				OBJ_19 /* Switcher.swift */,
+				OBJ_10 /* Connection.swift */,
 				OBJ_16 /* Message.swift */,
 				OBJ_17 /* Packet.swift */,
 				OBJ_18 /* PacketTypes.swift */,
-				OBJ_19 /* Switcher.swift */,
+				74D8D32620B5454B006EA471 /* Utilities */,
 			);
 			name = Atem;
 			path = Sources/Atem;
@@ -1044,7 +1051,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_118 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1073,9 +1080,8 @@
 				OBJ_133 /* ArrayOperations.swift in Sources */,
 				OBJ_134 /* Connection.swift in Sources */,
 				OBJ_135 /* Controller.swift in Sources */,
-				OBJ_136 /* EnvelopeWrapper.swift in Sources */,
 				OBJ_137 /* HandlerWithTimer.swift in Sources */,
-				OBJ_138 /* InitialStateMessages.swift in Sources */,
+				OBJ_138 /* InitialSwitcherStateMessages.swift in Sources */,
 				OBJ_139 /* IntOperators.swift in Sources */,
 				OBJ_140 /* Message.swift in Sources */,
 				OBJ_141 /* Packet.swift in Sources */,
@@ -1089,6 +1095,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_171 /* Atem_RTests.swift in Sources */,
+				74D8D32720B5456F006EA471 /* EnvelopeWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,7 @@ class ControllerHandler: HandlerWithTimer {
 		self.address = address
 	}
 	
-	override func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+	final override func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
 		var envelope = unwrapInboundIn(data)
 		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
 		print("←", packet)
