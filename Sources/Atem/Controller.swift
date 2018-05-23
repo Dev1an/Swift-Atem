@@ -45,11 +45,18 @@ class ControllerHandler: HandlerWithTimer {
 	
 	override func executeTimerTask(context: ChannelHandlerContext) {
 		if let state = connectionState {
-			for packet in state.assembleOutgoingPackets() {
-				let data = encode(bytes: packet.bytes, for: address, in: context)
-				context.write(data).whenFailure{ error in
-					print(error)
+			let packets = state.assembleOutgoingPackets()
+			if packets.count < 50 {
+				for packet in packets {
+					let data = encode(bytes: packet.bytes, for: address, in: context)
+					context.write(data).whenFailure{ error in
+						print(error)
+					}
 				}
+			} else {
+				connectionState = nil
+				awaitingConnectionResponse = true
+				print("disconnected")
 			}
 		} else if awaitingConnectionResponse {
 			let 📦 = SerialPacket.connectToCore(uid: initiationID, type: .connect)
@@ -68,16 +75,23 @@ class ControllerHandler: HandlerWithTimer {
 	}
 }
 
-class Controller {
+public class Controller {
 	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
 	public let channel: EventLoopFuture<Channel>
+	let handler: ControllerHandler
 	
 	public init(ipAddress: String) throws {
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
+		let tempHandler = ControllerHandler(address: address)
+		handler = tempHandler
 		channel = DatagramBootstrap(group: 🔂)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
-			.channelInitializer { $0.pipeline.add(handler: ControllerHandler(address: address)) }
+			.channelInitializer { $0.pipeline.add(handler: tempHandler) }
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
+	}
+	
+	public func transition(to position: UInt16) {
+		handler.connectionState?.send(message: [0, 12, 203, 167, 67, 84, 80, 115, 0, 43] + position.bytes)
 	}
 	
 	deinit {
