@@ -36,6 +36,7 @@ class SwitcherHandler: HandlerWithTimer {
 			let initiationPacket = SerialPacket.connectToController(oldUid: packet.connectionUID, newUid: newId.bytes, type: .connect)
 			let data = encode(bytes: initiationPacket.bytes, for: envelope.remoteAddress, in: ctx)
 			ctx.write(data, promise: nil)
+			ctx.flush()
 		} else if let newId = connectionIdUpgrades[UInt16(from: packet.connectionUID)] {
 			clients[newId] = Client(
 				address: envelope.remoteAddress,

@@ -556,8 +556,8 @@
 		OBJ_21 /* Atem RTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_12 /* EnvelopeWrapper.swift */,
 				OBJ_22 /* Atem_RTests.swift */,
+				OBJ_12 /* EnvelopeWrapper.swift */,
 			);
 			name = "Atem RTests";
 			path = "Tests/Atem RTests";

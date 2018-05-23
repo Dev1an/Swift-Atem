@@ -22,7 +22,6 @@ class ControllerHandler: HandlerWithTimer {
 	final override func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
 		var envelope = unwrapInboundIn(data)
 		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
-		print("←", packet)
 
 		if let connectionState = connectionState {
 			handle(messages: connectionState.parse(packet))
@@ -47,7 +46,6 @@ class ControllerHandler: HandlerWithTimer {
 	override func executeTimerTask(context: ChannelHandlerContext) {
 		if let state = connectionState {
 			for packet in state.assembleOutgoingPackets() {
-				print("→", packet.bytes.map{String($0, radix: 16)})
 				let data = encode(bytes: packet.bytes, for: address, in: context)
 				context.write(data).whenFailure{ error in
 					print(error)
