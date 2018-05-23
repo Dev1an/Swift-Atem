@@ -82,7 +82,7 @@ class SwitcherHandler: HandlerWithTimer {
 					print("Change preview")
 					client.state.send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(8..<12).advanced(by: message.startIndex)])
 				default:
-					print(name)
+					print(name, "→")
 				}
 			}
 		}

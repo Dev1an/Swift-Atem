@@ -88,10 +88,23 @@ class Atem_RTests: XCTestCase {
 		
 	}
 	
-//	func testUDPserver() {
-//		let _ = try? Switcher()
-//	}
-//	
+	func testUDPserver() {
+		do {
+			let switcher = try Switcher()
+			let controller1 = try Controller(ipAddress: "127.0.0.1")
+			let controller2 = try Controller(ipAddress: "127.0.0.1")
+
+			let deadline = DispatchSemaphore(value: 0)
+			DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {
+				deadline.signal()
+			}
+			deadline.wait()
+			print(switcher, controller1, controller2)
+		} catch {
+			XCTFail(error.localizedDescription)
+		}
+	}
+//
 //	func testUDPclient() {
 //		let _ = try! Controller(ipAddress: "10.1.0.212")
 //		let deadline = DispatchSemaphore(value: 0)

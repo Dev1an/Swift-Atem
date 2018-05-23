@@ -69,20 +69,18 @@ class ControllerHandler: HandlerWithTimer {
 }
 
 class Controller {
-	init(ipAddress: String) throws {
+	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
+	public let channel: EventLoopFuture<Channel>
+	
+	public init(ipAddress: String) throws {
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
-		let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
-		let bootstrap = DatagramBootstrap(group: 🔂)
+		channel = DatagramBootstrap(group: 🔂)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer { $0.pipeline.add(handler: ControllerHandler(address: address)) }
-		defer {
-			try! 🔂.syncShutdownGracefully()
-		}
-		
-		try bootstrap
-			.bind(host: "0.0.0.0", port: 9910)
-			.wait()
-			.closeFuture
-			.wait()
+			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
+	}
+	
+	deinit {
+		try? 🔂.syncShutdownGracefully()
 	}
 }

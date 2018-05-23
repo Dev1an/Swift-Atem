@@ -20,3 +20,28 @@ for message in changeProgram.messages {
 	print(String(bytes: message[messageTitlePosition.advanced(by: message.startIndex)], encoding: .utf8))
 	print(message)
 }
+
+protocol Event {
+	associatedtype Information
+	static var id: Int {get}
+}
+
+struct Cut: Event {
+	typealias Information = String
+	static let id = 8
+}
+
+var registry = [Int: Any]()
+func register<E: Event>(_ event: E.Type, handler: @escaping (E.Information)->Void) {
+	registry[E.id] = handler
+}
+
+func handler<E: Event>(for: E.Type) -> ((E.Information)->Void) {
+	return registry[E.id] as! (E.Information)->Void
+}
+
+register(Cut.self) { channel in
+	print(channel)
+}
+
+handler(for: Cut.self)("Kannaal 1020")

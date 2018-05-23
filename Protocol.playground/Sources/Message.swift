@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias MessageTitle = String
+public typealias MessageTitle = String
 extension MessageTitle {
 	var quadBytes: UInt32 {
 		return Array(utf8).withUnsafeBytes{ $0.load(as: UInt32.self) }
@@ -30,7 +30,7 @@ enum MessageError: String, Error {
 }
 
 /// A message containing a title
-protocol Message: CustomDebugStringConvertible {
+public protocol Message: CustomDebugStringConvertible {
 	static var title: MessageTitle {get}
 	init(with bytes: ArraySlice<UInt8>) throws
 }
@@ -205,7 +205,7 @@ enum MessageParseError: Error {
 	case unknownMessageTitle(String)
 }
 
-func getMessage(from bytes: ArraySlice<UInt8>) throws -> Message {
+public func getMessage(from bytes: ArraySlice<UInt8>) throws -> Message {
 	let titleByteSlice = bytes[messageTitlePosition.advanced(by: bytes.startIndex)]
 	let title = UInt32(from: titleByteSlice)
 	if let messageType = messageTypes[title] {
