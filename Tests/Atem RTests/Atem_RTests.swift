@@ -11,8 +11,8 @@ class Atem_RTests: XCTestCase {
 		let cEventLoop = controller.eventLoop as! EmbeddedEventLoop
 		let sEventLoop = switcher.eventLoop as! EmbeddedEventLoop
 		defer {
-			try! controller.finish()
-			try! switcher.finish()
+			let _ = try! controller.finish()
+			let _ = try! switcher.finish()
 		}
 		
 		func packet(from data: IOData?) -> (content: Packet, raw: [UInt8])? {
@@ -87,18 +87,18 @@ class Atem_RTests: XCTestCase {
 		
 	}
 	
-	func testUDPserver() {
-		let s = try? Switcher()
-	}
-	
-	func testUDPclient() {
-		let c = try! Controller(ipAddress: "10.1.0.212")
-		let deadline = DispatchSemaphore(value: 0)
-		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 60) {
-			deadline.signal()
-		}
-		deadline.wait()
-	}
+//	func testUDPserver() {
+//		let _ = try? Switcher()
+//	}
+//	
+//	func testUDPclient() {
+//		let _ = try! Controller(ipAddress: "10.1.0.212")
+//		let deadline = DispatchSemaphore(value: 0)
+//		DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 60) {
+//			deadline.signal()
+//		}
+//		deadline.wait()
+//	}
 
     static var allTests = [
         ("testConnectionLogic", testConnectionHandlers),
