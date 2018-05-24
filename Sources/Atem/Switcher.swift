@@ -46,6 +46,7 @@ class SwitcherHandler: HandlerWithTimer {
 				address: envelope.remoteAddress,
 				state: newConnection
 			)
+			connectionIdUpgrades.removeValue(forKey: UInt16(from: packet.connectionUID))
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
 			for message in client.state.parse(packet) {
 				let namePosition = messageTitlePosition.advanced(by: message.startIndex)
@@ -53,7 +54,7 @@ class SwitcherHandler: HandlerWithTimer {
 				switch name {
 				case "CPgI":
 					let source = UInt16(from: message[(10..<12).advanced(by: message.startIndex)])
-					if (1...8).contains(source) {
+					if (0...8).contains(source) {
 						// Construct Time
 						let components = Calendar(identifier: .gregorian).dateComponents([.hour, .minute, .second, .nanosecond], from: bootDate, to: Date())
 						let timeMessage = [0, 16, 0, 0, 84, 105, 109, 101,
@@ -99,15 +100,26 @@ class SwitcherHandler: HandlerWithTimer {
 	}
 	
 	override func executeTimerTask(context: ChannelHandlerContext) {
-		for (_, client) in clients {
-			for packet in client.state.assembleOutgoingPackets() {
-				let data = encode(bytes: packet.bytes, for: client.address, in: context)
-				context.write(data).whenFailure{ error in
-					print(error)
+		var notRespondingClients = [UInt16]()
+		for (id, client) in clients {
+			let packets = client.state.assembleOutgoingPackets()
+			if packets.count < 50 {
+				for packet in packets {
+					let data = encode(bytes: packet.bytes, for: client.address, in: context)
+					context.write(data).whenFailure{ error in
+						print(error)
+					}
 				}
+			} else {
+				notRespondingClients.append(id)
 			}
 		}
 		context.flush()
+		for key in notRespondingClients {
+			clients.removeValue(forKey: key)
+			print("client", key, "disconnected")
+		}
+		notRespondingClients.removeAll()
 	}
 }
 
