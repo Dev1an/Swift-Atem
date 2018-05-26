@@ -23,10 +23,10 @@ public class MessageHandler {
 	func handle(rawMessage: ArraySlice<UInt8>) throws {
 		let titlePosition = MessageTitle.position.advanced(by: rawMessage.startIndex)
 		let title = UInt32(from: rawMessage[titlePosition])
-		if let unknownHandler = registry[title] {
+		if let handler = registry[title] {
 			let type = messageTypeRegister[title]!
 			let message = try type.init(with: rawMessage[titlePosition.endIndex...])
-			message.execute(unknownHandler)
+			message.execute(handler)
 		}
 	}
 	
