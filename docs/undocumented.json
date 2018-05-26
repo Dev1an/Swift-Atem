@@ -29,14 +29,14 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/InternalMessage.swift",
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/Message.swift",
       "line": 25,
       "symbol": "Message",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/InternalMessage.swift",
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/Message.swift",
       "line": 26,
       "symbol": "Message.title",
       "symbol_kind": "source.lang.swift.decl.var.static",

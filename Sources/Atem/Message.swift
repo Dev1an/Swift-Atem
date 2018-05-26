@@ -22,12 +22,12 @@ enum MessageError: String, Error {
 	}
 }
 
-public protocol Message {
+public protocol Message: CustomDebugStringConvertible {
 	static var title: MessageTitle {get}
 }
 
 /// A message containing a title
-protocol InternalMessage: Message, CustomDebugStringConvertible {
+protocol InternalMessage: Message {
 	init(with bytes: ArraySlice<UInt8>) throws
 }
 
