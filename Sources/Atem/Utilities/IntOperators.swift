@@ -33,6 +33,10 @@ extension UInt32 {
 }
 
 extension ArraySlice {
+	subscript(relative index: Index) -> Element {
+		return self[startIndex + index]
+	}
+	
 	subscript(relative range: CountableRange<Index>) -> SubSequence {
 		return self[range.advanced(by: startIndex)]
 	}

@@ -185,8 +185,8 @@ public struct PreviewBusChanged: InternalMessage {
 }
 
 /// Informs a switcher that the program bus shoud be changed
-struct ProgramBusChanged: InternalMessage {
-	static let title = register(title: "PrgI")
+public struct ProgramBusChanged: InternalMessage {
+	public static let title = register(title: "PrgI")
 	let programBus: VideoSource
 	
 	init(with bytes: ArraySlice<UInt8>) throws {
@@ -194,6 +194,22 @@ struct ProgramBusChanged: InternalMessage {
 		self.programBus = try VideoSource.decode(from: sourceNumber)
 	}
 	
-	var debugDescription: String {return "Program bus changed to \(programBus)"}
+	public var debugDescription: String {return "Program bus changed to \(programBus)"}
 }
 
+public struct NewTimecode: InternalMessage {
+	public typealias Timecode = (hour: UInt8, minute: UInt8, second: UInt8, frame: UInt8)
+	public static let title = register(title: "Time")
+	public let timecode: Timecode
+	
+	init(with bytes: ArraySlice<UInt8>) throws {
+		timecode = (
+			bytes[relative: 0],
+			bytes[relative: 1],
+			bytes[relative: 2],
+			bytes[relative: 3]
+		)
+	}
+	
+	public var debugDescription: String { return "Switcher time \(timecode)" }
+}
