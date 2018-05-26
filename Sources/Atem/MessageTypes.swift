@@ -187,7 +187,7 @@ public struct PreviewBusChanged: InternalMessage {
 /// Informs a switcher that the program bus shoud be changed
 public struct ProgramBusChanged: InternalMessage {
 	public static let title = register(title: "PrgI")
-	let programBus: VideoSource
+	public let programBus: VideoSource
 	
 	init(with bytes: ArraySlice<UInt8>) throws {
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])

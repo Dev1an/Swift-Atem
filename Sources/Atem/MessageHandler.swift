@@ -5,12 +5,18 @@
 //  Created by Damiaan on 26/05/18.
 //
 
-class MessageHandler {
+/// A utility to parse binary messages and dispatch the parsed messages to registered handlers.
+public class MessageHandler {
 	/// A registry with handlers for each message.
 	/// The keys in the registry are the message names and the values are functions that interprete and react on a message.
 	private var registry = [UInt32: Any]()
 	
-	func when<M: Message>(_ handler: @escaping (M)->()) {
+	
+	/// Registers a message handler. This is used to subscribe to a specific type of `Message`.
+	/// A handler is a function that takes one generic argument `M`. The type of this argument indicates which messages you want to subscribe to.
+	///
+	/// - Parameter handler: The handler to register
+	public func when<M: Message>(_ handler: @escaping (M)->()) {
 		registry[M.title.number] = handler
 	}
 	

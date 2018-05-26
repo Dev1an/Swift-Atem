@@ -7,9 +7,10 @@ Implementation of BlackMagicDesign's ATEM communication protocol in Swift. It is
 ### Controller
 
 ```swift
-let controller = try? Controller(ipAddress: "10.1.0.210")
-controller.when{ (change: PreviewBusChanged) in
-	print(change) // prints: 'Preview bus changed to input(x)'
+try? Controller(ipAddress: "10.1.0.67") { handler in
+	handler.when{ (change: PreviewBusChanged) in
+		print(change) // prints: 'Preview bus changed to input(x)'
+	}
 }
 ```
 

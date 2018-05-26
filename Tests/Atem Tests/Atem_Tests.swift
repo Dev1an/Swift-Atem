@@ -32,7 +32,12 @@ class Atem_RTests: XCTestCase {
 		
 		try! controller.pipeline.add(handler: IODataWrapper()).wait()
 		try! controller.pipeline.add(handler: EnvelopeWrapper()).wait()
-		try! controller.pipeline.add(handler: ControllerHandler(address: try! .init(ipAddress: "10.1.0.100", port: 9910))).wait()
+		try! controller.pipeline.add(
+			handler: ControllerHandler(
+				address: try! .init(ipAddress: "10.1.0.100", port: 9910),
+				messageHandler: MessageHandler()
+			)
+		).wait()
 		
 		
 		try! switcher.pipeline.add(handler: IODataWrapper()).wait()
