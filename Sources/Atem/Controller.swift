@@ -78,7 +78,7 @@ public class Controller {
 	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
 	public let channel: EventLoopFuture<Channel>
 	let handler: ControllerHandler
-	public let messageHandler = MessageHandler()
+	let messageHandler = MessageHandler()
 	
 	public init(ipAddress: String) throws {
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
@@ -92,6 +92,10 @@ public class Controller {
 	
 	public func transition(to position: UInt16) {
 		self.handler.connectionState?.send(message: [0, 12, 203, 167, 67, 84, 80, 115, 0, 43] + position.bytes)
+	}
+	
+	public func when<M: Message>(_ handler: @escaping (M)->()) {
+		messageHandler.when(handler)
 	}
 	
 	deinit {

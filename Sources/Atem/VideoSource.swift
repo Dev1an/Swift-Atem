@@ -109,7 +109,7 @@ public enum VideoSource: RawRepresentable {
 		}
 		
 		static func - (left: RawValue, right: Base) -> RawValue {
-			return left + right.rawValue
+			return left - right.rawValue
 		}
 		
 		static func ..< (lower: Base, upper: Base) -> CountableRange<RawValue> {

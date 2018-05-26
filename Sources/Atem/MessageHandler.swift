@@ -5,12 +5,12 @@
 //  Created by Damiaan on 26/05/18.
 //
 
-public class MessageHandler {
+class MessageHandler {
 	/// A registry with handlers for each message.
 	/// The keys in the registry are the message names and the values are functions that interprete and react on a message.
 	private var registry = [UInt32: Any]()
 	
-	public func when<M: Message>(_ handler: @escaping (M)->()) {
+	func when<M: Message>(_ handler: @escaping (M)->()) {
 		registry[M.title.number] = handler
 	}
 	
