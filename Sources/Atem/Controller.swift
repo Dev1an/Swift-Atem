@@ -14,32 +14,31 @@ class ControllerHandler: HandlerWithTimer {
 	let address: SocketAddress
 	let initiationID = ConnectionState.id(firstBit: false)
 	var awaitingConnectionResponse = true
+	let messageHandler: MessageHandler
 		
-	init(address: SocketAddress) {
+	init(address: SocketAddress, messageHandler: MessageHandler) {
 		self.address = address
+		self.messageHandler = messageHandler
 	}
 	
 	final override func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
 		var envelope = unwrapInboundIn(data)
 		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
 
-		if let connectionState = connectionState {
-			handle(messages: connectionState.parse(packet))
-		} else {
-			if awaitingConnectionResponse {
-				awaitingConnectionResponse = false
+		do {
+			if let connectionState = connectionState {
+				try messageHandler.handle(messages: connectionState.parse(packet))
 			} else {
-				let state = ConnectionState(id: packet.connectionUID)
-				connectionState = state
-				handle(messages: state.parse(packet))
+				if awaitingConnectionResponse {
+					awaitingConnectionResponse = false
+				} else {
+					let state = ConnectionState(id: packet.connectionUID)
+					connectionState = state
+					try messageHandler.handle(messages: state.parse(packet))
+				}
 			}
-		}
-	}
-	
-	final func handle(messages: [ArraySlice<UInt8>]) {
-		for message in messages {
-			let name = String(bytes: message[messageTitlePosition.advanced(by: message.startIndex)], encoding: .utf8)!
-			print(name)
+		} catch {
+			fatalError(error.localizedDescription)
 		}
 	}
 	
@@ -79,10 +78,11 @@ public class Controller {
 	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
 	public let channel: EventLoopFuture<Channel>
 	let handler: ControllerHandler
+	public let messageHandler = MessageHandler()
 	
 	public init(ipAddress: String) throws {
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
-		let tempHandler = ControllerHandler(address: address)
+		let tempHandler = ControllerHandler(address: address, messageHandler: messageHandler)
 		handler = tempHandler
 		channel = DatagramBootstrap(group: 🔂)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)

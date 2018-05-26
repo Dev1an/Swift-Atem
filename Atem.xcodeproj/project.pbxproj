@@ -22,6 +22,9 @@
 
 /* Begin PBXBuildFile section */
 		744FE92B20B95D9800A3D03C /* MessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FE92A20B95D9800A3D03C /* MessageHandler.swift */; };
+		744FE94820B9769300A3D03C /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FE94720B9769300A3D03C /* VideoSource.swift */; };
+		747F68D220B9B6EC003257A0 /* MessageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F68D120B9B6EC003257A0 /* MessageTitle.swift */; };
+		747F68D420B9B840003257A0 /* MessageTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F68D320B9B840003257A0 /* MessageTypes.swift */; };
 		74D8D32720B5456F006EA471 /* EnvelopeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* EnvelopeWrapper.swift */; };
 		OBJ_133 /* ArrayOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ArrayOperations.swift */; };
 		OBJ_134 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Connection.swift */; };
@@ -29,7 +32,7 @@
 		OBJ_137 /* HandlerWithTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* HandlerWithTimer.swift */; };
 		OBJ_138 /* InitialSwitcherStateMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* InitialSwitcherStateMessages.swift */; };
 		OBJ_139 /* IntOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* IntOperators.swift */; };
-		OBJ_140 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Message.swift */; };
+		OBJ_140 /* InternalMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* InternalMessage.swift */; };
 		OBJ_141 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Packet.swift */; };
 		OBJ_142 /* PacketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* PacketTypes.swift */; };
 		OBJ_143 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Switcher.swift */; };
@@ -285,6 +288,9 @@
 
 /* Begin PBXFileReference section */
 		744FE92A20B95D9800A3D03C /* MessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandler.swift; sourceTree = "<group>"; };
+		744FE94720B9769300A3D03C /* VideoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSource.swift; sourceTree = "<group>"; };
+		747F68D120B9B6EC003257A0 /* MessageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTitle.swift; sourceTree = "<group>"; };
+		747F68D320B9B840003257A0 /* MessageTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTypes.swift; sourceTree = "<group>"; };
 		"Atem::Atem RTests::Product" /* Atem_RTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = Atem_RTests.xctest; path = "Atem RTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Atem::Atem::Product" /* Atem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Atem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
@@ -305,7 +311,7 @@
 		OBJ_13 /* HandlerWithTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerWithTimer.swift; sourceTree = "<group>"; };
 		OBJ_14 /* InitialSwitcherStateMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSwitcherStateMessages.swift; sourceTree = "<group>"; };
 		OBJ_15 /* IntOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntOperators.swift; sourceTree = "<group>"; };
-		OBJ_16 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		OBJ_16 /* InternalMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalMessage.swift; sourceTree = "<group>"; };
 		OBJ_17 /* Packet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 		OBJ_18 /* PacketTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTypes.swift; sourceTree = "<group>"; };
 		OBJ_19 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
@@ -833,7 +839,10 @@
 				OBJ_19 /* Switcher.swift */,
 				OBJ_10 /* Connection.swift */,
 				744FE92A20B95D9800A3D03C /* MessageHandler.swift */,
-				OBJ_16 /* Message.swift */,
+				OBJ_16 /* InternalMessage.swift */,
+				747F68D120B9B6EC003257A0 /* MessageTitle.swift */,
+				747F68D320B9B840003257A0 /* MessageTypes.swift */,
+				744FE94720B9769300A3D03C /* VideoSource.swift */,
 				OBJ_17 /* Packet.swift */,
 				OBJ_18 /* PacketTypes.swift */,
 				74D8D32620B5454B006EA471 /* Utilities */,
@@ -1084,10 +1093,13 @@
 				OBJ_134 /* Connection.swift in Sources */,
 				744FE92B20B95D9800A3D03C /* MessageHandler.swift in Sources */,
 				OBJ_135 /* Controller.swift in Sources */,
+				747F68D220B9B6EC003257A0 /* MessageTitle.swift in Sources */,
 				OBJ_137 /* HandlerWithTimer.swift in Sources */,
 				OBJ_138 /* InitialSwitcherStateMessages.swift in Sources */,
 				OBJ_139 /* IntOperators.swift in Sources */,
-				OBJ_140 /* Message.swift in Sources */,
+				OBJ_140 /* InternalMessage.swift in Sources */,
+				747F68D420B9B840003257A0 /* MessageTypes.swift in Sources */,
+				744FE94820B9769300A3D03C /* VideoSource.swift in Sources */,
 				OBJ_141 /* Packet.swift in Sources */,
 				OBJ_142 /* PacketTypes.swift in Sources */,
 				OBJ_143 /* Switcher.swift in Sources */,

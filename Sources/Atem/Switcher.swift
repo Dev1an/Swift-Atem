@@ -49,7 +49,7 @@ class SwitcherHandler: HandlerWithTimer {
 			connectionIdUpgrades.removeValue(forKey: UInt16(from: packet.connectionUID))
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
 			for message in client.state.parse(packet) {
-				let namePosition = messageTitlePosition.advanced(by: message.startIndex)
+				let namePosition = MessageTitle.position.advanced(by: message.startIndex)
 				let name = String(bytes: message[namePosition], encoding: .utf8)!
 				switch name {
 				case "CPgI":
@@ -74,20 +74,20 @@ class SwitcherHandler: HandlerWithTimer {
 						// Construct TlIn
 						var TlInMessage = [UInt8(0), 20, 102, 101, 84, 108, 73, 110, 0, 8, 0, 0, 0, 0, 0, 2, 0, 0, 1, 120]
 						TlInMessage[9+Int(source)] = 1
-						print("Change program to ", source)
+						print("Switcher got: Change program to", source)
 						
 						// Send 3 messages
 						send(message: timeMessage + TlInMessage + TlSrMessage + PrgIMessage)
 					}
 				case "CPvI":
-					print("Change preview")
+					print("Switcher got: Change preview")
 					send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(4..<8).advanced(by: message.startIndex)] + [0, 0, 0, 0])
 				case "CTPs":
 					let position = message[(6..<8).advanced(by: message.startIndex)]
 					let response = [0, 16, 1, 224, 0x54, 0x72, 0x50, 0x73, 0, 1, 5, 0] + position + [0, 0]
 					send(message: response)
 				default:
-					print("→", name)
+					break
 				}
 			}
 		}

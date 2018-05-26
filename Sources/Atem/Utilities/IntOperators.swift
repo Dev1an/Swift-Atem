@@ -25,6 +25,19 @@ extension UInt16 {
 	}
 }
 
+extension UInt32 {
+	var bytes: [UInt8] {
+		var copy = self
+		return withUnsafeBytes(of: &copy, { [ $0[3], $0[2], $0[1], $0[0] ] })
+	}
+}
+
+extension ArraySlice {
+	subscript(relative range: CountableRange<Index>) -> SubSequence {
+		return self[range.advanced(by: startIndex)]
+	}
+}
+
 extension CountableRange {
 	func advanced(by stride: Bound.Stride) -> CountableRange<Bound> {
 		return CountableRange(uncheckedBounds: (lower: lowerBound.advanced(by: stride), upper: upperBound.advanced(by: stride)))

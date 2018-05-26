@@ -15,9 +15,6 @@ let connectionUidPosition   = 2 ..< 4
 let acknowledgementPosition = 4 ..< 6
 let numberPosition          = 10..<12
 
-/// Slice 4 ..< 8
-let messageTitlePosition    = 0 ..< 4
-
 let connectMessagePosition  = 12..<20
 let controllerConnectMessageBytes: [UInt8] = [1,0,0,0,0,0,0,0]
 

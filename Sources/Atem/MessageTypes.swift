@@ -1,64 +1,17 @@
 //
-//  Message.swift
+//  MessageTypes.swift
 //  Atem
 //
-//  Created by Damiaan on 11-11-16.
+//  Created by Damiaan on 26/05/18.
 //
-//
-
-import Foundation
-
-typealias MessageTitle = String
-extension MessageTitle {
-	var quadBytes: UInt32 {
-		return Array(utf8).withUnsafeBytes{ $0.load(as: UInt32.self) }
-	}
-}
-
-enum MessageError: String, Error {
-	case serialising
-	case titleNotDeserializable
-	
-	var localizedDescription: String {
-		switch self {
-		case .titleNotDeserializable:
-			return "MessageError: Unable to decode the title"
-		default:
-			return "MessageError: \(self.rawValue)"
-		}
-	}
-}
-
-/// A message containing a title
-protocol Message: CustomDebugStringConvertible {
-	static var title: MessageTitle {get}
-	init(with bytes: ArraySlice<UInt8>) throws
-}
-
-extension Message {
-	static func prefix() -> [UInt8] { return Array(Self.title.utf8) }
-}
-
-protocol Serializable: Message {
-	var dataBytes: [UInt8] {get}
-}
-
-extension Serializable {
-	func serialize() -> [UInt8] {
-		let data = dataBytes
-		return UInt16(data.count).bytes + [0,0] + Self.prefix() + data
-	}
-}
 
 enum AtemSize: UInt8 {
 	case oneME = 0, twoME = 1
 }
 
-
-
 /// There are two version numbers in ATEM world: One for the ATEM Software Control application (for instance version 6.0) which is what people usually refers to and one for the firmware which is often updated with the PC/Mac application versions (for instance 2.15). The latter version number is what "_ver" gives you and a number you can not find anywhere in the application to our knowledge.
 struct ProtocolVersion: Serializable {
-	static let title = "_ver"
+	static let title = register(title: "_ver")
 	static let majorPosition = 0..<2
 	static let minorPosition = 2..<4
 	let minor, major: UInt16
@@ -80,8 +33,7 @@ struct ProtocolVersion: Serializable {
 
 /// The type of atem
 struct AtemType: Serializable {
-	
-	static var title = "_pin"
+	static var title = register(title: "_pin")
 	let string: String
 	
 	init(with bytes: ArraySlice<UInt8>) throws {
@@ -103,8 +55,8 @@ struct AtemType: Serializable {
 	
 	var dataBytes: [UInt8] {
 		switch string.count {
-			case 44: return Array(string.utf8)
-			default: return Array(string.utf8) + Array(repeating: UInt8(0), count: 44 - string.count)
+		case 44: return Array(string.utf8)
+		default: return Array(string.utf8) + Array(repeating: UInt8(0), count: 44 - string.count)
 		}
 	}
 	
@@ -115,7 +67,7 @@ struct AtemType: Serializable {
 
 /// The resources of an atem
 struct Topology: Serializable {
-	static var title = "_top"
+	static var title = register(title: "_top")
 	
 	let mixEffectBanks: UInt8
 	let sources: UInt8
@@ -126,7 +78,7 @@ struct Topology: Serializable {
 	let digitalVideoEffects: UInt8
 	let superSources: UInt8
 	let standardDefinitionOutput: Bool
-
+	
 	init(with bytes: ArraySlice<UInt8>) {
 		mixEffectBanks      = bytes[bytes.startIndex    ]
 		sources             = bytes[bytes.startIndex + 1]
@@ -140,14 +92,14 @@ struct Topology: Serializable {
 	}
 	
 	init(mixEffectBanks: UInt8,
-		sources: UInt8,
-		colorGenerators: UInt8,
-		auxiliaryBusses: UInt8,
-		downstreamKeyers: UInt8,
-		stingers: UInt8,
-		digitalVideoEffects: UInt8,
-		superSources: UInt8,
-		standardDefinitionOutput: Bool) {
+		 sources: UInt8,
+		 colorGenerators: UInt8,
+		 auxiliaryBusses: UInt8,
+		 downstreamKeyers: UInt8,
+		 stingers: UInt8,
+		 digitalVideoEffects: UInt8,
+		 superSources: UInt8,
+		 standardDefinitionOutput: Bool) {
 		
 		self.mixEffectBanks           = mixEffectBanks
 		self.sources                  = sources
@@ -167,54 +119,81 @@ struct Topology: Serializable {
 	var debugDescription: String {
 		return [
 			""
-		].joined(separator: "\n")
+			].joined(separator: "\n")
 	}
 }
 
 /// The message that should be sent at the end of the connection initiation. The connection initiation is the sequence of packets that is sent at the very beginning of a connection and they contain messages that represent the state of the device at the moment of conection.
 struct ConnectionInitiationEnd: Serializable {
-	static let title = "InCm"
+	static let title = register(title: "InCm")
 	static let `default` = ConnectionInitiationEnd(with: [])
 	let dataBytes = [UInt8(1), 0, 0, 0]
-
+	
 	init(with bytes: ArraySlice<UInt8>) {}
 	
 	let debugDescription = "End of connection initiation sequence."
 }
 
 /// Performs a cut on the atem
-struct DoCut: Message {
-	static let title = "DCut"
+struct DoCut: InternalMessage {
+	static let title = register(title: "DCut")
 	let debugDescription = "cut"
 	let atemSize : AtemSize
 	
 	init(with bytes: ArraySlice<UInt8>) {
-		atemSize = AtemSize(rawValue: bytes[0])!
+		atemSize = AtemSize(rawValue: bytes.first!)!
 	}
 }
 
-let messageTypes: [UInt32: Message.Type] = [
-	ProtocolVersion.title.quadBytes: ProtocolVersion.self,
-	AtemType.title.quadBytes: AtemType.self,
-	Topology.title.quadBytes: Topology.self,
-	ConnectionInitiationEnd.title.quadBytes: ConnectionInitiationEnd.self,
-	DoCut.title.quadBytes: DoCut.self
-]
-
-enum MessageParseError: Error {
-	case unknownMessageTitle(String)
-}
-
-func getMessage(from bytes: ArraySlice<UInt8>) throws -> Message {
-	let titleByteSlice = bytes[messageTitlePosition.advanced(by: bytes.startIndex)]
-	let title = UInt32(from: titleByteSlice)
-	if let messageType = messageTypes[title] {
-		return try! messageType.init(with: bytes)
-	} else {
-		if let string = String(bytes: titleByteSlice, encoding: .utf8) {
-			throw MessageParseError.unknownMessageTitle(string)
-		} else {
-			throw MessageError.titleNotDeserializable
-		}
+/// Informs a switcher that the preview bus should be changed
+public struct ChangePreviewBus: InternalMessage {
+	public static let title = register(title: "CPvI")
+	public let previewBus: VideoSource
+	
+	init(with bytes: ArraySlice<UInt8>) throws {
+		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+		self.previewBus = try VideoSource.decode(from: sourceNumber)
 	}
+	
+	public var debugDescription: String {return "Change preview bus to \(previewBus)"}
 }
+
+/// Informs a switcher that the program bus shoud be changed
+struct ChangeProgramBus: InternalMessage {
+	static let title = register(title: "CPgI")
+	let programBus: VideoSource
+	
+	init(with bytes: ArraySlice<UInt8>) throws {
+		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+		self.programBus = try VideoSource.decode(from: sourceNumber)
+	}
+	
+	var debugDescription: String {return "Change program bus to \(programBus)"}
+}
+
+/// Informs a switcher that the preview bus should be changed
+public struct PreviewBusChanged: InternalMessage {
+	public static let title = register(title: "PrvI")
+	public let previewBus: VideoSource
+	
+	init(with bytes: ArraySlice<UInt8>) throws {
+		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+		self.previewBus = try VideoSource.decode(from: sourceNumber)
+	}
+	
+	public var debugDescription: String {return "Preview bus changed to \(previewBus)"}
+}
+
+/// Informs a switcher that the program bus shoud be changed
+struct ProgramBusChanged: InternalMessage {
+	static let title = register(title: "PrgI")
+	let programBus: VideoSource
+	
+	init(with bytes: ArraySlice<UInt8>) throws {
+		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+		self.programBus = try VideoSource.decode(from: sourceNumber)
+	}
+	
+	var debugDescription: String {return "Program bus changed to \(programBus)"}
+}
+
