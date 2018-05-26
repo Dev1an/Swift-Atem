@@ -14,6 +14,4 @@ try? Controller(ipAddress: "10.1.0.67") { handler in
 }
 ```
 
-### Switcher
-
-Code example coming soon
+See [API reference](https://dev1an.github.io/Swift-Atem/) for more details
