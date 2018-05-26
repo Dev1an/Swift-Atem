@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		744FE92B20B95D9800A3D03C /* MessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FE92A20B95D9800A3D03C /* MessageHandler.swift */; };
 		74D8D32720B5456F006EA471 /* EnvelopeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* EnvelopeWrapper.swift */; };
 		OBJ_133 /* ArrayOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ArrayOperations.swift */; };
 		OBJ_134 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Connection.swift */; };
@@ -283,6 +284,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		744FE92A20B95D9800A3D03C /* MessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandler.swift; sourceTree = "<group>"; };
 		"Atem::Atem RTests::Product" /* Atem_RTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = Atem_RTests.xctest; path = "Atem RTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Atem::Atem::Product" /* Atem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Atem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
@@ -830,6 +832,7 @@
 				OBJ_11 /* Controller.swift */,
 				OBJ_19 /* Switcher.swift */,
 				OBJ_10 /* Connection.swift */,
+				744FE92A20B95D9800A3D03C /* MessageHandler.swift */,
 				OBJ_16 /* Message.swift */,
 				OBJ_17 /* Packet.swift */,
 				OBJ_18 /* PacketTypes.swift */,
@@ -1079,6 +1082,7 @@
 			files = (
 				OBJ_133 /* ArrayOperations.swift in Sources */,
 				OBJ_134 /* Connection.swift in Sources */,
+				744FE92B20B95D9800A3D03C /* MessageHandler.swift in Sources */,
 				OBJ_135 /* Controller.swift in Sources */,
 				OBJ_137 /* HandlerWithTimer.swift in Sources */,
 				OBJ_138 /* InitialSwitcherStateMessages.swift in Sources */,

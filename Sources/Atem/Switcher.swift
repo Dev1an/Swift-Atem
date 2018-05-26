@@ -53,7 +53,7 @@ class SwitcherHandler: HandlerWithTimer {
 				let name = String(bytes: message[namePosition], encoding: .utf8)!
 				switch name {
 				case "CPgI":
-					let source = UInt16(from: message[(10..<12).advanced(by: message.startIndex)])
+					let source = UInt16(from: message[(6..<8).advanced(by: message.startIndex)])
 					if (0...8).contains(source) {
 						// Construct Time
 						let components = Calendar(identifier: .gregorian).dateComponents([.hour, .minute, .second, .nanosecond], from: bootDate, to: Date())
@@ -65,7 +65,7 @@ class SwitcherHandler: HandlerWithTimer {
 										   1, 0, 3, 232]
 						
 						// Construct PrgI
-						let PrgIMessage = [0, 12, 1, 232, 0x50, 0x72, 0x67, 0x49] + message[(8..<12).advanced(by: message.startIndex)]
+						let PrgIMessage = [0, 12, 1, 232, 0x50, 0x72, 0x67, 0x49] + message[(4..<8).advanced(by: message.startIndex)]
 						
 						// Construct TlSr
 						var TlSrMessage = [UInt8(0), 84, 1, 224, 84, 108, 83, 114, 0, 24, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 2, 0, 7, 0, 0, 8, 0, 3, 232, 0, 7, 209, 0, 7, 210, 0, 11, 194, 0, 11, 195, 0, 11, 204, 0, 11, 205, 0, 15, 170, 0, 19, 146, 0, 19, 156, 0, 39, 26, 0, 39, 27, 0, 27, 89, 0, 27, 90, 0, 31, 65, 0, 1, 0]
@@ -81,9 +81,9 @@ class SwitcherHandler: HandlerWithTimer {
 					}
 				case "CPvI":
 					print("Change preview")
-					send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(8..<12).advanced(by: message.startIndex)])
+					send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(4..<8).advanced(by: message.startIndex)] + [0, 0, 0, 0])
 				case "CTPs":
-					let position = message[(10..<12).advanced(by: message.startIndex)]
+					let position = message[(6..<8).advanced(by: message.startIndex)]
 					let response = [0, 16, 1, 224, 0x54, 0x72, 0x50, 0x73, 0, 1, 5, 0] + position + [0, 0]
 					send(message: response)
 				default:

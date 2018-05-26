@@ -14,7 +14,7 @@ class ControllerHandler: HandlerWithTimer {
 	let address: SocketAddress
 	let initiationID = ConnectionState.id(firstBit: false)
 	var awaitingConnectionResponse = true
-	
+		
 	init(address: SocketAddress) {
 		self.address = address
 	}
@@ -38,7 +38,7 @@ class ControllerHandler: HandlerWithTimer {
 	
 	final func handle(messages: [ArraySlice<UInt8>]) {
 		for message in messages {
-			let name = String(bytes: message[message.startIndex.advanced(by: 4)..<message.startIndex.advanced(by: 8)], encoding: .utf8)!
+			let name = String(bytes: message[messageTitlePosition.advanced(by: message.startIndex)], encoding: .utf8)!
 			print(name)
 		}
 	}
@@ -91,7 +91,7 @@ public class Controller {
 	}
 	
 	public func transition(to position: UInt16) {
-		handler.connectionState?.send(message: [0, 12, 203, 167, 67, 84, 80, 115, 0, 43] + position.bytes)
+		self.handler.connectionState?.send(message: [0, 12, 203, 167, 67, 84, 80, 115, 0, 43] + position.bytes)
 	}
 	
 	deinit {

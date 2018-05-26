@@ -16,7 +16,7 @@ let acknowledgementPosition = 4 ..< 6
 let numberPosition          = 10..<12
 
 /// Slice 4 ..< 8
-let messageTitlePosition    = 4 ..< 8
+let messageTitlePosition    = 0 ..< 4
 
 let connectMessagePosition  = 12..<20
 let controllerConnectMessageBytes: [UInt8] = [1,0,0,0,0,0,0,0]
@@ -30,7 +30,7 @@ struct Packet: CustomDebugStringConvertible {
 	let messages: [ArraySlice<UInt8>]
 	
 	init(bytes: [UInt8]) {
-		let packetLength = Int(bytes[0] & 0b111) << 8 + Int(bytes[1])
+		let packetLength = UInt16(from: bytes[0...1]) & 0b111_1111_1111
 		let type = PacketTypes(rawValue: bytes[0])
 		isRepeated = type.contains(.retransmission)
 		isConnect =  type.contains(.connect)
@@ -43,8 +43,8 @@ struct Packet: CustomDebugStringConvertible {
 			var messages = [ArraySlice<UInt8>]()
 			var cursor = headerLength
 			while cursor < packetLength-1 {
-				let length = Int(bytes[cursor]) << 8 + Int(bytes[cursor+1])
-				messages.append(bytes[cursor ..< cursor+length])
+				let length = Int( UInt16(from: bytes[cursor...cursor+1]) )
+				messages.append(bytes[cursor+4 ..< cursor+length])
 				cursor += length
 			}
 			self.messages = messages
