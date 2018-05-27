@@ -27,14 +27,14 @@ class ControllerHandler: HandlerWithTimer {
 
 		do {
 			if let connectionState = connectionState {
-				try messageHandler.handle(messages: connectionState.parse(packet))
+				let _ = try messageHandler.handle(messages: connectionState.parse(packet))
 			} else {
 				if awaitingConnectionResponse {
 					awaitingConnectionResponse = false
 				} else {
 					let state = ConnectionState(id: packet.connectionUID)
 					connectionState = state
-					try messageHandler.handle(messages: state.parse(packet))
+					let _ = try messageHandler.handle(messages: state.parse(packet))
 				}
 			}
 		} catch {
@@ -91,8 +91,8 @@ public class Controller {
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
 	}
 	
-	public func transition(to position: UInt16) {
-		self.handler.connectionState?.send(message: [0, 12, 203, 167, 67, 84, 80, 115, 0, 43] + position.bytes)
+	public func send(message: Serializable) {
+		handler.connectionState?.send(message: message.serialize())
 	}
 	
 	deinit {

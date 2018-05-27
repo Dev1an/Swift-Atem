@@ -148,9 +148,12 @@ struct DoCut: Message {
 /// Informs a switcher that the preview bus should be changed
 public struct ChangePreviewBus: Message {
 	public static let title = MessageTitle(string: "CPvI")
+
+	public let mixEffect: UInt8
 	public let previewBus: VideoSource
 	
 	public init(with bytes: ArraySlice<UInt8>) throws {
+		mixEffect = bytes[relative: 0]
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
 		self.previewBus = try VideoSource.decode(from: sourceNumber)
 	}
@@ -159,41 +162,67 @@ public struct ChangePreviewBus: Message {
 }
 
 /// Informs a switcher that the program bus shoud be changed
-struct ChangeProgramBus: Message {
-	static let title = MessageTitle(string: "CPgI")
-	let programBus: VideoSource
-	
-	public init(with bytes: ArraySlice<UInt8>) throws {
-		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
-		self.programBus = try VideoSource.decode(from: sourceNumber)
-	}
-	
-	var debugDescription: String {return "Change program bus to \(programBus)"}
-}
+public struct ChangeProgramBus: Message {
+	public static let title = MessageTitle(string: "CPgI")
 
-/// Informs a switcher that the preview bus should be changed
-public struct PreviewBusChanged: Message {
-	public static let title = MessageTitle(string: "PrvI")
-	public let previewBus: VideoSource
-	
-	public init(with bytes: ArraySlice<UInt8>) throws {
-		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
-		self.previewBus = try VideoSource.decode(from: sourceNumber)
-	}
-	
-	public var debugDescription: String {return "Preview bus changed to \(previewBus)"}
-}
-
-/// Informs a switcher that the program bus shoud be changed
-public struct ProgramBusChanged: Message {
-	public static let title = MessageTitle(string: "PrgI")
+	public let mixEffect: UInt8
 	public let programBus: VideoSource
 	
 	public init(with bytes: ArraySlice<UInt8>) throws {
+		mixEffect = bytes[relative: 0]
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
 		self.programBus = try VideoSource.decode(from: sourceNumber)
 	}
 	
+	public var debugDescription: String {return "Change program bus to \(programBus)"}
+}
+
+/// Informs a switcher that the preview bus should be changed
+public struct PreviewBusChanged: Serializable {
+	public static let title = MessageTitle(string: "PrvI")
+
+	public let mixEffect: UInt8
+	public let previewBus: VideoSource
+
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		mixEffect = bytes[relative: 0]
+		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+		previewBus = try VideoSource.decode(from: sourceNumber)
+	}
+	
+	public init(to newPreviewBus: VideoSource, mixEffect: UInt8 = 0) {
+		self.mixEffect = mixEffect
+		previewBus = newPreviewBus
+	}
+	
+	public var dataBytes: [UInt8] {
+		return [mixEffect, 0] + previewBus.rawValue.bytes + [0,0,0,0]
+	}
+	public var debugDescription: String {return "Preview bus changed to \(previewBus) on ME\(mixEffect)"}
+}
+
+/// Informs a switcher that the program bus shoud be changed
+public struct ProgramBusChanged: Serializable {
+	public static let title = MessageTitle(string: "PrgI")
+
+	public let mixEffect: UInt8
+	public let programBus: VideoSource
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		mixEffect = bytes[relative: 0]
+		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+		self.programBus = try VideoSource.decode(from: sourceNumber)
+	}
+	
+	public init(to newProgramBus: VideoSource, mixEffect: UInt8 = 0) {
+		self.mixEffect = mixEffect
+		programBus = newProgramBus
+	}
+	
+	public var dataBytes: [UInt8] {
+		return [mixEffect, 0] + programBus.rawValue.bytes
+	}
+
 	public var debugDescription: String {return "Program bus changed to \(programBus)"}
 }
 
@@ -212,4 +241,58 @@ public struct NewTimecode: Message {
 	}
 	
 	public var debugDescription: String { return "Switcher time \(timecode)" }
+}
+
+public struct ChangeTransitionPosition: Serializable {
+	public static let title = MessageTitle(string: "CTPs")
+	public let mixEffect: UInt8
+	public let position: UInt16
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		mixEffect = bytes[relative: 0]
+		position = UInt16(from: bytes[relative: 2..<4])
+	}
+	
+	public init(to position: UInt16, mixEffect: UInt8 = 0) {
+		self.mixEffect = mixEffect
+		self.position = position
+	}
+	
+	public var dataBytes: [UInt8] {
+		return [mixEffect, 0] + position.bytes
+	}
+	
+	public var debugDescription: String { return "Change transition position of ME\(mixEffect+1) to \(position)"}
+}
+
+public struct TransitionPositionChanged: Serializable {
+	public static let title = MessageTitle(string: "TrPs")
+	public let mixEffect: UInt8
+	public let position: UInt16
+	public let inTransition: Bool
+	public let remainingFrames: UInt8
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		mixEffect = bytes[relative: 0]
+		inTransition = bytes[relative: 1] == 1
+		remainingFrames = bytes[relative: 2]
+		position = UInt16(from: bytes[relative: 4..<6])
+	}
+	
+	public init(to position: UInt16, remainingFrames: UInt8, inTransition: Bool? = nil, mixEffect: UInt8 = 0) {
+		self.mixEffect = mixEffect
+		self.position = position
+		if let inTransition = inTransition {
+			self.inTransition = inTransition
+		} else {
+			self.inTransition = (1..<9999).contains(position)
+		}
+		self.remainingFrames = remainingFrames
+	}
+	
+	public var dataBytes: [UInt8] {
+		return [mixEffect, inTransition ? 1:0, remainingFrames, 0] + position.bytes + [0, 0]
+	}
+	
+	public var debugDescription: String { return "Change transition position of ME\(mixEffect+1) to \(position)"}
 }

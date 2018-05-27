@@ -14,7 +14,7 @@
     <a title="ProgramBusChanged Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Atem Docs</a> (29% documented)</p>
+        <p><a href="../index.html">Atem Docs</a> (22% documented)</p>
         <p class="header-right"><a href="https://github.com/Dev1an/Swift-Atem"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -35,7 +35,13 @@
                 <a href="../Classes/Controller.html">Controller</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/MessageHandler.html">MessageHandler</a>
+                <a href="../Classes.html#/s:4Atem14MessageHandlerC">MessageHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageHandlerBase.html">MessageHandlerBase</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:4Atem24RespondingMessageHandlerC">RespondingMessageHandler</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Switcher.html">Switcher</a>
@@ -64,6 +70,9 @@
               <li class="nav-group-task">
                 <a href="../Protocols/Message.html">Message</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Serializable.html">Serializable</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -71,6 +80,12 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/ChangePreviewBus.html">ChangePreviewBus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChangeProgramBus.html">ChangeProgramBus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChangeTransitionPosition.html">ChangeTransitionPosition</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MessageTitle.html">MessageTitle</a>
@@ -84,6 +99,9 @@
               <li class="nav-group-task">
                 <a href="../Structs/ProgramBusChanged.html">ProgramBusChanged</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TransitionPositionChanged.html">TransitionPositionChanged</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -94,7 +112,7 @@
             <h1>ProgramBusChanged</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ProgramBusChanged</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Message.html">Message</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ProgramBusChanged</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Serializable.html">Serializable</a></span></code></pre>
 
                 </div>
               </div>
@@ -125,6 +143,36 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">title</span> <span class="o">=</span> <span class="kt"><a href="../Structs/MessageTitle.html">MessageTitle</a></span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"PrgI"</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/blob/master/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem17ProgramBusChangedV9mixEffects5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/mixEffect" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem17ProgramBusChangedV9mixEffects5UInt8Vvp">mixEffect</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">mixEffect</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
 
                         </div>
                       </div>
@@ -189,7 +237,67 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/blob/master/Sources/Atem/MessageTypes.swift#L192-L195">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/blob/master/Sources/Atem/MessageTypes.swift#L211-L215">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem17ProgramBusChangedVAcA11VideoSourceO2to_s5UInt8V9mixEffecttcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(to:mixEffect:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem17ProgramBusChangedVAcA11VideoSourceO2to_s5UInt8V9mixEffecttcfc">init(to:mixEffect:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">to</span> <span class="nv">newProgramBus</span><span class="p">:</span> <span class="kt"><a href="../Enums/VideoSource.html">VideoSource</a></span><span class="p">,</span> <span class="nv">mixEffect</span><span class="p">:</span> <span class="kt">UInt8</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/blob/master/Sources/Atem/MessageTypes.swift#L217-L220">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem17ProgramBusChangedV9dataBytesSays5UInt8VGvp"></a>
+                    <a name="//apple_ref/swift/Property/dataBytes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem17ProgramBusChangedV9dataBytesSays5UInt8VGvp">dataBytes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dataBytes</span><span class="p">:</span> <span class="p">[</span><span class="kt">UInt8</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/blob/master/Sources/Atem/MessageTypes.swift#L222-L224">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

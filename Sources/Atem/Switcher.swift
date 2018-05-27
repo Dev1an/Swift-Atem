@@ -18,7 +18,11 @@ class SwitcherHandler: HandlerWithTimer {
 	var clients = [UInt16: Client]()
 	var connectionIdUpgrades = [UInt16: UInt16]()
 	var outbox = [NIOAny]()
-	let bootDate = Date()
+	let messageHandler: RespondingMessageHandler
+	
+	init(handler: RespondingMessageHandler) {
+		messageHandler = handler
+	}
 		
 	final override func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
 		var envelope = unwrapInboundIn(data)
@@ -48,47 +52,12 @@ class SwitcherHandler: HandlerWithTimer {
 			)
 			connectionIdUpgrades.removeValue(forKey: UInt16(from: packet.connectionUID))
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
-			for message in client.state.parse(packet) {
-				let namePosition = MessageTitle.position.advanced(by: message.startIndex)
-				let name = String(bytes: message[namePosition], encoding: .utf8)!
-				switch name {
-				case "CPgI":
-					let source = UInt16(from: message[(6..<8).advanced(by: message.startIndex)])
-					if (0...8).contains(source) {
-						// Construct Time
-						let components = Calendar(identifier: .gregorian).dateComponents([.hour, .minute, .second, .nanosecond], from: bootDate, to: Date())
-						let timeMessage = [0, 16, 0, 0, 84, 105, 109, 101,
-										   UInt8(components.hour!),
-										   UInt8(components.minute!),
-										   UInt8(components.second!),
-										   UInt8(components.nanosecond! / 20_000_000),
-										   1, 0, 3, 232]
-						
-						// Construct PrgI
-						let PrgIMessage = [0, 12, 1, 232, 0x50, 0x72, 0x67, 0x49] + message[(4..<8).advanced(by: message.startIndex)]
-						
-						// Construct TlSr
-						var TlSrMessage = [UInt8(0), 84, 1, 224, 84, 108, 83, 114, 0, 24, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 2, 0, 7, 0, 0, 8, 0, 3, 232, 0, 7, 209, 0, 7, 210, 0, 11, 194, 0, 11, 195, 0, 11, 204, 0, 11, 205, 0, 15, 170, 0, 19, 146, 0, 19, 156, 0, 39, 26, 0, 39, 27, 0, 27, 89, 0, 27, 90, 0, 31, 65, 0, 1, 0]
-						TlSrMessage[12+Int(source)*3] = 1
-						
-						// Construct TlIn
-						var TlInMessage = [UInt8(0), 20, 102, 101, 84, 108, 73, 110, 0, 8, 0, 0, 0, 0, 0, 2, 0, 0, 1, 120]
-						TlInMessage[9+Int(source)] = 1
-						print("Switcher got: Change program to", source)
-						
-						// Send 3 messages
-						send(message: timeMessage + TlInMessage + TlSrMessage + PrgIMessage)
-					}
-				case "CPvI":
-					print("Switcher got: Change preview")
-					send(message: [0, 0x10, 1, 0xe8, 0x50, 0x72, 0x76, 0x49] + message[(4..<8).advanced(by: message.startIndex)] + [0, 0, 0, 0])
-				case "CTPs":
-					let position = message[(6..<8).advanced(by: message.startIndex)]
-					let response = [0, 16, 1, 224, 0x54, 0x72, 0x50, 0x73, 0, 1, 5, 0] + position + [0, 0]
-					send(message: response)
-				default:
-					break
+			do {
+				for response in try messageHandler.handle(messages: client.state.parse(packet)) {
+					client.state.send(message: response.serialize())
 				}
+			} catch {
+				fatalError(error.localizedDescription)
 			}
 		}
 	}
@@ -126,11 +95,14 @@ class SwitcherHandler: HandlerWithTimer {
 public class Switcher {
 	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
 	public let channel: EventLoopFuture<Channel>
+	let messageHandler = RespondingMessageHandler()
 	
-	public init() throws {
+	public init(initializer: (RespondingMessageHandler)->Void) throws {
+		let handler = SwitcherHandler(handler: messageHandler)
+		initializer(messageHandler)
 		channel = DatagramBootstrap(group: 🔂)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
-			.channelInitializer { $0.pipeline.add(handler: SwitcherHandler()) }
+			.channelInitializer { $0.pipeline.add(handler: handler) }
 			.bind(host: "0.0.0.0", port: 9910)
 	}
 	

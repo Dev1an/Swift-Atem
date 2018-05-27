@@ -30,20 +30,20 @@ public protocol Message: CustomDebugStringConvertible {
 
 extension Message {
 	static func prefix() -> [UInt8] { return title.number.bytes }
-	func execute(_ unknownHandler: Any) {
-		let handler = unknownHandler as! (Self)->Void
-		handler(self)
+	func execute<T>(_ unknownHandler: Any) -> T {
+		let handler = unknownHandler as! (Self)->T
+		return handler(self)
 	}
 }
 
-protocol Serializable: Message {
+public protocol Serializable: Message {
 	var dataBytes: [UInt8] {get}
 }
 
 extension Serializable {
 	func serialize() -> [UInt8] {
 		let data = dataBytes
-		return UInt16(data.count).bytes + [0,0] + Self.prefix() + data
+		return UInt16(data.count + 8).bytes + [0,0] + Self.prefix() + data
 	}
 }
 
