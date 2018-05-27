@@ -243,6 +243,7 @@ public struct NewTimecode: Message {
 	public var debugDescription: String { return "Switcher time \(timecode)" }
 }
 
+/// Informs the switcher that it should update its transition position
 public struct ChangeTransitionPosition: Serializable {
 	public static let title = MessageTitle(string: "CTPs")
 	public let mixEffect: UInt8
@@ -265,6 +266,7 @@ public struct ChangeTransitionPosition: Serializable {
 	public var debugDescription: String { return "Change transition position of ME\(mixEffect+1) to \(position)"}
 }
 
+/// Informs the controller that the transition position has changed
 public struct TransitionPositionChanged: Serializable {
 	public static let title = MessageTitle(string: "TrPs")
 	public let mixEffect: UInt8
