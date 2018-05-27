@@ -42,7 +42,7 @@ class Atem_RTests: XCTestCase {
 		
 		try! switcher.pipeline.add(handler: IODataWrapper()).wait()
 		try! switcher.pipeline.add(handler: EnvelopeWrapper()).wait()
-		try! switcher.pipeline.add(handler: SwitcherHandler()).wait()
+		try! switcher.pipeline.add(handler: SwitcherHandler(handler: RespondingMessageHandler())).wait()
 
 		controller.pipeline.fireChannelActive()
 		switcher.pipeline.fireChannelActive()
@@ -95,7 +95,7 @@ class Atem_RTests: XCTestCase {
 	
 	func testUdpConnection() {
 		do {
-			let switcher = try Switcher()
+			let switcher = try Switcher(initializer: {_ in})
 			let controller = try Controller(ipAddress: "0.0.0.0")
 			
 			let deadline = DispatchSemaphore(value: 0)
