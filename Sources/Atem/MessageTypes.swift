@@ -223,7 +223,7 @@ public struct ProgramBusChanged: Serializable {
 		return [mixEffect, 0] + programBus.rawValue.bytes
 	}
 
-	public var debugDescription: String {return "Program bus changed to \(programBus)"}
+	public var debugDescription: String {return "Program bus changed to \(programBus) on ME\(mixEffect)"}
 }
 
 public struct NewTimecode: Message {

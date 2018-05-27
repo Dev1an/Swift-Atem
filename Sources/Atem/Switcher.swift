@@ -53,8 +53,13 @@ class SwitcherHandler: HandlerWithTimer {
 			connectionIdUpgrades.removeValue(forKey: UInt16(from: packet.connectionUID))
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
 			do {
-				for response in try messageHandler.handle(messages: client.state.parse(packet)) {
-					client.state.send(message: response.serialize())
+				let responses = try messageHandler.handle(messages: client.state.parse(packet))
+				var buffer = [UInt8]()
+				for response in responses {
+					buffer.append(contentsOf: response.serialize())
+				}
+				for (_, client) in clients {
+					client.state.send(message: buffer)
 				}
 			} catch {
 				fatalError(error.localizedDescription)
