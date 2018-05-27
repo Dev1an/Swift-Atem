@@ -4,7 +4,7 @@ Implementation of BlackMagicDesign's ATEM communication protocol in Swift. It is
 
 ## Usage
 
-After looking at the following examples, look the [API reference](https://dev1an.github.io/Swift-Atem/) for more details.
+After looking at the following examples, study the [API reference](https://dev1an.github.io/Swift-Atem/) for more details.
 
 ### Controller
 
@@ -25,19 +25,19 @@ The following example shows you how to emulate the basic functionality of an ate
 ```swift
 try Switcher { handler in
     handler.when { (change: ChangePreviewBus) in
-		return [PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect)]
-	}
-	handler.when{ (change: ChangeProgramBus) in
-		return [ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect)]
-	}
-	handler.when { (change: ChangeTransitionPosition) in
-		return [
-			TransitionPositionChanged(
-				to: change.position,
-				remainingFrames: 250 - UInt8(change.position/40),
-				mixEffect: change.mixEffect
-			)
-		]
-	}
+        return [PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect)]
+    }
+    handler.when{ (change: ChangeProgramBus) in
+        return [ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect)]
+    }
+    handler.when { (change: ChangeTransitionPosition) in
+        return [
+            TransitionPositionChanged(
+                to: change.position,
+                remainingFrames: 250 - UInt8(change.position/40),
+                mixEffect: change.mixEffect
+            )
+        ]
+    }
 }
 ```
