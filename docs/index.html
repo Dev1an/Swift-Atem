@@ -113,15 +113,38 @@
 
 <p>Implementation of BlackMagicDesign&rsquo;s ATEM communication protocol in Swift. It is written on top of Apple&rsquo;s new networking library <a href="https://github.com/apple/swift-nio">NIO</a> and implements both sides of the protocol: the control panel and the switcher side. This means that you can not only use it to control atem switchers but also to connect to your control panels without the need for a switcher. Opening a whole new world of applications for the Atem control panels. An example can be found at <a href="https://github.com/Dev1an/Atem-Simulator">Atem-Simulator</a></p>
 <h2 id='usage' class='heading'>Usage</h2>
+
+<p>After looking at the following examples, look the <a href="https://dev1an.github.io/Swift-Atem/">API reference</a> for more details.</p>
 <h3 id='controller' class='heading'>Controller</h3>
-<pre class="highlight swift"><code><span class="k">try</span><span class="p">?</span> <span class="kt">Controller</span><span class="p">(</span><span class="nv">ipAddress</span><span class="p">:</span> <span class="s">"10.1.0.67"</span><span class="p">)</span> <span class="p">{</span> <span class="n">handler</span> <span class="k">in</span>
+
+<p>This example shows how to print a message when the preview bus changes</p>
+<pre class="highlight swift"><code><span class="k">try</span> <span class="kt">Controller</span><span class="p">(</span><span class="nv">ipAddress</span><span class="p">:</span> <span class="s">"10.1.0.67"</span><span class="p">)</span> <span class="p">{</span> <span class="n">handler</span> <span class="k">in</span>
     <span class="n">handler</span><span class="o">.</span><span class="n">when</span><span class="p">{</span> <span class="p">(</span><span class="nv">change</span><span class="p">:</span> <span class="kt">PreviewBusChanged</span><span class="p">)</span> <span class="k">in</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">change</span><span class="p">)</span> <span class="c1">// prints: 'Preview bus changed to input(x)'</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
+<h3 id='switcher' class='heading'>Switcher</h3>
 
-<p>See <a href="https://dev1an.github.io/Swift-Atem/">API reference</a> for more details</p>
+<p>The following example shows you how to emulate the basic functionality of an atem switcher. It forwards the messages containing transition and preview &amp; program bus changes to the connected controller.</p>
+<pre class="highlight swift"><code><span class="k">try</span> <span class="kt">Switcher</span> <span class="p">{</span> <span class="n">handler</span> <span class="k">in</span>
+    <span class="n">handler</span><span class="o">.</span><span class="n">when</span> <span class="p">{</span> <span class="p">(</span><span class="nv">change</span><span class="p">:</span> <span class="kt">ChangePreviewBus</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kt">PreviewBusChanged</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">change</span><span class="o">.</span><span class="n">previewBus</span><span class="p">,</span> <span class="nv">mixEffect</span><span class="p">:</span> <span class="n">change</span><span class="o">.</span><span class="n">mixEffect</span><span class="p">)]</span>
+    <span class="p">}</span>
+    <span class="n">handler</span><span class="o">.</span><span class="n">when</span><span class="p">{</span> <span class="p">(</span><span class="nv">change</span><span class="p">:</span> <span class="kt">ChangeProgramBus</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kt">ProgramBusChanged</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">change</span><span class="o">.</span><span class="n">programBus</span><span class="p">,</span> <span class="nv">mixEffect</span><span class="p">:</span> <span class="n">change</span><span class="o">.</span><span class="n">mixEffect</span><span class="p">)]</span>
+    <span class="p">}</span>
+    <span class="n">handler</span><span class="o">.</span><span class="n">when</span> <span class="p">{</span> <span class="p">(</span><span class="nv">change</span><span class="p">:</span> <span class="kt">ChangeTransitionPosition</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="kt">TransitionPositionChanged</span><span class="p">(</span>
+                <span class="nv">to</span><span class="p">:</span> <span class="n">change</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+                <span class="nv">remainingFrames</span><span class="p">:</span> <span class="mi">250</span> <span class="o">-</span> <span class="kt">UInt8</span><span class="p">(</span><span class="n">change</span><span class="o">.</span><span class="n">position</span><span class="o">/</span><span class="mi">40</span><span class="p">),</span>
+                <span class="nv">mixEffect</span><span class="p">:</span> <span class="n">change</span><span class="o">.</span><span class="n">mixEffect</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
 
           </section>
         </section>

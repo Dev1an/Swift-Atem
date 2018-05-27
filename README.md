@@ -4,14 +4,40 @@ Implementation of BlackMagicDesign's ATEM communication protocol in Swift. It is
 
 ## Usage
 
+After looking at the following examples, look the [API reference](https://dev1an.github.io/Swift-Atem/) for more details.
+
 ### Controller
 
+This example shows how to print a message when the preview bus changes
+
 ```swift
-try? Controller(ipAddress: "10.1.0.67") { handler in
+try Controller(ipAddress: "10.1.0.67") { handler in
 	handler.when{ (change: PreviewBusChanged) in
 		print(change) // prints: 'Preview bus changed to input(x)'
 	}
 }
 ```
 
-See [API reference](https://dev1an.github.io/Swift-Atem/) for more details
+### Switcher
+
+The following example shows you how to emulate the basic functionality of an atem switcher. It forwards the messages containing transition and preview & program bus changes to the connected controller.
+
+```swift
+try Switcher { handler in
+    handler.when { (change: ChangePreviewBus) in
+		return [PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect)]
+	}
+	handler.when{ (change: ChangeProgramBus) in
+		return [ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect)]
+	}
+	handler.when { (change: ChangeTransitionPosition) in
+		return [
+			TransitionPositionChanged(
+				to: change.position,
+				remainingFrames: 250 - UInt8(change.position/40),
+				mixEffect: change.mixEffect
+			)
+		]
+	}
+}
+```
