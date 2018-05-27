@@ -30,16 +30,16 @@
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/Message.swift",
-      "line": 25,
-      "symbol": "Message",
-      "symbol_kind": "source.lang.swift.decl.protocol",
+      "line": 27,
+      "symbol": "Message.title",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/Message.swift",
-      "line": 26,
-      "symbol": "Message.title",
-      "symbol_kind": "source.lang.swift.decl.var.static",
+      "line": 28,
+      "symbol": "Message.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -65,6 +65,13 @@
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
+      "line": 153,
+      "symbol": "ChangePreviewBus.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
       "line": 176,
       "symbol": "PreviewBusChanged.title",
       "symbol_kind": "source.lang.swift.decl.var.static",
@@ -79,6 +86,13 @@
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
+      "line": 179,
+      "symbol": "PreviewBusChanged.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
       "line": 189,
       "symbol": "ProgramBusChanged.title",
       "symbol_kind": "source.lang.swift.decl.var.static",
@@ -89,6 +103,13 @@
       "line": 190,
       "symbol": "ProgramBusChanged.programBus",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
+      "line": 192,
+      "symbol": "ProgramBusChanged.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -117,6 +138,13 @@
       "line": 203,
       "symbol": "NewTimecode.timecode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
+      "line": 205,
+      "symbol": "NewTimecode.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {

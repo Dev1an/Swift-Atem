@@ -10,13 +10,14 @@ public class MessageHandler {
 	/// A registry with handlers for each message.
 	/// The keys in the registry are the message names and the values are functions that interprete and react on a message.
 	private var registry = [UInt32: Any]()
-	
+	private static var messageTypeRegister = [UInt32: Message.Type]()
 	
 	/// Registers a message handler. This is used to subscribe to a specific type of `Message`.
 	/// A handler is a function that takes one generic argument `M`. The type of this argument indicates which messages you want to subscribe to.
 	///
 	/// - Parameter handler: The handler to register
 	public func when<M: Message>(_ handler: @escaping (M)->()) {
+		MessageHandler.messageTypeRegister[M.title.number] = M.self
 		registry[M.title.number] = handler
 	}
 	
@@ -24,7 +25,7 @@ public class MessageHandler {
 		let titlePosition = MessageTitle.position.advanced(by: rawMessage.startIndex)
 		let title = UInt32(from: rawMessage[titlePosition])
 		if let handler = registry[title] {
-			let type = messageTypeRegister[title]!
+			let type = MessageHandler.messageTypeRegister[title]!
 			let message = try type.init(with: rawMessage[titlePosition.endIndex...])
 			message.execute(handler)
 		}

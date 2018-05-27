@@ -11,7 +11,7 @@ enum AtemSize: UInt8 {
 
 /// There are two version numbers in ATEM world: One for the ATEM Software Control application (for instance version 6.0) which is what people usually refers to and one for the firmware which is often updated with the PC/Mac application versions (for instance 2.15). The latter version number is what "_ver" gives you and a number you can not find anywhere in the application to our knowledge.
 struct ProtocolVersion: Serializable {
-	static let title = register(title: "_ver")
+	static let title = MessageTitle(string: "_ver")
 	static let majorPosition = 0..<2
 	static let minorPosition = 2..<4
 	let minor, major: UInt16
@@ -33,7 +33,7 @@ struct ProtocolVersion: Serializable {
 
 /// The type of atem
 struct AtemType: Serializable {
-	static var title = register(title: "_pin")
+	static var title = MessageTitle(string: "_pin")
 	let string: String
 	
 	init(with bytes: ArraySlice<UInt8>) throws {
@@ -67,7 +67,7 @@ struct AtemType: Serializable {
 
 /// The resources of an atem
 struct Topology: Serializable {
-	static var title = register(title: "_top")
+	static var title = MessageTitle(string: "_top")
 	
 	let mixEffectBanks: UInt8
 	let sources: UInt8
@@ -125,7 +125,7 @@ struct Topology: Serializable {
 
 /// The message that should be sent at the end of the connection initiation. The connection initiation is the sequence of packets that is sent at the very beginning of a connection and they contain messages that represent the state of the device at the moment of conection.
 struct ConnectionInitiationEnd: Serializable {
-	static let title = register(title: "InCm")
+	static let title = MessageTitle(string: "InCm")
 	static let `default` = ConnectionInitiationEnd(with: [])
 	let dataBytes = [UInt8(1), 0, 0, 0]
 	
@@ -135,8 +135,8 @@ struct ConnectionInitiationEnd: Serializable {
 }
 
 /// Performs a cut on the atem
-struct DoCut: InternalMessage {
-	static let title = register(title: "DCut")
+struct DoCut: Message {
+	static let title = MessageTitle(string: "DCut")
 	let debugDescription = "cut"
 	let atemSize : AtemSize
 	
@@ -146,11 +146,11 @@ struct DoCut: InternalMessage {
 }
 
 /// Informs a switcher that the preview bus should be changed
-public struct ChangePreviewBus: InternalMessage {
-	public static let title = register(title: "CPvI")
+public struct ChangePreviewBus: Message {
+	public static let title = MessageTitle(string: "CPvI")
 	public let previewBus: VideoSource
 	
-	init(with bytes: ArraySlice<UInt8>) throws {
+	public init(with bytes: ArraySlice<UInt8>) throws {
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
 		self.previewBus = try VideoSource.decode(from: sourceNumber)
 	}
@@ -159,11 +159,11 @@ public struct ChangePreviewBus: InternalMessage {
 }
 
 /// Informs a switcher that the program bus shoud be changed
-struct ChangeProgramBus: InternalMessage {
-	static let title = register(title: "CPgI")
+struct ChangeProgramBus: Message {
+	static let title = MessageTitle(string: "CPgI")
 	let programBus: VideoSource
 	
-	init(with bytes: ArraySlice<UInt8>) throws {
+	public init(with bytes: ArraySlice<UInt8>) throws {
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
 		self.programBus = try VideoSource.decode(from: sourceNumber)
 	}
@@ -172,11 +172,11 @@ struct ChangeProgramBus: InternalMessage {
 }
 
 /// Informs a switcher that the preview bus should be changed
-public struct PreviewBusChanged: InternalMessage {
-	public static let title = register(title: "PrvI")
+public struct PreviewBusChanged: Message {
+	public static let title = MessageTitle(string: "PrvI")
 	public let previewBus: VideoSource
 	
-	init(with bytes: ArraySlice<UInt8>) throws {
+	public init(with bytes: ArraySlice<UInt8>) throws {
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
 		self.previewBus = try VideoSource.decode(from: sourceNumber)
 	}
@@ -185,11 +185,11 @@ public struct PreviewBusChanged: InternalMessage {
 }
 
 /// Informs a switcher that the program bus shoud be changed
-public struct ProgramBusChanged: InternalMessage {
-	public static let title = register(title: "PrgI")
+public struct ProgramBusChanged: Message {
+	public static let title = MessageTitle(string: "PrgI")
 	public let programBus: VideoSource
 	
-	init(with bytes: ArraySlice<UInt8>) throws {
+	public init(with bytes: ArraySlice<UInt8>) throws {
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
 		self.programBus = try VideoSource.decode(from: sourceNumber)
 	}
@@ -197,12 +197,12 @@ public struct ProgramBusChanged: InternalMessage {
 	public var debugDescription: String {return "Program bus changed to \(programBus)"}
 }
 
-public struct NewTimecode: InternalMessage {
+public struct NewTimecode: Message {
 	public typealias Timecode = (hour: UInt8, minute: UInt8, second: UInt8, frame: UInt8)
-	public static let title = register(title: "Time")
+	public static let title = MessageTitle(string: "Time")
 	public let timecode: Timecode
 	
-	init(with bytes: ArraySlice<UInt8>) throws {
+	public init(with bytes: ArraySlice<UInt8>) throws {
 		timecode = (
 			bytes[relative: 0],
 			bytes[relative: 1],

@@ -22,16 +22,13 @@ enum MessageError: String, Error {
 	}
 }
 
+/// A message containing a title
 public protocol Message: CustomDebugStringConvertible {
 	static var title: MessageTitle {get}
-}
-
-/// A message containing a title
-protocol InternalMessage: Message {
 	init(with bytes: ArraySlice<UInt8>) throws
 }
 
-extension InternalMessage {
+extension Message {
 	static func prefix() -> [UInt8] { return title.number.bytes }
 	func execute(_ unknownHandler: Any) {
 		let handler = unknownHandler as! (Self)->Void
@@ -39,7 +36,7 @@ extension InternalMessage {
 	}
 }
 
-protocol Serializable: InternalMessage {
+protocol Serializable: Message {
 	var dataBytes: [UInt8] {get}
 }
 
