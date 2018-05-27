@@ -58,15 +58,15 @@
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageHandler.swift",
-      "line": 22,
-      "symbol": "MessageHandler",
+      "line": 9,
+      "symbol": "RespondingMessageHandler",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageHandler.swift",
-      "line": 32,
-      "symbol": "MessageHandlerBase",
+      "line": 21,
+      "symbol": "MessageHandler",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },

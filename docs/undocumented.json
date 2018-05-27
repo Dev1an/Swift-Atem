@@ -254,112 +254,98 @@
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 246,
-      "symbol": "ChangeTransitionPosition",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 247,
+      "line": 248,
       "symbol": "ChangeTransitionPosition.title",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 248,
+      "line": 249,
       "symbol": "ChangeTransitionPosition.mixEffect",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 249,
+      "line": 250,
       "symbol": "ChangeTransitionPosition.position",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 251,
+      "line": 252,
       "symbol": "ChangeTransitionPosition.init(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 256,
+      "line": 257,
       "symbol": "ChangeTransitionPosition.init(to:mixEffect:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 261,
+      "line": 262,
       "symbol": "ChangeTransitionPosition.dataBytes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 268,
-      "symbol": "TransitionPositionChanged",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 269,
+      "line": 271,
       "symbol": "TransitionPositionChanged.title",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 270,
+      "line": 272,
       "symbol": "TransitionPositionChanged.mixEffect",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 271,
+      "line": 273,
       "symbol": "TransitionPositionChanged.position",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 272,
+      "line": 274,
       "symbol": "TransitionPositionChanged.inTransition",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 273,
+      "line": 275,
       "symbol": "TransitionPositionChanged.remainingFrames",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 275,
+      "line": 277,
       "symbol": "TransitionPositionChanged.init(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 282,
+      "line": 284,
       "symbol": "TransitionPositionChanged.init(to:remainingFrames:inTransition:mixEffect:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/Sources/Atem/MessageTypes.swift",
-      "line": 293,
+      "line": 295,
       "symbol": "TransitionPositionChanged.dataBytes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
