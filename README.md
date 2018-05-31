@@ -14,7 +14,7 @@ When starting a new project: create a Swift package via [SPM](https://swift.org/
 Then add this library to the [package description](https://github.com/apple/swift-package-manager/blob/master/Documentation/PackageDescriptionV4.md#dependencies)'s dependencies
 
 ```swift
-.package(url: "https://github.com/Dev1an/Swift-Atem", from: "0.0.1")
+.package(url: "https://github.com/Dev1an/Swift-Atem", from: "0.1.0")
 ```
 
 And resolve this new dependency
