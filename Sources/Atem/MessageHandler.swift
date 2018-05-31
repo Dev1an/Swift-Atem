@@ -56,7 +56,9 @@ public class MessageHandlerBase<T> {
 			let type = messageTypeRegister[title]!
 			let message = try type.init(with: rawMessage[titlePosition.endIndex...])
 			return message.execute(handler)
-		}
+		}/* else {
+			print(String(bytes: rawMessage[titlePosition], encoding: .utf8)!, rawMessage[titlePosition.endIndex...])
+		}*/
 		return emptyResponse
 	}
 }
