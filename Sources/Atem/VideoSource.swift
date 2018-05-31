@@ -82,13 +82,6 @@ public enum VideoSource: RawRepresentable {
 		}
 	}
 	
-	static func decode(from number: UInt16) throws -> VideoSource {
-		guard let result = VideoSource(rawValue: number) else {
-			throw UnsupportedRawValue(number: number)
-		}
-		return result
-	}
-	
 	enum Base: UInt16 {
 		case black = 0
 		case input = 1
@@ -114,13 +107,6 @@ public enum VideoSource: RawRepresentable {
 		
 		static func ..< (lower: Base, upper: Base) -> CountableRange<RawValue> {
 			return lower.rawValue ..< upper.rawValue
-		}
-	}
-	
-	struct UnsupportedRawValue: LocalizedError {
-		let number: UInt16
-		var errorDescription: String? {
-			return "Unable to interpret source with raw representation: \(number)"
 		}
 	}
 }

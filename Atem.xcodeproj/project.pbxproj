@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		741DEECB20BFEB67003CD760 /* TallyLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741DEECA20BFEB67003CD760 /* TallyLight.swift */; };
+		741DEECD20BFF74D003CD760 /* RawRepresentable+decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741DEECC20BFF74D003CD760 /* RawRepresentable+decode.swift */; };
 		744FE92B20B95D9800A3D03C /* MessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FE92A20B95D9800A3D03C /* MessageHandler.swift */; };
 		744FE94820B9769300A3D03C /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FE94720B9769300A3D03C /* VideoSource.swift */; };
 		747F68D220B9B6EC003257A0 /* MessageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747F68D120B9B6EC003257A0 /* MessageTitle.swift */; };
@@ -287,6 +289,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		741DEECA20BFEB67003CD760 /* TallyLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallyLight.swift; sourceTree = "<group>"; };
+		741DEECC20BFF74D003CD760 /* RawRepresentable+decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+decode.swift"; sourceTree = "<group>"; };
 		744FE92A20B95D9800A3D03C /* MessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHandler.swift; sourceTree = "<group>"; };
 		744FE94720B9769300A3D03C /* VideoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSource.swift; sourceTree = "<group>"; };
 		747F68D120B9B6EC003257A0 /* MessageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTitle.swift; sourceTree = "<group>"; };
@@ -480,6 +484,7 @@
 				OBJ_15 /* IntOperators.swift */,
 				OBJ_13 /* HandlerWithTimer.swift */,
 				OBJ_14 /* InitialSwitcherStateMessages.swift */,
+				741DEECC20BFF74D003CD760 /* RawRepresentable+decode.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -839,12 +844,13 @@
 				OBJ_19 /* Switcher.swift */,
 				OBJ_10 /* Connection.swift */,
 				744FE92A20B95D9800A3D03C /* MessageHandler.swift */,
+				OBJ_17 /* Packet.swift */,
+				OBJ_18 /* PacketTypes.swift */,
 				OBJ_16 /* Message.swift */,
 				747F68D120B9B6EC003257A0 /* MessageTitle.swift */,
 				747F68D320B9B840003257A0 /* MessageTypes.swift */,
+				741DEECA20BFEB67003CD760 /* TallyLight.swift */,
 				744FE94720B9769300A3D03C /* VideoSource.swift */,
-				OBJ_17 /* Packet.swift */,
-				OBJ_18 /* PacketTypes.swift */,
 				74D8D32620B5454B006EA471 /* Utilities */,
 			);
 			name = Atem;
@@ -1089,6 +1095,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				741DEECD20BFF74D003CD760 /* RawRepresentable+decode.swift in Sources */,
 				OBJ_133 /* ArrayOperations.swift in Sources */,
 				OBJ_134 /* Connection.swift in Sources */,
 				744FE92B20B95D9800A3D03C /* MessageHandler.swift in Sources */,
@@ -1102,6 +1109,7 @@
 				744FE94820B9769300A3D03C /* VideoSource.swift in Sources */,
 				OBJ_141 /* Packet.swift in Sources */,
 				OBJ_142 /* PacketTypes.swift in Sources */,
+				741DEECB20BFEB67003CD760 /* TallyLight.swift in Sources */,
 				OBJ_143 /* Switcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
