@@ -66,20 +66,20 @@ struct AtemType: Serializable {
 }
 
 /// The resources of an atem
-struct Topology: Serializable {
-	static var title = MessageTitle(string: "_top")
+public struct Topology: Serializable {
+	public static var title = MessageTitle(string: "_top")
 	
-	let mixEffectBanks: UInt8
-	let sources: UInt8
-	let colorGenerators: UInt8
-	let auxiliaryBusses: UInt8
-	let downstreamKeyers: UInt8
-	let stingers: UInt8
-	let digitalVideoEffects: UInt8
-	let superSources: UInt8
-	let standardDefinitionOutput: Bool
+	public let mixEffectBanks: UInt8
+	public let sources: UInt8
+	public let colorGenerators: UInt8
+	public let auxiliaryBusses: UInt8
+	public let downstreamKeyers: UInt8
+	public let stingers: UInt8
+	public let digitalVideoEffects: UInt8
+	public let superSources: UInt8
+	public let standardDefinitionOutput: Bool
 	
-	init(with bytes: ArraySlice<UInt8>) {
+	public init(with bytes: ArraySlice<UInt8>) {
 		mixEffectBanks      = bytes[bytes.startIndex    ]
 		sources             = bytes[bytes.startIndex + 1]
 		colorGenerators     = bytes[bytes.startIndex + 2]
@@ -91,7 +91,7 @@ struct Topology: Serializable {
 		standardDefinitionOutput = bytes[bytes.startIndex + 9].firstBit
 	}
 	
-	init(mixEffectBanks: UInt8,
+	public init(mixEffectBanks: UInt8,
 		 sources: UInt8,
 		 colorGenerators: UInt8,
 		 auxiliaryBusses: UInt8,
@@ -112,15 +112,24 @@ struct Topology: Serializable {
 		self.standardDefinitionOutput = standardDefinitionOutput
 	}
 	
-	var dataBytes: [UInt8] {
+	public var dataBytes: [UInt8] {
 		return [mixEffectBanks, sources, colorGenerators, auxiliaryBusses, downstreamKeyers, stingers, digitalVideoEffects, superSources, 0, standardDefinitionOutput ? 1:0, 0]
 	}
 	
-	var debugDescription: String {
-		return [
-			""
-			].joined(separator: "\n")
+	public var debugDescription: String {
+		return "Topology(\n" + ([
+			"mixEffectBanks": mixEffectBanks,
+			"sources": sources,
+			"colorGenerators": colorGenerators,
+			"auxiliaryBusses": auxiliaryBusses,
+			"downstreamKeyers": downstreamKeyers,
+			"stingers": stingers,
+			"digitalVideoEffects": digitalVideoEffects,
+			"superSources": superSources,
+			"standardDefinitionOutput": standardDefinitionOutput
+			] as DictionaryLiteral ).map{"\t\($0): \($1),"}.joined(separator: "\n") + "\n)"
 	}
+	
 }
 
 /// The message that should be sent at the end of the connection initiation. The connection initiation is the sequence of packets that is sent at the very beginning of a connection and they contain messages that represent the state of the device at the moment of conection.
@@ -297,4 +306,126 @@ public struct TransitionPositionChanged: Serializable {
 	}
 	
 	public var debugDescription: String { return "Change transition position of ME\(mixEffect+1) to \(position)"}
+}
+
+public struct LockRequest: Serializable {
+	public static var title = MessageTitle(string: "LOCK")
+	public let store: UInt16
+	public let state: UInt16
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		store = UInt16(from: bytes)
+		state = UInt16(from: bytes[relative: 2..<4])
+	}
+	
+	public var debugDescription: String {return "Lock store \(store) to \(String(state, radix: 16))"}
+	
+	public var dataBytes: [UInt8] {
+		return store.bytes + state.bytes
+	}
+}
+
+public struct LockPositionRequest: Message {
+	public static var title = MessageTitle(string: "PLCK")
+	public let store: UInt16
+	public let index: UInt16
+	public let type: UInt16
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		store = UInt16(from: bytes)
+		index = UInt16(from: bytes[relative: 2..<4])
+		type = UInt16(from: bytes[relative: 4..<6])
+		print(bytes)
+	}
+	
+	public var debugDescription: String {return "Lock request \(store): for index \(index), type \(type)"}
+}
+
+public struct LockChange: Serializable {
+	public static var title = MessageTitle(string: "LKST")
+	public let store: UInt16
+	public let isLocked: Bool
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		store = .init(from: bytes)
+		isLocked = bytes[relative: 2] == 1
+	}
+	
+	public init(store: UInt16, isLocked: Bool) {
+		self.store = store
+		self.isLocked = isLocked
+	}
+	
+	public var dataBytes: [UInt8] {
+		return store.bytes + [isLocked ? 1:0, 0]
+	}
+	
+	public var debugDescription: String { return "Lock for store \(store) is \(isLocked ? "established" : "released")" }
+}
+
+public struct LockObtained: Serializable {
+	public static var title = MessageTitle(string: "LKOB")
+	let store: UInt16
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		store = .init(from: bytes)
+	}
+	
+	public init(store: UInt16) {
+		self.store = store
+	}
+	
+	public var debugDescription: String { return "Lock obtained" }
+	
+	public var dataBytes: [UInt8] {
+		return store.bytes + [0, 0]
+	}
+}
+
+public struct InitiationComplete: Message {
+	public static var title = MessageTitle(string: "InCm")
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		print("InCm", bytes)
+	}
+	
+	public let debugDescription = "Initiation complete"
+}
+public struct SourceTallies: Serializable {
+	public static var title = MessageTitle(string: "TlSr")
+	public let tallies: [VideoSource:TallyLight]
+	
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		let sourceCount = Int(UInt16(from: bytes))
+		precondition(sourceCount*3 <= bytes.count-2, "Message is too short, it cannot contain tally info for \(sourceCount) sources")
+		
+		var tallies = [VideoSource:TallyLight](minimumCapacity: sourceCount)
+		for cursor in stride(from: 2, to: sourceCount*3 + 2, by: 3) {
+			let source = try VideoSource.decode(from: UInt16(from: bytes[relative: cursor...]))
+			tallies[source] = try TallyLight.decode(from: bytes[relative: cursor+2])
+		}
+		self.tallies = tallies
+	}
+	public init(tallies: [VideoSource:TallyLight]) {
+		self.tallies = tallies
+	}
+	
+	public var dataBytes: [UInt8] {
+		var bytes = [UInt8]()
+		bytes.reserveCapacity(2 + tallies.count*3)
+		
+		bytes.append(contentsOf: UInt16(tallies.count).bytes)
+		// Todo: check if sources really need to be sorted
+		for (source, tally) in tallies.sorted(by: {$0.0.rawValue < $1.0.rawValue}) {
+			bytes.append(contentsOf: source.rawValue.bytes)
+			bytes.append(tally.rawValue)
+		}
+		return bytes
+	}
+	
+	public var debugDescription: String {
+		return "Source tallies (\n" +
+		"\(tallies.sorted{$0.0.rawValue < $1.0.rawValue}.map{"\t\($0.0): \($0.1)"}.joined(separator: "\n"))" +
+		"\n)"
+	}
 }
