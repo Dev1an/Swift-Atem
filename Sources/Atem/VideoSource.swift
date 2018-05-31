@@ -38,7 +38,7 @@ public enum VideoSource: RawRepresentable {
 			let division = div(Int32(rawValue - .mediaPlayer), 10)
 			switch division.rem {
 			case 0: self = .mediaPlayer(UInt16(division.quot))
-			case 1: self = .mediaPlayer(UInt16(division.quot))
+			case 1: self = .mediaPlayerKey(UInt16(division.quot))
 			default: return nil
 			}
 		case .keyMask ..< .downStreamKeyMask:
@@ -108,5 +108,11 @@ public enum VideoSource: RawRepresentable {
 		static func ..< (lower: Base, upper: Base) -> CountableRange<RawValue> {
 			return lower.rawValue ..< upper.rawValue
 		}
+	}
+}
+
+extension VideoSource: Hashable {
+	public var hashValue: Int {
+		return Int(rawValue)
 	}
 }
