@@ -98,20 +98,21 @@ class SwitcherHandler: HandlerWithTimer {
 }
 
 public class Switcher {
-	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
+	let eventLoop: EventLoopGroup
 	public let channel: EventLoopFuture<Channel>
 	let messageHandler = RespondingMessageHandler()
 	
-	public init(initializer: (RespondingMessageHandler)->Void) throws {
+	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numThreads: 1), initializer: (RespondingMessageHandler)->Void) throws {
+		eventLoop = eventLoopGroup
 		let handler = SwitcherHandler(handler: messageHandler)
 		initializer(messageHandler)
-		channel = DatagramBootstrap(group: 🔂)
+		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer { $0.pipeline.add(handler: handler) }
 			.bind(host: "0.0.0.0", port: 9910)
 	}
 	
 	deinit {
-		try? 🔂.syncShutdownGracefully()
+		try? eventLoop.syncShutdownGracefully()
 	}
 }

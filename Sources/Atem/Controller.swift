@@ -75,27 +75,31 @@ class ControllerHandler: HandlerWithTimer {
 }
 
 public class Controller {
-	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
 	public let channel: EventLoopFuture<Channel>
+
+	let eventLoop: EventLoopGroup
 	let handler: ControllerHandler
 	let messageHandler = MessageHandler()
 	
-	public init(ipAddress: String, initializer: (MessageHandler)->Void = {_ in}) throws {
+	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numThreads: 1), initializer: (MessageHandler)->Void = {_ in}) throws {
+		eventLoop = eventLoopGroup
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
 		let tempHandler = ControllerHandler(address: address, messageHandler: messageHandler)
 		handler = tempHandler
 		initializer(messageHandler)
-		channel = DatagramBootstrap(group: 🔂)
+		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer { $0.pipeline.add(handler: tempHandler) }
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
 	}
 	
 	public func send(message: Serializable) {
-		handler.connectionState?.send(message: message.serialize())
+		channel.eventLoop.execute {
+			self.handler.connectionState?.send(message: message.serialize())
+		}
 	}
 	
 	deinit {
-		try? 🔂.syncShutdownGracefully()
+		try? eventLoop.syncShutdownGracefully()
 	}
 }
