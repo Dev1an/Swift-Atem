@@ -14,6 +14,48 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Atem::Atem"
+               BuildableName = "Atem.framework"
+               BlueprintName = "Atem"
+               ReferencedContainer = "container:Atem.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "swift-nio::NIOPriorityQueue"
+               BuildableName = "NIOPriorityQueue.framework"
+               BlueprintName = "NIOPriorityQueue"
+               ReferencedContainer = "container:Atem.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "swift-nio::NIO"
+               BuildableName = "NIO.framework"
+               BlueprintName = "NIO"
+               ReferencedContainer = "container:Atem.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "swift-nio::CNIOAtomics"
                BuildableName = "CNIOAtomics.framework"
                BlueprintName = "CNIOAtomics"
@@ -42,9 +84,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "swift-nio::NIOPriorityQueue"
-               BuildableName = "NIOPriorityQueue.framework"
-               BlueprintName = "NIOPriorityQueue"
+               BlueprintIdentifier = "swift-nio::CNIOLinux"
+               BuildableName = "CNIOLinux.framework"
+               BlueprintName = "CNIOLinux"
                ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -70,51 +112,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Atem::Atem"
-               BuildableName = "Atem.framework"
-               BlueprintName = "Atem"
-               ReferencedContainer = "container:Atem.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "swift-nio::NIO"
-               BuildableName = "NIO.framework"
-               BlueprintName = "NIO"
-               ReferencedContainer = "container:Atem.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "swift-nio::CNIOSHA1"
                BuildableName = "CNIOSHA1.framework"
                BlueprintName = "CNIOSHA1"
-               ReferencedContainer = "container:Atem.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "swift-nio::CNIOLinux"
-               BuildableName = "CNIOLinux.framework"
-               BlueprintName = "CNIOLinux"
                ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -124,16 +124,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Atem::Atem RTests"
-               BuildableName = "Atem RTests.xctest"
-               BlueprintName = "Atem RTests"
+               BlueprintIdentifier = "Atem::Atem Tests"
+               BuildableName = "Atem Tests.xctest"
+               BlueprintName = "Atem Tests"
                ReferencedContainer = "container:Atem.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -154,9 +153,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "swift-nio::CNIOAtomics"
-            BuildableName = "CNIOAtomics.framework"
-            BlueprintName = "CNIOAtomics"
+            BlueprintIdentifier = "Atem::Atem"
+            BuildableName = "Atem.framework"
+            BlueprintName = "Atem"
             ReferencedContainer = "container:Atem.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
