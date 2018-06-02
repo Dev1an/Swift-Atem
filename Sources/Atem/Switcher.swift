@@ -102,7 +102,7 @@ public class Switcher {
 	public let channel: EventLoopFuture<Channel>
 	let messageHandler = RespondingMessageHandler()
 	
-	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numThreads: 1), initializer: (RespondingMessageHandler)->Void) throws {
+	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (RespondingMessageHandler)->Void) throws {
 		eventLoop = eventLoopGroup
 		let handler = SwitcherHandler(handler: messageHandler)
 		initializer(messageHandler)

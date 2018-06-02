@@ -81,7 +81,7 @@ public class Controller {
 	let handler: ControllerHandler
 	let messageHandler = MessageHandler()
 	
-	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numThreads: 1), initializer: (MessageHandler)->Void = {_ in}) throws {
+	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (MessageHandler)->Void = {_ in}) throws {
 		eventLoop = eventLoopGroup
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
 		let tempHandler = ControllerHandler(address: address, messageHandler: messageHandler)

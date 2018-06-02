@@ -3,7 +3,7 @@ import XCTest
 
 import NIO
 
-class Atem_RTests: XCTestCase {
+class Atem_Tests: XCTestCase {
 	
 	func testConnectionHandlers() {
 		let controller = EmbeddedChannel()
