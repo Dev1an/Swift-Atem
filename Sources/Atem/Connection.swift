@@ -98,7 +98,7 @@ class ConnectionState {
 	}
 
 	static func id(firstBit: Bool) -> UID {
-		let randomNumber = random() % UInt32(UInt16.max)
+		let randomNumber = UInt32(Int(random()) % Int(UInt16.max))
 		let  firstByte = UInt8((randomNumber & 0x0700) >> 8)
 		let secondByte = UInt8( randomNumber & 0x00FF)
 		if firstBit {
