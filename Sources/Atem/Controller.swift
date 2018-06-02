@@ -75,7 +75,7 @@ class ControllerHandler: HandlerWithTimer {
 }
 
 public class Controller {
-	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
+	let 🔂 = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 	public let channel: EventLoopFuture<Channel>
 	let handler: ControllerHandler
 	let messageHandler = MessageHandler()

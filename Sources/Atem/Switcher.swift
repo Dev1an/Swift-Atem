@@ -98,7 +98,7 @@ class SwitcherHandler: HandlerWithTimer {
 }
 
 public class Switcher {
-	let 🔂 = MultiThreadedEventLoopGroup(numThreads: 1)
+	let 🔂 = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 	public let channel: EventLoopFuture<Channel>
 	let messageHandler = RespondingMessageHandler()
 	

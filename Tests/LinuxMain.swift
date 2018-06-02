@@ -1,6 +1,6 @@
 import XCTest
-@testable import Atem_RTests
+@testable import Atem_Tests
 
 XCTMain([
-    testCase(Atem_RTests.allTests),
+    testCase(Atem_Tests.allTests),
 ])
