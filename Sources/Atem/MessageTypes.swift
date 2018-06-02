@@ -235,6 +235,7 @@ public struct ProgramBusChanged: Serializable {
 	public var debugDescription: String {return "Program bus changed to \(programBus) on ME\(mixEffect)"}
 }
 
+/// Informs a controller that the switchers timecode has changed
 public struct NewTimecode: Message {
 	public typealias Timecode = (hour: UInt8, minute: UInt8, second: UInt8, frame: UInt8)
 	public static let title = MessageTitle(string: "Time")
@@ -382,6 +383,7 @@ public struct LockObtained: Serializable {
 	}
 }
 
+/// Informs a controller that a connection is succesfully established.
 public struct InitiationComplete: Message {
 	public static var title = MessageTitle(string: "InCm")
 	
@@ -391,8 +393,13 @@ public struct InitiationComplete: Message {
 	
 	public let debugDescription = "Initiation complete"
 }
+
+
+/// Informs a controller that the some tally lights might have changed.
 public struct SourceTallies: Serializable {
 	public static var title = MessageTitle(string: "TlSr")
+	
+	/// The state of the tally lights for each source of the Atem switcher
 	public let tallies: [VideoSource:TallyLight]
 	
 	public init(with bytes: ArraySlice<UInt8>) throws {
@@ -406,6 +413,8 @@ public struct SourceTallies: Serializable {
 		}
 		self.tallies = tallies
 	}
+	
+	
 	public init(tallies: [VideoSource:TallyLight]) {
 		self.tallies = tallies
 	}

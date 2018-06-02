@@ -22,9 +22,15 @@ enum MessageError: String, Error {
 	}
 }
 
-/// A message containing a title
+/// An interpreted message coming from an ATEM device
 public protocol Message: CustomDebugStringConvertible {
+	/// The title of the message. This is referred to as CMD in [Skarhoj's protocol documentation](http://skaarhoj.com/fileadmin/BMDPROTOCOL.html)
 	static var title: MessageTitle {get}
+	
+	/// Initialize a new message from the given binary string
+	///
+	/// - Parameter bytes: the binary string to interpret
+	/// - Throws: when the message cannot be interpreted
 	init(with bytes: ArraySlice<UInt8>) throws
 }
 
@@ -36,7 +42,11 @@ extension Message {
 	}
 }
 
+/// A `Message` that is serializable. In other words: that can be transformed into a binary format, ready to be sent to another device.
+/// Serializable messages use the `Message.title` and `Serializable.dataBytes` properties to compute the serialized message.
 public protocol Serializable: Message {
+	/// The part of the serialized message starting after the 4 `Message.title` bytes.
+	/// This property is used by the `Serializable.serialize()` method
 	var dataBytes: [UInt8] {get}
 }
 

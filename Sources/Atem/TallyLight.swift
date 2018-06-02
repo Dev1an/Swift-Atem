@@ -7,6 +7,11 @@
 
 import Foundation
 
+/// Describes the state of a tally light. Possible values are
+///  - `.off`
+///  - `.program`
+///  - `.preview`
+///  - both `.program` & `.preview`
 public struct TallyLight: OptionSet, CustomDebugStringConvertible {
 	public let rawValue: UInt8
 	

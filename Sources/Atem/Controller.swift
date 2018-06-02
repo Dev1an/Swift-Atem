@@ -74,13 +74,26 @@ class ControllerHandler: HandlerWithTimer {
 	}
 }
 
+/// An interface to
+///  - send commands to an ATEM Switcher
+///  - react upon incomming state change messages from the ATEM Switcher
+///
+/// To make an anology with real world devices: this class can be compared to a BlackMagicDesign Control Panel. It is used to control a production switcher.
 public class Controller {
+	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
 	public let channel: EventLoopFuture<Channel>
+	public let messageHandler = MessageHandler()
 
 	let eventLoop: EventLoopGroup
 	let handler: ControllerHandler
-	let messageHandler = MessageHandler()
 	
+	/// Start a new connection to an ATEM Switcher.
+	///
+	/// When a connection is being initialized it will receive `Message`s from the switcher to describe its initial state. If you are interested in these messages use the `initializer` parameter to set up handlers for them (see `MessageHandlerBase.when(...)`). When this connection initiation process is finished the `ConnectionInitiationEnd` message will be sent. From that moment on you know that a connection is succesfully established.
+	
+	/// - Parameter ipAddress: the IPv4 address of the switcher.
+	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
+	/// - Parameter initializer: a closure that will be called before establishing the connection to the switcher. Use the provided `MessageHandler` to register callbacks for incoming messages from the switcher.
 	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (MessageHandler)->Void = {_ in}) throws {
 		eventLoop = eventLoopGroup
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
@@ -93,6 +106,10 @@ public class Controller {
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
 	}
 	
+	
+	/// Sends a message to the connected switcher.
+	///
+	/// - Parameter message: the message that will be sent to the switcher
 	public func send(message: Serializable) {
 		channel.eventLoop.execute {
 			self.handler.connectionState?.send(message: message.serialize())

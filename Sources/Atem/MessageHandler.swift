@@ -6,6 +6,7 @@
 //
 private var messageTypeRegister = [UInt32: Message.Type]()
 
+/// A utility to interprete incoming messages and call the registered handlers and to send back the responses provided by the handlers. For more information on how to register handlers see `MessageHandlerBase.when(...)`. This class is similar to `MessageHandler`. The difference here is that the registered handlers should return zero or more (`Serializable`) responses for each incoming `Message`.
 public class RespondingMessageHandler: MessageHandlerBase<[Serializable]> {
 	init() { super.init(emptyResponse: [])}
 	
@@ -18,6 +19,7 @@ public class RespondingMessageHandler: MessageHandlerBase<[Serializable]> {
 	}
 }
 
+/// A utility that interprets incoming messages and calls the registered handlers. For more information on how to register handlers see `MessageHandlerBase.when(...)`
 public class MessageHandler: MessageHandlerBase<Void> {
 	init() { super.init(emptyResponse: Void()) }
 	

@@ -13,7 +13,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Atem Docs</a> (25% documented)</p>
+        <p><a href="index.html">Atem Docs</a> (59% documented)</p>
         <p class="header-right"><a href="https://github.com/Dev1an/Swift-Atem"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -87,6 +87,21 @@
                 <a href="Structs/ChangeTransitionPosition.html">ChangeTransitionPosition</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/InitiationComplete.html">InitiationComplete</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LockChange.html">LockChange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LockObtained.html">LockObtained</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LockPositionRequest.html">LockPositionRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LockRequest.html">LockRequest</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/MessageTitle.html">MessageTitle</a>
               </li>
               <li class="nav-group-task">
@@ -97,6 +112,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ProgramBusChanged.html">ProgramBusChanged</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SourceTallies.html">SourceTallies</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TallyLight.html">TallyLight</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Topology.html">Topology</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/TransitionPositionChanged.html">TransitionPositionChanged</a>
@@ -118,6 +142,48 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:4Atem10ControllerC"></a>
+                    <a name="//apple_ref/swift/Class/Controller" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem10ControllerC">Controller</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An interface to</p>
+
+<ul>
+<li>send commands to an ATEM Switcher</li>
+<li>react upon incomming state change messages from the ATEM Switcher</li>
+</ul>
+
+<p>To make an anology with real world devices: this class can be compared to a BlackMagicDesign Control Panel. It is used to control a production switcher.</p>
+
+                        <a href="Classes/Controller.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Controller</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/9b717ea0a75b7441e026867a44aa737bf8df72f4/Sources/Atem/Controller.swift#L82-L122">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:4Atem24RespondingMessageHandlerC"></a>
                     <a name="//apple_ref/swift/Class/RespondingMessageHandler" class="dashAnchor"></a>
                     <a class="token" href="#/s:4Atem24RespondingMessageHandlerC">RespondingMessageHandler</a>
@@ -128,7 +194,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A utility to interprete incoming messages and call the registered handlers and to send back the responses provided by the handlers. For more information on how to register handlers see <code><a href="Classes/MessageHandlerBase.html#/s:4Atem18MessageHandlerBaseC4whenyxqd__cAA0B0Rd__lF">MessageHandlerBase.when(...)</a></code>. This class is similar to <code><a href="Classes.html#/s:4Atem14MessageHandlerC">MessageHandler</a></code>. The difference here is that the registered handlers should return zero or more (<code><a href="Protocols/Serializable.html">Serializable</a></code>) responses for each incoming <code><a href="Protocols/Message.html">Message</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -140,7 +206,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/efc724d96e5c4dc9407d55b45cb000c055627502/Sources/Atem/MessageHandler.swift#L9-L19">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/9b717ea0a75b7441e026867a44aa737bf8df72f4/Sources/Atem/MessageHandler.swift#L10-L20">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -158,7 +224,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A utility that interprets incoming messages and calls the registered handlers. For more information on how to register handlers see <code><a href="Classes/MessageHandlerBase.html#/s:4Atem18MessageHandlerBaseC4whenyxqd__cAA0B0Rd__lF">MessageHandlerBase.when(...)</a></code></p>
 
                       </div>
                       <div class="declaration">
@@ -170,7 +236,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/efc724d96e5c4dc9407d55b45cb000c055627502/Sources/Atem/MessageHandler.swift#L21-L29">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/9b717ea0a75b7441e026867a44aa737bf8df72f4/Sources/Atem/MessageHandler.swift#L23-L31">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -201,42 +267,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/efc724d96e5c4dc9407d55b45cb000c055627502/Sources/Atem/MessageHandler.swift#L32-L62">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:4Atem10ControllerC"></a>
-                    <a name="//apple_ref/swift/Class/Controller" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem10ControllerC">Controller</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="Classes/Controller.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Controller</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/efc724d96e5c4dc9407d55b45cb000c055627502/Sources/Atem/Controller.swift#L77-L101">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/9b717ea0a75b7441e026867a44aa737bf8df72f4/Sources/Atem/MessageHandler.swift#L34-L66">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -258,7 +289,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>An interface to</p>
+
+<ul>
+<li>process incoming commands received from one or more controllers</li>
+<li>send state change messages to connected controllers</li>
+</ul>
+
+<p>To make an anology with real world devices: this class can be compared to a BlackMagicDesign Production switcher. It is a state machine and control panels connect to this entity to change its state.</p>
 
                         <a href="Classes/Switcher.html" class="slightly-smaller">See more</a>
                       </div>
@@ -271,7 +309,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/efc724d96e5c4dc9407d55b45cb000c055627502/Sources/Atem/Switcher.swift#L95-L112">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/9b717ea0a75b7441e026867a44aa737bf8df72f4/Sources/Atem/Switcher.swift#L106-L127">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -281,7 +319,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-27)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-02)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

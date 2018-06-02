@@ -97,11 +97,20 @@ class SwitcherHandler: HandlerWithTimer {
 	}
 }
 
+
+/// An interface to
+///  - process incoming commands received from one or more controllers
+///  - send state change messages to connected controllers
+///
+/// To make an anology with real world devices: this class can be compared to a BlackMagicDesign Production switcher. It is a state machine and control panels connect to this entity to change its state.
 public class Switcher {
 	let eventLoop: EventLoopGroup
+	
+	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
 	public let channel: EventLoopFuture<Channel>
 	let messageHandler = RespondingMessageHandler()
 	
+	/// Start a switcher endpoint that controllers can use to connect to.
 	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (RespondingMessageHandler)->Void) throws {
 		eventLoop = eventLoopGroup
 		let handler = SwitcherHandler(handler: messageHandler)

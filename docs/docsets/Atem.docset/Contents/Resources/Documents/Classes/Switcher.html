@@ -14,7 +14,7 @@
     <a title="Switcher Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Atem Docs</a> (25% documented)</p>
+        <p><a href="../index.html">Atem Docs</a> (59% documented)</p>
         <p class="header-right"><a href="https://github.com/Dev1an/Swift-Atem"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -88,6 +88,21 @@
                 <a href="../Structs/ChangeTransitionPosition.html">ChangeTransitionPosition</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/InitiationComplete.html">InitiationComplete</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockChange.html">LockChange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockObtained.html">LockObtained</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockPositionRequest.html">LockPositionRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockRequest.html">LockRequest</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MessageTitle.html">MessageTitle</a>
               </li>
               <li class="nav-group-task">
@@ -98,6 +113,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ProgramBusChanged.html">ProgramBusChanged</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceTallies.html">SourceTallies</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TallyLight.html">TallyLight</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Topology.html">Topology</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TransitionPositionChanged.html">TransitionPositionChanged</a>
@@ -116,7 +140,14 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>An interface to</p>
+
+<ul>
+<li>process incoming commands received from one or more controllers</li>
+<li>send state change messages to connected controllers</li>
+</ul>
+
+<p>To make an anology with real world devices: this class can be compared to a BlackMagicDesign Production switcher. It is a state machine and control panels connect to this entity to change its state.</p>
 
           </section>
           <section class="section task-group-section">
@@ -135,7 +166,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The underlying <a href="https://github.com/apple/swift-nio">NIO</a> <a href="https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html">Datagram</a> <a href="https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html">Channel</a></p>
 
                       </div>
                       <div class="declaration">
@@ -147,7 +178,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/efc724d96e5c4dc9407d55b45cb000c055627502/Sources/Atem/Switcher.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/9b717ea0a75b7441e026867a44aa737bf8df72f4/Sources/Atem/Switcher.swift#L110">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -155,9 +186,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem8SwitcherCACyAA24RespondingMessageHandlerCc11initializer_tKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(initializer:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem8SwitcherCACyAA24RespondingMessageHandlerCc11initializer_tKcfc">init(initializer:)</a>
+                    <a name="/s:4Atem8SwitcherCAC3NIO14EventLoopGroup_p05eventeF0_yAA24RespondingMessageHandlerCc11initializertKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(eventLoopGroup:initializer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8SwitcherCAC3NIO14EventLoopGroup_p05eventeF0_yAA24RespondingMessageHandlerCc11initializertKcfc">init(eventLoopGroup:initializer:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -165,19 +196,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Start a switcher endpoint that controllers can use to connect to.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">initializer</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Classes.html#/s:4Atem24RespondingMessageHandlerC">RespondingMessageHandler</a></span><span class="p">)</span><span class="o">-&gt;</span><span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">eventLoopGroup</span><span class="p">:</span> <span class="kt">EventLoopGroup</span> <span class="o">=</span> <span class="kt">MultiThreadedEventLoopGroup</span><span class="p">(</span><span class="nv">numberOfThreads</span><span class="p">:</span> <span class="mi">1</span><span class="p">),</span> <span class="nv">initializer</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Classes.html#/s:4Atem24RespondingMessageHandlerC">RespondingMessageHandler</a></span><span class="p">)</span><span class="o">-&gt;</span><span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/efc724d96e5c4dc9407d55b45cb000c055627502/Sources/Atem/Switcher.swift#L100-L107">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/9b717ea0a75b7441e026867a44aa737bf8df72f4/Sources/Atem/Switcher.swift#L114-L122">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -187,7 +218,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-27)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-02)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
