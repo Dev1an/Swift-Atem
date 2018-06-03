@@ -1,9 +1,9 @@
-# Atem network protocol implementation
-
 <p align="center">
     <img src="https://img.shields.io/badge/swift-4.1-orange.svg" alt="Swift 4.1">
     <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-brightgreen.svg" alt="Platforms: macOS & Linux">
 </p>
+
+# Atem network protocol implementation
 
 Implementation of BlackMagicDesign's ATEM communication protocol in Swift. It is written on top of Apple's new networking library [NIO](https://github.com/apple/swift-nio) and implements both sides of the protocol: the control panel and the switcher side. This means that you can not only use it to control atem switchers but also to connect to your control panels without the need for a switcher. Opening a whole new world of applications for the Atem control panels. An example can be found at [Atem-Simulator](https://github.com/Dev1an/Atem-Simulator)
 
