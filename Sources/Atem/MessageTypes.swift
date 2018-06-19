@@ -186,7 +186,7 @@ public struct ChangeProgramBus: Message {
 	public var debugDescription: String {return "Change program bus to \(programBus)"}
 }
 
-/// Informs a switcher that the preview bus should be changed
+/// Informs a controller that the preview bus has changed
 public struct PreviewBusChanged: Serializable {
 	public static let title = MessageTitle(string: "PrvI")
 
@@ -210,7 +210,7 @@ public struct PreviewBusChanged: Serializable {
 	public var debugDescription: String {return "Preview bus changed to \(previewBus) on ME\(mixEffect)"}
 }
 
-/// Informs a switcher that the program bus shoud be changed
+/// Informs a controller that the program bus has changed
 public struct ProgramBusChanged: Serializable {
 	public static let title = MessageTitle(string: "PrgI")
 
