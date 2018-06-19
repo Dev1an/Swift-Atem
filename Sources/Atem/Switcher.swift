@@ -73,7 +73,7 @@ class SwitcherHandler: HandlerWithTimer {
 		}
 	}
 	
-	override func executeTimerTask(context: ChannelHandlerContext) {
+	final override func executeTimerTask(context: ChannelHandlerContext) {
 		var notRespondingClients = [UInt16]()
 		for (id, client) in clients {
 			let packets = client.state.assembleOutgoingPackets()

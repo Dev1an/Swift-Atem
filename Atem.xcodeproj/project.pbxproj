@@ -291,7 +291,7 @@
 
 /* Begin PBXFileReference section */
 		"Atem::Atem Tests::Product" /* Atem_Tests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = Atem_Tests.xctest; path = "Atem Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Atem::Atem::Product" /* Atem.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Atem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Atem::Atem::Product" /* Atem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Atem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		OBJ_100 /* LinuxCPUSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxCPUSet.swift; sourceTree = "<group>"; };
 		OBJ_101 /* MarkedCircularBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedCircularBuffer.swift; sourceTree = "<group>"; };
@@ -689,7 +689,7 @@
 			path = include;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -701,7 +701,6 @@
 				OBJ_33 /* Dependencies */,
 				OBJ_130 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_52 /* NIOTLS */ = {
@@ -1088,7 +1087,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_130 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

@@ -42,7 +42,7 @@ class ControllerHandler: HandlerWithTimer {
 		}
 	}
 	
-	override func executeTimerTask(context: ChannelHandlerContext) {
+	final override func executeTimerTask(context: ChannelHandlerContext) {
 		if let state = connectionState {
 			let packets = state.assembleOutgoingPackets()
 			if packets.count < 50 {
