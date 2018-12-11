@@ -10,25 +10,25 @@ enum AtemSize: UInt8 {
 }
 
 /// There are two version numbers in ATEM world: One for the ATEM Software Control application (for instance version 6.0) which is what people usually refers to and one for the firmware which is often updated with the PC/Mac application versions (for instance 2.15). The latter version number is what "_ver" gives you and a number you can not find anywhere in the application to our knowledge.
-struct ProtocolVersion: Serializable {
-	static let title = MessageTitle(string: "_ver")
+public struct ProtocolVersion: Serializable {
+	public static let title = MessageTitle(string: "_ver")
 	static let majorPosition = 0..<2
 	static let minorPosition = 2..<4
 	let minor, major: UInt16
 	
-	init(with bytes: ArraySlice<UInt8>) {
+	public init(with bytes: ArraySlice<UInt8>) {
 		major = UInt16(from: bytes[ProtocolVersion.majorPosition.advanced(by: bytes.startIndex)])
 		minor = UInt16(from: bytes[ProtocolVersion.minorPosition.advanced(by: bytes.startIndex)])
 	}
 	
-	init(major: UInt16, minor: UInt16) {
+	public init(major: UInt16, minor: UInt16) {
 		self.major = major
 		self.minor = minor
 	}
 	
-	var dataBytes: [UInt8] { return major.bytes + minor.bytes }
+	public var dataBytes: [UInt8] { return major.bytes + minor.bytes }
 	
-	var debugDescription: String { return "Version: \(major).\(minor)"}
+	public var debugDescription: String { return "Version: \(major).\(minor)"}
 }
 
 /// The type of atem

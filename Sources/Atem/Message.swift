@@ -51,7 +51,7 @@ public protocol Serializable: Message {
 }
 
 extension Serializable {
-	func serialize() -> [UInt8] {
+	public func serialize() -> [UInt8] {
 		let data = dataBytes
 		return UInt16(data.count + 8).bytes + [0,0] + Self.prefix() + data
 	}
