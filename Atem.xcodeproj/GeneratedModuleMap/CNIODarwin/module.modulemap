@@ -1,4 +1,0 @@
-module CNIODarwin {
-    umbrella "/Users/damiaan/Documents/Projecten/AtemSimulator/Protocol/.build/checkouts/swift-nio.git-3108475404973543938/Sources/CNIODarwin/include"
-    export *
-}

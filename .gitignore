@@ -1,6 +1,5 @@
 /.build
 /Packages/Socks-1.2.3
-/Atem.xcodeproj/project.xcworkspace/xcuserdata
-/Atem.xcodeproj/xcuserdata
 /Protocol.playground/playground.xcworkspace/xcuserdata
 /build
+/Atem.xcodeproj
