@@ -132,7 +132,7 @@ public enum VideoSource: RawRepresentable {
 		case sVideo    = 0x0500
 	}
 	
-	public struct ExternalInterfaces: OptionSet {
+	public struct ExternalInterfaces: OptionSet, SingleValueDescribable {
 		public let rawValue: UInt8
 		public init(rawValue: UInt8) {
 			self.rawValue = rawValue
@@ -143,29 +143,63 @@ public enum VideoSource: RawRepresentable {
 		public static let composite = ExternalInterfaces(rawValue: 1 << 2)
 		public static let component = ExternalInterfaces(rawValue: 1 << 3)
 		public static let sVideo =    ExternalInterfaces(rawValue: 1 << 4)
+		
+		public static let none = ExternalInterfaces(rawValue: 0)
+		
+		public func describe() -> String? {
+			switch self {
+				case .sdi:       return "sdi"
+				case .hdmi:      return "hdmi"
+				case .composite: return "composite"
+				case .component: return "composite"
+				case .sVideo:    return "sVideo"
+				default:         return "Unknown"
+			}
+		}
 	}
 	
-	public struct Availability: OptionSet {
+	public struct Availability: OptionSet, SingleValueDescribable {		
 		public let rawValue: UInt8
 		public init(rawValue: UInt8) {
 			self.rawValue = rawValue
 		}
 		
-		public static let auxiliary =      ExternalInterfaces(rawValue: 1 << 0)
-		public static let multiviewer =    ExternalInterfaces(rawValue: 1 << 1)
-		public static let superSourceArt = ExternalInterfaces(rawValue: 1 << 2)
-		public static let superSourceBox = ExternalInterfaces(rawValue: 1 << 3)
-		public static let keySources =     ExternalInterfaces(rawValue: 1 << 4)
+		public static let auxiliary =      Availability(rawValue: 1 << 0)
+		public static let multiviewer =    Availability(rawValue: 1 << 1)
+		public static let superSourceArt = Availability(rawValue: 1 << 2)
+		public static let superSourceBox = Availability(rawValue: 1 << 3)
+		public static let keySources =     Availability(rawValue: 1 << 4)
+
+		public func describe() -> String? {
+			switch self {
+			case .auxiliary:      return "auxiliary"
+			case .multiviewer:    return "multiviewer"
+			case .superSourceArt: return "superSourceArt"
+			case .superSourceBox: return "superSourceBox"
+			case .keySources:     return "keySources"
+			default:              return nil
+			}
+		}
 	}
 	
-	public struct MixEffects: OptionSet {
+	public struct MixEffects: OptionSet, SingleValueDescribable {
 		public let rawValue: UInt8
 		public init(rawValue: UInt8) {
 			self.rawValue = rawValue
 		}
 		
-		public static let me1AndFillSources = ExternalInterfaces(rawValue: 1 << 0)
-		public static let me2AndFillSources = ExternalInterfaces(rawValue: 1 << 1)
+		public static let me1AndFillSources = MixEffects(rawValue: 1 << 0)
+		public static let me2AndFillSources = MixEffects(rawValue: 1 << 1)
+
+		public static let none = MixEffects(rawValue: 0)
+		
+		public func describe() -> String? {
+			switch self {
+				case .me1AndFillSources: return "me1AndFillSources"
+				case .me2AndFillSources: return "me2AndFillSources"
+				default: return nil
+			}
+		}
 	}
 	
 }

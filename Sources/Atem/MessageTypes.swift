@@ -396,7 +396,7 @@ extension VideoSource {
 			dataBytes = Array(bytes)
 		}
 		
-		public init(source: VideoSource, longName: String, shortName optionalShortName: String? = nil, kind: VideoSource.Kind, externalInterfaces: ExternalInterfaces, availability: Availability, mixEffects: MixEffects) throws {
+		public init(source: VideoSource, longName: String, shortName optionalShortName: String? = nil, externalInterfaces: ExternalInterfaces, kind: VideoSource.Kind, availability: Availability, mixEffects: MixEffects) throws {
 			let encodedLongName = try encodeAtem(string: longName, length: PropertiesChanged.longNameLength)
 			
 			let shortName = optionalShortName ?? String(longName.prefix(4))
@@ -423,17 +423,39 @@ extension VideoSource {
 		}
 		
 		public var debugDescription: String {
-			return "Video source \(String(describing: id)) changed to: \(longName ?? "unknown long name") (\(shortName ?? "unknown short name"))"
+			return """
+			VideoSource.PropertiesChanged(
+				source: .\(String(describing: id!)),
+				longName: "\(longName!)",
+				shortName: "\(shortName!)",
+				externalInterfaces: \(externalInterfaces.description),
+				kind: .\(String(describing: kind!)),
+				availability: \(availability.description),
+				mixEffects: \(mixEffects.description)
+			)
+			"""
 		}
 		
 		public var id: VideoSource? {
 			return VideoSource(rawValue: .init(from: dataBytes[0..<2]))
 		}
-		public var shortName: String? {
+		public var longName: String? {
 			return String(bytes: dataBytes[ 2..<22].prefix {$0 != 0}, encoding: .utf8)
 		}
-		public var longName: String? {
+		public var shortName: String? {
 			return String(bytes: dataBytes[22..<26].prefix {$0 != 0}, encoding: .utf8)
+		}
+		public var externalInterfaces: ExternalInterfaces {
+			return ExternalInterfaces(rawValue: dataBytes[27] & 0b1_1111)
+		}
+		public var kind: Kind? {
+			return Kind(rawValue: .init(from: dataBytes[29..<31]))
+		}
+		public var availability: Availability {
+			return Availability(rawValue: dataBytes[32] & 0b1_1111)
+		}
+		public var mixEffects: MixEffects {
+			return MixEffects(rawValue: dataBytes[33] & 0b11)
 		}
 	}
 }
