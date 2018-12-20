@@ -8,16 +8,19 @@
 
 import Foundation
 
-enum MessageError: String, Error {
+enum MessageError: Error {
 	case serialising
+	case stringTooLong(String, Int)
 	case titleNotDeserializable
 	
 	var localizedDescription: String {
 		switch self {
 		case .titleNotDeserializable:
 			return "MessageError: Unable to decode the title"
-		default:
-			return "MessageError: \(self.rawValue)"
+		case .stringTooLong(let string, let maxLength):
+			return "MessageError: Unable to serialise '\(string)' because it's too long, max length is: \(maxLength) bytes"
+		case .serialising:
+			return "MessageError: serialising"
 		}
 	}
 }
@@ -60,3 +63,16 @@ extension Serializable {
 enum MessageParseError: Error {
 	case unknownMessageTitle(String)
 }
+
+public func encodeAtem(string: String, length: Int) throws -> [UInt8] {
+	guard string.lengthOfBytes(using: .utf8)<=length else {
+		throw MessageError.stringTooLong(string, length)
+	}
+	let short = string.utf8.prefix(length)
+	if short.count == length {
+		return Array(short)
+	} else {
+		return short + [UInt8](repeating: 0, count: length - short.count)
+	}
+}
+

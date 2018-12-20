@@ -10,7 +10,7 @@ import Foundation
 /// A unique identifier for a video source of an ATEM switcher
 public enum VideoSource: RawRepresentable {
 	public typealias RawValue = UInt16
-
+	
 	case black
 	case input(UInt16)
 	case colorBars
@@ -110,6 +110,64 @@ public enum VideoSource: RawRepresentable {
 			return lower.rawValue ..< upper.rawValue
 		}
 	}
+	
+	/// The type of video source
+	public enum Kind: UInt16 {
+		// Internal
+		case black     = 0x0001
+		case colorBars
+		case colorGenerator
+		case mediaPlayerFill
+		case mediaPlayerKey
+		case superSource
+		case meOutput  = 0x0080
+		case auxiliary
+		case mask
+		
+		// External
+		case sdi       = 0x0100
+		case hdmi      = 0x0200
+		case composite = 0x0300
+		case component = 0x0400
+		case sVideo    = 0x0500
+	}
+	
+	public struct ExternalInterfaces: OptionSet {
+		public let rawValue: UInt8
+		public init(rawValue: UInt8) {
+			self.rawValue = rawValue
+		}
+		
+		public static let sdi =       ExternalInterfaces(rawValue: 1 << 0)
+		public static let hdmi =      ExternalInterfaces(rawValue: 1 << 1)
+		public static let composite = ExternalInterfaces(rawValue: 1 << 2)
+		public static let component = ExternalInterfaces(rawValue: 1 << 3)
+		public static let sVideo =    ExternalInterfaces(rawValue: 1 << 4)
+	}
+	
+	public struct Availability: OptionSet {
+		public let rawValue: UInt8
+		public init(rawValue: UInt8) {
+			self.rawValue = rawValue
+		}
+		
+		public static let auxiliary =      ExternalInterfaces(rawValue: 1 << 0)
+		public static let multiviewer =    ExternalInterfaces(rawValue: 1 << 1)
+		public static let superSourceArt = ExternalInterfaces(rawValue: 1 << 2)
+		public static let superSourceBox = ExternalInterfaces(rawValue: 1 << 3)
+		public static let keySources =     ExternalInterfaces(rawValue: 1 << 4)
+	}
+	
+	public struct MixEffects: OptionSet {
+		public let rawValue: UInt8
+		public init(rawValue: UInt8) {
+			self.rawValue = rawValue
+		}
+		
+		public static let me1AndFillSources = ExternalInterfaces(rawValue: 1 << 0)
+		public static let me2AndFillSources = ExternalInterfaces(rawValue: 1 << 1)
+	}
+	
 }
 
 extension VideoSource: Hashable {

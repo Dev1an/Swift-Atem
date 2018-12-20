@@ -33,7 +33,7 @@ public struct ProtocolVersion: Serializable {
 
 /// The type of atem
 struct AtemType: Serializable {
-	static var title = MessageTitle(string: "_pin")
+	static let title = MessageTitle(string: "_pin")
 	let string: String
 	
 	init(with bytes: ArraySlice<UInt8>) throws {
@@ -67,7 +67,7 @@ struct AtemType: Serializable {
 
 /// The resources of an atem
 public struct Topology: Serializable {
-	public static var title = MessageTitle(string: "_top")
+	public static let title = MessageTitle(string: "_top")
 	
 	public let mixEffectBanks: UInt8
 	public let sources: UInt8
@@ -310,7 +310,7 @@ public struct TransitionPositionChanged: Serializable {
 }
 
 public struct LockRequest: Serializable {
-	public static var title = MessageTitle(string: "LOCK")
+	public static let title = MessageTitle(string: "LOCK")
 	public let store: UInt16
 	public let state: UInt16
 	
@@ -327,7 +327,7 @@ public struct LockRequest: Serializable {
 }
 
 public struct LockPositionRequest: Message {
-	public static var title = MessageTitle(string: "PLCK")
+	public static let title = MessageTitle(string: "PLCK")
 	public let store: UInt16
 	public let index: UInt16
 	public let type: UInt16
@@ -343,7 +343,7 @@ public struct LockPositionRequest: Message {
 }
 
 public struct LockChange: Serializable {
-	public static var title = MessageTitle(string: "LKST")
+	public static let title = MessageTitle(string: "LKST")
 	public let store: UInt16
 	public let isLocked: Bool
 	
@@ -365,7 +365,7 @@ public struct LockChange: Serializable {
 }
 
 public struct LockObtained: Serializable {
-	public static var title = MessageTitle(string: "LKOB")
+	public static let title = MessageTitle(string: "LKOB")
 	let store: UInt16
 	
 	public init(with bytes: ArraySlice<UInt8>) throws {
@@ -380,6 +380,61 @@ public struct LockObtained: Serializable {
 	
 	public var dataBytes: [UInt8] {
 		return store.bytes + [0, 0]
+	}
+}
+
+extension VideoSource {
+	/// The properties (like name and port types) of a video source
+	public struct PropertiesChanged: Serializable {
+		public static let title: MessageTitle = MessageTitle(string: "InPr")
+		public static let shortNameLength = 4
+		public static let longNameLength = 20
+
+		public let dataBytes: [UInt8]
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			dataBytes = Array(bytes)
+		}
+		
+		public init(source: VideoSource, longName: String, shortName optionalShortName: String? = nil, kind: VideoSource.Kind, externalInterfaces: ExternalInterfaces, availability: Availability, mixEffects: MixEffects) throws {
+			let encodedLongName = try encodeAtem(string: longName, length: PropertiesChanged.longNameLength)
+			
+			let shortName = optionalShortName ?? String(longName.prefix(4))
+			let encodedShortName = try encodeAtem(string: shortName, length: PropertiesChanged.shortNameLength)
+			
+			
+			dataBytes =
+				source.rawValue.bytes +
+				encodedLongName +
+				encodedShortName +
+				[
+					0x01,
+					externalInterfaces.rawValue,
+					0x01
+				] +
+				kind.rawValue.bytes +
+				[
+					0x00,
+					availability.rawValue,
+					mixEffects.rawValue,
+					0x1f,
+					0x03
+				]
+		}
+		
+		public var debugDescription: String {
+			return "Video source \(String(describing: id)) changed to: \(longName ?? "unknown long name") (\(shortName ?? "unknown short name"))"
+		}
+		
+		public var id: VideoSource? {
+			return VideoSource(rawValue: .init(from: dataBytes[0..<2]))
+		}
+		public var shortName: String? {
+			return String(bytes: dataBytes[ 2..<22].prefix {$0 != 0}, encoding: .utf8)
+		}
+		public var longName: String? {
+			return String(bytes: dataBytes[22..<26].prefix {$0 != 0}, encoding: .utf8)
+		}
 	}
 }
 
