@@ -155,7 +155,7 @@ struct DoCut: Message {
 }
 
 /// Informs a switcher that the preview bus should be changed
-public struct ChangePreviewBus: Message {
+public struct ChangePreviewBus: Serializable {
 	public static let title = MessageTitle(string: "CPvI")
 
 	public let mixEffect: UInt8
@@ -167,6 +167,15 @@ public struct ChangePreviewBus: Message {
 		self.previewBus = try VideoSource.decode(from: sourceNumber)
 	}
 	
+	public init(to newPreviewBus: VideoSource, mixEffect: UInt8 = 0) {
+		self.mixEffect = mixEffect
+		previewBus = newPreviewBus
+	}
+	
+	public var dataBytes: [UInt8] {
+		return [mixEffect, 0] + previewBus.rawValue.bytes
+	}
+    
 	public var debugDescription: String {return "Change preview bus to \(previewBus)"}
 }
 
