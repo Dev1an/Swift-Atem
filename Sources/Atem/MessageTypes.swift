@@ -5,7 +5,7 @@
 //  Created by Damiaan on 26/05/18.
 //
 
-enum AtemSize: UInt8 {
+public enum AtemSize: UInt8 {
 	case oneME = 0, twoME = 1
 }
 
@@ -144,14 +144,22 @@ struct ConnectionInitiationEnd: Serializable {
 }
 
 /// Performs a cut on the atem
-struct DoCut: Message {
-	static let title = MessageTitle(string: "DCut")
-	let debugDescription = "cut"
-	let atemSize : AtemSize
+public struct DoCut: Serializable {
+	public static let title = MessageTitle(string: "DCut")
+    	public let debugDescription = "cut"
+	public let atemSize: AtemSize
 	
-	init(with bytes: ArraySlice<UInt8>) {
+	public init(with bytes: ArraySlice<UInt8>) {
 		atemSize = AtemSize(rawValue: bytes.first!)!
 	}
+    
+    	public init(in atemSize: AtemSize) {
+        	self.atemSize = atemSize
+    	}
+    
+    	public var dataBytes: [UInt8] {
+        	return [atemSize.rawValue] + [0,0,0]
+    	}
 }
 
 /// Informs a switcher that the preview bus should be changed
@@ -166,21 +174,21 @@ public struct ChangePreviewBus: Serializable {
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
 		self.previewBus = try VideoSource.decode(from: sourceNumber)
 	}
-	
-	public init(to newPreviewBus: VideoSource, mixEffect: UInt8 = 0) {
-		self.mixEffect = mixEffect
-		previewBus = newPreviewBus
-	}
-	
-	public var dataBytes: [UInt8] {
-		return [mixEffect, 0] + previewBus.rawValue.bytes
-	}
+    
+    	public init(to newPreviewBus: VideoSource, mixEffect: UInt8 = 0) {
+        	self.mixEffect = mixEffect
+        	previewBus = newPreviewBus
+    	}
+    
+    	public var dataBytes: [UInt8] {
+	    return [mixEffect, 0] + previewBus.rawValue.bytes
+    }
     
 	public var debugDescription: String {return "Change preview bus to \(previewBus)"}
 }
 
 /// Informs a switcher that the program bus shoud be changed
-public struct ChangeProgramBus: Message {
+public struct ChangeProgramBus: Serializable {
 	public static let title = MessageTitle(string: "CPgI")
 
 	public let mixEffect: UInt8
@@ -191,6 +199,15 @@ public struct ChangeProgramBus: Message {
 		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
 		self.programBus = try VideoSource.decode(from: sourceNumber)
 	}
+    
+    	public init(to newProgramBus: VideoSource, mixEffect: UInt8 = 0) {
+        	self.mixEffect = mixEffect
+        	programBus = newProgramBus
+    	}
+    
+    	public var dataBytes: [UInt8] {
+        	return [mixEffect, 0] + programBus.rawValue.bytes
+    	}
 	
 	public var debugDescription: String {return "Change program bus to \(programBus)"}
 }
