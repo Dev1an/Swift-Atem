@@ -212,6 +212,56 @@ public struct ChangeProgramBus: Serializable {
 	public var debugDescription: String {return "Change program bus to \(programBus)"}
 }
 
+//MARK: - Informs a switcher that the Aux Source shoud be changed
+public struct ChangeAuxSource: Serializable {
+    public static let title = MessageTitle(string: "CAuS")
+    
+    public let auxChannel: UInt8
+    public let auxSource: VideoSource
+    
+    public init(with bytes: ArraySlice<UInt8>) throws {
+        auxChannel = bytes[relative: 1]
+        let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+        self.auxSource = try VideoSource.decode(from: sourceNumber)
+    }
+    
+    public init(aux channel: UInt8, to newSource: VideoSource) {
+        self.auxChannel = channel
+        auxSource = newSource
+    }
+    
+    public var dataBytes: [UInt8] {
+        return [1, auxChannel] + auxSource.rawValue.bytes
+    }
+    
+    public var debugDescription: String {return "Change Aux \(auxChannel) source to source \(auxSource)"}
+}
+
+//MARK: - Informs a controller that the Aux Source has changed
+public struct AuxSourceChanged: Serializable {
+    public static let title = MessageTitle(string: "AuxS")
+    
+    public let auxChannel: UInt8
+    public let auxSource: VideoSource
+    
+    public init(with bytes: ArraySlice<UInt8>) throws {
+        auxChannel = bytes[relative: 0]
+        let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+        self.auxSource = try VideoSource.decode(from: sourceNumber)
+    }
+    
+    public init(aux channel: UInt8, to newSource: VideoSource) {
+        self.auxChannel = channel
+        auxSource = newSource
+    }
+    
+    public var dataBytes: [UInt8] {
+        return [auxChannel, 0] + auxSource.rawValue.bytes
+    }
+    
+    public var debugDescription: String {return "Aux \(auxChannel) source changed to source \(auxSource)"}
+}
+
 /// Informs a controller that the preview bus has changed
 public struct PreviewBusChanged: Serializable {
 	public static let title = MessageTitle(string: "PrvI")
