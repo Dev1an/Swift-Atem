@@ -146,20 +146,20 @@ struct ConnectionInitiationEnd: Serializable {
 /// Performs a cut on the atem
 public struct DoCut: Serializable {
 	public static let title = MessageTitle(string: "DCut")
-    	public let debugDescription = "cut"
+	public let debugDescription = "cut"
 	public let atemSize: AtemSize
 	
 	public init(with bytes: ArraySlice<UInt8>) {
 		atemSize = AtemSize(rawValue: bytes.first!)!
 	}
     
-    	public init(in atemSize: AtemSize) {
-        	self.atemSize = atemSize
-    	}
-    
-    	public var dataBytes: [UInt8] {
-        	return [atemSize.rawValue] + [0,0,0]
-    	}
+	public init(in atemSize: AtemSize) {
+		self.atemSize = atemSize
+	}
+
+	public var dataBytes: [UInt8] {
+		return [atemSize.rawValue] + [0,0,0]
+	}
 }
 
 /// Informs a switcher that the preview bus should be changed
@@ -175,13 +175,13 @@ public struct ChangePreviewBus: Serializable {
 		self.previewBus = try VideoSource.decode(from: sourceNumber)
 	}
     
-    	public init(to newPreviewBus: VideoSource, mixEffect: UInt8 = 0) {
-        	self.mixEffect = mixEffect
-        	previewBus = newPreviewBus
-    	}
-    
-    	public var dataBytes: [UInt8] {
-	    return [mixEffect, 0] + previewBus.rawValue.bytes
+	public init(to newPreviewBus: VideoSource, mixEffect: UInt8 = 0) {
+		self.mixEffect = mixEffect
+		previewBus = newPreviewBus
+	}
+
+	public var dataBytes: [UInt8] {
+	return [mixEffect, 0] + previewBus.rawValue.bytes
     }
     
 	public var debugDescription: String {return "Change preview bus to \(previewBus)"}
@@ -200,66 +200,78 @@ public struct ChangeProgramBus: Serializable {
 		self.programBus = try VideoSource.decode(from: sourceNumber)
 	}
     
-    	public init(to newProgramBus: VideoSource, mixEffect: UInt8 = 0) {
-        	self.mixEffect = mixEffect
-        	programBus = newProgramBus
-    	}
-    
-    	public var dataBytes: [UInt8] {
-        	return [mixEffect, 0] + programBus.rawValue.bytes
-    	}
+	public init(to newProgramBus: VideoSource, mixEffect: UInt8 = 0) {
+		self.mixEffect = mixEffect
+		programBus = newProgramBus
+	}
+
+	public var dataBytes: [UInt8] {
+		return [mixEffect, 0] + programBus.rawValue.bytes
+	}
 	
 	public var debugDescription: String {return "Change program bus to \(programBus)"}
 }
 
-//MARK: - Informs a switcher that the Aux Source shoud be changed
-public struct ChangeAuxSource: Serializable {
-    public static let title = MessageTitle(string: "CAuS")
-    
-    public let auxChannel: UInt8
-    public let auxSource: VideoSource
-    
-    public init(with bytes: ArraySlice<UInt8>) throws {
-        auxChannel = bytes[relative: 1]
-        let sourceNumber = UInt16(from: bytes[relative: 2..<4])
-        self.auxSource = try VideoSource.decode(from: sourceNumber)
-    }
-    
-    public init(aux channel: UInt8, to newSource: VideoSource) {
-        self.auxChannel = channel
-        auxSource = newSource
-    }
-    
-    public var dataBytes: [UInt8] {
-        return [1, auxChannel] + auxSource.rawValue.bytes
-    }
-    
-    public var debugDescription: String {return "Change Aux \(auxChannel) source to source \(auxSource)"}
+/// Informs a switcher that a source should be assigned to the specified auxiliary output
+public struct ChangeAuxiliaryOutput: Serializable {
+	public static let title = MessageTitle(string: "CAuS")
+
+	/// The source that should be assigned to the auxiliary output
+	public let source: VideoSource
+	/// The auxiliary output that should be rerouted
+	public let output: UInt8
+
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		output = bytes[relative: 1]
+		let sourceNumber = UInt16(from: bytes[relative: 2..<4])
+		self.source = try VideoSource.decode(from: sourceNumber)
+	}
+
+	/// Create a message to reroute an auxiliary output.
+	/// - Parameters:
+	///   - output: The source that should be assigned to the auxiliary output
+	///   - newSource: The auxiliary output that should be rerouted
+	public init(_ output: UInt8, to newSource: VideoSource) {
+		self.source = newSource
+		self.output = output
+	}
+
+	public var dataBytes: [UInt8] {
+		return [1, output] + source.rawValue.bytes
+	}
+
+	public var debugDescription: String {return "Change Aux \(output) source to source \(source)"}
 }
 
-//MARK: - Informs a controller that the Aux Source has changed
-public struct AuxSourceChanged: Serializable {
+/// Informs a controller that a source has been routed to an auxiliary output
+public struct AuxiliaryOutputChanged: Serializable {
     public static let title = MessageTitle(string: "AuxS")
     
-    public let auxChannel: UInt8
-    public let auxSource: VideoSource
+	/// The auxiliary output that has received another route
+    public let output: UInt8
+	/// The source that has been routed to the auxiliary output
+    public let source: VideoSource
     
     public init(with bytes: ArraySlice<UInt8>) throws {
-        auxChannel = bytes[relative: 0]
+        output = bytes[relative: 0]
         let sourceNumber = UInt16(from: bytes[relative: 2..<4])
-        self.auxSource = try VideoSource.decode(from: sourceNumber)
+        self.source = try VideoSource.decode(from: sourceNumber)
     }
     
+	/// Create a message to inform that a source has been routed to an auxiliary output
+	/// - Parameters:
+	///   - output: The source that has been assigned to the auxiliary output
+	///   - newSource: The auxiliary output that has been rerouted
     public init(aux channel: UInt8, to newSource: VideoSource) {
-        self.auxChannel = channel
-        auxSource = newSource
+        self.output = channel
+        source = newSource
     }
     
     public var dataBytes: [UInt8] {
-        return [auxChannel, 0] + auxSource.rawValue.bytes
+        return [output, 0] + source.rawValue.bytes
     }
     
-    public var debugDescription: String {return "Aux \(auxChannel) source changed to source \(auxSource)"}
+    public var debugDescription: String {return "Aux \(output) source changed to source \(source)"}
 }
 
 /// Informs a controller that the preview bus has changed
