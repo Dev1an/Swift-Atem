@@ -10,6 +10,8 @@ let package = Package(
         .library(
             name: "Atem",
             targets: ["Atem"]),
+			.executable(name: "Version dump", targets: ["Version dump"]),
+			.executable(name: "Simulator", targets: ["Simulator"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -22,6 +24,8 @@ let package = Package(
         .target(
             name: "Atem",
             dependencies: ["NIO"]),
+		.target(name: "Version dump", dependencies: ["Atem"]),
+		.target(name: "Simulator", dependencies: ["Atem"]),
         .testTarget(
             name: "Atem Tests",
             dependencies: ["Atem"]),
