@@ -60,6 +60,14 @@ try Controller(ipAddress: "10.1.0.67") { handler in
 }
 ```
 
+**Sending messages**
+
+To send a message to the switcher use the `send(...)` method like this:
+
+```swift
+controller.send(message: ChangeTransitionPosition(to: 5000))
+```
+
 ### Switcher
 
 The following example shows how to emulate the basic functionality of an atem switcher. It will forward incoming messages containing transition and preview & program bus changes to the connected controller.
