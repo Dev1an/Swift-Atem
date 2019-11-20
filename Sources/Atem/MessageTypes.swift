@@ -247,11 +247,11 @@ public struct ChangeAuxiliaryOutput: Serializable {
 public struct AuxiliaryOutputChanged: Serializable {
     public static let title = MessageTitle(string: "AuxS")
     
-	/// The auxiliary output that has received another route
-    public let output: UInt8
 	/// The source that has been routed to the auxiliary output
     public let source: VideoSource
-    
+	/// The auxiliary output that has received another route
+    public let output: UInt8
+
     public init(with bytes: ArraySlice<UInt8>) throws {
         output = bytes[relative: 0]
         let sourceNumber = UInt16(from: bytes[relative: 2..<4])
@@ -260,11 +260,11 @@ public struct AuxiliaryOutputChanged: Serializable {
     
 	/// Create a message to inform that a source has been routed to an auxiliary output
 	/// - Parameters:
-	///   - output: The source that has been assigned to the auxiliary output
-	///   - newSource: The auxiliary output that has been rerouted
-    public init(aux channel: UInt8, to newSource: VideoSource) {
-        self.output = channel
+	///   - source: The source that has been assigned to the auxiliary output
+	///   - output: The auxiliary output that has been rerouted
+    public init(source newSource: VideoSource, output newOutput: UInt8) {
         source = newSource
+        output = newOutput
     }
     
     public var dataBytes: [UInt8] {
