@@ -21,7 +21,7 @@ class ControllerHandler: HandlerWithTimer {
 		self.messageHandler = messageHandler
 	}
 	
-	final override func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+	final override func channelRead(context: ChannelHandlerContext, data: NIOAny) {
 		var envelope = unwrapInboundIn(data)
 		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
 
@@ -102,7 +102,7 @@ public class Controller {
 		initializer(messageHandler)
 		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
-			.channelInitializer { $0.pipeline.add(handler: tempHandler) }
+			.channelInitializer { $0.pipeline.addHandler(tempHandler) }
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
 	}
 	

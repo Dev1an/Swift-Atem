@@ -38,7 +38,7 @@ struct AtemType: Serializable {
 	
 	init(with bytes: ArraySlice<UInt8>) throws {
 		// Stores the string constructed from the first non-zero bytes
-		if let string = String(bytes: bytes.prefix(upTo: bytes.index {$0==0} ?? 44), encoding: .utf8) {
+		if let string = String(bytes: bytes.prefix(upTo: bytes.firstIndex {$0==0} ?? 44), encoding: .utf8) {
 			self.string = string
 		} else {
 			throw MessageError.titleNotDeserializable
@@ -127,7 +127,7 @@ public struct Topology: Serializable {
 			"digitalVideoEffects": digitalVideoEffects,
 			"superSources": superSources,
 			"standardDefinitionOutput": standardDefinitionOutput
-			] as DictionaryLiteral ).map{"\t\($0): \($1),"}.joined(separator: "\n") + "\n)"
+			] as KeyValuePairs ).map{"\t\($0): \($1),"}.joined(separator: "\n") + "\n)"
 	}
 	
 }
@@ -489,25 +489,25 @@ extension VideoSource {
 			
 			let shortName = optionalShortName ?? String(longName.prefix(4))
 			let encodedShortName = try encodeAtem(string: shortName, length: PropertiesChanged.shortNameLength)
-			
-			
-			dataBytes =
-				source.rawValue.bytes +
-				encodedLongName +
-				encodedShortName +
-				[
-					0x01,
-					externalInterfaces.rawValue,
-					0x01
-				] +
-				kind.rawValue.bytes +
-				[
-					0x00,
-					availability.rawValue,
-					mixEffects.rawValue,
-					0x1f,
-					0x03
-				]
+
+			var temp = source.rawValue.bytes
+			temp += encodedLongName
+			temp += encodedShortName
+			temp += [
+				0x01,
+				externalInterfaces.rawValue,
+				0x01
+			]
+			temp += kind.rawValue.bytes
+			temp += [
+				0x00,
+				availability.rawValue,
+				mixEffects.rawValue,
+				0x1f,
+				0x03
+			]
+
+			dataBytes = temp
 		}
 		
 		public var debugDescription: String {

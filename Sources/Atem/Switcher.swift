@@ -24,7 +24,7 @@ class SwitcherHandler: HandlerWithTimer {
 		messageHandler = handler
 	}
 		
-	final override func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+	final override func channelRead(context: ChannelHandlerContext, data: NIOAny) {
 		var envelope = unwrapInboundIn(data)
 		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
 		
@@ -38,9 +38,9 @@ class SwitcherHandler: HandlerWithTimer {
 				connectionIdUpgrades[UInt16(from: packet.connectionUID)] = newId | 0b1000_0000_0000_0000
 			}
 			let initiationPacket = SerialPacket.connectToController(oldUid: packet.connectionUID, newUid: newId.bytes, type: .connect)
-			let data = encode(bytes: initiationPacket.bytes, for: envelope.remoteAddress, in: ctx)
-			ctx.write(data, promise: nil)
-			ctx.flush()
+			let data = encode(bytes: initiationPacket.bytes, for: envelope.remoteAddress, in: context)
+			context.write(data, promise: nil)
+			context.flush()
 		} else if let newId = connectionIdUpgrades[UInt16(from: packet.connectionUID)] {
 			let newConnection = ConnectionState(id: newId.bytes[0...])
 			for message in initialMessages {
@@ -117,7 +117,7 @@ public class Switcher {
 		initializer(messageHandler)
 		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
-			.channelInitializer { $0.pipeline.add(handler: handler) }
+			.channelInitializer { $0.pipeline.addHandler(handler) }
 			.bind(host: "0.0.0.0", port: 9910)
 	}
 	

@@ -15,13 +15,13 @@ class HandlerWithTimer: ChannelInboundHandler {
 
 	var nextKeepAliveTask: Scheduled<Void>?
 
-	func channelActive(ctx: ChannelHandlerContext) {
-		startLoop(in: ctx)
+	func channelActive(context: ChannelHandlerContext) {
+		startLoop(in: context)
 	}
 	
-	func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {}
+	func channelRead(context: ChannelHandlerContext, data: NIOAny) {}
 	
-	func channelInactive(ctx: ChannelHandlerContext) {
+	func channelInactive(context: ChannelHandlerContext) {
 		nextKeepAliveTask?.cancel()
 	}
 	
@@ -36,7 +36,7 @@ class HandlerWithTimer: ChannelInboundHandler {
 
 	final func encode(bytes: [UInt8], for client: SocketAddress, in context: ChannelHandlerContext) -> NIOAny {
 		var buffer = context.channel.allocator.buffer(capacity: bytes.count)
-		buffer.write(bytes: bytes)
+		buffer.writeBytes(bytes)
 		return wrapOutboundOut(AddressedEnvelope(remoteAddress: client, data: buffer))
 	}
 }
