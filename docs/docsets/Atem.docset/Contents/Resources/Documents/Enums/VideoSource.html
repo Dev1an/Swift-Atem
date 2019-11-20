@@ -14,7 +14,7 @@
     <a title="VideoSource Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Atem Docs</a> (59% documented)</p>
+        <p><a href="../index.html">Atem Docs</a> (53% documented)</p>
         <p class="header-right"><a href="https://github.com/Dev1an/Swift-Atem"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -52,7 +52,25 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Enums/AtemSize.html">AtemSize</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/VideoSource.html">VideoSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/ExternalInterfaces.html">– ExternalInterfaces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/Availability.html">– Availability</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/MixEffects.html">– MixEffects</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/PropertiesChanged.html">– PropertiesChanged</a>
               </li>
             </ul>
           </li>
@@ -65,6 +83,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:4Atem06encodeA06string6lengthSays5UInt8VGSS_SitKF">encodeAtem(string:length:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -73,11 +99,20 @@
               <li class="nav-group-task">
                 <a href="../Protocols/Serializable.html">Serializable</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SingleValueDescribable.html">SingleValueDescribable</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AuxiliaryOutputChanged.html">AuxiliaryOutputChanged</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChangeAuxiliaryOutput.html">ChangeAuxiliaryOutput</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Structs/ChangePreviewBus.html">ChangePreviewBus</a>
               </li>
@@ -86,6 +121,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ChangeTransitionPosition.html">ChangeTransitionPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DoCut.html">DoCut</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/InitiationComplete.html">InitiationComplete</a>
@@ -115,6 +153,9 @@
                 <a href="../Structs/ProgramBusChanged.html">ProgramBusChanged</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ProtocolVersion.html">ProtocolVersion</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SourceTallies.html">SourceTallies</a>
               </li>
               <li class="nav-group-task">
@@ -136,7 +177,7 @@
             <h1>VideoSource</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">VideoSource</span><span class="p">:</span> <span class="kt">RawRepresentable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">VideoSource</span> <span class="p">:</span> <span class="kt">RawRepresentable</span></code></pre>
 
                 </div>
               </div>
@@ -149,9 +190,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s16RawRepresentableP0A5Value"></a>
+                    <a name="/s:SY8RawValueQa"></a>
                     <a name="//apple_ref/swift/Alias/RawValue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s16RawRepresentableP0A5Value">RawValue</a>
+                    <a class="token" href="#/s:SY8RawValueQa">RawValue</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -170,7 +211,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -178,71 +219,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s16RawRepresentablePxSg0A5ValueQz03rawC0_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(rawValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s16RawRepresentablePxSg0A5ValueQz03rawC0_tcfc">init(rawValue:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">rawValue</span><span class="p">:</span> <span class="kt">UInt16</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L28-L66">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s16RawRepresentableP8rawValue0aD0Qzvp"></a>
-                    <a name="//apple_ref/swift/Property/rawValue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s16RawRepresentableP8rawValue0aD0Qzvp">rawValue</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rawValue</span><span class="p">:</span> <span class="kt">UInt16</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L68-L84">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:4Atem11VideoSourceO5blackA2CmF"></a>
+                    <a name="/s:4Atem11VideoSourceO5blackyA2CmF"></a>
                     <a name="//apple_ref/swift/Element/black" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO5blackA2CmF">black</a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO5blackyA2CmF">black</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -262,21 +241,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO5inputACs6UInt16VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/input" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO5inputACs6UInt16VcACmF">input</a>
+                    <a name="/s:4Atem11VideoSourceO5inputyACs6UInt16VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/input(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO5inputyACs6UInt16VcACmF">input(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -296,21 +271,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO9colorBarsA2CmF"></a>
+                    <a name="/s:4Atem11VideoSourceO9colorBarsyA2CmF"></a>
                     <a name="//apple_ref/swift/Element/colorBars" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO9colorBarsA2CmF">colorBars</a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO9colorBarsyA2CmF">colorBars</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -330,21 +301,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO5colorACs6UInt16VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/color" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO5colorACs6UInt16VcACmF">color</a>
+                    <a name="/s:4Atem11VideoSourceO5coloryACs6UInt16VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/color(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO5coloryACs6UInt16VcACmF">color(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -364,21 +331,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO11mediaPlayerACs6UInt16VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/mediaPlayer" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO11mediaPlayerACs6UInt16VcACmF">mediaPlayer</a>
+                    <a name="/s:4Atem11VideoSourceO11mediaPlayeryACs6UInt16VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/mediaPlayer(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO11mediaPlayeryACs6UInt16VcACmF">mediaPlayer(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -398,21 +361,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO14mediaPlayerKeyACs6UInt16VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/mediaPlayerKey" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO14mediaPlayerKeyACs6UInt16VcACmF">mediaPlayerKey</a>
+                    <a name="/s:4Atem11VideoSourceO14mediaPlayerKeyyACs6UInt16VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/mediaPlayerKey(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO14mediaPlayerKeyyACs6UInt16VcACmF">mediaPlayerKey(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -432,21 +391,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO7keyMaskACs6UInt16VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/keyMask" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO7keyMaskACs6UInt16VcACmF">keyMask</a>
+                    <a name="/s:4Atem11VideoSourceO7keyMaskyACs6UInt16VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/keyMask(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO7keyMaskyACs6UInt16VcACmF">keyMask(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -466,21 +421,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO17downStreamKeyMaskACs6UInt16VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/downStreamKeyMask" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO17downStreamKeyMaskACs6UInt16VcACmF">downStreamKeyMask</a>
+                    <a name="/s:4Atem11VideoSourceO17downStreamKeyMaskyACs6UInt16VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/downStreamKeyMask(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO17downStreamKeyMaskyACs6UInt16VcACmF">downStreamKeyMask(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -500,21 +451,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO05superC0A2CmF"></a>
+                    <a name="/s:4Atem11VideoSourceO05superC0yA2CmF"></a>
                     <a name="//apple_ref/swift/Element/superSource" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO05superC0A2CmF">superSource</a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO05superC0yA2CmF">superSource</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -534,21 +481,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO9cleanFeedACs6UInt16VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/cleanFeed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO9cleanFeedACs6UInt16VcACmF">cleanFeed</a>
+                    <a name="/s:4Atem11VideoSourceO9cleanFeedyACs6UInt16VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/cleanFeed(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO9cleanFeedyACs6UInt16VcACmF">cleanFeed(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -568,21 +511,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO9auxiliaryACs6UInt16VcACmF"></a>
-                    <a name="//apple_ref/swift/Element/auxiliary" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO9auxiliaryACs6UInt16VcACmF">auxiliary</a>
+                    <a name="/s:4Atem11VideoSourceO9auxiliaryyACs6UInt16VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/auxiliary(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO9auxiliaryyACs6UInt16VcACmF">auxiliary(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -602,21 +541,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO7programACs6UInt16V2me_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/program" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO7programACs6UInt16V2me_tcACmF">program</a>
+                    <a name="/s:4Atem11VideoSourceO7programyACs6UInt16V_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/program(me:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO7programyACs6UInt16V_tcACmF">program(me:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -636,21 +571,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem11VideoSourceO7previewACs6UInt16V2me_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/preview" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem11VideoSourceO7previewACs6UInt16V2me_tcACmF">preview</a>
+                    <a name="/s:4Atem11VideoSourceO7previewyACs6UInt16V_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/preview(me:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO7previewyACs6UInt16V_tcACmF">preview(me:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -670,21 +601,17 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s8HashableP9hashValueSivp"></a>
-                    <a name="//apple_ref/swift/Property/hashValue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s8HashableP9hashValueSivp">hashValue</a>
+                    <a name="/s:SY8rawValuexSg03RawB0Qz_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(rawValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SY8rawValuexSg03RawB0Qz_tcfc">init(rawValue:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -698,12 +625,233 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hashValue</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">rawValue</span><span class="p">:</span> <span class="kt">UInt16</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/VideoSource.swift#L116-L118">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L28-L66">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:SY8rawValue03RawB0Qzvp"></a>
+                    <a name="//apple_ref/swift/Property/rawValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SY8rawValue03RawB0Qzvp">rawValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rawValue</span><span class="p">:</span> <span class="kt">UInt16</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L68-L84">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem11VideoSourceO4KindO"></a>
+                    <a name="//apple_ref/swift/Enum/Kind" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO4KindO">Kind</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of video source</p>
+
+                        <a href="../Enums/VideoSource/Kind.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Kind</span> <span class="p">:</span> <span class="kt">UInt16</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L115-L133">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem11VideoSourceO18ExternalInterfacesV"></a>
+                    <a name="//apple_ref/swift/Struct/ExternalInterfaces" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO18ExternalInterfacesV">ExternalInterfaces</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Enums/VideoSource/ExternalInterfaces.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ExternalInterfaces</span> <span class="p">:</span> <span class="kt">OptionSet</span><span class="p">,</span> <span class="kt"><a href="../Protocols/SingleValueDescribable.html">SingleValueDescribable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L135-L159">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem11VideoSourceO12AvailabilityV"></a>
+                    <a name="//apple_ref/swift/Struct/Availability" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO12AvailabilityV">Availability</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Enums/VideoSource/Availability.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Availability</span> <span class="p">:</span> <span class="kt">OptionSet</span><span class="p">,</span> <span class="kt"><a href="../Protocols/SingleValueDescribable.html">SingleValueDescribable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L161-L183">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem11VideoSourceO10MixEffectsV"></a>
+                    <a name="//apple_ref/swift/Struct/MixEffects" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO10MixEffectsV">MixEffects</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Enums/VideoSource/MixEffects.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MixEffects</span> <span class="p">:</span> <span class="kt">OptionSet</span><span class="p">,</span> <span class="kt"><a href="../Protocols/SingleValueDescribable.html">SingleValueDescribable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L185-L203">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem11VideoSourceO17PropertiesChangedV"></a>
+                    <a name="//apple_ref/swift/Struct/PropertiesChanged" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem11VideoSourceO17PropertiesChangedV">PropertiesChanged</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The properties (like name and port types) of a video source</p>
+
+                        <a href="../Enums/VideoSource/PropertiesChanged.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PropertiesChanged</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Serializable.html">Serializable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/MessageTypes.swift#L476-L548">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:SH9hashValueSivp"></a>
+                    <a name="//apple_ref/swift/Property/hashValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SH9hashValueSivp">hashValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hashValue</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/VideoSource.swift#L208-L210">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -713,8 +861,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-19)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -10,10 +10,11 @@
     
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Atem Docs</a> (59% documented)</p>
+        <p><a href="index.html">Atem Docs</a> (53% documented)</p>
         <p class="header-right"><a href="https://github.com/Dev1an/Swift-Atem"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -51,7 +52,25 @@
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Enums/AtemSize.html">AtemSize</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/VideoSource.html">VideoSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/VideoSource/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/VideoSource/ExternalInterfaces.html">– ExternalInterfaces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/VideoSource/Availability.html">– Availability</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/VideoSource/MixEffects.html">– MixEffects</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/VideoSource/PropertiesChanged.html">– PropertiesChanged</a>
               </li>
             </ul>
           </li>
@@ -64,6 +83,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:4Atem06encodeA06string6lengthSays5UInt8VGSS_SitKF">encodeAtem(string:length:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -72,11 +99,20 @@
               <li class="nav-group-task">
                 <a href="Protocols/Serializable.html">Serializable</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SingleValueDescribable.html">SingleValueDescribable</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/AuxiliaryOutputChanged.html">AuxiliaryOutputChanged</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ChangeAuxiliaryOutput.html">ChangeAuxiliaryOutput</a>
+              </li>
               <li class="nav-group-task">
                 <a href="Structs/ChangePreviewBus.html">ChangePreviewBus</a>
               </li>
@@ -85,6 +121,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ChangeTransitionPosition.html">ChangeTransitionPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DoCut.html">DoCut</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/InitiationComplete.html">InitiationComplete</a>
@@ -112,6 +151,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ProgramBusChanged.html">ProgramBusChanged</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProtocolVersion.html">ProtocolVersion</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SourceTallies.html">SourceTallies</a>
@@ -172,7 +214,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/Controller.swift#L82-L122">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/Controller.swift#L82-L122">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -194,19 +236,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A utility to interprete incoming messages and call the registered handlers and to send back the responses provided by the handlers. For more information on how to register handlers see <code><a href="Classes/MessageHandlerBase.html#/s:4Atem18MessageHandlerBaseC4whenyxqd__cAA0B0Rd__lF">MessageHandlerBase.when(...)</a></code>. This class is similar to <code><a href="Classes.html#/s:4Atem14MessageHandlerC">MessageHandler</a></code>. The difference here is that the registered handlers should return zero or more (<code><a href="Protocols/Serializable.html">Serializable</a></code>) responses for each incoming <code><a href="Protocols/Message.html">Message</a></code>.</p>
+                        <p>A utility to interprete incoming messages and call the registered handlers and to send back the responses provided by the handlers. For more information on how to register handlers see <code><a href="Classes/MessageHandlerBase.html#/s:4Atem18MessageHandlerBaseC4whenyyxqd__cAA0B0Rd__lF">MessageHandlerBase.when(...)</a></code>. This class is similar to <code><a href="Classes.html#/s:4Atem14MessageHandlerC">MessageHandler</a></code>. The difference here is that the registered handlers should return zero or more (<code><a href="Protocols/Serializable.html">Serializable</a></code>) responses for each incoming <code><a href="Protocols/Message.html">Message</a></code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RespondingMessageHandler</span><span class="p">:</span> <span class="kt"><a href="Classes/MessageHandlerBase.html">MessageHandlerBase</a></span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="Protocols/Serializable.html">Serializable</a></span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RespondingMessageHandler</span> <span class="p">:</span> <span class="kt"><a href="Classes/MessageHandlerBase.html">MessageHandlerBase</a></span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="Protocols/Serializable.html">Serializable</a></span><span class="p">]</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageHandler.swift#L10-L20">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/MessageHandler.swift#L10-L20">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -224,19 +266,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A utility that interprets incoming messages and calls the registered handlers. For more information on how to register handlers see <code><a href="Classes/MessageHandlerBase.html#/s:4Atem18MessageHandlerBaseC4whenyxqd__cAA0B0Rd__lF">MessageHandlerBase.when(...)</a></code></p>
+                        <p>A utility that interprets incoming messages and calls the registered handlers. For more information on how to register handlers see <code><a href="Classes/MessageHandlerBase.html#/s:4Atem18MessageHandlerBaseC4whenyyxqd__cAA0B0Rd__lF">MessageHandlerBase.when(...)</a></code></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MessageHandler</span><span class="p">:</span> <span class="kt"><a href="Classes/MessageHandlerBase.html">MessageHandlerBase</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MessageHandler</span> <span class="p">:</span> <span class="kt"><a href="Classes/MessageHandlerBase.html">MessageHandlerBase</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageHandler.swift#L23-L31">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/MessageHandler.swift#L23-L31">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -267,7 +309,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageHandler.swift#L34-L66">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/MessageHandler.swift#L34-L66">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -309,7 +351,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/Switcher.swift#L106-L127">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/Switcher.swift#L106-L127">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -319,8 +361,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-19)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

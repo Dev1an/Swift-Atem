@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Topology Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Topology" class="dashAnchor"></a>
+    <a title="Topology Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Atem Docs</a> (59% documented)</p>
+        <p class="header-right"><a href="https://github.com/Dev1an/Swift-Atem"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Atem Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Topology Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Controller.html">Controller</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:4Atem14MessageHandlerC">MessageHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageHandlerBase.html">MessageHandlerBase</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:4Atem24RespondingMessageHandlerC">RespondingMessageHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Switcher.html">Switcher</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource.html">VideoSource</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Message.html">Message</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Serializable.html">Serializable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/ChangePreviewBus.html">ChangePreviewBus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChangeProgramBus.html">ChangeProgramBus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChangeTransitionPosition.html">ChangeTransitionPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/InitiationComplete.html">InitiationComplete</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockChange.html">LockChange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockObtained.html">LockObtained</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockPositionRequest.html">LockPositionRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LockRequest.html">LockRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageTitle.html">MessageTitle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NewTimecode.html">NewTimecode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PreviewBusChanged.html">PreviewBusChanged</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProgramBusChanged.html">ProgramBusChanged</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceTallies.html">SourceTallies</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TallyLight.html">TallyLight</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Topology.html">Topology</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TransitionPositionChanged.html">TransitionPositionChanged</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Topology</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Topology</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Serializable.html">Serializable</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>The resources of an atem</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem7MessageP5titleAA0B5TitleVvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/title" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem7MessageP5titleAA0B5TitleVvpZ">title</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">title</span> <span class="o">=</span> <span class="kt"><a href="../Structs/MessageTitle.html">MessageTitle</a></span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"_top"</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L28">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV14mixEffectBankss5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/mixEffectBanks" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV14mixEffectBankss5UInt8Vvp">mixEffectBanks</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">mixEffectBanks</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV7sourcess5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/sources" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV7sourcess5UInt8Vvp">sources</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">sources</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV15colorGeneratorss5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/colorGenerators" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV15colorGeneratorss5UInt8Vvp">colorGenerators</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">colorGenerators</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV15auxiliaryBussess5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/auxiliaryBusses" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV15auxiliaryBussess5UInt8Vvp">auxiliaryBusses</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">auxiliaryBusses</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV16downstreamKeyerss5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/downstreamKeyers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV16downstreamKeyerss5UInt8Vvp">downstreamKeyers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">downstreamKeyers</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV8stingerss5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/stingers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV8stingerss5UInt8Vvp">stingers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">stingers</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV19digitalVideoEffectss5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/digitalVideoEffects" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV19digitalVideoEffectss5UInt8Vvp">digitalVideoEffects</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">digitalVideoEffects</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV12superSourcess5UInt8Vvp"></a>
+                    <a name="//apple_ref/swift/Property/superSources" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV12superSourcess5UInt8Vvp">superSources</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">superSources</span><span class="p">:</span> <span class="kt">UInt8</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyV24standardDefinitionOutputSbvp"></a>
+                    <a name="//apple_ref/swift/Property/standardDefinitionOutput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyV24standardDefinitionOutputSbvp">standardDefinitionOutput</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">standardDefinitionOutput</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem7MessagePxs10ArraySliceVys5UInt8VG4with_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem7MessagePxs10ArraySliceVys5UInt8VG4with_tKcfc">init(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">with</span> <span class="nv">bytes</span><span class="p">:</span> <span class="kt">ArraySlice</span><span class="o">&lt;</span><span class="kt">UInt8</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L82-L92">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem8TopologyVACs5UInt8V14mixEffectBanks_AE7sourcesAE15colorGeneratorsAE15auxiliaryBussesAE16downstreamKeyersAE8stingersAE19digitalVideoEffectsAE12superSourcesSb24standardDefinitionOutputtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(mixEffectBanks:sources:colorGenerators:auxiliaryBusses:downstreamKeyers:stingers:digitalVideoEffects:superSources:standardDefinitionOutput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8TopologyVACs5UInt8V14mixEffectBanks_AE7sourcesAE15colorGeneratorsAE15auxiliaryBussesAE16downstreamKeyersAE8stingersAE19digitalVideoEffectsAE12superSourcesSb24standardDefinitionOutputtcfc">init(mixEffectBanks:sources:colorGenerators:auxiliaryBusses:downstreamKeyers:stingers:digitalVideoEffects:superSources:standardDefinitionOutput:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">mixEffectBanks</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span>
+	 <span class="nv">sources</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span>
+	 <span class="nv">colorGenerators</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span>
+	 <span class="nv">auxiliaryBusses</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span>
+	 <span class="nv">downstreamKeyers</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span>
+	 <span class="nv">stingers</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span>
+	 <span class="nv">digitalVideoEffects</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span>
+	 <span class="nv">superSources</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span>
+	 <span class="nv">standardDefinitionOutput</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L94-L113">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem12SerializableP9dataBytesSays5UInt8VGvp"></a>
+                    <a name="//apple_ref/swift/Property/dataBytes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem12SerializableP9dataBytesSays5UInt8VGvp">dataBytes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dataBytes</span><span class="p">:</span> <span class="p">[</span><span class="kt">UInt8</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L115-L117">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s28CustomDebugStringConvertibleP16debugDescriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/debugDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s28CustomDebugStringConvertibleP16debugDescriptionSSvp">debugDescription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debugDescription</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/4d3d7bbfbc9ef227ae55bd7ee0c24c7f10f7a2a2/Sources/Atem/MessageTypes.swift#L119-L131">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
