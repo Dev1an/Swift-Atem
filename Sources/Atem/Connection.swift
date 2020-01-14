@@ -1,6 +1,6 @@
 import Foundation
 
-#if os(macOS)
+#if os(macOS) || os(iOS)
 let random = arc4random
 #endif
 
