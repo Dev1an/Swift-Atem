@@ -12,6 +12,7 @@ enum MessageError: Error {
 	case serialising
 	case stringTooLong(String, Int)
 	case titleNotDeserializable
+	case unknownModel(UInt8)
 	
 	var localizedDescription: String {
 		switch self {
@@ -21,6 +22,8 @@ enum MessageError: Error {
 			return "MessageError: Unable to serialise '\(string)' because it's too long, max length is: \(maxLength) bytes"
 		case .serialising:
 			return "MessageError: serialising"
+		case .unknownModel(let modelNumber):
+			return "Message error: unknown model \(modelNumber)"
 		}
 	}
 }

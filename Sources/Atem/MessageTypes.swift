@@ -32,36 +32,48 @@ public struct ProtocolVersion: Serializable {
 }
 
 /// The type of atem
-struct AtemType: Serializable {
-	static let title = MessageTitle(string: "_pin")
-	let string: String
+public struct ProductInfo: Serializable {
+	public static let title = MessageTitle(string: "_pin")
+	static let namePosition = 0..<40
+	static let tooLongNameCount = Self.namePosition.count + 1
+	static let truncationDots = Array("...".utf8)
+	static let modelPosition = 40
+
+	let name: String
+	let model: Model
 	
-	init(with bytes: ArraySlice<UInt8>) throws {
+	public init(with bytes: ArraySlice<UInt8>) throws {
 		// Stores the string constructed from the first non-zero bytes
-		if let string = String(bytes: bytes.prefix(upTo: bytes.firstIndex {$0==0} ?? 44), encoding: .utf8) {
-			self.string = string
-		} else {
+		guard let string = String(bytes: bytes.prefix(upTo: bytes[Self.namePosition].firstIndex {$0==0} ?? 40), encoding: .utf8) else {
 			throw MessageError.titleNotDeserializable
 		}
-	}
-	
-	init(string: String) {
-		if string.count > 44 {
-			self.string = String(string[..<string.index(string.startIndex, offsetBy: 44)])
-		} else {
-			self.string = string
+		let modelNumber = bytes[Self.modelPosition]
+		guard let model = Model(rawValue: modelNumber) else {
+			throw MessageError.unknownModel(modelNumber)
 		}
+		self.name = string
+		self.model = model
 	}
 	
-	var dataBytes: [UInt8] {
-		switch string.count {
-		case 44: return Array(string.utf8)
-		default: return Array(string.utf8) + Array(repeating: UInt8(0), count: 44 - string.count)
+	public init(name: String, model: Model) {
+		self.name = name
+		self.model = model
+	}
+	
+	public var dataBytes: [UInt8] {
+		let binaryString = Array(name.utf8).prefix(Self.tooLongNameCount)
+		let fixedString: [UInt8]
+		switch binaryString.count {
+		case Self.tooLongNameCount... :
+			fixedString = binaryString.prefix(Self.namePosition.upperBound - Self.truncationDots.count) + Self.truncationDots
+		default:
+			fixedString = binaryString + Array(repeating: UInt8(0), count: Self.namePosition.count - binaryString.count)
 		}
+		return fixedString + [model.rawValue, 0, 0, 0]
 	}
 	
-	var debugDescription: String {
-		return string
+	public var debugDescription: String {
+		return name
 	}
 }
 
