@@ -454,6 +454,7 @@ class Atem_Tests: XCTestCase {
 				return [PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect)]
 			}
 			handler.when{ (change: ChangeProgramBus) in
+				group.leave()
 				return [ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect)]
 			}
 			handler.when { (change: ChangeTransitionPosition) in

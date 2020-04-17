@@ -19,7 +19,7 @@ public struct TallyLight: OptionSet, CustomDebugStringConvertible {
 		self.rawValue = rawValue
 	}
 	
-	public static let     off = TallyLight(rawValue: 0)
+	public static let     off = TallyLight([])
 	public static let program = TallyLight(rawValue: 1)
 	public static let preview = TallyLight(rawValue: 2)
 	

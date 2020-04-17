@@ -31,4 +31,4 @@ let switcher = try Switcher { handler in
 
 print(switcher)
 dispatchMain()
-print(switcher)
+//print(switcher)

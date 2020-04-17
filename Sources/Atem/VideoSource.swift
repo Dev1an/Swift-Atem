@@ -144,7 +144,7 @@ public enum VideoSource: RawRepresentable {
 		public static let component = ExternalInterfaces(rawValue: 1 << 3)
 		public static let sVideo =    ExternalInterfaces(rawValue: 1 << 4)
 		
-		public static let none = ExternalInterfaces(rawValue: 0)
+		public static let none = ExternalInterfaces([])
 		
 		public func describe() -> String? {
 			switch self {
@@ -191,7 +191,7 @@ public enum VideoSource: RawRepresentable {
 		public static let me1AndFillSources = MixEffects(rawValue: 1 << 0)
 		public static let me2AndFillSources = MixEffects(rawValue: 1 << 1)
 
-		public static let none = MixEffects(rawValue: 0)
+		public static let none = MixEffects([])
 		
 		public func describe() -> String? {
 			switch self {
