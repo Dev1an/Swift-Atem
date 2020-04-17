@@ -5,7 +5,9 @@
 //  Created by Damiaan on 17/04/2020.
 //
 
+/// Atem model number
 public enum Model: UInt8 {
+	/// Television studio
 	case tvStudio = 1
 	case oneME
 	case twoME

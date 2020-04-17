@@ -31,7 +31,7 @@ public struct ProtocolVersion: Serializable {
 	public var debugDescription: String { return "Version: \(major).\(minor)"}
 }
 
-/// The type of atem
+/// Information about the ATEM product
 public struct ProductInfo: Serializable {
 	public static let title = MessageTitle(string: "_pin")
 	static let namePosition = 0..<40
@@ -39,15 +39,17 @@ public struct ProductInfo: Serializable {
 	static let truncationDots = Array("...".utf8)
 	static let modelPosition = 40
 
+	/// The name of the product
 	let name: String
+	/// The model of the product
 	let model: Model
 	
 	public init(with bytes: ArraySlice<UInt8>) throws {
 		// Stores the string constructed from the first non-zero bytes
-		guard let string = String(bytes: bytes.prefix(upTo: bytes[Self.namePosition].firstIndex {$0==0} ?? 40), encoding: .utf8) else {
+		guard let string = String(bytes: bytes.prefix(upTo: bytes[relative: Self.namePosition].firstIndex {$0==0} ?? 40), encoding: .utf8) else {
 			throw MessageError.titleNotDeserializable
 		}
-		let modelNumber = bytes[Self.modelPosition]
+		let modelNumber = bytes[relative: Self.modelPosition]
 		guard let model = Model(rawValue: modelNumber) else {
 			throw MessageError.unknownModel(modelNumber)
 		}
