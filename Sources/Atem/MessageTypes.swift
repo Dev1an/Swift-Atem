@@ -87,7 +87,7 @@ public struct ProductInfo: Serializable {
 public struct Topology: Serializable {
 	public static let title = MessageTitle(string: "_top")
 	
-	public let mixEffectBanks: UInt8
+	public let mixEffectBlocks: UInt8
 	public let sources: UInt8
 	public let auxiliaryBusses: UInt8
 	/// Number of downstream keyers. Tested using simulator and v8.2.1
@@ -115,7 +115,7 @@ public struct Topology: Serializable {
 	public let unknownC: [UInt8]
 
 	public init(with bytes: ArraySlice<UInt8>) {
-		mixEffectBanks      = bytes[relative: 0]
+		mixEffectBlocks      = bytes[relative: 0]
 		sources             = bytes[relative: 1]
 		downstreamKeyers    = bytes[relative: 2]
 		auxiliaryBusses     = bytes[relative: 3]
@@ -129,7 +129,7 @@ public struct Topology: Serializable {
 		unknownC            = Array(bytes[relative: 11..<28 ])
 	}
 	
-	public init(mixEffectBanks: UInt8,
+	public init(mixEffectBlocks: UInt8,
 		 sources: UInt8,
 		 downstreamKeyers: UInt8,
 		 auxiliaryBusses: UInt8,
@@ -142,7 +142,7 @@ public struct Topology: Serializable {
 		 stingers: UInt8,
 		 unknownC: [UInt8]) {
 		
-		self.mixEffectBanks           = mixEffectBanks
+		self.mixEffectBlocks          = mixEffectBlocks
 		self.sources                  = sources
 		self.downstreamKeyers         = downstreamKeyers
 		self.auxiliaryBusses          = auxiliaryBusses
@@ -157,12 +157,12 @@ public struct Topology: Serializable {
 	}
 	
 	public var dataBytes: [UInt8] {
-		return [mixEffectBanks, sources, downstreamKeyers, auxiliaryBusses, mixMinusOutputs, mediaPlayers, unknownA, serialPorts, maxHyperdecks, unknownB, stingers] + unknownC
+		return [mixEffectBlocks, sources, downstreamKeyers, auxiliaryBusses, mixMinusOutputs, mediaPlayers, unknownA, serialPorts, maxHyperdecks, unknownB, stingers] + unknownC
 	}
 	
 	public var debugDescription: String {
 		return "Topology(\n" + ([
-			"mixEffectBanks": mixEffectBanks,
+			"mixEffectBlocks": mixEffectBlocks,
 			"sources": sources,
 			"auxiliaryBusses": auxiliaryBusses,
 			"downstreamKeyers": downstreamKeyers,
