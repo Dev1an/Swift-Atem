@@ -79,68 +79,93 @@ public struct ProductInfo: Serializable {
 	}
 }
 
-/// The resources of an atem
+/// The topology of an atem describes all its resources: inputs, outputs, generators, etc.
+///
+/// References:
+///  - [Norwegian government-owned radio and television public broadcasting company](https://github.com/nrkno/tv-automation-atem-connection/issues/79)
+///  - [Qt ATEM protocol implementation](https://github.com/petersimonsson/libqatemcontrol/blob/master/qatemconnection.cpp)
 public struct Topology: Serializable {
 	public static let title = MessageTitle(string: "_top")
 	
 	public let mixEffectBanks: UInt8
 	public let sources: UInt8
-	public let colorGenerators: UInt8
 	public let auxiliaryBusses: UInt8
+	/// Number of downstream keyers. Tested using simulator and v8.2.1
 	public let downstreamKeyers: UInt8
+	public let mixMinusOutputs: UInt8
+	/// Number of media players. Tested using simulator and v8.2.1
+	public let mediaPlayers: UInt8
+	/// Maximum number of linked hyperdecks. Tested using simulator and v8.2.1
+	public let maxHyperdecks: UInt8
+	/// Number of serial ports.
+	///
+	/// Tested using v8.2.1 and the simulator: When changing this value the tab "Remote" in the settings pane of the official "ATEM Software control" changes
+	///  - when `0`: the "*use RS422 control port to*" radio buttons are **disabled**
+	///  - when `1`: the "*use RS422 control port to*" radio buttons are **enabled**
+	public let serialPorts: UInt8
+	public let unknownA: UInt8
+	/// Unknown property, it might be the number of *Digital Video Effects* aka *DVE*s
+	public let unknownB: UInt8
+	/// Number of stingers.
+	///
+	/// Tested using v8.2.1 and the simulator: When changing this value, the *STING* button under *Transition Style* of the official "ATEM Software control" changes
+	///  - when `0`: the *STING* button is **disabled**
+	///  - when `1`: the *STING* button is **enabled**
 	public let stingers: UInt8
-	public let digitalVideoEffects: UInt8
-	public let superSources: UInt8
-	public let standardDefinitionOutput: Bool
-	
+	public let unknownC: [UInt8]
+
 	public init(with bytes: ArraySlice<UInt8>) {
-		mixEffectBanks      = bytes[bytes.startIndex    ]
-		sources             = bytes[bytes.startIndex + 1]
-		colorGenerators     = bytes[bytes.startIndex + 2]
-		auxiliaryBusses     = bytes[bytes.startIndex + 3]
-		downstreamKeyers    = bytes[bytes.startIndex + 4]
-		stingers            = bytes[bytes.startIndex + 5]
-		digitalVideoEffects = bytes[bytes.startIndex + 6]
-		superSources        = bytes[bytes.startIndex + 7]
-		standardDefinitionOutput = bytes[bytes.startIndex + 9].firstBit
+		mixEffectBanks      = bytes[relative: 0]
+		sources             = bytes[relative: 1]
+		downstreamKeyers    = bytes[relative: 2]
+		auxiliaryBusses     = bytes[relative: 3]
+		mixMinusOutputs     = bytes[relative: 4]
+		mediaPlayers        = bytes[relative: 5]
+		unknownA            = bytes[relative: 6]
+		serialPorts         = bytes[relative: 7]
+		maxHyperdecks       = bytes[relative: 8]
+		unknownB            = bytes[relative: 9]
+		stingers            = bytes[relative: 10]
+		unknownC            = Array(bytes[relative: 11..<28 ])
 	}
 	
 	public init(mixEffectBanks: UInt8,
 		 sources: UInt8,
-		 colorGenerators: UInt8,
-		 auxiliaryBusses: UInt8,
 		 downstreamKeyers: UInt8,
+		 auxiliaryBusses: UInt8,
+		 mixMinusOutputs: UInt8,
+		 mediaPlayers: UInt8,
+		 unknownA: UInt8,
+		 serialPorts: UInt8,
+		 maxHyperdecks: UInt8,
+		 unknownB: UInt8,
 		 stingers: UInt8,
-		 digitalVideoEffects: UInt8,
-		 superSources: UInt8,
-		 standardDefinitionOutput: Bool) {
+		 unknownC: [UInt8]) {
 		
 		self.mixEffectBanks           = mixEffectBanks
 		self.sources                  = sources
-		self.colorGenerators          = colorGenerators
-		self.auxiliaryBusses          = auxiliaryBusses
 		self.downstreamKeyers         = downstreamKeyers
+		self.auxiliaryBusses          = auxiliaryBusses
+		self.mixMinusOutputs          = mixMinusOutputs
+		self.mediaPlayers             = mediaPlayers
+		self.unknownA                 = unknownA
+		self.serialPorts              = serialPorts
+		self.maxHyperdecks            = maxHyperdecks
+		self.unknownB                 = unknownB
 		self.stingers                 = stingers
-		self.digitalVideoEffects      = digitalVideoEffects
-		self.superSources             = superSources
-		self.standardDefinitionOutput = standardDefinitionOutput
+		self.unknownC                 = unknownC
 	}
 	
 	public var dataBytes: [UInt8] {
-		return [mixEffectBanks, sources, colorGenerators, auxiliaryBusses, downstreamKeyers, stingers, digitalVideoEffects, superSources, 0, standardDefinitionOutput ? 1:0, 0]
+		return [mixEffectBanks, sources, downstreamKeyers, auxiliaryBusses, mixMinusOutputs, mediaPlayers, unknownA, serialPorts, maxHyperdecks, unknownB, stingers] + unknownC
 	}
 	
 	public var debugDescription: String {
 		return "Topology(\n" + ([
 			"mixEffectBanks": mixEffectBanks,
 			"sources": sources,
-			"colorGenerators": colorGenerators,
 			"auxiliaryBusses": auxiliaryBusses,
 			"downstreamKeyers": downstreamKeyers,
-			"stingers": stingers,
-			"digitalVideoEffects": digitalVideoEffects,
-			"superSources": superSources,
-			"standardDefinitionOutput": standardDefinitionOutput
 			] as KeyValuePairs ).map{"\t\($0): \($1),"}.joined(separator: "\n") + "\n)"
 	}
 	
