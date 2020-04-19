@@ -42,7 +42,6 @@ extension ArraySlice {
 	subscript<R: AdvancableRange>(relative range: R) -> SubSequence where R.Bound == Index {
 		return self[range.advanced(by: startIndex)]
 	}
-
 }
 
 protocol AdvancableRange: RangeExpression where Bound: Strideable {
