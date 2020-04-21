@@ -42,9 +42,13 @@ public protocol Message: CustomDebugStringConvertible {
 
 extension Message {
 	static func prefix() -> [UInt8] { return title.number.bytes }
-	func execute<T>(_ unknownHandler: Any) -> T {
-		let handler = unknownHandler as! (Self)->T
+	func execute(_ unknownHandler: Any) {
+		let handler = unknownHandler as! (Self)->Void
 		return handler(self)
+	}
+	func execute(_ unknownHandler: Any, in context: ContextualMessageHandler.Context) {
+		let handler = unknownHandler as! (Self, ContextualMessageHandler.Context)->Void
+		return handler(self, context)
 	}
 }
 

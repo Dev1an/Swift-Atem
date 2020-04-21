@@ -4,6 +4,9 @@ import Foundation
 let random = arc4random
 #endif
 
+public protocol Commander {
+	func send(_ message: Serializable)
+}
 
 /// Stores all relevant information to keep an ATEM connection alive.
 /// Use this store to interprete incoming packets and construct new outgoing packets.
@@ -107,5 +110,11 @@ class ConnectionState {
 		} else {
 			return [firstByte & 0b01111111, secondByte]
 		}
+	}
+}
+
+extension ConnectionState: Commander {
+	public func send(_ message: Serializable) {
+		send(message: message.serialize())
 	}
 }

@@ -18,9 +18,9 @@ class SwitcherHandler: HandlerWithTimer {
 	var clients = [UInt16: Client]()
 	var connectionIdUpgrades = [UInt16: UInt16]()
 	var outbox = [NIOAny]()
-	let messageHandler: RespondingMessageHandler
+	let messageHandler: ContextualMessageHandler
 	
-	init(handler: RespondingMessageHandler) {
+	init(handler: ContextualMessageHandler) {
 		messageHandler = handler
 	}
 		
@@ -53,20 +53,14 @@ class SwitcherHandler: HandlerWithTimer {
 			connectionIdUpgrades.removeValue(forKey: UInt16(from: packet.connectionUID))
 		} else if let client = clients[UInt16(from: packet.connectionUID)] {
 			do {
-				let responses = try messageHandler.handle(messages: client.state.parse(packet))
-				var buffer = [UInt8]()
-				for response in responses {
-					buffer.append(contentsOf: response.serialize())
-				}
-				for (_, client) in clients {
-					client.state.send(message: buffer)
-				}
+				try messageHandler.handle(messages: client.state.parse(packet), in: client.state)
 			} catch {
 				fatalError(error.localizedDescription)
 			}
 		}
 	}
-	
+
+	/// Queues a block of bytes to be sent to all connected controllers.
 	func send(message: [UInt8]) {
 		for (_, client) in clients {
 			client.state.send(message: message)
@@ -97,6 +91,16 @@ class SwitcherHandler: HandlerWithTimer {
 	}
 }
 
+extension SwitcherHandler: Commander {
+	/// Queues a message to be sent to all connected controllers.
+	///
+	/// The message will be serialized immediately into a byte array and appended to the outgoing buffer of all the connected controllers.
+	/// These buffers will be flushed after at most 20ms.
+	func send(_ message: Serializable) {
+		send(message: message.serialize())
+	}
+}
+
 
 /// An interface to
 ///  - process incoming commands received from one or more controllers
@@ -108,13 +112,13 @@ public class Switcher {
 	
 	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
 	public let channel: EventLoopFuture<Channel>
-	let messageHandler = RespondingMessageHandler()
+	let messageHandler = ContextualMessageHandler()
 	
 	/// Start a switcher endpoint that controllers can use to connect to.
-	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (RespondingMessageHandler)->Void) throws {
+	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (ContextualMessageHandler, Commander)->Void) throws {
 		eventLoop = eventLoopGroup
 		let handler = SwitcherHandler(handler: messageHandler)
-		initializer(messageHandler)
+		initializer(messageHandler, handler)
 		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer { $0.pipeline.addHandler(handler) }

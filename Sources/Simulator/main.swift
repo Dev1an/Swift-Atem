@@ -8,24 +8,24 @@
 import Atem
 import Dispatch
 
-let switcher = try Switcher { handler in
-    handler.when { (change: ChangePreviewBus) in
-        return [PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect)]
+let switcher = try Switcher { handler, allControllers in
+    handler.when { (change: ChangePreviewBus, _) in
+		allControllers.send(PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect))
     }
-    handler.when{ (change: ChangeProgramBus) in
-        return [ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect)]
-    }
-    handler.when { (change: ChangeTransitionPosition) in
-        return [
+    handler.when{ (change: ChangeProgramBus, _) in
+		allControllers.send(ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect))
+	}
+    handler.when { (change: ChangeTransitionPosition, _) in
+		allControllers.send(
             TransitionPositionChanged(
                 to: change.position,
                 remainingFrames: 250 - UInt8(change.position/40),
                 mixEffect: change.mixEffect
             )
-        ]
+        )
     }
-	handler.when { (change: ChangeAuxiliaryOutput) in
-		return [AuxiliaryOutputChanged(source: change.source, output: change.output)]
+	handler.when { (change: ChangeAuxiliaryOutput, _) in
+		allControllers.send(AuxiliaryOutputChanged(source: change.source, output: change.output))
 	}
 }
 

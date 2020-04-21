@@ -446,29 +446,28 @@ class Atem_Tests: XCTestCase {
 //	}
 
 	func testSimulator() {
-		print("why does this not work")
 		let group = DispatchGroup()
 		group.enter()
-		let switcher = try! Switcher { handler in
-			handler.when { (change: ChangePreviewBus) in
-				return [PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect)]
+		let switcher = try! Switcher { handler, allControllers in
+			handler.when { (change: ChangePreviewBus, _) in
+				allControllers.send(PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect))
 			}
-			handler.when{ (change: ChangeProgramBus) in
+			handler.when{ (change: ChangeProgramBus, _) in
 				group.leave()
-				return [ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect)]
+				allControllers.send(ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect))
 			}
-			handler.when { (change: ChangeTransitionPosition) in
-				return [
+			handler.when { (change: ChangeTransitionPosition, _) in
+				allControllers.send(
 					TransitionPositionChanged(
 						to: change.position,
 						remainingFrames: 250 - UInt8(change.position/40),
 						mixEffect: change.mixEffect
 					)
-				]
+				)
 			}
-			handler.when { (change: ChangeAuxiliaryOutput) in
+			handler.when { (change: ChangeAuxiliaryOutput, _) in
 				print(change)
-				return [AuxiliaryOutputChanged(source: change.source, output: change.output)]
+				allControllers.send(AuxiliaryOutputChanged(source: change.source, output: change.output))
 			}
 		}
 		print(switcher)

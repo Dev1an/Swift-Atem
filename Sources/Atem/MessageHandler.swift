@@ -4,63 +4,93 @@
 //
 //  Created by Damiaan on 26/05/18.
 //
-private var messageTypeRegister = [UInt32: Message.Type]()
 
-/// A utility to interprete incoming messages and call the registered handlers and to send back the responses provided by the handlers. For more information on how to register handlers see `MessageHandlerBase.when(...)`. This class is similar to `MessageHandler`. The difference here is that the registered handlers should return zero or more (`Serializable`) responses for each incoming `Message`.
-public class RespondingMessageHandler: MessageHandlerBase<[Serializable]> {
-	init() { super.init(emptyResponse: [])}
-	
-	func handle(messages: [ArraySlice<UInt8>]) throws -> [Serializable] {
-		var result = [Serializable]()
-		for message in messages {
-			result.append(contentsOf: try handle(rawMessage: message))
+/// A utility to parse `RawMessage`s and call their attached handlers within a certain context.
+/// This class is similar to `PureMessageHandler` with the difference that the registered handlers are also passed a certain context in addition to the attached message. This context can be used to determine where the message comes from.
+public class ContextualMessageHandler: MessageParser {
+	public typealias Context = Commander
+
+	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called.
+	/// The handler takes one generic argument `message`. The type of this argument indicates the type that this message handler will be attached to.
+	///
+	/// - Parameter handler: The handler to attach
+	/// - Parameter message: The message to which the handler is attached
+	/// - Parameter context: The context `message` was sent from.
+	public func when<M: Message>(_ handler: @escaping (_ message: M, _ context: Context)->Void) {
+		eventRegister[M.title.number] = M.self
+		handlerRegister[M.title.number] = handler
+	}
+
+	final func handle(rawMessage: RawMessage, in context: Context) throws {
+		if let (message, handler) = try self.message(from: rawMessage) {
+			message.execute(handler, in: context)
 		}
-		return result
+	}
+
+	final func handle(messages: [RawMessage], in context: Context) throws {
+		for message in messages {
+			try handle(rawMessage: message, in: context)
+		}
 	}
 }
 
-/// A utility that interprets incoming messages and calls the registered handlers. For more information on how to register handlers see `MessageHandlerBase.when(...)`
-public class MessageHandler: MessageHandlerBase<Void> {
-	init() { super.init(emptyResponse: Void()) }
-	
-	func handle(messages: [ArraySlice<UInt8>]) throws {
+/// A utility to parse `RawMessage`s and call their attached handlers.
+///
+/// Handlers are functions that will be executed when you call `handle(rawMessage: RawMessage)`.
+///
+/// Attach a handler to a certain type of `Message` by calling
+/// ```
+/// when { message: <MessageType> in
+///		// Handle your message here
+/// }
+/// ```
+/// Replace `<MessageType>` with a concrete type that conforms to the `Message` protocol (eg: `ProgramBusChanged`).
+public class PureMessageHandler: MessageParser {
+
+	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called.
+	/// The handler takes one generic argument `message`. The type of this argument indicates the type that this message handler will be attached to.
+	///
+	/// - Parameter handler: The handler to attach
+	/// - Parameter message: The message to which the handler is attached
+	public func when<M: Message>(_ handler: @escaping (_ message: M)->Void) {
+		eventRegister[M.title.number] = M.self
+		handlerRegister[M.title.number] = handler
+	}
+
+	/// Parse a message and if it is of a known type and there is a handler attached to this type, execute the handler.
+	final func handle(rawMessage: RawMessage) throws {
+		if let (message, handler) = try self.message(from: rawMessage) {
+			message.execute(handler)
+		}
+	}
+
+	/// Same as `handle(rawMessage: RawMessage)` but for multiple messages.
+	final func handle(messages: [ArraySlice<UInt8>]) throws {
 		for message in messages {
 			try handle(rawMessage: message)
 		}
 	}
 }
 
-/// A utility to parse binary messages and dispatch the parsed messages to registered handlers.
-public class MessageHandlerBase<T> {
+/// A utility to parse binary messages and look up corresponding message handlers.
+public class MessageParser {
+	typealias RawMessage = ArraySlice<UInt8>
+
 	/// A registry with handlers for each message.
 	/// The keys in the registry are the message names and the values are functions that interprete and react on a message.
-	var registry = [UInt32: Any]()
-	
-	let emptyResponse: T
-	
-	init(emptyResponse: T) {
-		self.emptyResponse = emptyResponse
-	}
+	fileprivate var eventRegister = [UInt32: Message.Type]()
+	fileprivate var handlerRegister = [UInt32: Any]()
 
-	/// Registers a message handler. This is used to subscribe to a specific type of `Message`.
-	/// A handler is a function that takes one generic argument `M`. The type of this argument indicates which messages you want to subscribe to.
-	///
-	/// - Parameter handler: The handler to register
-	public func when<M: Message>(_ handler: @escaping (M)->T) {
-		messageTypeRegister[M.title.number] = M.self
-		registry[M.title.number] = handler
-	}
-	
-	func handle(rawMessage: ArraySlice<UInt8>) throws -> T {
-		let titlePosition = MessageTitle.position.advanced(by: rawMessage.startIndex)
-		let title = UInt32(from: rawMessage[titlePosition])
-		if let handler = registry[title] {
-			let type = messageTypeRegister[title]!
-			let message = try type.init(with: rawMessage[titlePosition.endIndex...])
-			return message.execute(handler)
-		}/* else {
-			print(String(bytes: rawMessage[titlePosition], encoding: .utf8)!, rawMessage[titlePosition.endIndex...])
-		}*/
-		return emptyResponse
+	fileprivate final func message(from bytes: RawMessage) throws -> (Message, Any)? {
+		let titlePosition = MessageTitle.position.advanced(by: bytes.startIndex)
+		let title = UInt32(from: bytes[titlePosition])
+		if let handler = handlerRegister[title] {
+			let type = eventRegister[title]!
+			let message = try type.init(with: bytes[titlePosition.endIndex...])
+			return (message, handler)
+		} else {
+//			print(String(bytes: rawMessage[titlePosition], encoding: .utf8)!, rawMessage[titlePosition.endIndex...])
+			return nil
+		}
 	}
 }

@@ -14,9 +14,9 @@ class ControllerHandler: HandlerWithTimer {
 	let address: SocketAddress
 	let initiationID = ConnectionState.id(firstBit: false)
 	var awaitingConnectionResponse = true
-	let messageHandler: MessageHandler
+	let messageHandler: PureMessageHandler
 		
-	init(address: SocketAddress, messageHandler: MessageHandler) {
+	init(address: SocketAddress, messageHandler: PureMessageHandler) {
 		self.address = address
 		self.messageHandler = messageHandler
 	}
@@ -74,6 +74,12 @@ class ControllerHandler: HandlerWithTimer {
 	}
 }
 
+extension ControllerHandler: Commander {
+	final func send(_ message: Serializable) {
+		connectionState?.send(message)
+	}
+}
+
 /// An interface to
 ///  - send commands to an ATEM Switcher
 ///  - react upon incomming state change messages from the ATEM Switcher
@@ -82,7 +88,7 @@ class ControllerHandler: HandlerWithTimer {
 public class Controller {
 	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
 	public let channel: EventLoopFuture<Channel>
-	public let messageHandler = MessageHandler()
+	public let messageHandler = PureMessageHandler()
 
 	let eventLoop: EventLoopGroup
 	let handler: ControllerHandler
@@ -94,12 +100,12 @@ public class Controller {
 	/// - Parameter ipAddress: the IPv4 address of the switcher.
 	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
 	/// - Parameter initializer: a closure that will be called before establishing the connection to the switcher. Use the provided `MessageHandler` to register callbacks for incoming messages from the switcher.
-	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (MessageHandler)->Void = {_ in}) throws {
+	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (PureMessageHandler, Commander)->Void = {_,_ in}) throws {
 		eventLoop = eventLoopGroup
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
 		let tempHandler = ControllerHandler(address: address, messageHandler: messageHandler)
 		handler = tempHandler
-		initializer(messageHandler)
+		initializer(messageHandler, handler)
 		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer { $0.pipeline.addHandler(tempHandler) }
@@ -112,7 +118,7 @@ public class Controller {
 	/// - Parameter message: the message that will be sent to the switcher
 	public func send(message: Serializable) {
 		channel.eventLoop.execute {
-			self.handler.connectionState?.send(message: message.serialize())
+			self.handler.send(message)
 		}
 	}
 	
