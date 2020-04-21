@@ -448,16 +448,16 @@ class Atem_Tests: XCTestCase {
 	func testSimulator() {
 		let group = DispatchGroup()
 		group.enter()
-		let switcher = try! Switcher { handler, allControllers in
-			handler.when { (change: ChangePreviewBus, _) in
-				allControllers.send(PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect))
+		let switcher = Switcher { connections in
+			connections.when { (change: ChangePreviewBus, _) in
+				connections.send(PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect))
 			}
-			handler.when{ (change: ChangeProgramBus, _) in
+			connections.when{ (change: ChangeProgramBus, _) in
 				group.leave()
-				allControllers.send(ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect))
+				connections.send(ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect))
 			}
-			handler.when { (change: ChangeTransitionPosition, _) in
-				allControllers.send(
+			connections.when { (change: ChangeTransitionPosition, _) in
+				connections.send(
 					TransitionPositionChanged(
 						to: change.position,
 						remainingFrames: 250 - UInt8(change.position/40),
@@ -465,9 +465,9 @@ class Atem_Tests: XCTestCase {
 					)
 				)
 			}
-			handler.when { (change: ChangeAuxiliaryOutput, _) in
+			connections.when { (change: ChangeAuxiliaryOutput, _) in
 				print(change)
-				allControllers.send(AuxiliaryOutputChanged(source: change.source, output: change.output))
+				connections.send(AuxiliaryOutputChanged(source: change.source, output: change.output))
 			}
 		}
 		print(switcher)

@@ -61,7 +61,7 @@ class SwitcherHandler: HandlerWithTimer {
 	}
 
 	/// Queues a block of bytes to be sent to all connected controllers.
-	func send(message: [UInt8]) {
+	final func send(message: [UInt8]) {
 		for (_, client) in clients {
 			client.state.send(message: message)
 		}
@@ -91,22 +91,7 @@ class SwitcherHandler: HandlerWithTimer {
 	}
 }
 
-extension SwitcherHandler: Commander {
-	/// Queues a message to be sent to all connected controllers.
-	///
-	/// The message will be serialized immediately into a byte array and appended to the outgoing buffer of all the connected controllers.
-	/// These buffers will be flushed after at most 20ms.
-	func send(_ message: Serializable) {
-		send(message: message.serialize())
-	}
-}
-
-
-/// An interface to
-///  - process incoming commands received from one or more controllers
-///  - send state change messages to connected controllers
-///
-/// To make an anology with real world devices: this class can be compared to a BlackMagicDesign Production switcher. It is a state machine and control panels connect to this entity to change its state.
+/// An endpoint to interact with BMD ATEM controllers like "Atem Software Control" or any of the hardware control panels.
 public class Switcher {
 	let eventLoop: EventLoopGroup
 	
@@ -114,11 +99,17 @@ public class Switcher {
 	public let channel: EventLoopFuture<Channel>
 	let messageHandler = ContextualMessageHandler()
 	
-	/// Start a switcher endpoint that controllers can use to connect to.
-	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), initializer: (ContextualMessageHandler, Commander)->Void) throws {
+	/// Start a switcher endpoint that controllers can interact with.
+	///
+	/// Behaviour of this switcher can be defined using the `setup` parameter. This is a function that will be called with a connections handle before the switcher is started. Use this connection parameter to attach handlers for the messages you want to act upon. See `SwitcherConnections` for more information.
+	///
+	/// - Parameters:
+	///   - eventLoopGroup: The Swift NIO event loop group this switcher will run in.
+	///   - setup: A function to setup the behaviour of the switcher.
+	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), setup: (SwitcherConnections)->Void) {
 		eventLoop = eventLoopGroup
 		let handler = SwitcherHandler(handler: messageHandler)
-		initializer(messageHandler, handler)
+		setup(handler)
 		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer { $0.pipeline.addHandler(handler) }
@@ -127,5 +118,37 @@ public class Switcher {
 	
 	deinit {
 		try? eventLoop.syncShutdownGracefully()
+	}
+}
+
+/// Interact with connections to a switcher.
+///
+/// Used to send messages to all connected controllers and to attach message handlers to incoming `Message`s.
+///
+/// Handlers are functions that will be executed when a certain type of Message is received by the `Switcher`.
+///
+public protocol SwitcherConnections {
+	/// Queues a message to be sent to all connected controllers.
+	///
+	/// The message will be serialized immediately into a byte array and appended to the outgoing buffer of all the connected controllers.
+	/// These buffers will be flushed after at most 20ms.
+	func send(_ message: Serializable)
+
+	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called with two parameters: the message itself and the origin of the message.
+	/// The handler takes one generic argument `message`. The type of this argument indicates the type that this message handler will be attached to.
+	///
+	/// - Parameter handler: The handler to attach
+	/// - Parameter message: The message to which the handler is attached
+	/// - Parameter context: The origin of the message. Use this parameter to reply directly to the sender of the message.
+	func when<M: Message>(_ handler: @escaping (_ message: M, _ context: ConnectionState)->Void)
+}
+
+extension SwitcherHandler: SwitcherConnections {
+	public func send(_ message: Serializable) {
+		send(message: message.serialize())
+	}
+
+	func when<M: Message>(_ handler: @escaping (_ message: M, _ context: ConnectionState)->Void) {
+		messageHandler.when(handler)
 	}
 }

@@ -4,13 +4,9 @@ import Foundation
 let random = arc4random
 #endif
 
-public protocol Commander {
-	func send(_ message: Serializable)
-}
-
 /// Stores all relevant information to keep an ATEM connection alive.
 /// Use this store to interprete incoming packets and construct new outgoing packets.
-class ConnectionState {
+public class ConnectionState {
 	#if os(Linux)
 	    private static let seed: Void = srandom(UInt32(time(nil)))
 	#endif
@@ -62,6 +58,10 @@ class ConnectionState {
 			messageOutBoxPages.append(oldCount)
 		}
 	}
+
+	public func send(_ message: Serializable) {
+		send(message: message.serialize())
+	}
 	
 	/// Returns old packets that aren't acknowledged yet together with new packets
 	func assembleOutgoingPackets() -> [SerialPacket] {
@@ -110,11 +110,5 @@ class ConnectionState {
 		} else {
 			return [firstByte & 0b01111111, secondByte]
 		}
-	}
-}
-
-extension ConnectionState: Commander {
-	public func send(_ message: Serializable) {
-		send(message: message.serialize())
 	}
 }

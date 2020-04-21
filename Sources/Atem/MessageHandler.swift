@@ -8,7 +8,7 @@
 /// A utility to parse `RawMessage`s and call their attached handlers within a certain context.
 /// This class is similar to `PureMessageHandler` with the difference that the registered handlers are also passed a certain context in addition to the attached message. This context can be used to determine where the message comes from.
 public class ContextualMessageHandler: MessageParser {
-	public typealias Context = Commander
+	public typealias Context = ConnectionState
 
 	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called.
 	/// The handler takes one generic argument `message`. The type of this argument indicates the type that this message handler will be attached to.
@@ -36,15 +36,7 @@ public class ContextualMessageHandler: MessageParser {
 
 /// A utility to parse `RawMessage`s and call their attached handlers.
 ///
-/// Handlers are functions that will be executed when you call `handle(rawMessage: RawMessage)`.
-///
-/// Attach a handler to a certain type of `Message` by calling
-/// ```
-/// when { message: <MessageType> in
-///		// Handle your message here
-/// }
-/// ```
-/// Replace `<MessageType>` with a concrete type that conforms to the `Message` protocol (eg: `ProgramBusChanged`).
+/// Handlers are functions that will be executed when `handle(rawMessage: RawMessage)` is called. Handlers are attached to a specific `Message` type for example :`ProgramBusChanged`.
 public class PureMessageHandler: MessageParser {
 
 	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called.
