@@ -18,6 +18,7 @@ class ControllerHandler: HandlerWithTimer {
 
 	public var whenDisconnected: (()->Void)?
 	public var whenError = { (error: Error)->Void in
+		print(error)
 		fatalError(error.localizedDescription)
 	}
 

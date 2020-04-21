@@ -11,7 +11,8 @@ let package = Package(
             name: "Atem",
             targets: ["Atem"]),
 			.executable(name: "VersionDump", targets: ["VersionDump"]),
-			.executable(name: "Simulator", targets: ["Simulator"])
+			.executable(name: "Simulator", targets: ["Simulator"]),
+			.executable(name: "PreviewSwitcher", targets: ["PreviewSwitcher"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -26,8 +27,10 @@ let package = Package(
             dependencies: ["NIO"]),
 		.target(name: "VersionDump", dependencies: ["Atem"]),
 		.target(name: "Simulator", dependencies: ["Atem"]),
+		.target(name: "PreviewSwitcher", dependencies: ["Atem"]),
         .testTarget(
             name: "AtemTests",
-            dependencies: ["Atem"]),
+            dependencies: ["Atem"]
+		),
     ]
 )

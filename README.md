@@ -53,10 +53,10 @@ After looking at the following examples, study the [API reference](https://dev1a
 This example shows how to create a controller that connects to a swicther at ip address 10.1.0.67 and print a message whenever the preview bus changes.
 
 ```swift
-try Controller(ipAddress: "10.1.0.67") { handler in
-    handler.when{ (change: PreviewBusChanged) in
-        print(change) // prints: 'Preview bus changed to input(x)'
-    }
+try Controller(ipAddress: address) { connection in
+  connection.when{ (change: PreviewBusChanged) in
+    print(change) // prints: 'Preview bus changed to input(x)'
+  }
 }
 ```
 
@@ -72,22 +72,42 @@ controller.send(message: ChangeTransitionPosition(to: 5000))
 
 The following example shows how to emulate the basic functionality of an atem switcher. It will forward incoming messages containing transition and preview & program bus changes to the connected controller.
 
+This snippet is also included in a seperate SPM target "Simulator" (./Sources/Simulator) and can be run by simply executing `swift run simulator` in the terminal.
+
 ```swift
-try Switcher { handler in
-    handler.when { (change: ChangePreviewBus) in
-        return [PreviewBusChanged(to: change.previewBus, mixEffect: change.mixEffect)]
-    }
-    handler.when{ (change: ChangeProgramBus) in
-        return [ProgramBusChanged(to: change.programBus, mixEffect: change.mixEffect)]
-    }
-    handler.when { (change: ChangeTransitionPosition) in
-        return [
-            TransitionPositionChanged(
-                to: change.position,
-                remainingFrames: 250 - UInt8(change.position/40),
-                mixEffect: change.mixEffect
-            )
-        ]
-    }
+let switcher = Switcher { controllers in
+  controllers.when { (change: ChangePreviewBus, _) in
+    controllers.send(
+      PreviewBusChanged(
+        to: change.previewBus,
+        mixEffect: change.mixEffect
+      )
+    )
+  }
+  controllers.when{ (change: ChangeProgramBus, _) in
+		controllers.send(
+      ProgramBusChanged(
+        to: change.programBus,
+        mixEffect: change.mixEffect
+      )
+    )
+	}
+  controllers.when { (change: ChangeTransitionPosition, _) in
+		controllers.send(
+      TransitionPositionChanged(
+        to: change.position,
+        remainingFrames: 250 - UInt8(change.position/40),
+        mixEffect: change.mixEffect
+      )
+    )
+  }
+	controllers.when { (change: ChangeAuxiliaryOutput, _) in
+		controllers.send(
+      AuxiliaryOutputChanged(
+        source: change.source,
+        output: change.output
+      )
+    )
+	}
 }
 ```
