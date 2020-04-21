@@ -14,7 +14,7 @@
     <a title="Switcher Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Atem Docs</a> (53% documented)</p>
+        <p><a href="../index.html">Atem Docs</a> (55% documented)</p>
         <p class="header-right"><a href="https://github.com/Dev1an/Swift-Atem"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -32,16 +32,19 @@
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Classes/ConnectionState.html">ConnectionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ContextualMessageHandler.html">ContextualMessageHandler</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Controller.html">Controller</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes.html#/s:4Atem14MessageHandlerC">MessageHandler</a>
+                <a href="../Classes.html#/s:4Atem13MessageParserC">MessageParser</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/MessageHandlerBase.html">MessageHandlerBase</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes.html#/s:4Atem24RespondingMessageHandlerC">RespondingMessageHandler</a>
+                <a href="../Classes/PureMessageHandler.html">PureMessageHandler</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Switcher.html">Switcher</a>
@@ -53,6 +56,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Enums/AtemSize.html">AtemSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/VideoSource.html">VideoSource</a>
@@ -80,6 +86,36 @@
               <li class="nav-group-task">
                 <a href="../Extensions/Array.html">Array</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ArraySlice.html">ArraySlice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CountablePartialRangeFrom.html">CountablePartialRangeFrom</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CountableRange.html">CountableRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FixedWidthInteger.html">FixedWidthInteger</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/OptionSet.html">OptionSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt32.html">UInt32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt8.html">UInt8</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -94,6 +130,9 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/ControllerConnection.html">ControllerConnection</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Message.html">Message</a>
               </li>
               <li class="nav-group-task">
@@ -101,6 +140,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/SingleValueDescribable.html">SingleValueDescribable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SwitcherConnections.html">SwitcherConnections</a>
               </li>
             </ul>
           </li>
@@ -141,13 +183,25 @@
                 <a href="../Structs/LockRequest.html">LockRequest</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/MediaPoolConfiguration.html">MediaPoolConfiguration</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MessageTitle.html">MessageTitle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MixEffectConfiguration.html">MixEffectConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiViewConfiguration.html">MultiViewConfiguration</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/NewTimecode.html">NewTimecode</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/PreviewBusChanged.html">PreviewBusChanged</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProductInfo.html">ProductInfo</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ProgramBusChanged.html">ProgramBusChanged</a>
@@ -181,14 +235,7 @@
 
                 </div>
               </div>
-            <p>An interface to</p>
-
-<ul>
-<li>process incoming commands received from one or more controllers</li>
-<li>send state change messages to connected controllers</li>
-</ul>
-
-<p>To make an anology with real world devices: this class can be compared to a BlackMagicDesign Production switcher. It is a state machine and control panels connect to this entity to change its state.</p>
+            <p>An endpoint to interact with BMD ATEM controllers like &ldquo;Atem Software Control&rdquo; or any of the hardware control panels.</p>
 
           </section>
           <section class="section task-group-section">
@@ -219,7 +266,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/Switcher.swift#L110">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/73b0c3e10dc92820a0f2e58cad59597cef3f1f6b/Sources/Atem/Switcher.swift#L99">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -227,9 +274,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4Atem8SwitcherC14eventLoopGroup11initializerAC3NIO05EventdE0_p_yAA24RespondingMessageHandlerCXEtKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(eventLoopGroup:initializer:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4Atem8SwitcherC14eventLoopGroup11initializerAC3NIO05EventdE0_p_yAA24RespondingMessageHandlerCXEtKcfc">init(eventLoopGroup:initializer:)</a>
+                    <a name="/s:4Atem8SwitcherC14eventLoopGroup5setupAC3NIO05EventdE0_p_yAA0B11Connections_pXEtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(eventLoopGroup:setup:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem8SwitcherC14eventLoopGroup5setupAC3NIO05EventdE0_p_yAA0B11Connections_pXEtcfc">init(eventLoopGroup:setup:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -237,19 +284,52 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Start a switcher endpoint that controllers can use to connect to.</p>
+                        <p>Start a switcher endpoint that controllers can interact with.</p>
+
+<p>Behaviour of this switcher can be defined using the <code>setup</code> parameter. This is a function that will be called with a connections handle before the switcher is started. Use this connection parameter to attach handlers for the messages you want to act upon. See <code><a href="../Protocols/SwitcherConnections.html">SwitcherConnections</a></code> for more information.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">eventLoopGroup</span><span class="p">:</span> <span class="kt">EventLoopGroup</span> <span class="o">=</span> <span class="kt">MultiThreadedEventLoopGroup</span><span class="p">(</span><span class="nv">numberOfThreads</span><span class="p">:</span> <span class="mi">1</span><span class="p">),</span> <span class="nv">initializer</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Classes.html#/s:4Atem24RespondingMessageHandlerC">RespondingMessageHandler</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">eventLoopGroup</span><span class="p">:</span> <span class="kt">EventLoopGroup</span> <span class="o">=</span> <span class="kt">MultiThreadedEventLoopGroup</span><span class="p">(</span><span class="nv">numberOfThreads</span><span class="p">:</span> <span class="mi">1</span><span class="p">),</span> <span class="nv">setup</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Protocols/SwitcherConnections.html">SwitcherConnections</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventLoopGroup</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Swift NIO event loop group this switcher will run in.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>setup</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function to setup the behaviour of the switcher.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Dev1an/Swift-Atem/tree/d596433b2300b8f21ba7ddaf479e77273e888246/Sources/Atem/Switcher.swift#L114-L122">Show on GitHub</a>
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/73b0c3e10dc92820a0f2e58cad59597cef3f1f6b/Sources/Atem/Switcher.swift#L109-L117">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -259,8 +339,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-11-20)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-04-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
