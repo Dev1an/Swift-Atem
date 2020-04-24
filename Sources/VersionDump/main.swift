@@ -7,6 +7,7 @@
 
 import Atem
 import Dispatch
+import Foundation
 
 let address: String
 if CommandLine.arguments.count > 1 {
