@@ -96,7 +96,7 @@ public class Controller {
 	/// - Parameter ipAddress: the IPv4 address of the switcher.
 	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
 	/// - Parameter setup: a closure that will be called before establishing the connection to the switcher. Use the provided `ControllerConnection` to register callbacks for incoming messages from the switcher.
-	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), setup: (ControllerConnection)->Void = {_ in}) throws {
+	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->Void = {_ in}) throws {
 		eventLoop = eventLoopGroup
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
 		let tempHandler = ControllerHandler(address: address, messageHandler: messageHandler)

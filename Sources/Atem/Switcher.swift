@@ -106,18 +106,16 @@ public class Switcher {
 	/// - Parameters:
 	///   - eventLoopGroup: The Swift NIO event loop group this switcher will run in.
 	///   - setup: A function to setup the behaviour of the switcher.
-	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1), setup: (SwitcherConnections)->Void) {
+	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (SwitcherConnections)->Void) {
 		eventLoop = eventLoopGroup
 		let handler = SwitcherHandler(handler: messageHandler)
 		setup(handler)
 		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
-			.channelInitializer { $0.pipeline.addHandler(handler) }
+			.channelInitializer { channel in
+				channel.pipeline.addHandler(handler)
+			}
 			.bind(host: "0.0.0.0", port: 9910)
-	}
-	
-	deinit {
-		try? eventLoop.syncShutdownGracefully()
 	}
 }
 
