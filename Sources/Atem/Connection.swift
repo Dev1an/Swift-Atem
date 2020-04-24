@@ -86,7 +86,6 @@ public class ConnectionState {
 		newPackets.reserveCapacity(messageOutBoxPages.count+1)
 		var startIndex = 0
 		for endIndex in messageOutBoxPages + [messageOutBox.endIndex] {
-			if lastSent📦ID.isMultiple(of: 1024) { print("ℹ️ Info: Sent packet", lastSent📦ID) }
 			lastSent📦ID = (lastSent📦ID + 1) % 0b1000_0000_0000_0000
 			newPackets.append(SerialPacket(connectionUID: id, data: messageOutBox[startIndex..<endIndex], number: lastSent📦ID, acknowledgement: acknowledgementNumber))
 			startIndex = endIndex
