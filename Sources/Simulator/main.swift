@@ -29,6 +29,4 @@ let switcher = Switcher { controllers in
 	}
 }
 
-print(switcher)
 dispatchMain()
-//print(switcher)

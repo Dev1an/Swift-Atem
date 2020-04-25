@@ -33,14 +33,14 @@ class ControllerHandler: HandlerWithTimer {
 
 		do {
 			if let connectionState = connectionState {
-				let _ = try messageHandler.handle(messages: connectionState.parse(packet))
+				try messageHandler.handle(messages: connectionState.parse(packet))
 			} else {
 				if awaitingConnectionResponse {
 					awaitingConnectionResponse = false
 				} else {
 					let state = ConnectionState(id: packet.connectionUID)
 					connectionState = state
-					let _ = try messageHandler.handle(messages: state.parse(packet))
+					try messageHandler.handle(messages: state.parse(packet))
 				}
 			}
 		} catch {

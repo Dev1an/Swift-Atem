@@ -116,7 +116,7 @@ public class Switcher {
 			.channelInitializer { channel in
 				channel.pipeline.addHandler(handler)
 			}
-			.bind(host: "0.0.0.0", port: 9910)
+			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 9910))
 	}
 }
 
