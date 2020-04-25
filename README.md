@@ -55,7 +55,7 @@ After looking at the following examples, study the [API reference](https://dev1a
 This example shows how to create a controller that connects to a swicther at ip address 10.1.0.67 and print a message whenever the preview bus changes.
 
 ```swift
-try Controller(ipAddress: address) { connection in
+try Controller(ipAddress: "10.1.0.67") { connection in
   connection.when{ (change: PreviewBusChanged) in
     print(change) // prints: 'Preview bus changed to input(x)'
   }
@@ -72,9 +72,9 @@ controller.send(message: ChangeTransitionPosition(to: 5000))
 
 ### Switcher
 
-The following example shows how to emulate the basic functionality of an atem switcher. It will forward incoming messages containing transition and preview & program bus changes to the connected controller.
+The following example shows how to emulate the basic functionality of an atem switcher. It will forward incoming messages containing transition and preview & program bus changes to all connected controllers.
 
-This snippet is also included in a seperate SPM target "Simulator" (./Sources/Simulator) and can be run by simply executing `swift run simulator` in the terminal.
+This snippet is also included in a seperate SPM target "Simulator" (./Sources/Simulator) and can be run by simply executing `swift run Simulator` in the terminal.
 
 ```swift
 let switcher = Switcher { controllers in
