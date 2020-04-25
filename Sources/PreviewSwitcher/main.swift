@@ -25,6 +25,10 @@ let controller = try Controller(ipAddress: address) { connection in
 	connection.when { (connected: InitiationComplete) in
 		print(connected)
 	}
+
+	connection.whenDisconnected = {
+		print("Disconnected")
+	}
 }
 
 var sourceString: String

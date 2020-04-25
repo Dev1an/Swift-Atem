@@ -43,6 +43,7 @@ class SwitcherHandler: HandlerWithTimer {
 			context.flush()
 		} else if let newId = connectionIdUpgrades[UInt16(from: packet.connectionUID)] {
 			let newConnection = ConnectionState(id: newId.bytes[0...])
+			print("new client \(UInt16(from: newConnection.id)) from \(envelope.remoteAddress)")
 			for message in initialMessages {
 				newConnection.send(message: message)
 			}

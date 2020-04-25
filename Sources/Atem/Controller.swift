@@ -47,6 +47,11 @@ class ControllerHandler: HandlerWithTimer {
 			whenError(error)
 		}
 	}
+
+	final override func channelInactive(context: ChannelHandlerContext) {
+		super.channelInactive(context: context)
+		whenDisconnected?()
+	}
 	
 	final override func executeTimerTask(context: ChannelHandlerContext) {
 		if let state = connectionState {
@@ -104,7 +109,9 @@ public class Controller {
 		setup(handler)
 		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
-			.channelInitializer { $0.pipeline.addHandler(tempHandler) }
+			.channelInitializer {
+				$0.pipeline.addHandler(tempHandler)
+			}
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
 	}
 	
@@ -130,7 +137,7 @@ public class Controller {
 /// }
 /// ```
 /// Replace `<MessageType>` with a concrete type that conforms to the `Message` protocol (eg: `ProgramBusChanged`).
-public protocol ControllerConnection {
+public protocol ControllerConnection: AnyObject {
 	/// Sends a message to the connected switcher.
 	///
 	/// - Parameter message: the message that will be sent to the switcher
