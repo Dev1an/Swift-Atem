@@ -13,6 +13,7 @@ Starting from version 1.0.0 this package uses Swift 5 and NIO2.
 
 - macOS 10.14.6 on a MacBook Pro retina 15" late 2013
 - Raspbian GNU/Linux 9 stretch on a Raspberry Pi model 3 B
+- Raspbian GNU/Linux 10 Buster on a Raspberry Pi 4 model B Rev 1.2
 
 ## Installation
 
