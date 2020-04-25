@@ -26,16 +26,3 @@ extension Collection {
 		return low
 	}
 }
-
-extension Array where Element: Comparable {
-	public mutating func sortedInsert(_ element: Element, isOrderedBefore: (Element)->Bool) {
-		insert(element, at: binarySearch(predicate: isOrderedBefore))
-	}
-
-	public mutating func sortedUpsert(_ element: Element) {
-		let index = binarySearch(predicate: {$0 < element})
-		if index == count || self[index] != element {
-			insert(element, at: index)
-		}
-	}
-}
