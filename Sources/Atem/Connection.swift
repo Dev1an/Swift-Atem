@@ -35,7 +35,7 @@ public class ConnectionState {
 	/// Interprets data and returns the messages that it contains
 	func parse(_ packet: Packet) -> [ArraySlice<UInt8>] {
 		if let packetID = packet.number {
-			received📦IDs.sortedInsert(packetID)
+			received📦IDs.sortedUpsert(packetID)
 			if packet.isConnect {
 				packetOutBox.removeAll()
 			} else if packetID == 1 {
@@ -71,7 +71,7 @@ public class ConnectionState {
 			acknowledgementNumber = nil
 		} else {
 			var (index, lastSequentialId) = (0, received📦IDs.first!)
-			for id in received📦IDs[1...] {
+			for id in received📦IDs.dropFirst() {
 				if id == lastSequentialId + 1 {
 					lastSequentialId += 1
 					index += 1
