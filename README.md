@@ -87,15 +87,15 @@ let switcher = Switcher { controllers in
     )
   }
   controllers.when{ (change: ChangeProgramBus, _) in
-		controllers.send(
+    controllers.send(
       ProgramBusChanged(
         to: change.programBus,
         mixEffect: change.mixEffect
       )
     )
-	}
+  }
   controllers.when { (change: ChangeTransitionPosition, _) in
-		controllers.send(
+    controllers.send(
       TransitionPositionChanged(
         to: change.position,
         remainingFrames: 250 - UInt8(change.position/40),
@@ -103,13 +103,13 @@ let switcher = Switcher { controllers in
       )
     )
   }
-	controllers.when { (change: ChangeAuxiliaryOutput, _) in
-		controllers.send(
+  controllers.when { (change: ChangeAuxiliaryOutput, _) in
+    controllers.send(
       AuxiliaryOutputChanged(
         source: change.source,
         output: change.output
       )
     )
-	}
+  }
 }
 ```
