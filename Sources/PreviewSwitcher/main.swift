@@ -24,6 +24,7 @@ let controller = try Controller(ipAddress: address) { connection in
 
 	connection.when { (connected: InitiationComplete) in
 		print(connected)
+		print("Type a number and press <enter> to change the current preview")
 	}
 
 	connection.whenDisconnected = {
@@ -33,7 +34,6 @@ let controller = try Controller(ipAddress: address) { connection in
 
 var sourceString: String
 while true {
-	print("Enter preview input: ", terminator: "")
 	sourceString = readLine() ?? "1"
 	guard let sourceNumber = UInt16(sourceString) else {
 		print("invalid source")
