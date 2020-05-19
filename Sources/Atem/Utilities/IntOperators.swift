@@ -14,23 +14,17 @@ extension UInt8 {
 
 extension FixedWidthInteger {
 	init(from slice: ArraySlice<UInt8>) {
-		self.init(slice.withUnsafeBufferPointer{
-			$0.baseAddress!.withMemoryRebound(to: Self.self, capacity: 1) {$0.pointee.byteSwapped}
+		self.init(bigEndian: slice.withUnsafeBufferPointer{
+			$0.baseAddress!.withMemoryRebound(to: Self.self, capacity: 1) {$0.pointee}
 		})
 	}
-}
 
-extension UInt16 {
 	var bytes: [UInt8] {
-		var copy = self
-		return withUnsafeBytes(of: &copy, { [ $0[1], $0[0] ] })
-	}
-}
-
-extension UInt32 {
-	var bytes: [UInt8] {
-		var copy = self
-		return withUnsafeBytes(of: &copy, { [ $0[3], $0[2], $0[1], $0[0] ] })
+		let byteCount = bitWidth >> 3
+		return [UInt8](unsafeUninitializedCapacity: byteCount) { (pointer, count) in
+			UnsafeMutableRawPointer(pointer.baseAddress!).bindMemory(to: Self.self, capacity: 1).pointee = bigEndian
+			count = byteCount
+		}
 	}
 }
 
