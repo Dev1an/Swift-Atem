@@ -35,7 +35,7 @@ public struct ProtocolVersion: Serializable {
 public struct ProductInfo: Serializable {
 	public static let title = MessageTitle(string: "_pin")
 	static let namePosition = 0..<40
-	static let tooLongNameCount = Self.namePosition.count + 1
+	static let tooLongNameCount = namePosition.count + 1
 	static let truncationDots = Array("...".utf8)
 	static let modelPosition = 40
 

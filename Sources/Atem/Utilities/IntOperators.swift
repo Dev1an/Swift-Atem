@@ -53,3 +53,9 @@ extension CountablePartialRangeFrom: AdvancableRange {
 		return CountablePartialRangeFrom(lowerBound.advanced(by: stride))
 	}
 }
+
+extension UnsafeMutableBufferPointer where Element == UInt8 {
+	func write<I: FixedWidthInteger>(_ number: I, at offset: Int) {
+        UnsafeMutableRawPointer(baseAddress!.advanced(by: offset)).bindMemory(to: I.self, capacity: 1).pointee = number
+	}
+}
