@@ -32,7 +32,6 @@ public struct LockPositionRequest: Message {
 		store = UInt16(from: bytes)
 		index = UInt16(from: bytes[relative: 2..<4])
 		type = UInt16(from: bytes[relative: 4..<6])
-		print(bytes)
 	}
 
 	public var debugDescription: String {return "Lock request \(store): for index \(index), type \(type)"}
@@ -68,8 +67,8 @@ public struct LockObtained: Serializable {
 		frameNumber = UInt16(from: bytes)
 	}
 
-	public init(store: UInt16) {
-		self.frameNumber = store
+	public init(frameNumber: UInt16) {
+		self.frameNumber = frameNumber
 	}
 
 	public var debugDescription: String { return "Lock obtained" }
@@ -175,7 +174,7 @@ public struct ContinueDataTransfer: Serializable {
 	}
 }
 
-struct SetFileDescription: Serializable {
+public struct SetFileDescription: Serializable {
 	public static let title = MessageTitle(string: "FTFD")
 
 	let transferID: UInt16
@@ -238,7 +237,7 @@ struct SetFileDescription: Serializable {
 	}
 }
 
-struct TransferData: Serializable {
+public struct TransferData: Serializable {
 	public static let title = MessageTitle(string: "FTDa")
 
 	public let transferID: UInt16
@@ -248,7 +247,7 @@ struct TransferData: Serializable {
 		transferID = UInt16(from: bytes[relative: Positions.transferID])
 		let size = Int(UInt16(from: bytes[relative: Positions.size]))
 		assert(bytes.count-Positions.body >= size, "incorrect size")
-		body = Array(bytes[Positions.body ..< Positions.body + size])
+		body = Array(bytes[relative: Positions.body ..< Positions.body + size])
 	}
 
 	public init(transferID: UInt16, data: [UInt8]) {
@@ -264,7 +263,7 @@ struct TransferData: Serializable {
 		} + body
 	}
 
-	var debugDescription: String { "Transfer \(body.count) bytes of data (ID: \(transferID)" }
+	public var debugDescription: String { "Transfer \(body.count) bytes of data (ID: \(transferID)" }
 
 	enum Positions {
 		static let transferID = 0..<2
@@ -273,13 +272,17 @@ struct TransferData: Serializable {
 	}
 }
 
-struct DataTransferCompleted: Serializable {
+public struct DataTransferCompleted: Serializable {
 	public static let title = MessageTitle(string: "FTDC")
 
 	public let transferID: UInt16
 
 	public init(with bytes: ArraySlice<UInt8>) throws {
-		transferID = UInt16(from: bytes[0..<2])
+		transferID = UInt16(from: bytes[relative: 0..<2])
+	}
+
+	public init(id: UInt16) {
+		transferID = id
 	}
 
 	public var dataBytes: [UInt8] {
@@ -289,5 +292,5 @@ struct DataTransferCompleted: Serializable {
 		}
 	}
 
-	var debugDescription: String { "Data transfer \(transferID) completed" }
+	public var debugDescription: String { "Data transfer \(transferID) completed" }
 }

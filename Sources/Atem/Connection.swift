@@ -87,7 +87,13 @@ public class ConnectionState {
 	
 	/// Returns old packets that aren't acknowledged yet together with new packets
 	func assembleOutgoingPackets() -> [SerialPacket] {
-		let acknowledgementNumber = lastRead📦needsConfirmation ? lastRead📦ID : nil
+		let acknowledgementNumber: UInt16?
+		if lastRead📦needsConfirmation {
+			acknowledgementNumber = lastRead📦ID
+			lastRead📦needsConfirmation = false
+		} else {
+			acknowledgementNumber = nil
+		}
 		var newPackets = [SerialPacket]()
 		newPackets.reserveCapacity(messageOutBoxPages.count+1)
 		var startIndex = 0

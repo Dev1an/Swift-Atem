@@ -27,6 +27,28 @@ let switcher = Switcher { controllers in
 	controllers.when { (change: ChangeAuxiliaryOutput, _) in
 		controllers.send(AuxiliaryOutputChanged(source: change.source, output: change.output))
 	}
+
+	controllers.when { (request: LockPositionRequest, connection) in
+		print("Lock request")
+		connection.send(LockObtained(frameNumber: 0))
+		connection.send(LockChange(store: 0, isLocked: true))
+	}
+	controllers.when { (request: StartDataTransfer, connection) in
+		print(request)
+		connection.send(
+			ContinueDataTransfer(transferID: request.transferID, chunkSize: 1396, chunkCount: 20)
+		)
+	}
+	controllers.when { (fileDescription: SetFileDescription, connection) in
+		print(fileDescription)
+	}
+	controllers.when { (data: TransferData, connection) in
+		print("Got data. Sending transfer finish")
+		connection.send(DataTransferCompleted(id: data.transferID))
+		connection.send(LockChange(store: 0, isLocked: false))
+	}
+
+	
 }
 
 dispatchMain()
