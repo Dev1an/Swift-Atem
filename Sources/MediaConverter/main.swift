@@ -18,10 +18,18 @@ let compressedImage = part1// + part2 + part3
 //let compressedImage = try Data(contentsOf: URL(fileURLWithPath: "/tmp/testColors.bin"))
 //let compressedImage = try Data(contentsOf: URL(fileURLWithPath: "/tmp/grayscale.bin"))
 
-let startDate = Date()
+print("decompressing", compressedImage.count, "bytes")
+var startDate = Date()
 let decompressedImage = decodeRunLength(data: compressedImage, uncompressedByteCount: 8294400)
+print("decompressing took", Date().timeIntervalSince(startDate))
+
 print(decompressedImage.count)
-print(Date().timeIntervalSince(startDate))
+startDate = Date()
+let recompressedImage = encodeRunLength(data: decompressedImage)
+print("recompressing took", Date().timeIntervalSince(startDate))
+print(recompressedImage.count)
+
+try recompressedImage.write(to: URL(fileURLWithPath: "/tmp/stripe-recompressed.bin"))
 
 //try imageData.write(to: URL(fileURLWithPath: "/tmp/atemImage.bmp"))
 

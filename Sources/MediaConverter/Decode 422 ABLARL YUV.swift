@@ -110,15 +110,15 @@ func decodeRunLength(data compressed: Data, uncompressedByteCount: Int? = nil) -
 	return decompressed.data
 }
 
-func ablarlFrom(rgbaBundle: Data) -> UInt64 {
-	let red1   = Float32(rgbaBundle[0])
-	let green1 = Float32(rgbaBundle[1])
-	let blue1  = Float32(rgbaBundle[2])
-	let alpha1 = Float32(rgbaBundle[3])
-	let red2   = Float32(rgbaBundle[4])
-	let green2 = Float32(rgbaBundle[5])
-	let blue2  = Float32(rgbaBundle[6])
-	let alpha2 = Float32(rgbaBundle[7])
+func ablarlFrom(rgbaBundle: UnsafeRawPointer) -> UInt64 {
+	let red1   = Float32(rgbaBundle.load(fromByteOffset: 0, as: UInt8.self))
+	let green1 = Float32(rgbaBundle.load(fromByteOffset: 1, as: UInt8.self))
+	let blue1  = Float32(rgbaBundle.load(fromByteOffset: 2, as: UInt8.self))
+	let alpha1 = Float32(rgbaBundle.load(fromByteOffset: 3, as: UInt8.self))
+	let red2   = Float32(rgbaBundle.load(fromByteOffset: 4, as: UInt8.self))
+	let green2 = Float32(rgbaBundle.load(fromByteOffset: 5, as: UInt8.self))
+	let blue2  = Float32(rgbaBundle.load(fromByteOffset: 6, as: UInt8.self))
+	let alpha2 = Float32(rgbaBundle.load(fromByteOffset: 7, as: UInt8.self))
 
 	let lum1 = red1 * rLum + green1 * gLum + blue1 * bLum
 	let lum2 = red2 * rLum + green2 * gLum + blue2 * bLum
@@ -150,6 +150,30 @@ func to10Bit(_ float: Float32) -> UInt64 {
 func encodeRunLength(data: Data) -> Data {
 	var compressed = [UInt64]()
 	compressed.reserveCapacity(data.count)
+
+	data.withUnsafeBytes { (buffer: UnsafeRawBufferPointer) -> Void in
+		let pixelCount = data.count/8
+		var cursor = buffer.baseAddress!.bindMemory(to: UInt64.self, capacity: pixelCount)
+		let endPixel = cursor.advanced(by: pixelCount)
+		while cursor < endPixel {
+			var nextCursor = cursor.successor()
+			defer { cursor = nextCursor }
+			while cursor.pointee == nextCursor.pointee {
+				nextCursor = nextCursor.successor()
+			}
+			let count = cursor.distance(to: nextCursor)
+			let yuv = ablarlFrom(rgbaBundle: UnsafeRawPointer(cursor))
+			if count > 2 {
+				compressed.append(repeatMarker)
+				compressed.append(UInt64(count).bigEndian)
+				compressed.append(yuv)
+			} else {
+				for _ in 0..<count {
+					compressed.append(yuv)
+				}
+			}
+		}
+	}
 
 	return compressed.data
 }
