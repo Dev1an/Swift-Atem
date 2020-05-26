@@ -43,8 +43,8 @@ func rgba(from ablarl: UInt64) -> UInt64 {
 	let b1 = to8Bit(bs + lum1)
 	let b2 = to8Bit(bs + lum2)
 
-	let g1 = to8Bit(lum1 - r1 * rLum - b1 * bLum)
-	let g2 = to8Bit(lum2 - r2 * rLum - b2 * bLum)
+	let g1 = to8Bit((lum1 - r1 * rLum - b1 * bLum) / gLum)
+	let g2 = to8Bit((lum2 - r2 * rLum - b2 * bLum) / gLum)
 
 	let a1 = to8Bit(alpha1)
 	let a2 = to8Bit(alpha2)
