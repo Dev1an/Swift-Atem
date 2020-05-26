@@ -136,15 +136,15 @@ func ablarlFrom(rgbaBundle: UnsafeRawPointer) -> UInt64 {
 	let a1 = to10Bit(alpha1)
 	let a2 = to10Bit(alpha2)
 
-	return (a1 | (b << 10) | (l1 << 20) | (a2 << 32) | (r << 42) | (l2 << 52)).littleEndian
+	return ((a1 << 52) | (b << 42) | (l1 << 32) | (a2 << 20) | (r << 10) | l2).bigEndian
 }
 
 func toSigned10Bit(_ float: Float32) -> UInt64 {
-	to10Bit(float + sInt10End)
+	UInt64(min(uInt10Max, max(0, float * 4 + sInt10End)))
 }
 
 func to10Bit(_ float: Float32) -> UInt64 {
-	UInt64(clampToUInt8(float)) << 2
+	UInt64(clampToUInt8(float) * 4)
 }
 
 func encodeRunLength(data: Data) -> Data {
