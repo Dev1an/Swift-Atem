@@ -185,11 +185,24 @@ public struct ProgramBusChanged: Serializable {
 	public var debugDescription: String {return "Program bus changed to \(programBus) on ME\(mixEffect)"}
 }
 
+public struct RequestTimeCode: Serializable {
+	public static let title = MessageTitle(string: "TiRq")
+
+	public init(with bytes: ArraySlice<UInt8>) throws {}
+
+	public let dataBytes = [UInt8]()
+	public let debugDescription = "Command: Request time code"
+}
+
 /// Informs a controller that the switchers timecode has changed
-public struct NewTimecode: Message {
+public struct NewTimecode: Serializable {
 	public typealias Timecode = (hour: UInt8, minute: UInt8, second: UInt8, frame: UInt8)
 	public static let title = MessageTitle(string: "Time")
 	public let timecode: Timecode
+
+	public init(hour: UInt8, minute: UInt8, second: UInt8, frame: UInt8) {
+		timecode = (hour, minute, second, frame)
+	}
 	
 	public init(with bytes: ArraySlice<UInt8>) throws {
 		timecode = (
@@ -198,6 +211,16 @@ public struct NewTimecode: Message {
 			bytes[relative: 2],
 			bytes[relative: 3]
 		)
+	}
+
+	public var dataBytes: [UInt8] {
+		[
+			timecode.hour,
+			timecode.minute,
+			timecode.second,
+			timecode.frame,
+			0,0,3,0xE8
+		]
 	}
 	
 	public var debugDescription: String { return "Switcher time \(timecode)" }
