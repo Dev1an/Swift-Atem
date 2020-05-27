@@ -15,6 +15,11 @@ public struct LockRequest: Serializable {
 		state = UInt16(from: bytes[relative: 2..<4])
 	}
 
+	public init(store: UInt16, state: UInt16) {
+		self.store = store
+		self.state = state
+	}
+
 	public var debugDescription: String {return "Lock store \(store) to \(String(state, radix: 16))"}
 
 	public var dataBytes: [UInt8] {
@@ -22,7 +27,7 @@ public struct LockRequest: Serializable {
 	}
 }
 
-public struct LockPositionRequest: Message {
+public struct LockPositionRequest: Serializable {
 	public static let title = MessageTitle(string: "PLCK")
 	public let store: UInt16
 	public let index: UInt16
@@ -34,7 +39,24 @@ public struct LockPositionRequest: Message {
 		type = UInt16(from: bytes[relative: 4..<6])
 	}
 
-	public var debugDescription: String {return "Lock request \(store): for index \(index), type \(type)"}
+	public init(store: UInt16, index: UInt16, type: UInt16) {
+		self.store = store
+		self.index = index
+		self.type  = type
+	}
+
+	public var dataBytes: [UInt8] {
+		[UInt8](unsafeUninitializedCapacity: 8) { (buffer, count) in
+			let pointer = UnsafeMutableRawBufferPointer(buffer).bindMemory(to: UInt16.self)
+			pointer[0] = store.bigEndian
+			pointer[1] = index.bigEndian
+			pointer[2] = type.bigEndian
+			pointer[3] = 0
+			count = 8
+		}
+	}
+
+	public var debugDescription: String {return "Lock request for store \(store); at index \(index), type \(type)"}
 }
 
 public struct LockChange: Serializable {
@@ -103,9 +125,11 @@ public struct StartDataTransfer: Serializable {
 		Array<UInt8>(unsafeUninitializedCapacity: 16) { (pointer, count) in
 			pointer.write(transferID.bigEndian, at: Positions.transferID.startIndex)
 			pointer.write(store.bigEndian, at: Positions.store.startIndex)
+			pointer.write(UInt16(0), at: Positions.store.endIndex)
 			pointer.write(frameNumber.bigEndian, at: Positions.frameNumber.startIndex)
 			pointer.write(size.bigEndian, at: Positions.size.startIndex)
 			pointer.write(mode.rawValue.bigEndian, at: Positions.mode.startIndex)
+			pointer.write(UInt16(0), at: Positions.mode.endIndex)
 			count = 16
 		}
 	}
@@ -133,10 +157,10 @@ public struct StartDataTransfer: Serializable {
 public struct ContinueDataTransfer: Serializable {
 	public static let title = MessageTitle(string: "FTCD")
 
-	let transferID:   UInt16
+	public let transferID:   UInt16
 	let magicNumber:  UInt8
-	let chunkSize:    UInt16
-	let chunkCount:   UInt16
+	public let chunkSize:    UInt16
+	public let chunkCount:   UInt16
 	let magicNumber2: UInt16
 
 	public init(with bytes: ArraySlice<UInt8>) throws {
@@ -177,9 +201,9 @@ public struct ContinueDataTransfer: Serializable {
 public struct SetFileDescription: Serializable {
 	public static let title = MessageTitle(string: "FTFD")
 
-	let transferID: UInt16
-	let name, description: String
-	let hash: ArraySlice<UInt8>
+	public let transferID: UInt16
+	public let name, description: String
+	public let hash: ArraySlice<UInt8>
 
 	public init(with bytes: ArraySlice<UInt8>) throws {
 		transferID = UInt16(from: bytes[relative: Positions.transferID])
