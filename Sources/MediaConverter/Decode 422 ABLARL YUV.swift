@@ -158,7 +158,7 @@ public func encodeRunLength(data: Data) -> Data {
 		while cursor < endPixel {
 			var nextCursor = cursor.successor()
 			defer { cursor = nextCursor }
-			while cursor.pointee == nextCursor.pointee {
+			while nextCursor < endPixel && cursor.pointee == nextCursor.pointee {
 				nextCursor = nextCursor.successor()
 			}
 			let count = cursor.distance(to: nextCursor)
