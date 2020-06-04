@@ -189,6 +189,7 @@ public struct RequestTimeCode: Serializable {
 	public static let title = MessageTitle(string: "TiRq")
 
 	public init(with bytes: ArraySlice<UInt8>) throws {}
+	public init() {}
 
 	public let dataBytes = [UInt8]()
 	public let debugDescription = "Command: Request time code"

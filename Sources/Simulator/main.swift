@@ -7,6 +7,8 @@
 
 import Atem
 import Dispatch
+import Foundation
+import Crypto
 
 let switcher = Switcher { controllers in
     controllers.when { (change: ChangePreviewBus, _) in
@@ -28,24 +30,61 @@ let switcher = Switcher { controllers in
 		controllers.send(AuxiliaryOutputChanged(source: change.source, output: change.output))
 	}
 
+	controllers.when { (request: RequestTimeCode, connection) in
+		let date = Calendar(identifier: .gregorian).dateComponents([.hour, .minute, .second, .nanosecond], from: Date())
+		let timecode = NewTimecode(
+			hour: UInt8(date.hour!),
+			minute: UInt8(date.minute!),
+			second: UInt8(date.second!),
+			frame: UInt8(date.nanosecond! / 20_000_000)
+		)
+		connection.send(timecode)
+	}
+
+	var data = Data()
+	var transfer: StartDataTransfer?
+	var fileDescription: SetFileDescription?
+
 	controllers.when { (request: LockPositionRequest, connection) in
-		print("Lock request")
+		print(request)
+
 		connection.send(LockObtained(frameNumber: 0))
 		connection.send(LockChange(store: 0, isLocked: true))
 	}
 	controllers.when { (request: StartDataTransfer, connection) in
+		data.removeAll(keepingCapacity: true)
+		data.reserveCapacity(Int(request.size))
+		transfer = request
 		print(request)
 		connection.send(
-			ContinueDataTransfer(transferID: request.transferID, chunkSize: 1396, chunkCount: 20)
+			DataTransferChunkRequest(transferID: request.transferID, chunkSize: 1396, chunkCount: 20)
 		)
 	}
-	controllers.when { (fileDescription: SetFileDescription, connection) in
-		print(fileDescription)
+	controllers.when { (newFileDescription: SetFileDescription, connection) in
+		print(newFileDescription)
+		if transfer?.transferID == newFileDescription.transferID {
+			fileDescription = newFileDescription
+			try? data.write(to: URL(fileURLWithPath: "/tmp/atemMedia-\(newFileDescription.name).bin"))
+		} else {
+			print("File description does not match transfer id")
+		}
 	}
-	controllers.when { (data: TransferData, connection) in
-		print("Got data. Sending transfer finish")
-		connection.send(DataTransferCompleted(id: data.transferID))
-		connection.send(LockChange(store: 0, isLocked: false))
+	controllers.when { (newData: TransferData, connection) in
+		print("Got data.")
+
+		if let transfer = transfer, newData.transferID == transfer.transferID {
+			data.append(contentsOf: newData.body)
+
+			if let fileDescription = fileDescription, data.count >= transfer.size {
+				print("received all bytes for", fileDescription.name)
+				let hash = Insecure.MD5.hash(data: data)
+				print("hashes", hash.elementsEqual(fileDescription.hash) ? "match" : "do not match")
+				connection.send(DataTransferCompleted(id: transfer.transferID))
+				connection.send(LockChange(store: 0, isLocked: false))
+			} else {
+				print(Int(transfer.size) - data.count, "bytes remaining")
+			}
+		}
 	}
 
 	

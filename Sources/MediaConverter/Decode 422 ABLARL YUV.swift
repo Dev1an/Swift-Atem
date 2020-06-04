@@ -70,7 +70,7 @@ func to8Bit(_ float: Float32) -> Float32 {
 	clampToUInt8( float * uInt10in8 )
 }
 
-let repeatMarker: UInt64 = 0xFEFE_FEFE_FEFE_FEFE
+public let repeatMarker: UInt64 = 0xFEFE_FEFE_FEFE_FEFE
 
 
 /// Decode 10bit YUV to 8bit RGB
@@ -147,7 +147,7 @@ func to10Bit(_ float: Float32) -> UInt64 {
 	UInt64(clampToUInt8(float) * 4)
 }
 
-func encodeRunLength(data: Data) -> Data {
+public func encodeRunLength(data: Data) -> Data {
 	var compressed = [UInt64]()
 	compressed.reserveCapacity(data.count)
 

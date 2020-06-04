@@ -56,6 +56,7 @@ class ControllerHandler: HandlerWithTimer {
 	final override func executeTimerTask(context: ChannelHandlerContext) {
 		if let state = connectionState {
 			let packets = state.assembleOutgoingPackets()
+//			print(Date().timeIntervalSince(ref), "transmitting", packets.map{$0.number})
 			if packets.count < 50 {
 				for packet in packets {
 					let data = encode(bytes: packet.bytes, for: address, in: context)
@@ -143,6 +144,8 @@ public protocol ControllerConnection: AnyObject {
 	/// - Parameter message: the message that will be sent to the switcher
 	func send(_ message: Serializable)
 
+	func sendPackage(with message: Serializable)
+
 	/// A function that will be called when the connection is lost
 	var whenDisconnected: (()->Void)?   { get set }
 
@@ -159,7 +162,19 @@ public protocol ControllerConnection: AnyObject {
 
 extension ControllerHandler: ControllerConnection {
 	public final func send(_ message: Serializable) {
-		connectionState?.send(message)
+		if let state = connectionState {
+			state.send(message)
+		} else {
+			print("👹 Not sending because connectionstate is nil")
+		}
+	}
+
+	public final func sendPackage(with message: Serializable) {
+		if let state = connectionState {
+			state.send(message, asSeparatePackage: true)
+		} else {
+			print("👹 Not sending because connectionstate is nil")
+		}
 	}
 
 	public final func when<M: Message>(_ handler: @escaping (_ message: M)->Void) {

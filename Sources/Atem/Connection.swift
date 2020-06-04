@@ -48,17 +48,30 @@ public class ConnectionState {
 				lastRead📦ID = packetID
 			} else if packetID == 1 {
 				id = packet.connectionUID
+				print("connected using id", id)
 				messagesToReadNow = packet.messages
 				lastRead📦ID = packetID
 			} else {
-				if let lastRead = lastRead📦ID, packetID == lastRead + 1 {
-					lastRead📦ID = packetID
-					messagesToReadNow = packet.messages + checkUnread📦s()
+				if let lastRead = lastRead📦ID {
+					if packetID == lastRead + 1 {
+						lastRead📦ID = packetID
+						messagesToReadNow = packet.messages + checkUnread📦s()
+					} else if packetID <= lastRead {
+						lastRead📦needsConfirmation = true
+						messagesToReadNow = []
+						print("package \(String(packetID, radix: 16)) already read")
+					} else {
+						print("missing a packet. Got", String(packetID, radix: 16), "needed", String(lastRead + 1, radix: 16))
+						messagesToReadNow = []
+						addUnread(📦: packet)
+					}
 				} else {
+					print("missing a packet. Got", String(packetID, radix: 16), "but lastRead📦ID = nil")
 					messagesToReadNow = []
 					addUnread(📦: packet)
 				}
 			}
+
 		} else {
 			// Packets with messages should have a number
 			// So messages within unnumbered packets are discarded
@@ -70,19 +83,19 @@ public class ConnectionState {
 				packetOutBox.removeSubrange(0...upperBound)
 			}
 		}
+
 		return messagesToReadNow
 	}
 	
-	func send(message: [UInt8]) {
-		let oldCount = messageOutBox.count
-		messageOutBox.append(contentsOf: message)
-		if messageOutBox.count > 1420 {
-			messageOutBoxPages.append(oldCount)
+	func send(message: [UInt8], asSeparatePackage needsSeparatepackage: Bool = false) {
+		if needsSeparatepackage || messageOutBox.count + message.count > 1420 {
+			messageOutBoxPages.append(messageOutBox.count)
 		}
+		messageOutBox.append(contentsOf: message)
 	}
 
-	public func send(_ message: Serializable) {
-		send(message: message.serialize())
+	public func send(_ message: Serializable, asSeparatePackage needsSeparatepackage: Bool = false) {
+		send(message: message.serialize(), asSeparatePackage: needsSeparatepackage)
 	}
 	
 	/// Returns old packets that aren't acknowledged yet together with new packets

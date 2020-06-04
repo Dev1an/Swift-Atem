@@ -46,6 +46,7 @@ struct Packet: CustomDebugStringConvertible {
 			}
 			self.messages = messages
 		}
+//		print(String(UInt16(from: bytes[numberPosition]), radix: 16), messages.count, "*")
 	}
 		
 	/// A textual representation of the packet

@@ -24,7 +24,7 @@ class DataMessageTests: XCTestCase {
 
 	func testContinueDataTransfer() throws {
 		let checker = try KeyPathEqualityChecker(
-			constructed: ContinueDataTransfer(transferID: 5, chunkSize: 4, chunkCount: 3)
+			constructed: DataTransferChunkRequest(transferID: 5, chunkSize: 4, chunkCount: 3)
 		)
 
 		checker.compare(field: \.transferID)

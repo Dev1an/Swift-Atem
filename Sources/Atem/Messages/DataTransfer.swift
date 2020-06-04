@@ -154,7 +154,7 @@ public struct StartDataTransfer: Serializable {
 	}
 }
 
-public struct ContinueDataTransfer: Serializable {
+public struct DataTransferChunkRequest: Serializable {
 	public static let title = MessageTitle(string: "FTCD")
 
 	public let transferID:   UInt16
@@ -186,7 +186,7 @@ public struct ContinueDataTransfer: Serializable {
 		}
 	}
 	public var debugDescription: String {
-		"Continue Data Transfer command"
+		"Command: please send me \(chunkCount) chunks of max \(chunkSize) bytes for transfer 0x\(String(transferID, radix: 16, uppercase: true))"
 	}
 
 	enum Positions {
@@ -216,7 +216,7 @@ public struct SetFileDescription: Serializable {
 		hash = bytes[relative: Positions.hash]
 	}
 
-	public init(transferID: UInt16, name: String, description: String, hash: [UInt8]) {
+	public init(transferID: UInt16, name: String, description: String, hash: [UInt8] = .init(repeating: 1, count: 16)) {
 		self.transferID = transferID
 		self.name = name
 		self.description = description
