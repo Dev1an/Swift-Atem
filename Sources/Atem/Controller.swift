@@ -144,7 +144,7 @@ public protocol ControllerConnection: AnyObject {
 	/// - Parameter message: the message that will be sent to the switcher
 	func send(_ message: Serializable)
 
-	func sendPackage(with message: Serializable)
+	func sendPackage(messages: [UInt8])
 
 	/// A function that will be called when the connection is lost
 	var whenDisconnected: (()->Void)?   { get set }
@@ -169,9 +169,9 @@ extension ControllerHandler: ControllerConnection {
 		}
 	}
 
-	public final func sendPackage(with message: Serializable) {
+	public final func sendPackage(messages: [UInt8]) {
 		if let state = connectionState {
-			state.send(message, asSeparatePackage: true)
+			state.send(message: messages, asSeparatePackage: true)
 		} else {
 			print("👹 Not sending because connectionstate is nil")
 		}

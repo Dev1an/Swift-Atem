@@ -83,20 +83,20 @@ public struct LockChange: Serializable {
 
 public struct LockObtained: Serializable {
 	public static let title = MessageTitle(string: "LKOB")
-	let frameNumber: UInt16
+	public let store: UInt16
 
 	public init(with bytes: ArraySlice<UInt8>) throws {
-		frameNumber = UInt16(from: bytes)
+		store = UInt16(from: bytes)
 	}
 
-	public init(frameNumber: UInt16) {
-		self.frameNumber = frameNumber
+	public init(store: UInt16) {
+		self.store = store
 	}
 
 	public var debugDescription: String { return "Lock obtained" }
 
 	public var dataBytes: [UInt8] {
-		return frameNumber.bytes + [0, 0]
+		return store.bytes + [0, 0]
 	}
 }
 
@@ -143,6 +143,7 @@ public struct StartDataTransfer: Serializable {
 		case clear = 2
 		case write2 = 256
 		case clear2 = 512
+		case writeInputLabel = 513
 	}
 
 	enum Positions {

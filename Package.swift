@@ -12,7 +12,6 @@ let package = Package(
             targets: ["Atem"]),
 		.executable(name: "VersionDump", targets: ["VersionDump"]),
 		.executable(name: "Simulator", targets: ["Simulator"]),
-		.library(name: "MediaConverter", targets: ["MediaConverter"]),
 		.executable(name: "TitleGenerator", targets: ["TitleGenerator"]),
 		.executable(name: "PreviewSwitcher", targets: ["PreviewSwitcher"])
     ],
@@ -30,8 +29,7 @@ let package = Package(
             dependencies: ["NIO"]),
 		.target(name: "VersionDump", dependencies: ["Atem"]),
 		.target(name: "Simulator", dependencies: ["Atem"]),
-		.target(name: "MediaConverter", dependencies: []),
-		.target(name: "TitleGenerator", dependencies: ["MediaConverter", "Atem"]),
+		.target(name: "TitleGenerator", dependencies: ["Atem"]),
 		.target(name: "PreviewSwitcher", dependencies: ["Atem"]),
         .testTarget(
             name: "AtemTests",

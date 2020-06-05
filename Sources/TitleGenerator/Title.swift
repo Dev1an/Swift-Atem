@@ -16,9 +16,11 @@ struct Title: View {
 	var body: some View {
 		Text(text)
 			.font(.system(size: 200))
+			.foregroundColor(.white)
 			.shadow(radius: 10)
 			.padding()
 			.background(Color.black.opacity(0.3))
 			.cornerRadius(10)
+			.padding(80)
 	}
 }

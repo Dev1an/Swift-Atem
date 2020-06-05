@@ -148,6 +148,7 @@ func to10Bit(_ float: Float32) -> UInt64 {
 }
 
 public func encodeRunLength(data: Data) -> Data {
+	let startTime = Date()
 	var compressed = [UInt64]()
 	compressed.reserveCapacity(data.count)
 
@@ -175,6 +176,7 @@ public func encodeRunLength(data: Data) -> Data {
 		}
 	}
 
+	print("encoding took", Date().timeIntervalSince(startTime))
 	return compressed.data
 }
 

@@ -8,7 +8,6 @@
 import Atem
 import Dispatch
 import Foundation
-import Crypto
 
 let switcher = Switcher { controllers in
     controllers.when { (change: ChangePreviewBus, _) in
@@ -77,8 +76,6 @@ let switcher = Switcher { controllers in
 
 			if let fileDescription = fileDescription, data.count >= transfer.size {
 				print("received all bytes for", fileDescription.name)
-				let hash = Insecure.MD5.hash(data: data)
-				print("hashes", hash.elementsEqual(fileDescription.hash) ? "match" : "do not match")
 				connection.send(DataTransferCompleted(id: transfer.transferID))
 				connection.send(LockChange(store: 0, isLocked: false))
 			} else {
