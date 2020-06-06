@@ -40,5 +40,6 @@ if #available(OSX 10.15, *) {
 			uncompressedSize: 1920*1080*4
 		)
 	}
-
+} else {
+	print("Rendering SwiftUI is only available on macOS")
 }
