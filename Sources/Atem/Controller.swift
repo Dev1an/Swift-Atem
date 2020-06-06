@@ -60,8 +60,8 @@ class ControllerHandler: HandlerWithTimer {
 			if packets.count < 50 {
 				for packet in packets {
 					let data = encode(bytes: packet.bytes, for: address, in: context)
-					context.write(data).whenFailure{ error in
-						print(error)
+					context.write(data).whenFailure { error in
+						self.whenError(error)
 					}
 				}
 			} else {
@@ -72,11 +72,15 @@ class ControllerHandler: HandlerWithTimer {
 		} else if awaitingConnectionResponse {
 			let 📦 = SerialPacket.connectToCore(uid: initiationID, type: .connect)
 			let data = encode(bytes: 📦.bytes, for: address, in: context)
-			context.write(data).whenFailure(whenError)
+			context.write(data).whenFailure { error in
+				self.whenError(error)
+							   }
 		} else {
 			let 📦 = SerialPacket(connectionUID: initiationID, acknowledgement: 0)
 			let data = encode(bytes: 📦.bytes, for: address, in: context)
-			context.write(data).whenFailure(whenError)
+			context.write(data).whenFailure { error in
+				self.whenError(error)
+							   }
 		}
 		context.flush()
 	}
@@ -89,7 +93,7 @@ class ControllerHandler: HandlerWithTimer {
 /// To make an anology with real world devices: this class can be compared to a BlackMagicDesign Control Panel. It is used to control a production switcher.
 public class Controller {
 	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
-	public let channel: EventLoopFuture<Channel>
+	public var channel: EventLoopFuture<Channel>?
 	public let messageHandler = PureMessageHandler()
 
 	let eventLoop: EventLoopGroup
@@ -105,15 +109,29 @@ public class Controller {
 	public init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->Void = {_ in}) throws {
 		eventLoop = eventLoopGroup
 		let address = try SocketAddress(ipAddress: ipAddress, port: 9910)
-		let tempHandler = ControllerHandler(address: address, messageHandler: messageHandler)
-		handler = tempHandler
+		handler = ControllerHandler(address: address, messageHandler: messageHandler)
 		setup(handler)
-		channel = DatagramBootstrap(group: eventLoop)
+		connect()
+	}
+
+	func connect() {
+		let channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
 			.channelInitializer {
-				$0.pipeline.addHandler(tempHandler)
+				$0.pipeline.addHandler(self.handler)
 			}
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
+
+		self.channel = channel
+
+		channel.whenSuccess { channel in
+			channel.closeFuture.whenComplete { close in
+				if case .failure(let error) = close {
+					self.handler.whenError(error)
+				}
+				self.eventLoop.next().scheduleTask(in: .seconds(5), self.connect)
+			}
+		}
 	}
 	
 	lazy var uploadManager: UploadManager = {
@@ -129,9 +147,7 @@ public class Controller {
 
 		handler.when { (startInfo: DataTransferChunkRequest) in
 			for chunk in manager.getChunks(for: startInfo.transferID, preferredSize: startInfo.chunkSize, count: startInfo.chunkCount) {
-				self.channel.eventLoop.execute {
-					self.handler.sendPackage(messages: chunk)
-				}
+				self.handler.sendPackage(messages: chunk)
 			}
 		}
 
@@ -154,11 +170,18 @@ public class Controller {
 	///
 	/// - Parameter message: the message that will be sent to the switcher
 	public func send(message: Serializable) {
-		channel.eventLoop.execute {
-			self.handler.send(message)
+		if let channel = channel {
+			channel.eventLoop.execute {
+				self.handler.send(message)
+			}
+		} else {
+			handler.whenError(Error.sendMessageWhileNoNetworkConnection)
 		}
 	}
 
+	enum Error: Swift.Error {
+		case sendMessageWhileNoNetworkConnection
+	}
 
 	/// Upload an image to the Media Pool
 	/// - Parameters:

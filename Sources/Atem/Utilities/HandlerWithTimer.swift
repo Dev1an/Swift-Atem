@@ -7,15 +7,17 @@
 
 import NIO
 
-let sendInterval = TimeAmount.milliseconds(20)
+let sendInterval = TimeAmount.milliseconds(30)
 
 class HandlerWithTimer: ChannelInboundHandler {
 	typealias InboundIn = AddressedEnvelope<ByteBuffer>
 	typealias OutboundOut = AddressedEnvelope<ByteBuffer>
 
 	var nextKeepAliveTask: Scheduled<Void>?
+	var active = false
 
 	func channelActive(context: ChannelHandlerContext) {
+		active = true
 		startLoop(in: context)
 	}
 	
@@ -23,12 +25,15 @@ class HandlerWithTimer: ChannelInboundHandler {
 	
 	func channelInactive(context: ChannelHandlerContext) {
 		nextKeepAliveTask?.cancel()
+		active = false
 	}
 	
 	final func startLoop(in context: ChannelHandlerContext) {
-		nextKeepAliveTask = context.eventLoop.scheduleTask(in: sendInterval) {
-			self.executeTimerTask(context: context)
-			self.startLoop(in: context)
+		if active {
+			nextKeepAliveTask = context.eventLoop.scheduleTask(in: sendInterval) {
+				self.executeTimerTask(context: context)
+				self.startLoop(in: context)
+			}
 		}
 	}
 	
