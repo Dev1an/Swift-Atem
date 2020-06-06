@@ -361,6 +361,7 @@ extension VideoSource {
 }
 
 /// Informs a controller that a connection is succesfully established.
+/// This message should be sent at the end of the connection initiation. The connection initiation is the sequence of packets that is sent at the very beginning of a connection and they contain messages that represent the state of the device at the moment of conection.
 public struct InitiationComplete: Message {
 	public static var title = MessageTitle(string: "InCm")
 	

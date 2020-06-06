@@ -261,14 +261,3 @@ public struct MultiViewConfiguration: Serializable {
 		"\(multiviewCount) multiviews with \(inputCount) inputs"
 	}
 }
-
-/// The message that should be sent at the end of the connection initiation. The connection initiation is the sequence of packets that is sent at the very beginning of a connection and they contain messages that represent the state of the device at the moment of conection.
-struct ConnectionInitiationEnd: Serializable {
-	static let title = MessageTitle(string: "InCm")
-	static let `default` = ConnectionInitiationEnd(with: [])
-	let dataBytes = [UInt8(1), 0, 0, 0]
-
-	init(with bytes: ArraySlice<UInt8>) {}
-
-	let debugDescription = "End of connection initiation sequence."
-}
