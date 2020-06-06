@@ -47,7 +47,7 @@ let switcher = Switcher { controllers in
 	controllers.when { (request: LockPositionRequest, connection) in
 		print(request)
 
-		connection.send(LockObtained(frameNumber: 0))
+		connection.send(LockObtained(store: 0))
 		connection.send(LockChange(store: 0, isLocked: true))
 	}
 	controllers.when { (request: StartDataTransfer, connection) in
