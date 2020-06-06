@@ -23,6 +23,7 @@ extension View {
 		let cgImage = CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width*4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue), provider: dataProvider, decode: nil, shouldInterpolate: false, intent: .defaultIntent)!
 		let imageRep = NSBitmapImageRep(cgImage: cgImage)
 		view.cacheDisplay(in: frame, to: imageRep)
+		try? imageRep.representation(using: .png, properties: [:])?.write(to: URL(fileURLWithPath: "/tmp/atem-media.png"))
 
 		print("rendering took", Date().timeIntervalSince(startTime))
 

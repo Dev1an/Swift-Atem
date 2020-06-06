@@ -147,8 +147,11 @@ func to10Bit(_ float: Float32) -> UInt64 {
 	UInt64(clampToUInt8(float) * 4)
 }
 
+/// Encode to 8bit RGB to 10bit YUV
+/// - Parameters:
+///   - data: array containing groups of (Red Green Blue Alpha) with 8 bits for each channel. So one group is 4 bytes = 32 bit and describes one pixel.
+/// - Returns: array containing groups of (Alpha1 Blue Lum1 Alpha2 Red Lum2). With 10bits for each color channel. So one group is 8 bytes  = 64 bits and describes two pixels
 public func encodeRunLength(data: Data) -> Data {
-	let startTime = Date()
 	var compressed = [UInt64]()
 	compressed.reserveCapacity(data.count)
 
@@ -176,7 +179,6 @@ public func encodeRunLength(data: Data) -> Data {
 		}
 	}
 
-	print("encoding took", Date().timeIntervalSince(startTime))
 	return compressed.data
 }
 

@@ -94,7 +94,7 @@ public class Controller {
 
 	let eventLoop: EventLoopGroup
 	let handler: ControllerHandler
-	
+
 	/// Start a new Controller that connects to an ATEM Switcher specified by its IP address.
 	///
 	/// When a connection to a switcher is being initialized it will receive `Message`s from the switcher to describe its initial state. If you are interested in these messages use the `setup` parameter to set up handlers for them (see `ControllerConnection.when(...)`). When the connection initiation process is finished the `ConnectionInitiationEnd` message will be sent. From that moment on you know that a connection is succesfully established.
@@ -116,7 +116,40 @@ public class Controller {
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 0))
 	}
 	
-	
+	lazy var uploadManager: UploadManager = {
+		let manager = UploadManager()
+		var lockedStore: UInt16?
+
+		handler.when { (lock: LockObtained) in
+			lockedStore = lock.store
+			if let startTransfer = manager.getTransfer(store: lock.store) {
+				self.send(message: startTransfer)
+			}
+		}
+
+		handler.when { (startInfo: DataTransferChunkRequest) in
+			for chunk in manager.getChunks(for: startInfo.transferID, preferredSize: startInfo.chunkSize, count: startInfo.chunkCount) {
+				self.channel.eventLoop.execute {
+					self.handler.sendPackage(messages: chunk)
+				}
+			}
+		}
+
+		handler.when { (completion: DataTransferCompleted) in
+			manager.markAsCompleted(transferId: completion.transferID)
+			if let store = lockedStore {
+				if let startTransfer = manager.getTransfer(store: store) {
+					self.send(message: startTransfer)
+				} else {
+					self.send(message: LockRequest(store: store, state: 0))
+					lockedStore = nil
+				}
+			}
+		}
+
+		return manager
+	}()
+
 	/// Sends a message to the connected switcher.
 	///
 	/// - Parameter message: the message that will be sent to the switcher
@@ -124,6 +157,23 @@ public class Controller {
 		channel.eventLoop.execute {
 			self.handler.send(message)
 		}
+	}
+
+
+	/// Upload an image to the Media Pool
+	/// - Parameters:
+	///   - slot: The number of the still in the media pool the image will be uploaded to
+	///   - data: Raw YUV data. Use `encodeRunLength(data: Data)` to convert an RGBA image to the required YUV format.
+	///   - uncompressedSize: The size of the image before run length encoding
+	public func uploadStill(slot: UInt16, data: Data, uncompressedSize: UInt32) {
+		uploadManager.createTransfer(
+			store: 0,
+			frameNumber: slot,
+			data: data,
+			uncompressedSize: uncompressedSize,
+			mode: .write
+		)
+		send(message: LockPositionRequest(store: 0, index: slot, type: 1))
 	}
 }
 

@@ -15,12 +15,14 @@ struct Title: View {
 	@available(OSX 10.15, *)
 	var body: some View {
 		Text(text)
-			.font(.system(size: 200))
+			.font(.system(size: 30))
+			.shadow(color: Color.black.opacity(0.5), radius: 0, x: -1, y: -1)
+			.shadow(color: Color.black.opacity(0.5), radius: 3)
 			.foregroundColor(.white)
-			.shadow(radius: 10)
 			.padding()
 			.background(Color.black.opacity(0.3))
-			.cornerRadius(10)
-			.padding(80)
+			.cornerRadius(5)
+			.frame(width: 1080, height: 1920, alignment: .leading)
+			.rotationEffect(.degrees(90))
 	}
 }

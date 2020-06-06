@@ -7,21 +7,21 @@
 
 import Foundation
 
-public class FileManager {
+public class UploadManager {
 
 	private var transferCounter: UInt16 = 0
 	private var transfers = [UInt16 : Transfer]()
 
-	public struct Transfer {
+	struct Transfer {
 		let start: StartDataTransfer
 		let description: SetFileDescription
 		let data: Data
 		var transferredBytes = 0
 	}
 
-	public init() {}
+	init() {}
 
-	public func createTransfer(store: UInt16, frameNumber: UInt16, data: Data, uncompressedSize: UInt32, mode: StartDataTransfer.Mode, name optionalName: String? = nil, description: String = "") {
+	func createTransfer(store: UInt16, frameNumber: UInt16, data: Data, uncompressedSize: UInt32, mode: StartDataTransfer.Mode, name optionalName: String? = nil, description: String = "") {
 
 		let id = transferCounter
 		transferCounter += 1
@@ -37,11 +37,11 @@ public class FileManager {
 		transfers[id] = transfer
 	}
 
-	public func markAsCompleted(transferId: UInt16) {
+	func markAsCompleted(transferId: UInt16) {
 		transfers.removeValue(forKey: transferId)
 	}
 
-	public func getChunks(for id: UInt16, preferredSize: UInt16, count: UInt16) -> [[UInt8]] {
+	func getChunks(for id: UInt16, preferredSize: UInt16, count: UInt16) -> [[UInt8]] {
 		guard let transfer = transfers[id] else {
 			return []
 		}
@@ -97,11 +97,7 @@ public class FileManager {
 		return chunks
 	}
 
-	public func getTransfer(store: UInt16) -> StartDataTransfer? {
+	func getTransfer(store: UInt16) -> StartDataTransfer? {
 		transfers.values.first { $0.start.store == store }?.start
-	}
-
-	public enum Error: Swift.Error {
-		case noSuchTransfer(id: UInt16)
 	}
 }
