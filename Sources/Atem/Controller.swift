@@ -12,7 +12,8 @@ class ControllerHandler: HandlerWithTimer {
 
 	var connectionState: ConnectionState?
 	let address: SocketAddress
-	let initiationID = ConnectionState.id(firstBit: false)
+	var initiationID = ConnectionState.id(firstBit: false)
+	var oldConnectionID: UID?
 	var awaitingConnectionResponse = true
 	let messageHandler: PureMessageHandler
 
@@ -32,12 +33,12 @@ class ControllerHandler: HandlerWithTimer {
 		let packet = Packet(bytes: envelope.data.readBytes(length: envelope.data.readableBytes)!)
 
 		do {
-			if let connectionState = connectionState {
+			if let connectionState = connectionState, packet.connectionUID == connectionState.id {
 				try messageHandler.handle(messages: connectionState.parse(packet))
 			} else {
-				if awaitingConnectionResponse {
+				if awaitingConnectionResponse, packet.connectionUID == initiationID {
 					awaitingConnectionResponse = false
-				} else {
+				} else if packet.connectionUID != oldConnectionID {
 					let state = ConnectionState(id: packet.connectionUID)
 					connectionState = state
 					try messageHandler.handle(messages: state.parse(packet))
@@ -65,8 +66,7 @@ class ControllerHandler: HandlerWithTimer {
 					}
 				}
 			} else {
-				connectionState = nil
-				awaitingConnectionResponse = true
+				resetState()
 				whenDisconnected?()
 			}
 		} else if awaitingConnectionResponse {
@@ -83,6 +83,15 @@ class ControllerHandler: HandlerWithTimer {
 							   }
 		}
 		context.flush()
+	}
+
+	func resetState() {
+		if let oldConnection = connectionState {
+			oldConnectionID = oldConnection.id
+			connectionState = nil
+		}
+		awaitingConnectionResponse = true
+		initiationID = ConnectionState.id(firstBit: false)
 	}
 }
 
