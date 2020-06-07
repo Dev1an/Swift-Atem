@@ -10,6 +10,7 @@ let package = Package(
         .library(
             name: "Atem",
             targets: ["Atem"]),
+        .executable(name: "AtemAppleDiscovery", targets: ["AtemAppleDiscovery"]),
 		.executable(name: "VersionDump", targets: ["VersionDump"]),
 		.executable(name: "Simulator", targets: ["Simulator"]),
 		.executable(name: "TitleGenerator", targets: ["TitleGenerator"]),
@@ -24,9 +25,8 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(
-            name: "Atem",
-            dependencies: ["NIO"]),
+        .target(name: "Atem", dependencies: ["NIO"]),
+		.target(name: "AtemAppleDiscovery", dependencies: ["NIO"]),
 		.target(name: "VersionDump", dependencies: ["Atem"]),
 		.target(name: "Simulator", dependencies: ["Atem"]),
 		.target(name: "TitleGenerator", dependencies: ["Atem"]),
