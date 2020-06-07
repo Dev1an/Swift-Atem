@@ -33,6 +33,10 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 		browser.searchForServices(ofType: "_blackmagic._tcp.", inDomain: "local.")
 	}
 
+	public func stop() {
+		browser.stop()
+	}
+
 	public func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
 		recognizers.insert( Recognizer(service: service, browser: self) )
 	}
