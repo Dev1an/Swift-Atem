@@ -77,6 +77,7 @@ struct Packet: CustomDebugStringConvertible {
 }
 
 struct SerialPacket {
+	let creation = ProcessInfo.processInfo.systemUptime
 	var bytes: [UInt8]
 	
 	init<C: Collection>(connectionUID: UID, data: C, number: UInt16? = nil, acknowledgement: UInt16? = nil) where C.Iterator.Element == UInt8 {

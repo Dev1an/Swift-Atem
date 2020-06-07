@@ -57,17 +57,20 @@ class ControllerHandler: HandlerWithTimer {
 	final override func executeTimerTask(context: ChannelHandlerContext) {
 		if let state = connectionState {
 			let packets = state.assembleOutgoingPackets()
-//			print(Date().timeIntervalSince(ref), "transmitting", packets.map{$0.number})
-			if packets.count < 50 {
-				for packet in packets {
-					let data = encode(bytes: packet.bytes, for: address, in: context)
-					context.write(data).whenFailure { error in
-						self.whenError(error)
+			if let oldestPacketCreationTime = packets.first?.creation {
+				if oldestPacketCreationTime < ProcessInfo.processInfo.systemUptime - 1.5 {
+					// The state where a packet is not acknowledged after 1.5 seconds
+					// is interpreted as a disconnected state.
+					resetState()
+					whenDisconnected?()
+				} else {
+					for packet in packets {
+						let data = encode(bytes: packet.bytes, for: address, in: context)
+						context.write(data).whenFailure { error in
+							self.whenError(error)
+						}
 					}
 				}
-			} else {
-				resetState()
-				whenDisconnected?()
 			}
 		} else if awaitingConnectionResponse {
 			let 📦 = SerialPacket.connectToCore(uid: initiationID, type: .connect)
