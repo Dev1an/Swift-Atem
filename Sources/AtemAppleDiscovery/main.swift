@@ -11,7 +11,7 @@ import NIO
 public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegate {
 	let browser = NetServiceBrowser()
 	var recognizers = Set<Recognizer>()
-	var atems = [NetService: AtemDescription]()
+	public private(set) var discoveredAtems = [NetService: AtemDescription]()
 
 	public typealias AtemAppearanceHandler = (AtemDescription) -> Void
 	public var atemDidAppearHandler: AtemAppearanceHandler = { atem in
@@ -49,7 +49,7 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 	}
 
 	public func netServiceBrowser(_ browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
-		if let atem = atems.removeValue(forKey: service) {
+		if let atem = discoveredAtems.removeValue(forKey: service) {
 			atemDidDisappearHandler(atem)
 		} else {
 			print("Warning: no description found for lost atem", service)
@@ -105,7 +105,7 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 		func isFullyRecognised() {
 			let description = AtemDescription(addresses: addresses!, properties: properties!)
 			browser.atemDidAppearHandler(description)
-			browser.atems[service] = description
+			browser.discoveredAtems[service] = description
 			unregister()
 		}
 
