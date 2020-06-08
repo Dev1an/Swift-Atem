@@ -363,7 +363,7 @@ extension VideoSource {
 /// Informs a controller that a connection is succesfully established.
 /// This message should be sent at the end of the connection initiation. The connection initiation is the sequence of packets that is sent at the very beginning of a connection and they contain messages that represent the state of the device at the moment of conection.
 public struct InitiationComplete: Message {
-	public static var title = MessageTitle(string: "InCm")
+	public static let title = MessageTitle(string: "InCm")
 	
 	public init(with bytes: ArraySlice<UInt8>) throws {
 		print("InCm", bytes)
@@ -375,7 +375,7 @@ public struct InitiationComplete: Message {
 
 /// Informs a controller that the some tally lights might have changed.
 public struct SourceTallies: Serializable {
-	public static var title = MessageTitle(string: "TlSr")
+	public static let title = MessageTitle(string: "TlSr")
 	
 	/// The state of the tally lights for each source of the Atem switcher
 	public let tallies: [VideoSource:TallyLight]
@@ -414,5 +414,65 @@ public struct SourceTallies: Serializable {
 		return "Source tallies (\n" +
 		"\(tallies.sorted{$0.0.rawValue < $1.0.rawValue}.map{"\t\($0.0): \($0.1)"}.joined(separator: "\n"))" +
 		"\n)"
+	}
+}
+
+import Foundation
+
+@available(OSX 10.12, *)
+public struct ChangeKeyDVE: Serializable {
+	public static let title = MessageTitle(string: "CKDV")
+
+	public let changedElements: ChangeMask
+	public let mixEffectIndex: UInt8
+	public let upstreamKey: UInt8
+	public let rotation: Measurement<UnitAngle>
+
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		changedElements = ChangeMask(rawValue: UInt32(from: bytes[relative: Position.changedElements]))
+		mixEffectIndex = bytes[relative: Position.mixEffect]
+		upstreamKey = bytes[relative: Position.upstreamKey]
+		rotation = Measurement(
+			value: Double(UInt32(from: bytes[relative: Position.rotation])) / 10,
+			unit: UnitAngle.degrees
+		)
+	}
+
+	public init(mixEffect: UInt8, key: UInt8, rotation: Measurement<UnitAngle>) {
+		changedElements = .rotation
+		mixEffectIndex = mixEffect
+		upstreamKey = key
+		self.rotation = rotation
+	}
+
+	public var debugDescription: String {
+		"Change Key DVE. \(changedElements)"
+	}
+
+	public var dataBytes: [UInt8] {
+		.init(unsafeUninitializedCapacity: 64) { (buffer, count) in
+			buffer.write(changedElements.rawValue.bigEndian, at: Position.changedElements.lowerBound)
+			buffer[Position.mixEffect] = mixEffectIndex
+			buffer[Position.upstreamKey] = upstreamKey
+			buffer.write(UInt32(rotation.converted(to: .degrees).value * 10).bigEndian, at: Position.rotation.lowerBound)
+			count = 64
+		}
+	}
+
+	enum Position {
+		static let changedElements = 0..<4
+		static let mixEffect = 4
+		static let upstreamKey = 5
+		static let rotation = 24..<28
+	}
+
+	public struct ChangeMask: OptionSet {
+		public let rawValue: UInt32
+
+		public init(rawValue: UInt32) {
+			self.rawValue = rawValue
+		}
+
+		public static let rotation = Self(rawValue: 1 << 4)
 	}
 }
