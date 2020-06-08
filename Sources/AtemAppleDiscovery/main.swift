@@ -11,11 +11,18 @@ import NIO
 public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegate {
 	let browser = NetServiceBrowser()
 	var recognizers = Set<Recognizer>()
-	public typealias AtemFoundHandler = ([SocketAddress], [String: Data]) -> Void
-	public var atemFoundHandler: AtemFoundHandler = { addresses, properties in
-		print("No handler attached to AtemBrowser.")
-		print("Attach a handler using <AtemBrowser>.atemFoundHandler = {address, properties in <do something here>}")
-		print("Atem found", addresses, properties)
+	var atems = [NetService: AtemDescription]()
+
+	public typealias AtemAppearanceHandler = (AtemDescription) -> Void
+	public var atemDidAppearHandler: AtemAppearanceHandler = { atem in
+		print("No 'appear' handler attached to AtemBrowser.")
+		print("Attach a handler using <AtemBrowser>.atemFoundHandler = {atem in <do something here>}")
+		print("Atem found", atem)
+	}
+	public var atemDidDisappearHandler: AtemAppearanceHandler = { atem in
+		print("No 'disappear' handler attached to AtemBrowser.")
+		print("Attach a handler using <AtemBrowser>.atemLostHandler = {atem in <do something here>}")
+		print("Atem lost", atem)
 	}
 
 	public override init() {
@@ -23,9 +30,9 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 		browser.delegate = self
 	}
 
-	public convenience init(whenFindingAtem handler: @escaping AtemFoundHandler) {
+	public convenience init(whenFindingAtem handler: @escaping AtemAppearanceHandler) {
 		self.init()
-		atemFoundHandler = handler
+		atemDidAppearHandler = handler
 		start()
 	}
 
@@ -42,7 +49,11 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 	}
 
 	public func netServiceBrowser(_ browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
-		print(service.name, "went away")
+		if let atem = atems.removeValue(forKey: service) {
+			atemDidDisappearHandler(atem)
+		} else {
+			print("Warning: no description found for lost atem", service)
+		}
 	}
 
 	class Recognizer: NSObject, NetServiceDelegate {
@@ -92,7 +103,9 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 		}
 
 		func isFullyRecognised() {
-			browser.atemFoundHandler(addresses!, properties!)
+			let description = AtemDescription(addresses: addresses!, properties: properties!)
+			browser.atemDidAppearHandler(description)
+			browser.atems[service] = description
 			unregister()
 		}
 
@@ -124,10 +137,14 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 			}
 		}
 	}
+
+	public struct AtemDescription {
+		public let addresses: [SocketAddress]
+		public let properties: [String: Data]
+	}
 }
 
-let browser = AtemBrowser { addresses, properties in
-	print("atem found on", addresses, properties)
-}
+let browser = AtemBrowser()
+browser.start()
 
 RunLoop.main.run()
