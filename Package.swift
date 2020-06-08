@@ -7,10 +7,8 @@ let package = Package(
     name: "Atem",
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
-        .library(
-            name: "Atem",
-            targets: ["Atem"]),
-        .executable(name: "AtemAppleDiscovery", targets: ["AtemAppleDiscovery"]),
+        .library(name: "Atem", targets: ["Atem"]),
+        .library(name: "AtemAppleDiscovery", targets: ["AtemAppleDiscovery"]),
 		.executable(name: "VersionDump", targets: ["VersionDump"]),
 		.executable(name: "Simulator", targets: ["Simulator"]),
 		.executable(name: "TitleGenerator", targets: ["TitleGenerator"]),
