@@ -10,7 +10,7 @@ import NIO
 
 enum NetworkDiscovery {
 	func discover() {
-		if #available(OSX 10.15, *) {
+		if #available(OSX 10.15, iOS 13.0, *) {
 			let browser = NWBrowser(for: .bonjourWithTXTRecord(type: "_blackmagic._tcp.", domain: nil), using: .udp)
 			let result = DispatchGroup()
 			browser.browseResultsChangedHandler = { services, changes in
