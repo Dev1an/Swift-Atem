@@ -419,7 +419,7 @@ public struct SourceTallies: Serializable {
 
 import Foundation
 
-@available(OSX 10.12, *)
+@available(OSX 10.12, iOS 10.0, *)
 public struct ChangeKeyDVE: Serializable {
 	public static let title = MessageTitle(string: "CKDV")
 
