@@ -144,7 +144,7 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 	}
 }
 
-let browser = AtemBrowser()
-browser.start()
-
-RunLoop.main.run()
+//let browser = AtemBrowser()
+//browser.start()
+//
+//RunLoop.main.run()
