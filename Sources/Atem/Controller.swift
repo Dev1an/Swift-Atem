@@ -137,6 +137,8 @@ public class Controller {
 		self.init(socket: socket, eventLoopGroup: eventLoopGroup, setup: setup)
 	}
 
+	public var address: SocketAddress { handler.address }
+
 	func connect() {
 		let channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
