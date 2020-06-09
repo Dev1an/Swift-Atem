@@ -11,11 +11,11 @@ import NIO
 class ControllerHandler: HandlerWithTimer {
 
 	var connectionState: ConnectionState?
-	let address: SocketAddress
 	var initiationID = ConnectionState.id(firstBit: false)
 	var oldConnectionID: UID?
 	var awaitingConnectionResponse = true
 	let messageHandler: PureMessageHandler
+	public let address: SocketAddress
 
 	public var whenDisconnected: (()->Void)?
 	public var whenError = { (error: Error)->Void in
