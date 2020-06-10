@@ -100,6 +100,7 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 
 		func netService(_ sender: NetService, didNotResolve errorDict: [String : NSNumber]) {
 			print("Warning: Address for", service.name, "could not be resolved")
+			service.resolve(withTimeout: 5)
 		}
 
 		func isFullyRecognised() {
