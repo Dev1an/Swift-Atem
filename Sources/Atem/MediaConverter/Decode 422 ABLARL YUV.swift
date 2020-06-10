@@ -124,7 +124,7 @@ func ablarlFrom(rgbaBundle: UnsafeRawPointer) -> UInt64 {
 	let lum2 = red2 * rLum + green2 * gLum + blue2 * bLum
 
 	let r1 = red1 - lum1
-	let r2 = red2 - lum1
+	let r2 = red2 - lum2
 	let r = toSigned10Bit( rChrom * (r1 + r2)/2 )
 
 	let b1 = blue1 - lum1
