@@ -20,14 +20,14 @@ extension View {
 		view.frame = frame
 		let data = Data(count: width * height * 4)
 		let dataProvider = CGDataProvider(data: data as NSData)!
-		let cgImage = CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width*4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue), provider: dataProvider, decode: nil, shouldInterpolate: false, intent: .defaultIntent)!
+		let cgImage = CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width*4, space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue), provider: dataProvider, decode: nil, shouldInterpolate: false, intent: .defaultIntent)!
 		let imageRep = NSBitmapImageRep(cgImage: cgImage)
 		view.cacheDisplay(in: frame, to: imageRep)
 		try? imageRep.representation(using: .png, properties: [:])?.write(to: URL(fileURLWithPath: "/tmp/atem-media.png"))
 
 		print("rendering took", Date().timeIntervalSince(startTime))
 
-//		try? imageRep.representation(using: .png, properties: [:])?.write(to: URL(fileURLWithPath: "/tmp/media.png"))
+//		try? yuv.write(to: URL(fileURLWithPath: "/tmp/atem-media.bin"))
 		return encodeRunLength(data: imageRep.cgImage!.dataProvider!.data! as Data)
 	}
 }

@@ -7,12 +7,12 @@
 
 import Foundation
 
-let rLum: Float32 = 0.2126
-let gLum: Float32 = 0.7152
-let bLum: Float32 = 1 - rLum - gLum
+let rLum: Float = 0.2126
+let gLum: Float = 0.7152
+let bLum: Float = 1 - rLum - gLum
 
-let bChrom: Float32 = 0.5389
-let rChrom: Float32 = 0.6350
+let bChrom: Float = 0.5389
+let rChrom: Float = 0.6350
 
 // ITU-Recommendation BT.709
 // Y   = 0.2126*R + 0.7152*G + 0.0722*B
@@ -20,20 +20,20 @@ let rChrom: Float32 = 0.6350
 // Cr  = 0.6350*(R-Y)
 
 
-let uInt10Max = Float32(1 << 10) - 1
-let sInt10End = Float32(1 <<  9)
+let uInt10Max = Float(1 << 10) - 1
+let sInt10End = Float(1 <<  9)
 let sInt10Max = sInt10End - 1
-let uInt10in8 = Float32(UInt8.max) / uInt10Max
-let sInt10in8 = Float32(UInt8.max) / sInt10Max
+let uInt10in8 = Float(UInt8.max) / uInt10Max
+let sInt10in8 = Float(UInt8.max) / sInt10Max
 
 func rgba(from ablarl: UInt64) -> UInt64 {
-	let alpha1 = Float32((ablarl >> 52) & 0b0000_0011_1111_1111)
-	let blue   = Float32((ablarl >> 42) & 0b0000_0011_1111_1111) - sInt10End
-	let lum1   = Float32((ablarl >> 32) & 0b0000_0011_1111_1111)
+	let alpha1 = Float((ablarl >> 52) & 0b0000_0011_1111_1111)
+	let blue   = Float((ablarl >> 42) & 0b0000_0011_1111_1111) - sInt10End
+	let lum1   = Float((ablarl >> 32) & 0b0000_0011_1111_1111)
 
-	let alpha2 = Float32((ablarl >> 20) & 0b0000_0011_1111_1111)
-	let red    = Float32((ablarl >> 10) & 0b0000_0011_1111_1111) - sInt10End
-	let lum2   = Float32((ablarl      ) & 0b0000_0011_1111_1111)
+	let alpha2 = Float((ablarl >> 20) & 0b0000_0011_1111_1111)
+	let red    = Float((ablarl >> 10) & 0b0000_0011_1111_1111) - sInt10End
+	let lum2   = Float((ablarl      ) & 0b0000_0011_1111_1111)
 
 	let rs = red / rChrom
 	let r1 = to8Bit(rs + lum1)
@@ -62,11 +62,11 @@ func rgba(from ablarl: UInt64) -> UInt64 {
 	return (sr1 | sg1 | sb1 | sa1 | sr2 | sg2 | sb2 | sa2).littleEndian
 }
 
-func clampToUInt8(_ float: Float32) -> Float32 {
+func clampToUInt8(_ float: Float) -> Float {
 	min(255, max(0, float))
 }
 
-func to8Bit(_ float: Float32) -> Float32 {
+func to8Bit(_ float: Float) -> Float {
 	clampToUInt8( float * uInt10in8 )
 }
 
@@ -111,14 +111,14 @@ func decodeRunLength(data compressed: Data, uncompressedByteCount: Int? = nil) -
 }
 
 func ablarlFrom(rgbaBundle: UnsafeRawPointer) -> UInt64 {
-	let red1   = Float32(rgbaBundle.load(fromByteOffset: 0, as: UInt8.self))
-	let green1 = Float32(rgbaBundle.load(fromByteOffset: 1, as: UInt8.self))
-	let blue1  = Float32(rgbaBundle.load(fromByteOffset: 2, as: UInt8.self))
-	let alpha1 = Float32(rgbaBundle.load(fromByteOffset: 3, as: UInt8.self))
-	let red2   = Float32(rgbaBundle.load(fromByteOffset: 4, as: UInt8.self))
-	let green2 = Float32(rgbaBundle.load(fromByteOffset: 5, as: UInt8.self))
-	let blue2  = Float32(rgbaBundle.load(fromByteOffset: 6, as: UInt8.self))
-	let alpha2 = Float32(rgbaBundle.load(fromByteOffset: 7, as: UInt8.self))
+	let red1   = Float(rgbaBundle.load(fromByteOffset: 0, as: UInt8.self))
+	let green1 = Float(rgbaBundle.load(fromByteOffset: 1, as: UInt8.self))
+	let blue1  = Float(rgbaBundle.load(fromByteOffset: 2, as: UInt8.self))
+	let alpha1 = Float(rgbaBundle.load(fromByteOffset: 3, as: UInt8.self))
+	let red2   = Float(rgbaBundle.load(fromByteOffset: 4, as: UInt8.self))
+	let green2 = Float(rgbaBundle.load(fromByteOffset: 5, as: UInt8.self))
+	let blue2  = Float(rgbaBundle.load(fromByteOffset: 6, as: UInt8.self))
+	let alpha2 = Float(rgbaBundle.load(fromByteOffset: 7, as: UInt8.self))
 
 	let lum1 = red1 * rLum + green1 * gLum + blue1 * bLum
 	let lum2 = red2 * rLum + green2 * gLum + blue2 * bLum
@@ -139,12 +139,15 @@ func ablarlFrom(rgbaBundle: UnsafeRawPointer) -> UInt64 {
 	return ((a1 << 52) | (b << 42) | (l1 << 32) | (a2 << 20) | (r << 10) | l2).bigEndian
 }
 
-func toSigned10Bit(_ float: Float32) -> UInt64 {
+func toSigned10Bit(_ float: Float) -> UInt64 {
 	UInt64(min(uInt10Max, max(0, float * 4 + sInt10End)))
 }
 
-func to10Bit(_ float: Float32) -> UInt64 {
-	UInt64(clampToUInt8(float) * 4)
+func to10Bit(_ float: Float) -> UInt64 {
+	UInt64(min(uInt10Max, max(0, float * 55 / 16 + 64)))
+	// The factor 55/16 + 64 shifts and scales [0-255] to [64-893].
+	// That is basically a combination of mapping [0-255] to [16-235] (see SMPTE-125M)
+	// combined with mapping [0-255] to [0-1024] (8bit to 10bit)
 }
 
 /// Encode to 8bit RGB to 10bit YUV
