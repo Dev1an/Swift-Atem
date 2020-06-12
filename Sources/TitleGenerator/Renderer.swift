@@ -27,7 +27,8 @@ extension View {
 
 		print("rendering took", Date().timeIntervalSince(startTime))
 
+//		let yuv = encodeRunLength(rgbData: imageRep.cgImage!.dataProvider!.data! as Data)
 //		try? yuv.write(to: URL(fileURLWithPath: "/tmp/atem-media.bin"))
-		return encodeRunLength(data: imageRep.cgImage!.dataProvider!.data! as Data)
+		return encodeRunLength(rgbData: imageRep.cgImage!.dataProvider!.data! as Data)
 	}
 }

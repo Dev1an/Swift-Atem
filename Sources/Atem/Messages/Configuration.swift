@@ -261,3 +261,75 @@ public struct MultiViewConfiguration: Serializable {
 		"\(multiviewCount) multiviews with \(inputCount) inputs"
 	}
 }
+
+public struct ChangeInputProperties: Serializable {
+	public static let title = MessageTitle(string: "CInL")
+
+	public let changeMask: ChangeMask
+	public let input: UInt16
+	public let longName: String
+	public let shortName: String
+
+	public init(with bytes: ArraySlice<UInt8>) throws {
+		fatalError("unimplemented")
+	}
+
+	public init(input: UInt16, longName: String?, shortName: String?) {
+		self.input = input
+
+		var changedElements = ChangeMask(rawValue: 0)
+		if let longName = longName {
+			assert(longName.count <= Position.longName.count) // TODO check ascii byte length
+			changedElements.insert(.longName)
+			self.longName = longName
+		} else {
+			self.longName = "! Not Set !"
+		}
+		if let shortName = shortName {
+			assert(shortName.count <= Position.shortName.count) // TODO check ascii byte length
+			changedElements.insert(.shortName)
+			self.shortName = shortName
+		} else {
+			self.shortName = "! Not Set !"
+		}
+
+		self.changeMask = changedElements
+	}
+
+	public var debugDescription: String {
+		"Change input properties \(changeMask)"
+	}
+
+	public var dataBytes: [UInt8] {
+		.init(unsafeUninitializedCapacity: 32) { (buffer, count) in
+			buffer[Position.changeMask] = changeMask.rawValue
+			buffer[Position.changeMask + 1] = 0 // unknown byte
+			buffer.write(input.bigEndian, at: Position.input.lowerBound)
+			if changeMask.contains(.longName) { buffer.write(longName, to: Position.longName) }
+			if changeMask.contains(.shortName) { buffer.write(longName, to: Position.shortName) }
+
+			buffer.write(UInt16(0), at: 30) // TODO may be removed
+			count = 32
+		}
+	}
+
+	enum Position {
+		static let changeMask = 0
+		static let input = 2..<4
+		static let longName = 4..<24
+		static let shortName = 24..<28
+		static let externalPortType = 28..<30
+	}
+
+	public struct ChangeMask: OptionSet {
+		public let rawValue: UInt8
+
+		public init(rawValue: UInt8) {
+			self.rawValue = rawValue
+		}
+
+		public static let longName  = Self(rawValue: 1 << 0)
+		public static let shortName = Self(rawValue: 1 << 1)
+		public static let externalPortType = Self(rawValue: 1 << 2)
+	}
+}

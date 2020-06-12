@@ -21,7 +21,7 @@ public class UploadManager {
 
 	init() {}
 
-	func createTransfer(store: UInt16, frameNumber: UInt16, data: Data, uncompressedSize: UInt32, mode: StartDataTransfer.Mode, name optionalName: String? = nil, description: String = "") {
+	func createTransfer(store: UInt16, frameNumber: UInt16, data: Data, uncompressedSize: UInt32, mode: StartDataTransfer.Mode, name optionalName: String? = nil, description: String = "") -> StartDataTransfer {
 
 		let id = transferCounter
 		transferCounter += 1
@@ -35,6 +35,7 @@ public class UploadManager {
 		)
 
 		transfers[id] = transfer
+		return transfer.start
 	}
 
 	func markAsCompleted(transferId: UInt16) {

@@ -75,10 +75,10 @@ public let repeatMarker: UInt64 = 0xFEFE_FEFE_FEFE_FEFE
 
 /// Decode 10bit YUV to 8bit RGB
 /// - Parameters:
-///   - compressed: array containing groups of (Alpha1 Blue Lum1 Alpha2 Red Lum2). With 10bits for each color channel. So one group is 8 bytes  = 64 bits and describes two pixels
+///   - yuvData: array containing groups of (Alpha1 Blue Lum1 Alpha2 Red Lum2). With 10bits for each color channel. So one group is 8 bytes  = 64 bits and describes two pixels
 ///   - uncompressedByteCount: the size of the decompressed data
 /// - Returns: array containing groups of (Red Green Blue Alpha) with 8 bits for each channel. So one group is 4 bytes = 32 bit and describes one pixel.
-func decodeRunLength(data compressed: Data, uncompressedByteCount: Int? = nil) -> Data {
+func decodeRunLength(yuvData compressed: Data, uncompressedByteCount: Int? = nil) -> Data {
 	var decompressed = [UInt64]()
 	if let byteCount = uncompressedByteCount {
 		decompressed.reserveCapacity(byteCount / 8)
@@ -152,9 +152,9 @@ func to10Bit(_ float: Float) -> UInt64 {
 
 /// Encode to 8bit RGB to 10bit YUV
 /// - Parameters:
-///   - data: array containing groups of (Red Green Blue Alpha) with 8 bits for each channel. So one group is 4 bytes = 32 bit and describes one pixel.
+///   - rgbData: array containing groups of (Red Green Blue Alpha) with 8 bits for each channel. So one group is 4 bytes = 32 bit and describes one pixel.
 /// - Returns: array containing groups of (Alpha1 Blue Lum1 Alpha2 Red Lum2). With 10bits for each color channel. So one group is 8 bytes  = 64 bits and describes two pixels
-public func encodeRunLength(data: Data) -> Data {
+public func encodeRunLength(rgbData data: Data) -> Data {
 	var compressed = [UInt64]()
 	compressed.reserveCapacity(data.count)
 

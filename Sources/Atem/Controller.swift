@@ -214,7 +214,7 @@ public class Controller {
 	///   - data: Raw YUV data. Use `encodeRunLength(data: Data)` to convert an RGBA image to the required YUV format.
 	///   - uncompressedSize: The size of the image before run length encoding
 	public func uploadStill(slot: UInt16, data: Data, uncompressedSize: UInt32) {
-		uploadManager.createTransfer(
+		_ = uploadManager.createTransfer(
 			store: 0,
 			frameNumber: slot,
 			data: data,
@@ -222,6 +222,24 @@ public class Controller {
 			mode: .write
 		)
 		send(message: LockPositionRequest(store: 0, index: slot, type: 1))
+	}
+
+	public func uploadLabel(source: VideoSource, labelImage: Data, longName: String? = nil, shortName: String? = nil) {
+		if longName == nil && shortName == nil {
+			send(message: ChangeInputProperties(input: source.rawValue, longName: String(describing: source), shortName: nil))
+		} else {
+			send(message: ChangeInputProperties(input: source.rawValue, longName: longName, shortName: shortName))
+		}
+		send(
+			message: uploadManager.createTransfer(
+				store: 0xFF_FF,
+				frameNumber: source.rawValue,
+				data: labelImage,
+				uncompressedSize: 28800,
+				mode: .writeInputLabel,
+				name: "Label"
+			)
+		)
 	}
 }
 
