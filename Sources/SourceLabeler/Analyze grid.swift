@@ -39,10 +39,9 @@ func getRounded(gradient: Data) -> [UInt8] {
 }
 
 
-func analyzeGrid() {
-	let baseAddress = "/Users/damiaan/Documents/Projecten/ATEM/Research/communication/Change input name/Gradient on "
-	let gradientB = loadRGBfrom(tiff: baseAddress + "black.tif")
-	let gradientW = loadRGBfrom(tiff: baseAddress + "white.tif")
+func analyzeGrid(filePath: String) {
+	let gradientB = loadRGBfrom(tiff: filePath + "black.tif")
+	let gradientW = loadRGBfrom(tiff: filePath + "white.tif")
 	let gradientBRounded = getRounded(gradient: gradientB)
 	let gradientWRounded = getRounded(gradient: gradientW)
 
