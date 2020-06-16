@@ -117,7 +117,7 @@ class Atem_Tests: XCTestCase {
 
 		print(initialInPr.count)
 
-		let customMsgs = try! [
+		let customMsgs = [
 			VideoSource.PropertiesChanged(
 				source: .input(14),
 				longName: "Camera 15",
@@ -406,7 +406,7 @@ class Atem_Tests: XCTestCase {
 				availability: [.auxiliary],
 				mixEffects: []
 			)
-			].flatMap {$0.serialize()}
+		].flatMap {$0.serialize()}
 
 		print(customMsgs.count)
 	}

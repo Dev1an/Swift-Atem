@@ -70,16 +70,3 @@ extension Serializable {
 enum MessageParseError: Error {
 	case unknownMessageTitle(String)
 }
-
-public func encodeAtem(string: String, length: Int) throws -> [UInt8] {
-	guard string.lengthOfBytes(using: .utf8)<=length else {
-		throw MessageError.stringTooLong(string, length)
-	}
-	let short = string.utf8.prefix(length)
-	if short.count == length {
-		return Array(short)
-	} else {
-		return short + [UInt8](repeating: 0, count: length - short.count)
-	}
-}
-

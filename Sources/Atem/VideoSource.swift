@@ -24,8 +24,9 @@ public enum VideoSource: RawRepresentable {
 	case auxiliary(UInt16)
 	case program(me: UInt16)
 	case preview(me: UInt16)
+	case unknown(UInt16)
 
-	public init?(rawValue: UInt16) {
+	public init(rawValue: UInt16) {
 		switch rawValue {
 		case Base.black.rawValue:
 			self = .black
@@ -40,13 +41,13 @@ public enum VideoSource: RawRepresentable {
 			switch division.rem {
 			case 0: self = .mediaPlayer(UInt16(division.quot))
 			case 1: self = .mediaPlayerKey(UInt16(division.quot))
-			default: return nil
+			default: self = .unknown(rawValue)
 			}
 		case .keyMask ..< .downStreamKeyMask:
-			guard rawValue % 10 == 0 else { return nil }
+			guard rawValue % 10 == 0 else { self = .unknown(rawValue); return }
 			self = .keyMask((rawValue - .keyMask) / 10)
 		case .downStreamKeyMask ..< .superSource:
-			guard rawValue % 10 == 0 else { return nil }
+			guard rawValue % 10 == 0 else { self = .unknown(rawValue); return }
 			self = .downStreamKeyMask( (rawValue - .downStreamKeyMask) / 10 )
 		case Base.superSource.rawValue:
 			self = .superSource
@@ -59,9 +60,9 @@ public enum VideoSource: RawRepresentable {
 			switch division.rem {
 			case 0: self = .program(me: UInt16(division.quot))
 			case 1: self = .preview(me: UInt16(division.quot))
-			default: return nil
+			default: self = .unknown(rawValue)
 			}
-		default: return nil
+		default: self = .unknown(rawValue)
 		}
 	}
 	
@@ -80,6 +81,7 @@ public enum VideoSource: RawRepresentable {
 		case .auxiliary(let number):         return .auxiliary + number
 		case .program(let me):               return .program + me*10
 		case .preview(let me):               return .preview + me*10
+		case .unknown(let rawValue):         return rawValue
 		}
 	}
 	
@@ -130,6 +132,10 @@ public enum VideoSource: RawRepresentable {
 		case composite = 0x0300
 		case component = 0x0400
 		case sVideo    = 0x0500
+
+		var isInternal: Bool {
+			rawValue < Kind.sdi.rawValue
+		}
 	}
 	
 	public struct ExternalInterfaces: OptionSet, SingleValueDescribable {
@@ -140,12 +146,12 @@ public enum VideoSource: RawRepresentable {
 		
 		public static let sdi =       ExternalInterfaces(rawValue: 1 << 0)
 		public static let hdmi =      ExternalInterfaces(rawValue: 1 << 1)
-		public static let composite = ExternalInterfaces(rawValue: 1 << 2)
-		public static let component = ExternalInterfaces(rawValue: 1 << 3)
+		public static let component = ExternalInterfaces(rawValue: 1 << 2)
+		public static let composite = ExternalInterfaces(rawValue: 1 << 3)
 		public static let sVideo =    ExternalInterfaces(rawValue: 1 << 4)
 		
 		public static let none = ExternalInterfaces([])
-		
+
 		public func describe() -> String? {
 			switch self {
 				case .sdi:       return "sdi"
@@ -158,17 +164,17 @@ public enum VideoSource: RawRepresentable {
 		}
 	}
 	
-	public struct Availability: OptionSet, SingleValueDescribable {		
+	public struct SourceAvailability: OptionSet, SingleValueDescribable {
 		public let rawValue: UInt8
 		public init(rawValue: UInt8) {
 			self.rawValue = rawValue
 		}
 		
-		public static let auxiliary =      Availability(rawValue: 1 << 0)
-		public static let multiviewer =    Availability(rawValue: 1 << 1)
-		public static let superSourceArt = Availability(rawValue: 1 << 2)
-		public static let superSourceBox = Availability(rawValue: 1 << 3)
-		public static let keySources =     Availability(rawValue: 1 << 4)
+		public static let auxiliary =      SourceAvailability(rawValue: 1 << 0)
+		public static let multiviewer =    SourceAvailability(rawValue: 1 << 1)
+		public static let superSourceArt = SourceAvailability(rawValue: 1 << 2)
+		public static let superSourceBox = SourceAvailability(rawValue: 1 << 3)
+		public static let keySource =      SourceAvailability(rawValue: 1 << 4)
 
 		public func describe() -> String? {
 			switch self {
@@ -176,7 +182,7 @@ public enum VideoSource: RawRepresentable {
 			case .multiviewer:    return "multiviewer"
 			case .superSourceArt: return "superSourceArt"
 			case .superSourceBox: return "superSourceBox"
-			case .keySources:     return "keySources"
+			case .keySource:     return "keySource"
 			default:              return nil
 			}
 		}

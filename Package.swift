@@ -13,7 +13,8 @@ let package = Package(
 		.executable(name: "Simulator", targets: ["Simulator"]),
 		.executable(name: "TitleGenerator", targets: ["TitleGenerator"]),
 		.executable(name: "PreviewSwitcher", targets: ["PreviewSwitcher"]),
-		.executable(name: "SourceLabeler", targets: ["SourceLabeler"])
+		.executable(name: "SourceLabeler", targets: ["SourceLabeler"]),
+		.executable(name: "MessageDecoder", targets: ["MessageDecoder"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -31,6 +32,7 @@ let package = Package(
 		.target(name: "TitleGenerator", dependencies: ["Atem"]),
 		.target(name: "PreviewSwitcher", dependencies: ["Atem"]),
 		.target(name: "SourceLabeler", dependencies: ["Atem"]),
+		.target(name: "MessageDecoder", dependencies: ["Atem"]),
         .testTarget(
             name: "AtemTests",
             dependencies: ["Atem"]

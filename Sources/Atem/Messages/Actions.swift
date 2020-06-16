@@ -287,75 +287,90 @@ extension VideoSource {
 	/// The properties (like name and port types) of a video source
 	public struct PropertiesChanged: Serializable {
 		public static let title: MessageTitle = MessageTitle(string: "InPr")
-		public static let shortNameLength = 4
-		public static let longNameLength = 20
+		static let defaultText = " ".data(using: .utf8)! + [0]
 
-		public let dataBytes: [UInt8]
-		
+		public let id: VideoSource
+		public let longNameBytes: ArraySlice<UInt8>
+		public let shortNameBytes: ArraySlice<UInt8>
+		public let externalInterfaces: ExternalInterfaces
+		public let rawKind: UInt16
+		public let availability: SourceAvailability
+		public let mixEffects: MixEffects
+
 		public init(with bytes: ArraySlice<UInt8>) throws {
-			dataBytes = Array(bytes)
+			assert(bytes.count > Position.last)
+			id = VideoSource(rawValue: UInt16(from: bytes[relative: Position.id]))
+			longNameBytes = bytes[relative: Position.longName].prefix {$0 != 0}
+			shortNameBytes = bytes[relative: Position.shortName].prefix {$0 != 0}
+			externalInterfaces = .init(rawValue: bytes[relative: Position.externalInterfaces])
+			rawKind = UInt16(from: bytes[relative: Position.kind])
+			availability = SourceAvailability(rawValue: bytes[relative: Position.availability])
+			mixEffects = MixEffects(rawValue: bytes[relative: Position.mixEffects])
 		}
 		
-		public init(source: VideoSource, longName: String, shortName optionalShortName: String? = nil, externalInterfaces: ExternalInterfaces, kind: VideoSource.Kind, availability: Availability, mixEffects: MixEffects) throws {
-			let encodedLongName = try encodeAtem(string: longName, length: PropertiesChanged.longNameLength)
-			
-			let shortName = optionalShortName ?? String(longName.prefix(4))
-			let encodedShortName = try encodeAtem(string: shortName, length: PropertiesChanged.shortNameLength)
-
-			var temp = source.rawValue.bytes
-			temp += encodedLongName
-			temp += encodedShortName
-			temp += [
-				0x01,
-				externalInterfaces.rawValue,
-				0x01
-			]
-			temp += kind.rawValue.bytes
-			temp += [
-				0x00,
-				availability.rawValue,
-				mixEffects.rawValue,
-				0x1f,
-				0x03
-			]
-
-			dataBytes = temp
+		public init(source: VideoSource, longName: String, shortName: String, externalInterfaces: ExternalInterfaces, kind: VideoSource.Kind, availability: SourceAvailability, mixEffects: MixEffects) {
+			id = source
+			longNameBytes = ArraySlice(longName.data(using: .utf8) ?? PropertiesChanged.defaultText)
+			shortNameBytes = ArraySlice(shortName.data(using: .utf8) ?? PropertiesChanged.defaultText)
+			self.externalInterfaces = externalInterfaces
+			rawKind = kind.rawValue
+			self.availability = availability
+			self.mixEffects = mixEffects
 		}
-		
+
+		public var dataBytes: [UInt8] {
+			[UInt8](unsafeUninitializedCapacity: 36) { (buffer, count) in
+				buffer.write(id.rawValue.bigEndian, at: Position.id.lowerBound)
+				buffer.write(data: Data(longNameBytes), to: Position.longName)
+				buffer.write(data: Data(shortNameBytes), to: Position.shortName)
+				buffer.write(UInt16.zero, at: Position.unknownA.lowerBound)
+				buffer[Position.isExternal] = !(kind?.isInternal ?? false) ? 1 : 0
+				buffer[Position.externalInterfaces] = externalInterfaces.rawValue
+				buffer[Position.unknownB] = 0
+				buffer.write(rawKind.bigEndian, at: Position.kind.lowerBound)
+				buffer[Position.unknownC] = 0
+				buffer[Position.availability] = availability.rawValue
+				buffer[Position.mixEffects] = mixEffects.rawValue
+				count = 36
+			}
+		}
+
+		var longName: String? {
+			String(bytes: longNameBytes, encoding: .utf8)
+		}
+		var shortName: String? {
+			String(bytes: shortNameBytes, encoding: .utf8)
+		}
+		var kind: Kind? { Kind(rawValue: rawKind) }
+
 		public var debugDescription: String {
 			return """
 			VideoSource.PropertiesChanged(
-				source: .\(String(describing: id!)),
+				source: .\(String(describing: id)),
 				longName: "\(longName!)",
 				shortName: "\(shortName!)",
 				externalInterfaces: \(externalInterfaces.description),
-				kind: .\(String(describing: kind!)),
+				kind: .\(kind.map{String(describing: $0)} ?? ".raw(\(rawKind)"),
 				availability: \(availability.description),
 				mixEffects: \(mixEffects.description)
 			)
 			"""
 		}
-		
-		public var id: VideoSource? {
-			return VideoSource(rawValue: .init(from: dataBytes[0..<2]))
-		}
-		public var longName: String? {
-			return String(bytes: dataBytes[ 2..<22].prefix {$0 != 0}, encoding: .utf8)
-		}
-		public var shortName: String? {
-			return String(bytes: dataBytes[22..<26].prefix {$0 != 0}, encoding: .utf8)
-		}
-		public var externalInterfaces: ExternalInterfaces {
-			return ExternalInterfaces(rawValue: dataBytes[27] & 0b1_1111)
-		}
-		public var kind: Kind? {
-			return Kind(rawValue: .init(from: dataBytes[29..<31]))
-		}
-		public var availability: Availability {
-			return Availability(rawValue: dataBytes[32] & 0b1_1111)
-		}
-		public var mixEffects: MixEffects {
-			return MixEffects(rawValue: dataBytes[33] & 0b11)
+
+		enum Position {
+			static let id = 0..<2
+			static let longName = 2..<22
+			static let shortName = 22..<26
+			static let unknownA = 26..<28
+			static let isExternal = 28
+			static let externalInterfaces = 29
+			static let unknownB = 30
+			static let kind = 31..<33
+			static let unknownC = 33
+			static let availability = 34
+			static let mixEffects = 35
+
+			static let last = Position.mixEffects
 		}
 	}
 }

@@ -56,34 +56,26 @@ extension CountablePartialRangeFrom: AdvancableRange {
 
 let truncationDots = "...".data(using: .ascii)!
 extension UnsafeMutableBufferPointer where Element == UInt8 {
-	static let errorText = "Error".data(using: .ascii)!
 
 	func write<I: FixedWidthInteger>(_ number: I, at offset: Int) {
         UnsafeMutableRawPointer(baseAddress!.advanced(by: offset)).bindMemory(to: I.self, capacity: 1).pointee = number
 	}
 
 	func write<S: StringProtocol>(_ text: S, to range: Range<Int>) {
-		if let data = text.data(using: .ascii) {
-			write(data: data, to: range)
-		} else {
-			write(data: Self.errorText, to: range)
-			print("Warning: unable to encode to utf8: ", text)
-		}
-	}
-
-	func write(data: Data, to range: Range<Int>) {
 		let destination = baseAddress!
 			.advanced(by: range.lowerBound)
 			.withMemoryRebound(to: UInt8.self, capacity: range.count) { $0 }
 
-		if data.count > range.count {
-			let shortenedCount = range.count - truncationDots.count
-			data.copyBytes(to: destination, count: shortenedCount)
-			truncationDots.copyBytes(to: destination + shortenedCount, count: truncationDots.count)
-		} else {
-			data.copyBytes(to: destination, count: data.count)
-			if data.count < range.count {
-				destination[data.count] = 0
+		if let data = text.data(using: .ascii) {
+			if data.count > range.count {
+				let shortenedCount = range.count - truncationDots.count
+				data.copyBytes(to: destination, count: shortenedCount)
+				truncationDots.copyBytes(to: destination + shortenedCount, count: truncationDots.count)
+			} else {
+				data.copyBytes(to: destination, count: data.count)
+				if data.count < range.count {
+					destination[data.count] = 0
+				}
 			}
 		}
 	}
