@@ -37,8 +37,10 @@ class ControllerHandler: HandlerWithTimer {
 				try messageHandler.handle(messages: connectionState.parse(packet))
 			} else {
 				if awaitingConnectionResponse, packet.connectionUID == initiationID {
+					print("reconnecting")
 					awaitingConnectionResponse = false
 				} else if packet.connectionUID != oldConnectionID {
+					print("connected, now retreiving initial state")
 					let state = ConnectionState(id: packet.connectionUID)
 					connectionState = state
 					try messageHandler.handle(messages: state.parse(packet))
@@ -63,6 +65,7 @@ class ControllerHandler: HandlerWithTimer {
 					// is interpreted as a disconnected state.
 					resetState()
 					whenDisconnected?()
+					print("lost connection due to too many unacknowbedged packets")
 				} else {
 					for packet in packets {
 						let data = encode(bytes: packet.bytes, for: address, in: context)
@@ -150,11 +153,13 @@ public class Controller {
 		self.channel = channel
 
 		channel.whenSuccess { channel in
-			channel.closeFuture.whenComplete { close in
-				if case .failure(let error) = close {
-					self.handler.whenError(error)
+			channel.closeFuture.whenComplete {[weak self] close in
+				if let controller = self {
+					if case .failure(let error) = close {
+						controller.handler.whenError(error)
+					}
+					controller.eventLoop.next().scheduleTask(in: .seconds(5), controller.connect)
 				}
-				self.eventLoop.next().scheduleTask(in: .seconds(5), self.connect)
 			}
 		}
 	}
