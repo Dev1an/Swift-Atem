@@ -9,7 +9,6 @@ import Foundation
 import NIO
 
 class ControllerHandler: HandlerWithTimer {
-
 	var connectionState: ConnectionState?
 	var initiationID = ConnectionState.id(firstBit: false)
 	var oldConnectionID: UID?
@@ -54,6 +53,7 @@ class ControllerHandler: HandlerWithTimer {
 	final override func channelInactive(context: ChannelHandlerContext) {
 		super.channelInactive(context: context)
 		whenDisconnected?()
+		print("lost connection due to channel inactive")
 	}
 	
 	final override func executeTimerTask(context: ChannelHandlerContext) {
@@ -69,8 +69,8 @@ class ControllerHandler: HandlerWithTimer {
 				} else {
 					for packet in packets {
 						let data = encode(bytes: packet.bytes, for: address, in: context)
-						context.write(data).whenFailure { error in
-							self.whenError(error)
+						context.write(data).whenFailure { [weak self] error in
+							self?.whenError(error)
 						}
 					}
 				}
@@ -78,15 +78,15 @@ class ControllerHandler: HandlerWithTimer {
 		} else if awaitingConnectionResponse {
 			let 📦 = SerialPacket.connectToCore(uid: initiationID, type: .connect)
 			let data = encode(bytes: 📦.bytes, for: address, in: context)
-			context.write(data).whenFailure { error in
-				self.whenError(error)
-							   }
+			context.write(data).whenFailure { [weak self] error in
+				self?.whenError(error)
+			}
 		} else {
 			let 📦 = SerialPacket(connectionUID: initiationID, acknowledgement: 0)
 			let data = encode(bytes: 📦.bytes, for: address, in: context)
-			context.write(data).whenFailure { error in
-				self.whenError(error)
-							   }
+			context.write(data).whenFailure { [weak self] error in
+				self?.whenError(error)
+			}
 		}
 		context.flush()
 	}
@@ -152,7 +152,7 @@ public class Controller {
 
 		self.channel = channel
 
-		channel.whenSuccess { channel in
+		channel.whenSuccess {[weak self] channel in
 			channel.closeFuture.whenComplete {[weak self] close in
 				if let controller = self {
 					if case .failure(let error) = close {
@@ -168,26 +168,26 @@ public class Controller {
 		let manager = UploadManager()
 		var lockedStore: UInt16?
 
-		handler.when { (lock: LockObtained) in
+		handler.when { [weak self] (lock: LockObtained) in
 			lockedStore = lock.store
 			if let startTransfer = manager.getTransfer(store: lock.store) {
-				self.send(message: startTransfer)
+				self?.send(message: startTransfer)
 			}
 		}
 
-		handler.when { (startInfo: DataTransferChunkRequest) in
+		handler.when { [weak self] (startInfo: DataTransferChunkRequest) in
 			for chunk in manager.getChunks(for: startInfo.transferID, preferredSize: startInfo.chunkSize, count: startInfo.chunkCount) {
-				self.handler.sendPackage(messages: chunk)
+				self?.handler.sendPackage(messages: chunk)
 			}
 		}
 
-		handler.when { (completion: DataTransferCompleted) in
+		handler.when { [weak self] (completion: DataTransferCompleted) in
 			manager.markAsCompleted(transferId: completion.transferID)
 			if let store = lockedStore {
 				if let startTransfer = manager.getTransfer(store: store) {
-					self.send(message: startTransfer)
+					self?.send(message: startTransfer)
 				} else {
-					self.send(message: LockRequest(store: store, state: 0))
+					self?.send(message: LockRequest(store: store, state: 0))
 					lockedStore = nil
 				}
 			}
@@ -245,6 +245,13 @@ public class Controller {
 				name: "Label"
 			)
 		)
+	}
+
+	deinit {
+		handler.active = false
+		channel?.whenSuccess({ (channel) in
+			_ = channel.close()
+		})
 	}
 }
 

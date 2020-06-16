@@ -18,6 +18,7 @@ class HandlerWithTimer: ChannelInboundHandler {
 
 	func channelActive(context: ChannelHandlerContext) {
 		active = true
+		print("channel active")
 		startLoop(in: context)
 	}
 	
@@ -26,13 +27,16 @@ class HandlerWithTimer: ChannelInboundHandler {
 	func channelInactive(context: ChannelHandlerContext) {
 		nextKeepAliveTask?.cancel()
 		active = false
+		print("channel inactive")
 	}
 	
 	final func startLoop(in context: ChannelHandlerContext) {
 		if active {
-			nextKeepAliveTask = context.eventLoop.scheduleTask(in: sendInterval) {
-				self.executeTimerTask(context: context)
-				self.startLoop(in: context)
+			nextKeepAliveTask = context.eventLoop.scheduleTask(in: sendInterval) { [weak self] in
+				if let handler = self {
+					handler.executeTimerTask(context: context)
+					handler.startLoop(in: context)
+				}
 			}
 		}
 	}
