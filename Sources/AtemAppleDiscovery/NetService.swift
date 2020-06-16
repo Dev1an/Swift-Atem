@@ -11,9 +11,9 @@ import NIO
 public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegate {
 	let browser = NetServiceBrowser()
 	var recognizers = Set<Recognizer>()
-	public private(set) var discoveredAtems = [NetService: AtemDescription]()
+	public private(set) var discoveredAtems = [NetService: Info]()
 
-	public typealias AtemAppearanceHandler = (AtemDescription) -> Void
+	public typealias AtemAppearanceHandler = (Info) -> Void
 	public var atemDidAppearHandler: AtemAppearanceHandler = { atem in
 		print("No 'appear' handler attached to AtemBrowser.")
 		print("Attach a handler using <AtemBrowser>.atemFoundHandler = {atem in <do something here>}")
@@ -60,7 +60,7 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 		static let atemClassData = "AtemSwitcher".data(using: .ascii)!
 		let service: NetService
 		unowned let browser: AtemBrowser
-		var addresses: [SocketAddress]?
+		var addresses: Set<SocketAddress>?
 		var properties: [String: Data]?
 
 		init(service: NetService, browser: AtemBrowser) {
@@ -74,7 +74,7 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 
 		func netServiceDidResolveAddress(_ sender: NetService) {
 			if let addresses = sender.addresses?.compactMap(socketAddress(from:)), !addresses.isEmpty {
-				self.addresses = addresses
+				self.addresses = Set(addresses)
 				if properties != nil {
 					isFullyRecognised()
 				}
@@ -99,12 +99,11 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 		}
 
 		func netService(_ sender: NetService, didNotResolve errorDict: [String : NSNumber]) {
-			print("Warning: Address for", service.name, "could not be resolved")
 			service.resolve(withTimeout: 5)
 		}
 
 		func isFullyRecognised() {
-			let description = AtemDescription(addresses: addresses!, properties: properties!)
+			let description = Info(service: service, addresses: addresses!, rawProperties: properties!)
 			browser.atemDidAppearHandler(description)
 			browser.discoveredAtems[service] = description
 			unregister()
@@ -139,9 +138,38 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 		}
 	}
 
-	public struct AtemDescription {
-		public let addresses: [SocketAddress]
-		public let properties: [String: Data]
+	public struct Info: Hashable {
+		public let service: NetService
+		public let addresses: Set<SocketAddress>
+		public let rawProperties: [String: Data]
+
+		/// All properties except the ones listed in `Info.Key`
+		public private(set) lazy var unknownProperties: [String: Data] = {
+			let keys = Set( Key.allCases.map(\.rawValue) )
+			return rawProperties.filter { !keys.contains($0.key) }
+		}()
+
+		nonmutating public func getString(_ key: Key) -> String? {
+			guard let data = rawProperties[key.rawValue] else { return nil }
+			return String(data: data, encoding: .utf8)
+		}
+
+		public enum Key: String, CaseIterable {
+			case name = "name"
+			case releaseVersion = "release version"
+			case internalVersion = "internal version"
+			case protocolVersion = "protocol version"
+			case uid = "unique id"
+		}
+
+		public static func == (lhs: Self, rhs: Self) -> Bool {
+			let uidKey = Key.uid.rawValue
+			if lhs.service == rhs.service { return true }
+			if let left = lhs.rawProperties[uidKey], let right = rhs.rawProperties[uidKey] {
+				return left == right
+			}
+			return Set(lhs.addresses) == Set(rhs.addresses)
+		}
 	}
 }
 
