@@ -262,74 +262,169 @@ public struct MultiViewConfiguration: Serializable {
 	}
 }
 
-public struct ChangeInputProperties: Serializable {
-	public static let title = MessageTitle(string: "CInL")
+import Foundation
 
-	public let changeMask: ChangeMask
-	public let input: UInt16
-	public let longName: String
-	public let shortName: String
+extension VideoSource {
+	/// The properties (like name and port types) of a video source
+	public struct PropertiesChanged: Serializable {
+		public static let title: MessageTitle = MessageTitle(string: "InPr")
+		static let defaultText = " ".data(using: .utf8)! + [0]
 
-	public init(with bytes: ArraySlice<UInt8>) throws {
-		fatalError("unimplemented")
-	}
+		public let id: VideoSource
+		public let longNameBytes: ArraySlice<UInt8>
+		public let shortNameBytes: ArraySlice<UInt8>
+		public let externalInterfaces: ExternalInterfaces
+		public let rawKind: UInt16
+		public let sourceAvailability: SourceAvailability
+		public let mixEffects: MixEffects
 
-	public init(input: UInt16, longName: String?, shortName: String?) {
-		self.input = input
-
-		var changedElements = ChangeMask(rawValue: 0)
-		if let longName = longName {
-			assert(longName.count <= Position.longName.count) // TODO check ascii byte length
-			changedElements.insert(.longName)
-			self.longName = longName
-		} else {
-			self.longName = "! Not Set !"
-		}
-		if let shortName = shortName {
-			assert(shortName.count <= Position.shortName.count) // TODO check ascii byte length
-			changedElements.insert(.shortName)
-			self.shortName = shortName
-		} else {
-			self.shortName = "! Not Set !"
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			assert(bytes.count > Position.last)
+			id = VideoSource(rawValue: UInt16(from: bytes[relative: Position.id]))
+			longNameBytes = bytes[relative: Position.longName].prefix {$0 != 0}
+			shortNameBytes = bytes[relative: Position.shortName].prefix {$0 != 0}
+			externalInterfaces = .init(rawValue: bytes[relative: Position.externalInterfaces])
+			rawKind = UInt16(from: bytes[relative: Position.kind])
+			sourceAvailability = SourceAvailability(rawValue: bytes[relative: Position.availability])
+			mixEffects = MixEffects(rawValue: bytes[relative: Position.mixEffects])
 		}
 
-		self.changeMask = changedElements
-	}
+		public init(source: VideoSource, longName: String, shortName: String, externalInterfaces: ExternalInterfaces, kind: VideoSource.Kind, availability: SourceAvailability, mixEffects: MixEffects) {
+			id = source
+			longNameBytes = ArraySlice(longName.data(using: .utf8) ?? PropertiesChanged.defaultText)
+			shortNameBytes = ArraySlice(shortName.data(using: .utf8) ?? PropertiesChanged.defaultText)
+			self.externalInterfaces = externalInterfaces
+			rawKind = kind.rawValue
+			self.sourceAvailability = availability
+			self.mixEffects = mixEffects
+		}
 
-	public var debugDescription: String {
-		"Change input properties \(changeMask)"
-	}
+		public var dataBytes: [UInt8] {
+			[UInt8](unsafeUninitializedCapacity: 36) { (buffer, count) in
+				buffer.write(id.rawValue.bigEndian, at: Position.id.lowerBound)
+				buffer.write(data: Data(longNameBytes), to: Position.longName)
+				buffer.write(data: Data(shortNameBytes), to: Position.shortName)
+				buffer.write(UInt16.zero, at: Position.unknownA.lowerBound)
+				buffer[Position.isExternal] = !(kind?.isInternal ?? false) ? 1 : 0
+				buffer[Position.externalInterfaces] = externalInterfaces.rawValue
+				buffer[Position.unknownB] = 0
+				buffer.write(rawKind.bigEndian, at: Position.kind.lowerBound)
+				buffer[Position.unknownC] = 0
+				buffer[Position.availability] = sourceAvailability.rawValue
+				buffer[Position.mixEffects] = mixEffects.rawValue
+				count = 36
+			}
+		}
 
-	public var dataBytes: [UInt8] {
-		.init(unsafeUninitializedCapacity: 32) { (buffer, count) in
-			buffer[Position.changeMask] = changeMask.rawValue
-			buffer[Position.changeMask + 1] = 0 // unknown byte
-			buffer.write(input.bigEndian, at: Position.input.lowerBound)
-			if changeMask.contains(.longName) { buffer.write(longName, to: Position.longName) }
-			if changeMask.contains(.shortName) { buffer.write(longName, to: Position.shortName) }
+		public var longName: String? {
+			String(bytes: longNameBytes, encoding: .utf8)
+		}
+		public var shortName: String? {
+			String(bytes: shortNameBytes, encoding: .utf8)
+		}
+		public var kind: Kind? { Kind(rawValue: rawKind) }
 
-			buffer.write(UInt16(0), at: 30) // TODO may be removed
-			count = 32
+		public var debugDescription: String {
+			return """
+			VideoSource.PropertiesChanged(
+				source: .\(String(describing: id)),
+				longName: "\(longName!)",
+				shortName: "\(shortName!)",
+				externalInterfaces: \(externalInterfaces.description),
+				kind: .\(kind.map{String(describing: $0)} ?? ".raw(\(rawKind)"),
+				availability: \(sourceAvailability.description),
+				mixEffects: \(mixEffects.description)
+			)
+			"""
+		}
+
+		enum Position {
+			static let id = 0..<2
+			static let longName = 2..<22
+			static let shortName = 22..<26
+			static let unknownA = 26..<28
+			static let isExternal = 28
+			static let externalInterfaces = 29
+			static let unknownB = 30
+			static let kind = 31..<33
+			static let unknownC = 33
+			static let availability = 34
+			static let mixEffects = 35
+
+			static let last = Position.mixEffects
 		}
 	}
 
-	enum Position {
-		static let changeMask = 0
-		static let input = 2..<4
-		static let longName = 4..<24
-		static let shortName = 24..<28
-		static let externalPortType = 28..<30
-	}
+	public struct ChangeProperties: Serializable {
+		public static let title = MessageTitle(string: "CInL")
 
-	public struct ChangeMask: OptionSet {
-		public let rawValue: UInt8
+		public let changeMask: ChangeMask
+		public let input: UInt16
+		public let longName: String
+		public let shortName: String
 
-		public init(rawValue: UInt8) {
-			self.rawValue = rawValue
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			fatalError("unimplemented")
 		}
 
-		public static let longName  = Self(rawValue: 1 << 0)
-		public static let shortName = Self(rawValue: 1 << 1)
-		public static let externalPortType = Self(rawValue: 1 << 2)
+		public init(input: UInt16, longName: String?, shortName: String?) {
+			self.input = input
+
+			var changedElements = ChangeMask(rawValue: 0)
+			if let longName = longName {
+				assert(longName.count <= Position.longName.count) // TODO check ascii byte length
+				changedElements.insert(.longName)
+				self.longName = longName
+			} else {
+				self.longName = "! Not Set !"
+			}
+			if let shortName = shortName {
+				assert(shortName.count <= Position.shortName.count) // TODO check ascii byte length
+				changedElements.insert(.shortName)
+				self.shortName = shortName
+			} else {
+				self.shortName = "! Not Set !"
+			}
+
+			self.changeMask = changedElements
+		}
+
+		public var debugDescription: String {
+			"Change input properties \(changeMask)"
+		}
+
+		public var dataBytes: [UInt8] {
+			.init(unsafeUninitializedCapacity: 32) { (buffer, count) in
+				buffer[Position.changeMask] = changeMask.rawValue
+				buffer[Position.changeMask + 1] = 0 // unknown byte
+				buffer.write(input.bigEndian, at: Position.input.lowerBound)
+				if changeMask.contains(.longName) { buffer.write(longName, to: Position.longName) }
+				if changeMask.contains(.shortName) { buffer.write(longName, to: Position.shortName) }
+
+				buffer.write(UInt16(0), at: 30) // TODO may be removed
+				count = 32
+			}
+		}
+
+		enum Position {
+			static let changeMask = 0
+			static let input = 2..<4
+			static let longName = 4..<24
+			static let shortName = 24..<28
+			static let externalPortType = 28..<30
+		}
+
+		public struct ChangeMask: OptionSet {
+			public let rawValue: UInt8
+
+			public init(rawValue: UInt8) {
+				self.rawValue = rawValue
+			}
+
+			public static let longName  = Self(rawValue: 1 << 0)
+			public static let shortName = Self(rawValue: 1 << 1)
+			public static let externalPortType = Self(rawValue: 1 << 2)
+		}
 	}
+
 }

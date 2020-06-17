@@ -182,7 +182,7 @@ public enum VideoSource: RawRepresentable {
 			case .multiviewer:    return "multiviewer"
 			case .superSourceArt: return "superSourceArt"
 			case .superSourceBox: return "superSourceBox"
-			case .keySource:     return "keySource"
+			case .keySource:      return "keySource"
 			default:              return nil
 			}
 		}

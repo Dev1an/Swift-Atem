@@ -231,9 +231,9 @@ public class Controller {
 
 	public func uploadLabel(source: VideoSource, labelImage: Data, longName: String? = nil, shortName: String? = nil) {
 		if longName == nil && shortName == nil {
-			send(message: ChangeInputProperties(input: source.rawValue, longName: String(describing: source), shortName: nil))
+			send(message: VideoSource.ChangeProperties(input: source.rawValue, longName: String(describing: source), shortName: nil))
 		} else {
-			send(message: ChangeInputProperties(input: source.rawValue, longName: longName, shortName: shortName))
+			send(message: VideoSource.ChangeProperties(input: source.rawValue, longName: longName, shortName: shortName))
 		}
 		send(
 			message: uploadManager.createTransfer(

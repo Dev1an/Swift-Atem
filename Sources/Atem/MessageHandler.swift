@@ -76,6 +76,7 @@ public class MessageParser {
 	fileprivate final func message(from bytes: RawMessage) throws -> (Message, Any)? {
 		let titlePosition = MessageTitle.position.advanced(by: bytes.startIndex)
 		let title = UInt32(from: bytes[titlePosition])
+//		print(String(bytes: bytes[titlePosition], encoding: .utf8))
 		if let handler = handlerRegister[title] {
 			let type = eventRegister[title]!
 			let message = try type.init(with: bytes[titlePosition.endIndex...])

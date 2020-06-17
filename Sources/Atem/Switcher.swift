@@ -108,7 +108,6 @@ public class Switcher {
 	///   - eventLoopGroup: The Swift NIO event loop group this switcher will run in.
 	///   - setup: A function to setup the behaviour of the switcher.
 	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (SwitcherConnections)->Void) {
-		print(inputProperties.last!, inputProperties.last!.serialize())
 		eventLoop = eventLoopGroup
 		let handler = SwitcherHandler(handler: messageHandler)
 		setup(handler)

@@ -52,7 +52,7 @@ class Atem_Tests: XCTestCase {
 		sEventLoop.advanceTime(by: .milliseconds(10))
 
 		XCTAssertNil(try controller.readOutbound())
-		cEventLoop.advanceTime(by: .milliseconds(20))
+		cEventLoop.advanceTime(by: HandlerWithTimer.sendInterval)
 
 		guard let 📦1 = packet(from: try controller.readOutbound()) else {
 			XCTFail("No writes")
@@ -74,7 +74,7 @@ class Atem_Tests: XCTestCase {
 
 		send(bytes: 📦2.raw, to: controller)
 
-		cEventLoop.advanceTime(by: .milliseconds(20))
+		cEventLoop.advanceTime(by: HandlerWithTimer.sendInterval)
 		guard let 📦3 = packet(from: try controller.readOutbound()) else {
 			XCTFail("No writes")
 			return
