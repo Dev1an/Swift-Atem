@@ -9,7 +9,7 @@ public enum AtemSize: UInt8 {
 	case oneME = 0, twoME = 1
 }
 
-/// There are two version numbers in ATEM world: One for the ATEM Software Control application (for instance version 6.0) which is what people usually refers to and one for the firmware which is often updated with the PC/Mac application versions (for instance 2.15). The latter version number is what "_ver" gives you and a number you can not find anywhere in the application to our knowledge.
+/// There are two version numbers in ATEM world: One for the ATEM Software Control application (for instance version 6.0), which is what people usually refer to, and one for the firmware which is often updated with the PC/Mac application versions (for instance 2.15). The latter version number is what "_ver" gives you and a number you can not find anywhere in the application to our knowledge.
 public struct ProtocolVersion: Serializable {
 	public static let title = MessageTitle(string: "_ver")
 	static let majorPosition = 0..<2
