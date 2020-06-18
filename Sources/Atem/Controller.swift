@@ -108,11 +108,10 @@ public typealias Address = SocketAddress
 ///  - react upon incomming state change messages from the ATEM Switcher
 ///
 /// To make an anology with real world devices: this class can be compared to a BlackMagicDesign Control Panel. It is used to control a production switcher.
-public class Controller<StateManager> {
+public class Controller {
 
 	let eventLoop: EventLoopGroup
 	let handler: ControllerHandler
-	public let stateManager: StateManager
 
 	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
 	public var channel: EventLoopFuture<Channel>?
@@ -124,11 +123,11 @@ public class Controller<StateManager> {
 	/// - Parameter socket: the network socket for the switcher.
 	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
 	/// - Parameter setup: a closure that will be called before establishing the connection to the switcher. Use the provided `ControllerConnection` to register callbacks for incoming messages from the switcher.
-	public init(socket: SocketAddress, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->StateManager) {
+	public init(socket: SocketAddress, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->Void = {_ in}) {
 		eventLoop = eventLoopGroup
 		let messageHandler = PureMessageHandler()
 		handler = ControllerHandler(address: socket, messageHandler: messageHandler)
-		stateManager = setup(handler)
+		setup(handler)
 		connect()
 	}
 
@@ -139,7 +138,7 @@ public class Controller<StateManager> {
 	/// - Parameter ipAddress: the IPv4 address of the switcher.
 	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
 	/// - Parameter setup: a closure that will be called before establishing the connection to the switcher. Use the provided `ControllerConnection` to register callbacks for incoming messages from the switcher.
-	public convenience init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->StateManager) throws {
+	public convenience init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->Void = {_ in}) throws {
 		let socket = try SocketAddress(ipAddress: ipAddress, port: 9910)
 		self.init(socket: socket, eventLoopGroup: eventLoopGroup, setup: setup)
 	}
