@@ -101,18 +101,21 @@ class ControllerHandler: HandlerWithTimer {
 	}
 }
 
+public typealias Address = SocketAddress
+
 /// An interface to
 ///  - send commands to an ATEM Switcher
 ///  - react upon incomming state change messages from the ATEM Switcher
 ///
 /// To make an anology with real world devices: this class can be compared to a BlackMagicDesign Control Panel. It is used to control a production switcher.
-public class Controller {
-	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
-	public var channel: EventLoopFuture<Channel>?
-	public let messageHandler = PureMessageHandler()
+public class Controller<StateManager> {
 
 	let eventLoop: EventLoopGroup
 	let handler: ControllerHandler
+	public let stateManager: StateManager
+
+	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
+	public var channel: EventLoopFuture<Channel>?
 
 	/// Start a new Controller that connects to an ATEM Switcher specified by its IP address.
 	///
@@ -121,10 +124,11 @@ public class Controller {
 	/// - Parameter socket: the network socket for the switcher.
 	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
 	/// - Parameter setup: a closure that will be called before establishing the connection to the switcher. Use the provided `ControllerConnection` to register callbacks for incoming messages from the switcher.
-	public init(socket: SocketAddress, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->Void = {_ in}) {
+	public init(socket: SocketAddress, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->StateManager) {
 		eventLoop = eventLoopGroup
+		let messageHandler = PureMessageHandler()
 		handler = ControllerHandler(address: socket, messageHandler: messageHandler)
-		setup(handler)
+		stateManager = setup(handler)
 		connect()
 	}
 
@@ -135,7 +139,7 @@ public class Controller {
 	/// - Parameter ipAddress: the IPv4 address of the switcher.
 	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
 	/// - Parameter setup: a closure that will be called before establishing the connection to the switcher. Use the provided `ControllerConnection` to register callbacks for incoming messages from the switcher.
-	public convenience init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->Void = {_ in}) throws {
+	public convenience init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->StateManager) throws {
 		let socket = try SocketAddress(ipAddress: ipAddress, port: 9910)
 		self.init(socket: socket, eventLoopGroup: eventLoopGroup, setup: setup)
 	}
@@ -168,26 +172,26 @@ public class Controller {
 		let manager = UploadManager()
 		var lockedStore: UInt16?
 
-		handler.when { [weak self] (lock: LockObtained) in
+		handler.when { [unowned self] (lock: LockObtained) in
 			lockedStore = lock.store
 			if let startTransfer = manager.getTransfer(store: lock.store) {
-				self?.send(message: startTransfer)
+				self.send(message: startTransfer)
 			}
 		}
 
-		handler.when { [weak self] (startInfo: DataTransferChunkRequest) in
+		handler.when { [unowned self] (startInfo: DataTransferChunkRequest) in
 			for chunk in manager.getChunks(for: startInfo.transferID, preferredSize: startInfo.chunkSize, count: startInfo.chunkCount) {
-				self?.handler.sendPackage(messages: chunk)
+				self.handler.sendSeparately(messages: chunk)
 			}
 		}
 
-		handler.when { [weak self] (completion: DataTransferCompleted) in
+		handler.when { [unowned self] (completion: DataTransferCompleted) in
 			manager.markAsCompleted(transferId: completion.transferID)
 			if let store = lockedStore {
 				if let startTransfer = manager.getTransfer(store: store) {
-					self?.send(message: startTransfer)
+					self.send(message: startTransfer)
 				} else {
-					self?.send(message: LockRequest(store: store, state: 0))
+					self.send(message: LockRequest(store: store, state: 0))
 					lockedStore = nil
 				}
 			}
@@ -248,6 +252,7 @@ public class Controller {
 	}
 
 	deinit {
+		print("🛑 Shutting down connection", address)
 		handler.active = false
 		channel?.whenSuccess({ (channel) in
 			_ = channel.close()
@@ -272,7 +277,7 @@ public protocol ControllerConnection: AnyObject {
 	/// - Parameter message: the message that will be sent to the switcher
 	func send(_ message: Serializable)
 
-	func sendPackage(messages: [UInt8])
+	func sendSeparately(messages: [UInt8])
 
 	/// A function that will be called when the connection is lost
 	var whenDisconnected: (()->Void)?   { get set }
@@ -297,7 +302,7 @@ extension ControllerHandler: ControllerConnection {
 		}
 	}
 
-	public final func sendPackage(messages: [UInt8]) {
+	public final func sendSeparately(messages: [UInt8]) {
 		if let state = connectionState {
 			state.send(message: messages, asSeparatePackage: true)
 		} else {

@@ -275,7 +275,7 @@ extension VideoSource {
 		public let shortNameBytes: ArraySlice<UInt8>
 		public let externalInterfaces: ExternalInterfaces
 		public let rawKind: UInt16
-		public let sourceAvailability: SourceAvailability
+		public let routingOptions: RoutingOptions
 		public let mixEffects: MixEffects
 
 		public init(with bytes: ArraySlice<UInt8>) throws {
@@ -285,17 +285,17 @@ extension VideoSource {
 			shortNameBytes = bytes[relative: Position.shortName].prefix {$0 != 0}
 			externalInterfaces = .init(rawValue: bytes[relative: Position.externalInterfaces])
 			rawKind = UInt16(from: bytes[relative: Position.kind])
-			sourceAvailability = SourceAvailability(rawValue: bytes[relative: Position.availability])
+			routingOptions = RoutingOptions(rawValue: bytes[relative: Position.routingOptions])
 			mixEffects = MixEffects(rawValue: bytes[relative: Position.mixEffects])
 		}
 
-		public init(source: VideoSource, longName: String, shortName: String, externalInterfaces: ExternalInterfaces, kind: VideoSource.Kind, availability: SourceAvailability, mixEffects: MixEffects) {
+		public init(source: VideoSource, longName: String, shortName: String, externalInterfaces: ExternalInterfaces, kind: VideoSource.Kind, routingOptions: RoutingOptions, mixEffects: MixEffects) {
 			id = source
 			longNameBytes = ArraySlice(longName.data(using: .utf8) ?? PropertiesChanged.defaultText)
 			shortNameBytes = ArraySlice(shortName.data(using: .utf8) ?? PropertiesChanged.defaultText)
 			self.externalInterfaces = externalInterfaces
 			rawKind = kind.rawValue
-			self.sourceAvailability = availability
+			self.routingOptions = routingOptions
 			self.mixEffects = mixEffects
 		}
 
@@ -310,7 +310,7 @@ extension VideoSource {
 				buffer[Position.unknownB] = 0
 				buffer.write(rawKind.bigEndian, at: Position.kind.lowerBound)
 				buffer[Position.unknownC] = 0
-				buffer[Position.availability] = sourceAvailability.rawValue
+				buffer[Position.routingOptions] = routingOptions.rawValue
 				buffer[Position.mixEffects] = mixEffects.rawValue
 				count = 36
 			}
@@ -332,7 +332,7 @@ extension VideoSource {
 				shortName: "\(shortName!)",
 				externalInterfaces: \(externalInterfaces.description),
 				kind: .\(kind.map{String(describing: $0)} ?? ".raw(\(rawKind)"),
-				availability: \(sourceAvailability.description),
+				availability: \(routingOptions.description),
 				mixEffects: \(mixEffects.description)
 			)
 			"""
@@ -348,7 +348,7 @@ extension VideoSource {
 			static let unknownB = 30
 			static let kind = 31..<33
 			static let unknownC = 33
-			static let availability = 34
+			static let routingOptions = 34
 			static let mixEffects = 35
 
 			static let last = Position.mixEffects

@@ -124,7 +124,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Cm15",
 				externalInterfaces: [.sdi, .composite, .sVideo],
 				kind: .sdi,
-				availability: [],
+				routingOptions: [],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -133,7 +133,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Cm16",
 				externalInterfaces: [.composite],
 				kind: .sdi,
-				availability: [],
+				routingOptions: [],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -142,7 +142,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Cm17",
 				externalInterfaces: [],
 				kind: .sdi,
-				availability: [],
+				routingOptions: [],
 				mixEffects: [.me2AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -151,7 +151,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Cm18",
 				externalInterfaces: [.sdi, .hdmi],
 				kind: .sdi,
-				availability: [],
+				routingOptions: [],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -160,7 +160,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Cm19",
 				externalInterfaces: [],
 				kind: .sdi,
-				availability: [],
+				routingOptions: [],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -169,7 +169,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Cm20",
 				externalInterfaces: [],
 				kind: .sdi,
-				availability: [],
+				routingOptions: [],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -178,7 +178,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Bars",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.multiviewer],
+				routingOptions: [.multiviewer],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -187,7 +187,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Col1",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.auxiliary, .multiviewer],
+				routingOptions: [.auxiliary, .multiviewer],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -196,7 +196,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Col2",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.auxiliary, .multiviewer],
+				routingOptions: [.auxiliary, .multiviewer],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -205,7 +205,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "MP1",
 				externalInterfaces: [.sdi, .hdmi, .composite, .sVideo],
 				kind: .black,
-				availability: [.superSourceArt],
+				routingOptions: [.superSourceArt],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -214,7 +214,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "MP1K",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.auxiliary, .superSourceArt],
+				routingOptions: [.auxiliary, .superSourceArt],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -223,7 +223,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "MP2",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.superSourceArt],
+				routingOptions: [.superSourceArt],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -232,7 +232,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "MP2K",
 				externalInterfaces: [.sdi, .composite, .composite],
 				kind: .black,
-				availability: [.auxiliary, .superSourceArt],
+				routingOptions: [.auxiliary, .superSourceArt],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -241,7 +241,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "PIP",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.multiviewer, .superSourceArt],
+				routingOptions: [.multiviewer, .superSourceArt],
 				mixEffects: [.me2AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -250,7 +250,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "M1K1",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.multiviewer],
+				routingOptions: [.multiviewer],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -259,7 +259,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "M1K2",
 				externalInterfaces: [.sdi, .composite, .composite],
 				kind: .black,
-				availability: [.multiviewer],
+				routingOptions: [.multiviewer],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -268,7 +268,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "M2K1",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.multiviewer],
+				routingOptions: [.multiviewer],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -277,7 +277,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "M2K2",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.multiviewer],
+				routingOptions: [.multiviewer],
 				mixEffects: [.me2AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -286,7 +286,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "DK1M",
 				externalInterfaces: [.sdi, .hdmi, .composite, .composite],
 				kind: .black,
-				availability: [.multiviewer],
+				routingOptions: [.multiviewer],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -295,7 +295,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "DK2M",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.multiviewer],
+				routingOptions: [.multiviewer],
 				mixEffects: [.me2AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -304,7 +304,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Pgm1",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [],
+				routingOptions: [],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -313,7 +313,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Pvw1",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [],
+				routingOptions: [],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -322,7 +322,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Pgm2",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [],
+				routingOptions: [],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -331,7 +331,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Pvw2",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [],
+				routingOptions: [],
 				mixEffects: [.me1AndFillSources, .me2AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -340,7 +340,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Cfd1",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [],
+				routingOptions: [],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -349,7 +349,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Cfd2",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [],
+				routingOptions: [],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -358,7 +358,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Aux1",
 				externalInterfaces: [.sdi, .hdmi, .composite],
 				kind: .black,
-				availability: [.auxiliary],
+				routingOptions: [.auxiliary],
 				mixEffects: [.me2AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -367,7 +367,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Aux2",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.auxiliary],
+				routingOptions: [.auxiliary],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -376,7 +376,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Aux3",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.auxiliary],
+				routingOptions: [.auxiliary],
 				mixEffects: [.me1AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -385,7 +385,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Aux4",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.auxiliary],
+				routingOptions: [.auxiliary],
 				mixEffects: [.me1AndFillSources, .me2AndFillSources]
 			),
 			VideoSource.PropertiesChanged(
@@ -394,7 +394,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Aux5",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.auxiliary],
+				routingOptions: [.auxiliary],
 				mixEffects: []
 			),
 			VideoSource.PropertiesChanged(
@@ -403,7 +403,7 @@ class Atem_Tests: XCTestCase {
 				shortName: "Aux6",
 				externalInterfaces: [],
 				kind: .black,
-				availability: [.auxiliary],
+				routingOptions: [.auxiliary],
 				mixEffects: []
 			)
 		].flatMap {$0.serialize()}

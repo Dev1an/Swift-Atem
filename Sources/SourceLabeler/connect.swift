@@ -8,7 +8,7 @@
 import Atem
 import Dispatch
 
-func connect(ip: String) throws -> Controller {
+func connect(ip: String) throws -> Controller<Void> {
 	let initialisation = DispatchGroup()
 	initialisation.enter()
 

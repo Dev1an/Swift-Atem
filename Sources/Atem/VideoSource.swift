@@ -22,6 +22,7 @@ public enum VideoSource: RawRepresentable {
 	case superSource
 	case cleanFeed(UInt16)
 	case auxiliary(UInt16)
+	case multiview(UInt16)
 	case program(me: UInt16)
 	case preview(me: UInt16)
 	case unknown(UInt16)
@@ -53,8 +54,10 @@ public enum VideoSource: RawRepresentable {
 			self = .superSource
 		case .cleanFeed ..< .auxiliary:
 			self = .cleanFeed(rawValue - .cleanFeed)
-		case .auxiliary ..< .program:
+		case .auxiliary ..< .multiview:
 			self = .auxiliary(rawValue - .auxiliary)
+		case .multiview ..< .program:
+			self = .multiview(rawValue - .multiview)
 		case Base.program.rawValue...:
 			let division = div(Int32(rawValue - .program), 10)
 			switch division.rem {
@@ -79,6 +82,7 @@ public enum VideoSource: RawRepresentable {
 		case .superSource:                   return .superSource + 0
 		case .cleanFeed(let number):         return .cleanFeed + number
 		case .auxiliary(let number):         return .auxiliary + number
+		case .multiview(let number):         return .multiview + number
 		case .program(let me):               return .program + me*10
 		case .preview(let me):               return .preview + me*10
 		case .unknown(let rawValue):         return rawValue
@@ -97,6 +101,7 @@ public enum VideoSource: RawRepresentable {
 		case superSource = 6000
 		case cleanFeed = 7001
 		case auxiliary = 8001
+		case multiview = 9001
 		case program = 10_010
 		case preview = 10_011
 
@@ -112,7 +117,7 @@ public enum VideoSource: RawRepresentable {
 			return lower.rawValue ..< upper.rawValue
 		}
 	}
-	
+
 	/// The type of video source
 	public enum Kind: UInt16 {
 		// Internal
@@ -125,7 +130,7 @@ public enum VideoSource: RawRepresentable {
 		case meOutput  = 0x0080
 		case auxiliary
 		case mask
-		
+
 		// External
 		case sdi       = 0x0100
 		case hdmi      = 0x0200
@@ -137,7 +142,7 @@ public enum VideoSource: RawRepresentable {
 			rawValue < Kind.sdi.rawValue
 		}
 	}
-	
+
 	public struct ExternalInterfaces: OptionSet, SingleValueDescribable {
 		public let rawValue: UInt8
 		public init(rawValue: UInt8) {
@@ -164,17 +169,17 @@ public enum VideoSource: RawRepresentable {
 		}
 	}
 	
-	public struct SourceAvailability: OptionSet, SingleValueDescribable {
+	public struct RoutingOptions: OptionSet, SingleValueDescribable {
 		public let rawValue: UInt8
 		public init(rawValue: UInt8) {
 			self.rawValue = rawValue
 		}
 		
-		public static let auxiliary =      SourceAvailability(rawValue: 1 << 0)
-		public static let multiviewer =    SourceAvailability(rawValue: 1 << 1)
-		public static let superSourceArt = SourceAvailability(rawValue: 1 << 2)
-		public static let superSourceBox = SourceAvailability(rawValue: 1 << 3)
-		public static let keySource =      SourceAvailability(rawValue: 1 << 4)
+		public static let auxiliary =      RoutingOptions(rawValue: 1 << 0)
+		public static let multiviewer =    RoutingOptions(rawValue: 1 << 1)
+		public static let superSourceArt = RoutingOptions(rawValue: 1 << 2)
+		public static let superSourceBox = RoutingOptions(rawValue: 1 << 3)
+		public static let keySource =      RoutingOptions(rawValue: 1 << 4)
 
 		public func describe() -> String? {
 			switch self {
