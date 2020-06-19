@@ -106,7 +106,7 @@ class Atem_Tests: XCTestCase {
 
 		var cursor = 0
 		let handler = PureMessageHandler()
-		handler.when { (change: VideoSource.PropertiesChanged) in
+		handler.when { (change: VideoSource.DidChangeProperties) in
 			print(change.debugDescription + ",")
 		}
 		while cursor < initialInPr.count {
@@ -118,7 +118,7 @@ class Atem_Tests: XCTestCase {
 		print(initialInPr.count)
 
 		let customMsgs = [
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .input(14),
 				longName: "Camera 15",
 				shortName: "Cm15",
@@ -127,7 +127,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .input(15),
 				longName: "Camera 16",
 				shortName: "Cm16",
@@ -136,7 +136,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .input(16),
 				longName: "Camera 17",
 				shortName: "Cm17",
@@ -145,7 +145,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: [.me2AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .input(17),
 				longName: "Camera 18",
 				shortName: "Cm18",
@@ -154,7 +154,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .input(18),
 				longName: "Camera 19",
 				shortName: "Cm19",
@@ -163,7 +163,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .input(19),
 				longName: "Camera 20",
 				shortName: "Cm20",
@@ -172,7 +172,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .colorBars,
 				longName: "Color Bars",
 				shortName: "Bars",
@@ -181,7 +181,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.multiviewer],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .color(0),
 				longName: "Color 1",
 				shortName: "Col1",
@@ -190,7 +190,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary, .multiviewer],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .color(1),
 				longName: "Color 2",
 				shortName: "Col2",
@@ -199,7 +199,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary, .multiviewer],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .mediaPlayer(0),
 				longName: "Media Player 1",
 				shortName: "MP1",
@@ -208,7 +208,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.superSourceArt],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .mediaPlayerKey(0),
 				longName: "Media Player 1 Key",
 				shortName: "MP1K",
@@ -217,7 +217,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary, .superSourceArt],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .mediaPlayer(1),
 				longName: "Media Player 2",
 				shortName: "MP2",
@@ -226,7 +226,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.superSourceArt],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .mediaPlayerKey(1),
 				longName: "Media Player 2 Key",
 				shortName: "MP2K",
@@ -235,7 +235,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary, .superSourceArt],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .superSource,
 				longName: "PIP",
 				shortName: "PIP",
@@ -244,7 +244,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.multiviewer, .superSourceArt],
 				mixEffects: [.me2AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .keyMask(0),
 				longName: "ME 1 Key 1 Mask",
 				shortName: "M1K1",
@@ -253,7 +253,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.multiviewer],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .keyMask(1),
 				longName: "ME 1 Key 2 Mask",
 				shortName: "M1K2",
@@ -262,7 +262,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.multiviewer],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .keyMask(2),
 				longName: "ME 2 Key 1 Mask",
 				shortName: "M2K1",
@@ -271,7 +271,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.multiviewer],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .keyMask(3),
 				longName: "ME 2 Key 2 Mask",
 				shortName: "M2K2",
@@ -280,7 +280,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.multiviewer],
 				mixEffects: [.me2AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .downStreamKeyMask(0),
 				longName: "DSK 1 Mask",
 				shortName: "DK1M",
@@ -289,7 +289,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.multiviewer],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .downStreamKeyMask(1),
 				longName: "DSK 2 Mask",
 				shortName: "DK2M",
@@ -298,7 +298,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.multiviewer],
 				mixEffects: [.me2AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .program(me: 0),
 				longName: "ME 1 PGM",
 				shortName: "Pgm1",
@@ -307,7 +307,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .preview(me: 0),
 				longName: "ME 1 PVW",
 				shortName: "Pvw1",
@@ -316,7 +316,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .program(me: 1),
 				longName: "ME 2 PGM",
 				shortName: "Pgm2",
@@ -325,7 +325,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .preview(me: 1),
 				longName: "ME 2 PVW",
 				shortName: "Pvw2",
@@ -334,7 +334,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: [.me1AndFillSources, .me2AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .cleanFeed(0),
 				longName: "Clean Feed 1",
 				shortName: "Cfd1",
@@ -343,7 +343,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .cleanFeed(1),
 				longName: "Clean Feed 2",
 				shortName: "Cfd2",
@@ -352,7 +352,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .auxiliary(0),
 				longName: "Auxiliary 1",
 				shortName: "Aux1",
@@ -361,7 +361,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary],
 				mixEffects: [.me2AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .auxiliary(1),
 				longName: "Auxiliary 2",
 				shortName: "Aux2",
@@ -370,7 +370,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .auxiliary(2),
 				longName: "Auxiliary 3",
 				shortName: "Aux3",
@@ -379,7 +379,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary],
 				mixEffects: [.me1AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .auxiliary(3),
 				longName: "Auxiliary 4",
 				shortName: "Aux4",
@@ -388,7 +388,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary],
 				mixEffects: [.me1AndFillSources, .me2AndFillSources]
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .auxiliary(4),
 				longName: "Auxiliary 5",
 				shortName: "Aux5",
@@ -397,7 +397,7 @@ class Atem_Tests: XCTestCase {
 				routingOptions: [.auxiliary],
 				mixEffects: []
 			),
-			VideoSource.PropertiesChanged(
+			VideoSource.DidChangeProperties(
 				source: .auxiliary(5),
 				longName: "Auxiliary 6",
 				shortName: "Aux6",

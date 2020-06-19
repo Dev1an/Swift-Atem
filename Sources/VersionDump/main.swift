@@ -19,11 +19,11 @@ if CommandLine.arguments.count > 1 {
 print("Trying to connect to switcher with IP addres", address)
 
 let controller = try Controller(ipAddress: address) { connection in
-	connection.when { (version: ProtocolVersion) in
+	connection.when { (version: Config.ProtocolVersion) in
 		print(version)
 	}
 
-	connection.when { (change: InitiationComplete) in
+	connection.when { (change: Config.InitiationComplete) in
 		print("Initiation complete")
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
 			exit(EXIT_SUCCESS)

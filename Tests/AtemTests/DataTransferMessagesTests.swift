@@ -12,7 +12,7 @@ class DataMessageTests: XCTestCase {
 
 	func testStartDataTransfer() throws {
 		let checker = try KeyPathEqualityChecker(
-			constructed: StartDataTransfer(transferID: 1, store: 2, frameNumber: 3, size: 4, mode: .write2)
+			constructed: Do.StartDataTransfer(transferID: 1, store: 2, frameNumber: 3, size: 4, mode: .write2)
 		)
 
 		checker.compare(field: \.transferID)
@@ -24,7 +24,7 @@ class DataMessageTests: XCTestCase {
 
 	func testContinueDataTransfer() throws {
 		let checker = try KeyPathEqualityChecker(
-			constructed: DataTransferChunkRequest(transferID: 5, chunkSize: 4, chunkCount: 3)
+			constructed: Do.RequestDataChunks(transferID: 5, chunkSize: 4, chunkCount: 3)
 		)
 
 		checker.compare(field: \.transferID)
@@ -36,7 +36,7 @@ class DataMessageTests: XCTestCase {
 
 	func testFileDescription() throws {
 		let checker = try KeyPathEqualityChecker(
-			constructed: SetFileDescription(transferID: .random(in: 0..<500), name: "Naampje", description: "Dit is een beschrijving", hash: Array(194..<210))
+			constructed: Do.SetFileDescription(transferID: .random(in: 0..<500), name: "Naampje", description: "Dit is een beschrijving", hash: Array(194..<210))
 		)
 
 		checker.compare(field: \.transferID)
@@ -47,7 +47,7 @@ class DataMessageTests: XCTestCase {
 
 	func testTransferData() throws {
 		let checker = try KeyPathEqualityChecker(
-			constructed: TransferData(transferID: .random(in: 0 ..< .max), data: Array(0 ..< .max))
+			constructed: Do.TransferData(transferID: .random(in: 0 ..< .max), data: Array(0 ..< .max))
 		)
 
 		checker.compare(field: \.transferID)
@@ -56,7 +56,7 @@ class DataMessageTests: XCTestCase {
 
 }
 
-class KeyPathEqualityChecker<S: Serializable> {
+class KeyPathEqualityChecker<S: SerializableMessage> {
 	let constructed: S
 	let parsed: S
 

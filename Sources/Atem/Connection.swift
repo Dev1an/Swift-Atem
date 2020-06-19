@@ -94,7 +94,7 @@ public class ConnectionState {
 		messageOutBox.append(contentsOf: message)
 	}
 
-	public func send(_ message: Serializable, asSeparatePackage needsSeparatepackage: Bool = false) {
+	public func send(_ message: SerializableMessage, asSeparatePackage needsSeparatepackage: Bool = false) {
 		send(message: message.serialize(), asSeparatePackage: needsSeparatepackage)
 	}
 	

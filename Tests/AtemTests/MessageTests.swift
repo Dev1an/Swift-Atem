@@ -18,20 +18,20 @@ class MessageTests: XCTestCase {
 
 		let testNames = [short, exact, tooLong, extraLong]
 
-		try testNames.map{ ProductInfo(name: $0, model: .mini).dataBytes }.forEach { bytes in
+		try testNames.map{ Config.ProductInfo(name: $0, model: .mini).dataBytes }.forEach { bytes in
 			XCTAssertEqual(bytes.count, 44)
-			XCTAssertEqual(try ProductInfo(with: ArraySlice(bytes)).model, .mini)
+			XCTAssertEqual(try Config.ProductInfo(with: ArraySlice(bytes)).model, .mini)
 		}
 
 		for name in [short, exact] {
-			let bytes = ArraySlice(ProductInfo(name: name, model: .mini).dataBytes)
-			XCTAssertEqual(try ProductInfo(with: bytes).name, name)
+			let bytes = ArraySlice(Config.ProductInfo(name: name, model: .mini).dataBytes)
+			XCTAssertEqual(try Config.ProductInfo(with: bytes).name, name)
 		}
 
 		for name in [tooLong, extraLong] {
-			let bytes = ArraySlice(ProductInfo(name: name, model: .mini).dataBytes)
+			let bytes = ArraySlice(Config.ProductInfo(name: name, model: .mini).dataBytes)
 			let trimmedName = String(name.prefix(40-3) + "...")
-			XCTAssertEqual(try ProductInfo(with: bytes).name, trimmedName)
+			XCTAssertEqual(try Config.ProductInfo(with: bytes).name, trimmedName)
 		}
 	}
 }

@@ -88,7 +88,7 @@ public enum VideoSource: RawRepresentable {
 		case .unknown(let rawValue):         return rawValue
 		}
 	}
-	
+
 	enum Base: UInt16 {
 		case black = 0
 		case input = 1

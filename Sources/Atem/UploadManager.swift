@@ -13,15 +13,15 @@ public class UploadManager {
 	private var transfers = [UInt16 : Transfer]()
 
 	struct Transfer {
-		let start: StartDataTransfer
-		let description: SetFileDescription
+		let start: Do.StartDataTransfer
+		let description: Do.SetFileDescription
 		let data: Data
 		var transferredBytes = 0
 	}
 
 	init() {}
 
-	func createTransfer(store: UInt16, frameNumber: UInt16, data: Data, uncompressedSize: UInt32, mode: StartDataTransfer.Mode, name optionalName: String? = nil, description: String = "") -> StartDataTransfer {
+	func createTransfer(store: UInt16, frameNumber: UInt16, data: Data, uncompressedSize: UInt32, mode: Do.StartDataTransfer.Mode, name optionalName: String? = nil, description: String = "") -> Do.StartDataTransfer {
 
 		let id = transferCounter
 		transferCounter += 1
@@ -29,8 +29,8 @@ public class UploadManager {
 		let name = optionalName ?? "transfer \(transferCounter)"
 
 		let transfer = Transfer(
-			start: StartDataTransfer(transferID: id, store: store, frameNumber: frameNumber, size: uncompressedSize, mode: mode),
-			description: SetFileDescription(transferID: id, name: name, description: description),
+			start: Do.StartDataTransfer(transferID: id, store: store, frameNumber: frameNumber, size: uncompressedSize, mode: mode),
+			description: Do.SetFileDescription(transferID: id, name: name, description: description),
 			data: data
 		)
 
@@ -72,7 +72,7 @@ public class UploadManager {
 				if maxChunkEnd > data.count { return data.count }
 				var chunkEnd = maxChunkEnd - 16
 				while chunkEnd < maxChunkEnd {
-					if buffer.load(fromByteOffset: chunkEnd, as: UInt64.self) == repeatMarker {
+					if buffer.load(fromByteOffset: chunkEnd, as: UInt64.self) == Media.repeatMarker {
 						return chunkEnd
 					}
 					chunkEnd += 8
@@ -81,7 +81,7 @@ public class UploadManager {
 			}
 //				print("\tsending chunk \(dataCursor..<chunkEnd) (size: \(chunkEnd - dataCursor))")
 			chunks.append(
-				TransferData(
+				Do.TransferData(
 					transferID: id,
 					data: Array(data[transferredBytes..<chunkEnd])
 				).serialize()
@@ -98,7 +98,7 @@ public class UploadManager {
 		return chunks
 	}
 
-	func getTransfer(store: UInt16) -> StartDataTransfer? {
+	func getTransfer(store: UInt16) -> Do.StartDataTransfer? {
 		transfers.values.first { $0.start.store == store }?.start
 	}
 }

@@ -29,6 +29,6 @@ extension View {
 
 //		let yuv = encodeRunLength(rgbData: imageRep.cgImage!.dataProvider!.data! as Data)
 //		try? yuv.write(to: URL(fileURLWithPath: "/tmp/atem-media.bin"))
-		return encodeRunLength(rgbData: imageRep.cgImage!.dataProvider!.data! as Data)
+		return Media.encodeRunLength(rgbData: imageRep.cgImage!.dataProvider!.data! as Data)
 	}
 }

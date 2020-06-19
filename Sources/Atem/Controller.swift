@@ -171,26 +171,26 @@ public class Controller {
 		let manager = UploadManager()
 		var lockedStore: UInt16?
 
-		handler.when { [unowned self] (lock: LockObtained) in
+		handler.when { [unowned self] (lock: Did.ObtainLock) in
 			lockedStore = lock.store
 			if let startTransfer = manager.getTransfer(store: lock.store) {
 				self.send(message: startTransfer)
 			}
 		}
 
-		handler.when { [unowned self] (startInfo: DataTransferChunkRequest) in
+		handler.when { [unowned self] (startInfo: Do.RequestDataChunks) in
 			for chunk in manager.getChunks(for: startInfo.transferID, preferredSize: startInfo.chunkSize, count: startInfo.chunkCount) {
 				self.handler.sendSeparately(messages: chunk)
 			}
 		}
 
-		handler.when { [unowned self] (completion: DataTransferCompleted) in
+		handler.when { [unowned self] (completion: Did.FinishDataTransfer) in
 			manager.markAsCompleted(transferId: completion.transferID)
 			if let store = lockedStore {
 				if let startTransfer = manager.getTransfer(store: store) {
 					self.send(message: startTransfer)
 				} else {
-					self.send(message: LockRequest(store: store, state: 0))
+					self.send(message: Do.RequestLock(store: store, state: 0))
 					lockedStore = nil
 				}
 			}
@@ -202,7 +202,7 @@ public class Controller {
 	/// Sends a message to the connected switcher.
 	///
 	/// - Parameter message: the message that will be sent to the switcher
-	public func send(message: Serializable) {
+	public func send(message: SerializableMessage) {
 		if let channel = channel {
 			channel.eventLoop.execute {
 				self.handler.send(message)
@@ -219,7 +219,7 @@ public class Controller {
 	/// Upload an image to the Media Pool
 	/// - Parameters:
 	///   - slot: The number of the still in the media pool the image will be uploaded to
-	///   - data: Raw YUV data. Use `encodeRunLength(data: Data)` to convert an RGBA image to the required YUV format.
+	///   - data: Raw YUV data. Use `Media.encodeRunLength(data: Data)` to convert an RGBA image to the required YUV format.
 	///   - uncompressedSize: The size of the image before run length encoding
 	public func uploadStill(slot: UInt16, data: Data, uncompressedSize: UInt32) {
 		_ = uploadManager.createTransfer(
@@ -229,14 +229,14 @@ public class Controller {
 			uncompressedSize: uncompressedSize,
 			mode: .write
 		)
-		send(message: LockPositionRequest(store: 0, index: slot, type: 1))
+		send(message: Do.RequestLockPosition(store: 0, index: slot, type: 1))
 	}
 
 	public func uploadLabel(source: VideoSource, labelImage: Data, longName: String? = nil, shortName: String? = nil) {
 		if longName == nil && shortName == nil {
-			send(message: VideoSource.ChangeProperties(input: source.rawValue, longName: String(describing: source), shortName: nil))
+			send(message: VideoSource.DoChangeProperties(input: source.rawValue, longName: String(describing: source), shortName: nil))
 		} else {
-			send(message: VideoSource.ChangeProperties(input: source.rawValue, longName: longName, shortName: shortName))
+			send(message: VideoSource.DoChangeProperties(input: source.rawValue, longName: longName, shortName: shortName))
 		}
 		send(
 			message: uploadManager.createTransfer(
@@ -274,7 +274,7 @@ public protocol ControllerConnection: AnyObject {
 	/// Sends a message to the connected switcher.
 	///
 	/// - Parameter message: the message that will be sent to the switcher
-	func send(_ message: Serializable)
+	func send(_ message: SerializableMessage)
 
 	func sendSeparately(messages: [UInt8])
 
@@ -289,11 +289,11 @@ public protocol ControllerConnection: AnyObject {
 	///
 	/// - Parameter handler: The handler to attach
 	/// - Parameter message: The message to which the handler is attached
-	func when<M: Message>(_ handler: @escaping (_ message: M)->Void)
+	func when<M: Message.Deserializable>(_ handler: @escaping (_ message: M)->Void)
 }
 
 extension ControllerHandler: ControllerConnection {
-	public final func send(_ message: Serializable) {
+	public final func send(_ message: SerializableMessage) {
 		if let state = connectionState {
 			state.send(message)
 		} else {
@@ -309,7 +309,7 @@ extension ControllerHandler: ControllerConnection {
 		}
 	}
 
-	public final func when<M: Message>(_ handler: @escaping (_ message: M)->Void) {
+	public final func when<M: Message.Deserializable>(_ handler: @escaping (_ message: M)->Void) {
 		messageHandler.when(handler)
 	}
 }

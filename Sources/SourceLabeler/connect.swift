@@ -13,11 +13,11 @@ func connect(ip: String) throws -> Controller {
 	initialisation.enter()
 
 	let controller = try Controller(ipAddress: ip) { connection in
-		connection.when{ (change: PreviewBusChanged) in
+		connection.when{ (change: Did.ChangePreviewBus) in
 			print(change) // prints: 'Preview bus changed to input(x)'
 		}
 
-		connection.when { (connected: InitiationComplete) in
+		connection.when { (connected: Config.InitiationComplete) in
 			print(connected)
 			initialisation.leave()
 		}

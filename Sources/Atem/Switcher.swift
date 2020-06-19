@@ -131,7 +131,7 @@ public protocol SwitcherConnections {
 	///
 	/// The message will be serialized immediately into a byte array and appended to the outgoing buffer of all the connected controllers.
 	/// These buffers will be flushed after at most 20ms.
-	func send(_ message: Serializable)
+	func send(_ message: SerializableMessage)
 
 	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called with two parameters: the message itself and the origin of the message.
 	/// The handler takes one generic argument `message`. The type of this argument indicates the type that this message handler will be attached to.
@@ -139,15 +139,15 @@ public protocol SwitcherConnections {
 	/// - Parameter handler: The handler to attach
 	/// - Parameter message: The message to which the handler is attached
 	/// - Parameter context: The origin of the message. Use this parameter to reply directly to the sender of the message.
-	func when<M: Message>(_ handler: @escaping (_ message: M, _ context: ConnectionState)->Void)
+	func when<M: Message.Deserializable>(_ handler: @escaping (_ message: M, _ context: ConnectionState)->Void)
 }
 
 extension SwitcherHandler: SwitcherConnections {
-	public func send(_ message: Serializable) {
+	public func send(_ message: SerializableMessage) {
 		send(message: message.serialize())
 	}
 
-	func when<M: Message>(_ handler: @escaping (_ message: M, _ context: ConnectionState)->Void) {
+	func when<M: Message.Deserializable>(_ handler: @escaping (_ message: M, _ context: ConnectionState)->Void) {
 		messageHandler.when(handler)
 	}
 }

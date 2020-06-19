@@ -8,7 +8,7 @@
 import Foundation
 
 let inputProperties = [
-	VideoSource.PropertiesChanged(
+	VideoSource.DidChangeProperties(
 		source: .black,
 		longName: "Black",
 		shortName: "BLK",
@@ -16,7 +16,7 @@ let inputProperties = [
 		kind: .black,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(0),
 		longName: "Rasperry",
 		shortName: "Rasp",
@@ -24,7 +24,7 @@ let inputProperties = [
 		kind: .hdmi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(1),
 		longName: "0. ",
 		shortName: " ",
@@ -32,7 +32,7 @@ let inputProperties = [
 		kind: .composite,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(2),
 		longName: "1. PTZ 1",
 		shortName: "1",
@@ -40,7 +40,7 @@ let inputProperties = [
 		kind: .sdi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(3),
 		longName: "2. PTZ 2",
 		shortName: "2",
@@ -48,7 +48,7 @@ let inputProperties = [
 		kind: .sdi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(4),
 		longName: "3. URSA",
 		shortName: "3",
@@ -56,7 +56,7 @@ let inputProperties = [
 		kind: .sdi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(5),
 		longName: "4. Micro Studio",
 		shortName: "4",
@@ -64,7 +64,7 @@ let inputProperties = [
 		kind: .sdi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(6),
 		longName: "5. ",
 		shortName: "5",
@@ -72,7 +72,7 @@ let inputProperties = [
 		kind: .sdi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(7),
 		longName: "6.",
 		shortName: "6",
@@ -80,7 +80,7 @@ let inputProperties = [
 		kind: .sdi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(8),
 		longName: "7. CasparCG",
 		shortName: "7CAS",
@@ -88,7 +88,7 @@ let inputProperties = [
 		kind: .sdi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .input(9),
 		longName: "8. ",
 		shortName: "8",
@@ -96,7 +96,7 @@ let inputProperties = [
 		kind: .sdi,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .colorBars,
 		longName: "Color Bars",
 		shortName: "BARS",
@@ -104,7 +104,7 @@ let inputProperties = [
 		kind: .colorBars,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .color(0),
 		longName: "Color 1",
 		shortName: "COL1",
@@ -112,7 +112,7 @@ let inputProperties = [
 		kind: .colorGenerator,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .color(1),
 		longName: "Color 2",
 		shortName: "COL2",
@@ -120,7 +120,7 @@ let inputProperties = [
 		kind: .colorGenerator,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .mediaPlayer(0),
 		longName: "Media Player 1",
 		shortName: "MP1",
@@ -128,7 +128,7 @@ let inputProperties = [
 		kind: .mediaPlayerFill,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .mediaPlayerKey(0),
 		longName: "Media Player 1 Key",
 		shortName: "MP1K",
@@ -136,7 +136,7 @@ let inputProperties = [
 		kind: .mediaPlayerKey,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .mediaPlayer(1),
 		longName: "Media Player 2",
 		shortName: "MP2",
@@ -144,7 +144,7 @@ let inputProperties = [
 		kind: .mediaPlayerFill,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .mediaPlayerKey(1),
 		longName: "Media Player 2 Key",
 		shortName: "MP2K",
@@ -152,7 +152,7 @@ let inputProperties = [
 		kind: .mediaPlayerKey,
 		routingOptions: [.auxiliary, .multiviewer, .keySource],
 		mixEffects: [.me1AndFillSources]
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .keyMask(0),
 		longName: "Key 1 Mask",
 		shortName: "M1K1",
@@ -160,7 +160,7 @@ let inputProperties = [
 		kind: .mask,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .keyMask(1),
 		longName: "Key 2 Mask",
 		shortName: "M1K2",
@@ -168,7 +168,7 @@ let inputProperties = [
 		kind: .mask,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .keyMask(2),
 		longName: "Key 3 Mask",
 		shortName: "M1K3",
@@ -176,7 +176,7 @@ let inputProperties = [
 		kind: .mask,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .keyMask(3),
 		longName: "Key 4 Mask",
 		shortName: "M1K4",
@@ -184,7 +184,7 @@ let inputProperties = [
 		kind: .mask,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .downStreamKeyMask(0),
 		longName: "DSK 1 Mask",
 		shortName: "DK1M",
@@ -192,7 +192,7 @@ let inputProperties = [
 		kind: .mask,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .downStreamKeyMask(1),
 		longName: "DSK 2 Mask",
 		shortName: "DK2M",
@@ -200,7 +200,7 @@ let inputProperties = [
 		kind: .mask,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .program(me: 0),
 		longName: "Program",
 		shortName: "Pgm",
@@ -208,7 +208,7 @@ let inputProperties = [
 		kind: .meOutput,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .preview(me: 0),
 		longName: "Preview",
 		shortName: "Pvw",
@@ -216,7 +216,7 @@ let inputProperties = [
 		kind: .meOutput,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .cleanFeed(0),
 		longName: "Clean Feed 1",
 		shortName: "Cfd1",
@@ -224,7 +224,7 @@ let inputProperties = [
 		kind: .meOutput,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .cleanFeed(1),
 		longName: "Clean Feed 2",
 		shortName: "Cfd2",
@@ -232,7 +232,7 @@ let inputProperties = [
 		kind: .meOutput,
 		routingOptions: [.auxiliary, .multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .auxiliary(0),
 		longName: "Auxiliary 1",
 		shortName: "Aux1",
@@ -240,7 +240,7 @@ let inputProperties = [
 		kind: .auxiliary,
 		routingOptions: [.multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .auxiliary(1),
 		longName: "Auxiliary 2",
 		shortName: "Aux2",
@@ -248,7 +248,7 @@ let inputProperties = [
 		kind: .auxiliary,
 		routingOptions: [.multiviewer],
 		mixEffects: []
-	), VideoSource.PropertiesChanged(
+	), VideoSource.DidChangeProperties(
 		source: .auxiliary(2),
 		longName: "Auxiliary 3",
 		shortName: "Aux3",
@@ -262,9 +262,9 @@ let inputProperties = [
 let serializedInPr = inputProperties.flatMap{$0.serialize()}
 
 let initialMessages: [[UInt8]] = [
-	ProtocolVersion(major: 2, minor: 30).serialize(),
-	ProductInfo(name: "ATEM 1 ME Production Studio 4K Simulator", model: .mini).serialize(),
-	Topology(
+	Config.ProtocolVersion(major: 2, minor: 30).serialize(),
+	Config.ProductInfo(name: "ATEM 1 ME Production Studio 4K Simulator", model: .mini).serialize(),
+	Config.Topology(
 		mixEffectBlocks: 1,
 		sources: UInt8(inputProperties.count),
 		downstreamKeyers: 2,
@@ -278,9 +278,9 @@ let initialMessages: [[UInt8]] = [
 		stingers: 0,
 		unknownC: [0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 	).serialize(),
-	MixEffectConfiguration(block: 0, numberOfKeyers: 4).serialize(),
-	MediaPoolConfiguration(stills: 5, clips: 2).serialize(),
-	MultiViewConfiguration(
+	Config.MixEffect(block: 0, numberOfKeyers: 4).serialize(),
+	Config.MediaPool(stills: 5, clips: 2).serialize(),
+	Config.MultiView(
 		inputs: 10,
 		multiviews: 1,
 		unknownBytes: [0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x00, 0x0e, 0x61, 0x60]

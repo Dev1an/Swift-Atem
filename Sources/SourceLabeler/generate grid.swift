@@ -24,7 +24,7 @@ func createGrid() throws -> Data {
 		}
 	}
 
-	let grid = encodeRunLength(rawData: decompressed)
+	let grid = Media.encodeRunLength(rawData: decompressed)
 	try grid.write(to: URL(fileURLWithPath: "/tmp/compressedGrid.bin"))
 
 	return grid
@@ -35,7 +35,7 @@ func createRect(color: UInt8) throws -> Data {
 	for _ in 0 ..< 320*90 {
 		decompressed.append(color)
 	}
-	return encodeRunLength(rawData: decompressed)
+	return Media.encodeRunLength(rawData: decompressed)
 }
 
 let grayGradient: [UInt8] = [14, 85, 29, 132, 17, 96, 30, 77, 136, 186, 101, 50, 13, 19, 72, 217, 49, 130, 124, 123, 47, 51, 28, 32, 192, 166, 56, 167, 97, 193, 143, 172, 189, 198, 41, 154, 147, 61, 81, 109, 199, 108, 60, 37, 12, 15, 153, 21, 142, 68, 35, 173, 141, 27, 197, 144, 94, 116, 42, 185, 214, 40, 46, 184, 181, 83, 127, 175, 31, 150, 213, 73, 95, 86, 191, 117, 135, 112, 208, 22, 78, 107, 179, 114, 210, 119, 58, 67, 149, 209, 171, 110, 89, 103, 133, 43, 202, 137, 66, 39, 151, 129, 71, 200, 26, 111, 128, 11, 16, 23, 196, 201, 36, 106, 207, 205, 69, 139, 62, 105, 90, 203, 216, 54, 99, 20, 5, 4, 100, 88, 146, 145, 25, 74, 80, 204, 180, 84, 138, 212, 215, 24, 63, 33, 187, 118, 148, 183, 57, 91, 102, 206, 44, 152, 190, 126, 134, 59, 182, 87, 174, 48, 125, 104, 140, 188, 131, 92, 178, 64, 70, 76, 79, 65, 121, 113, 176, 211, 177, 52, 75, 120, 82, 38, 93, 98, 122, 53, 115, 55, 45, 34]
@@ -57,5 +57,5 @@ func createGradient() throws -> Data {
 			}
 		}
 	}
-	return encodeRunLength(rawData: decompressed)
+	return Media.encodeRunLength(rawData: decompressed)
 }

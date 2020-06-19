@@ -16,7 +16,7 @@ public class ContextualMessageHandler: MessageParser {
 	/// - Parameter handler: The handler to attach
 	/// - Parameter message: The message to which the handler is attached
 	/// - Parameter context: The context `message` was sent from.
-	public func when<M: Message>(_ handler: @escaping (_ message: M, _ context: Context)->Void) {
+	public func when<M: Message.Deserializable>(_ handler: @escaping (_ message: M, _ context: Context)->Void) {
 		eventRegister[M.title.number] = M.self
 		handlerRegister[M.title.number] = handler
 	}
@@ -36,7 +36,7 @@ public class ContextualMessageHandler: MessageParser {
 
 /// A utility to parse `RawMessage`s and call their attached handlers.
 ///
-/// Handlers are functions that will be executed when `handle(rawMessage: RawMessage)` is called. Handlers are attached to a specific `Message` type for example :`ProgramBusChanged`.
+/// Handlers are functions that will be executed when `handle(rawMessage: RawMessage)` is called. Handlers are attached to a specific `Message` type for example: `ProgramBusChanged`.
 public class PureMessageHandler: MessageParser {
 
 	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called.
@@ -44,7 +44,7 @@ public class PureMessageHandler: MessageParser {
 	///
 	/// - Parameter handler: The handler to attach
 	/// - Parameter message: The message to which the handler is attached
-	public func when<M: Message>(_ handler: @escaping (_ message: M)->Void) {
+	public func when<M: Message.Deserializable>(_ handler: @escaping (_ message: M)->Void) {
 		eventRegister[M.title.number] = M.self
 		handlerRegister[M.title.number] = handler
 	}
@@ -64,17 +64,18 @@ public class PureMessageHandler: MessageParser {
 	}
 }
 
+/// A sequence of bytes
+public typealias RawMessage = ArraySlice<UInt8>
+
 /// A utility to parse binary messages and look up corresponding message handlers.
 public class MessageParser {
-	typealias RawMessage = ArraySlice<UInt8>
-
 	/// A registry with handlers for each message.
 	/// The keys in the registry are the message names and the values are functions that interprete and react on a message.
-	fileprivate var eventRegister = [UInt32: Message.Type]()
+	fileprivate var eventRegister = [UInt32: Message.Deserializable.Type]()
 	fileprivate var handlerRegister = [UInt32: Any]()
 
-	fileprivate final func message(from bytes: RawMessage) throws -> (Message, Any)? {
-		let titlePosition = MessageTitle.position.advanced(by: bytes.startIndex)
+	fileprivate final func message(from bytes: RawMessage) throws -> (Message.Deserializable, Any)? {
+		let titlePosition = Message.Title.position.advanced(by: bytes.startIndex)
 		let title = UInt32(from: bytes[titlePosition])
 //		print(String(bytes: bytes[titlePosition], encoding: .utf8))
 		if let handler = handlerRegister[title] {

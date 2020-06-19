@@ -103,7 +103,7 @@ struct SerialPacket {
 		self.init(connectionUID: connectionUID, data: [UInt8](), number: number, acknowledgement: acknowledgement)
 	}
 	
-	init(connectionUID: UID, messages: [Serializable], number: UInt16? = nil, acknowledgement: UInt16? = nil) {
+	init(connectionUID: UID, messages: [SerializableMessage], number: UInt16? = nil, acknowledgement: UInt16? = nil) {
 		self.init(connectionUID: connectionUID, data: messages.map { $0.serialize() } .joined(), number: number, acknowledgement: acknowledgement)
 	}
 	

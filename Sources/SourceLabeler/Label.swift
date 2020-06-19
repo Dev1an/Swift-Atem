@@ -58,7 +58,6 @@ struct Label: View {
 
 		let dataWithAlphaLayer = imageRep.cgImage!.dataProvider!.data! as Data
 
-
 		var indexedData = Data(capacity: width*height)
 		
 		for i in 0 ..< width*height {
@@ -76,7 +75,7 @@ struct Label: View {
 
 		assert(indexedData.count == width*height)
 
-		return encodeRunLength(rawData: indexedData)
+		return Media.encodeRunLength(rawData: indexedData)
 	}
 
 }

@@ -18,7 +18,7 @@ if #available(OSX 10.15, *) {
 	print("Trying to connect to switcher with IP addres", address)
 
 	let controller = try Controller(ipAddress: address) { connection in
-		connection.when { (connected: InitiationComplete) in
+		connection.when { (connected: Config.InitiationComplete) in
 			print(connected)
 			print("Type some text to send to the atem")
 		}
