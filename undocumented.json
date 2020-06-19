@@ -1,0 +1,1454 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Connection.swift",
+      "line": 97,
+      "symbol": "ConnectionState.send(_:asSeparatePackage:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Controller.swift",
+      "line": 104,
+      "symbol": "Address",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Controller.swift",
+      "line": 146,
+      "symbol": "Controller.address",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Controller.swift",
+      "line": 235,
+      "symbol": "Controller.uploadLabel(source:labelImage:longName:shortName:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Controller.swift",
+      "line": 279,
+      "symbol": "ControllerConnection.sendSeparately(messages:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Controller.swift",
+      "line": 304,
+      "symbol": "ControllerHandler.sendSeparately(messages:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/MediaConverter/422 ABLARL YUV.swift",
+      "line": 76,
+      "symbol": "Media.repeatMarker",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/MediaConverter/RunLength.swift",
+      "line": 12,
+      "symbol": "Media.decodeRunLength(rawData:uncompressedByteCount:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/MediaConverter/RunLength.swift",
+      "line": 43,
+      "symbol": "Media.encodeRunLength(rawData:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/MessageHandler.swift",
+      "line": 11,
+      "symbol": "ContextualMessageHandler.Context",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 13,
+      "symbol": "Message.Do.Cut.atemSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 19,
+      "symbol": "Message.Do.Cut.init(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 35,
+      "symbol": "Message.Do.ChangePreviewBus.mixEffect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 36,
+      "symbol": "Message.Do.ChangePreviewBus.previewBus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 44,
+      "symbol": "Message.Do.ChangePreviewBus.init(to:mixEffect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 61,
+      "symbol": "Message.Did.ChangePreviewBus.mixEffect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 62,
+      "symbol": "Message.Did.ChangePreviewBus.previewBus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 70,
+      "symbol": "Message.Did.ChangePreviewBus.init(to:mixEffect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 88,
+      "symbol": "Message.Do.ChangeProgramBus.mixEffect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 89,
+      "symbol": "Message.Do.ChangeProgramBus.programBus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 97,
+      "symbol": "Message.Do.ChangeProgramBus.init(to:mixEffect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 114,
+      "symbol": "Message.Did.ChangeProgramBus.mixEffect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 115,
+      "symbol": "Message.Did.ChangeProgramBus.programBus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 123,
+      "symbol": "Message.Did.ChangeProgramBus.init(to:mixEffect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 204,
+      "symbol": "Message.Do.GetTimecode",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 208,
+      "symbol": "Message.Do.GetTimecode.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 217,
+      "symbol": "Message.Did.GetTimecode.Timecode",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 219,
+      "symbol": "Message.Did.GetTimecode.timecode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 221,
+      "symbol": "Message.Did.GetTimecode.init(hour:minute:second:frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 253,
+      "symbol": "Message.Do.ChangeTransitionPosition.mixEffect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 254,
+      "symbol": "Message.Do.ChangeTransitionPosition.position",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 261,
+      "symbol": "Message.Do.ChangeTransitionPosition.init(to:mixEffect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 277,
+      "symbol": "Message.Did.ChangeTransitionPosition.mixEffect",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 278,
+      "symbol": "Message.Did.ChangeTransitionPosition.position",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 279,
+      "symbol": "Message.Did.ChangeTransitionPosition.inTransition",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 280,
+      "symbol": "Message.Did.ChangeTransitionPosition.remainingFrames",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 289,
+      "symbol": "Message.Did.ChangeTransitionPosition.init(to:remainingFrames:inTransition:mixEffect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 329,
+      "symbol": "Message.Did.GetSourceTallies.init(tallies:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 357,
+      "symbol": "Message.Do.ChangeKeyDVE",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 360,
+      "symbol": "Message.Do.ChangeKeyDVE.changedElements",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 361,
+      "symbol": "Message.Do.ChangeKeyDVE.mixEffectIndex",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 362,
+      "symbol": "Message.Do.ChangeKeyDVE.upstreamKey",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 363,
+      "symbol": "Message.Do.ChangeKeyDVE.rotation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 375,
+      "symbol": "Message.Do.ChangeKeyDVE.init(mixEffect:key:rotation:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 403,
+      "symbol": "Message.Do.ChangeKeyDVE.ChangeMask",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Actions.swift",
+      "line": 410,
+      "symbol": "Message.Do.ChangeKeyDVE.ChangeMask.rotation",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 8,
+      "symbol": "AtemSize",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 9,
+      "symbol": "AtemSize.oneME",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 9,
+      "symbol": "AtemSize.twoME",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 28,
+      "symbol": "Message.Config.ProtocolVersion.init(major:minor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 64,
+      "symbol": "Message.Config.ProductInfo.init(name:model:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 94,
+      "symbol": "Message.Config.Topology.mixEffectBlocks",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 95,
+      "symbol": "Message.Config.Topology.sources",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 96,
+      "symbol": "Message.Config.Topology.auxiliaryBusses",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 99,
+      "symbol": "Message.Config.Topology.mixMinusOutputs",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 110,
+      "symbol": "Message.Config.Topology.unknownA",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 119,
+      "symbol": "Message.Config.Topology.unknownC",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 136,
+      "symbol": "Message.Config.Topology.init(mixEffectBlocks:sources:downstreamKeyers:auxiliaryBusses:mixMinusOutputs:mediaPlayers:unknownA:serialPorts:maxHyperdecks:unknownB:stingers:unknownC:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 183,
+      "symbol": "Message.Config.MixEffect",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 197,
+      "symbol": "Message.Config.MixEffect.init(block:numberOfKeyers:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 211,
+      "symbol": "Message.Config.MediaPool",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 224,
+      "symbol": "Message.Config.MediaPool.init(stills:clips:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 238,
+      "symbol": "Message.Config.MultiView",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 246,
+      "symbol": "Message.Config.MultiView.unknown",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 254,
+      "symbol": "Message.Config.MultiView.init(inputs:multiviews:unknownBytes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 301,
+      "symbol": "VideoSource.DidChangeProperties.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 302,
+      "symbol": "VideoSource.DidChangeProperties.longNameBytes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 303,
+      "symbol": "VideoSource.DidChangeProperties.shortNameBytes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 304,
+      "symbol": "VideoSource.DidChangeProperties.externalInterfaces",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 305,
+      "symbol": "VideoSource.DidChangeProperties.rawKind",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 306,
+      "symbol": "VideoSource.DidChangeProperties.routingOptions",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 307,
+      "symbol": "VideoSource.DidChangeProperties.mixEffects",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 309,
+      "symbol": "VideoSource.DidChangeProperties.longName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 312,
+      "symbol": "VideoSource.DidChangeProperties.shortName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 315,
+      "symbol": "VideoSource.DidChangeProperties.kind",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 392,
+      "symbol": "VideoSource.DoChangeProperties",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 395,
+      "symbol": "VideoSource.DoChangeProperties.changeMask",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 396,
+      "symbol": "VideoSource.DoChangeProperties.input",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 397,
+      "symbol": "VideoSource.DoChangeProperties.longName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 398,
+      "symbol": "VideoSource.DoChangeProperties.shortName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 404,
+      "symbol": "VideoSource.DoChangeProperties.init(input:longName:shortName:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 451,
+      "symbol": "VideoSource.DoChangeProperties.ChangeMask",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 458,
+      "symbol": "VideoSource.DoChangeProperties.ChangeMask.longName",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 459,
+      "symbol": "VideoSource.DoChangeProperties.ChangeMask.shortName",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Configuration.swift",
+      "line": 460,
+      "symbol": "VideoSource.DoChangeProperties.ChangeMask.externalPortType",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 9,
+      "symbol": "Message.Do.RequestLock",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 11,
+      "symbol": "Message.Do.RequestLock.store",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 12,
+      "symbol": "Message.Do.RequestLock.state",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 19,
+      "symbol": "Message.Do.RequestLock.init(store:state:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 31,
+      "symbol": "Message.Do.RequestLockPosition",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 33,
+      "symbol": "Message.Do.RequestLockPosition.store",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 34,
+      "symbol": "Message.Do.RequestLockPosition.index",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 35,
+      "symbol": "Message.Do.RequestLockPosition.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 43,
+      "symbol": "Message.Do.RequestLockPosition.init(store:index:type:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 65,
+      "symbol": "Message.Did.ChangeLock",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 67,
+      "symbol": "Message.Did.ChangeLock.store",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 68,
+      "symbol": "Message.Did.ChangeLock.isLocked",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 75,
+      "symbol": "Message.Did.ChangeLock.init(store:isLocked:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 87,
+      "symbol": "Message.Did.ObtainLock",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 89,
+      "symbol": "Message.Did.ObtainLock.store",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 95,
+      "symbol": "Message.Did.ObtainLock.init(store:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 108,
+      "symbol": "Message.Do.StartDataTransfer",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 111,
+      "symbol": "Message.Do.StartDataTransfer.transferID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 112,
+      "symbol": "Message.Do.StartDataTransfer.store",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 113,
+      "symbol": "Message.Do.StartDataTransfer.frameNumber",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 114,
+      "symbol": "Message.Do.StartDataTransfer.size",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 115,
+      "symbol": "Message.Do.StartDataTransfer.mode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 125,
+      "symbol": "Message.Do.StartDataTransfer.init(transferID:store:frameNumber:size:mode:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 145,
+      "symbol": "Message.Do.StartDataTransfer.Mode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 146,
+      "symbol": "Message.Do.StartDataTransfer.Mode.noOperation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 147,
+      "symbol": "Message.Do.StartDataTransfer.Mode.write",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 148,
+      "symbol": "Message.Do.StartDataTransfer.Mode.clear",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 149,
+      "symbol": "Message.Do.StartDataTransfer.Mode.write2",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 150,
+      "symbol": "Message.Do.StartDataTransfer.Mode.clear2",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 151,
+      "symbol": "Message.Do.StartDataTransfer.Mode.writeInputLabel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 163,
+      "symbol": "Message.Do.RequestDataChunks",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 166,
+      "symbol": "Message.Do.RequestDataChunks.transferID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 168,
+      "symbol": "Message.Do.RequestDataChunks.chunkSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 169,
+      "symbol": "Message.Do.RequestDataChunks.chunkCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 180,
+      "symbol": "Message.Do.RequestDataChunks.init(transferID:chunkSize:chunkCount:magic1:magic2:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 207,
+      "symbol": "Message.Do.SetFileDescription",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 210,
+      "symbol": "Message.Do.SetFileDescription.transferID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 211,
+      "symbol": "Message.Do.SetFileDescription.description",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 211,
+      "symbol": "Message.Do.SetFileDescription.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 212,
+      "symbol": "Message.Do.SetFileDescription.hash",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 225,
+      "symbol": "Message.Do.SetFileDescription.init(transferID:name:description:hash:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 270,
+      "symbol": "Message.Do.TransferData",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 273,
+      "symbol": "Message.Do.TransferData.transferID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 274,
+      "symbol": "Message.Do.TransferData.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 283,
+      "symbol": "Message.Do.TransferData.init(transferID:data:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 307,
+      "symbol": "Message.Did.FinishDataTransfer",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 310,
+      "symbol": "Message.Did.FinishDataTransfer.transferID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/DataTransfer.swift",
+      "line": 316,
+      "symbol": "Message.Did.FinishDataTransfer.init(id:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Message.swift",
+      "line": 11,
+      "symbol": "Message",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Message.swift",
+      "line": 30,
+      "symbol": "Message.Deserializable",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Message.swift",
+      "line": 31,
+      "symbol": "Message.Serializable",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Message.swift",
+      "line": 67,
+      "symbol": "Do",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Message.swift",
+      "line": 68,
+      "symbol": "Did",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Message.swift",
+      "line": 69,
+      "symbol": "Config",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Messages/Message.swift",
+      "line": 104,
+      "symbol": "SerializableMessage.serialize()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 12,
+      "symbol": "Model.oneME",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 13,
+      "symbol": "Model.twoME",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 14,
+      "symbol": "Model.productionStudio4K",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 15,
+      "symbol": "Model.oneME4K",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 16,
+      "symbol": "Model.twoME4K",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 17,
+      "symbol": "Model.twoMEBroadcastStudio4K",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 18,
+      "symbol": "Model.tvStudioHD",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 19,
+      "symbol": "Model.tvStudioProHD",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 20,
+      "symbol": "Model.tvStudioPro4K",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 21,
+      "symbol": "Model.constellation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 22,
+      "symbol": "Model.constallation8K",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Model.swift",
+      "line": 23,
+      "symbol": "Model.mini",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/TallyLight.swift",
+      "line": 22,
+      "symbol": "TallyLight.off",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/TallyLight.swift",
+      "line": 23,
+      "symbol": "TallyLight.program",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/TallyLight.swift",
+      "line": 24,
+      "symbol": "TallyLight.preview",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/UploadManager.swift",
+      "line": 10,
+      "symbol": "UploadManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Utilities/OptionSet+elements.swift",
+      "line": 31,
+      "symbol": "SingleValueDescribable",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Utilities/OptionSet+elements.swift",
+      "line": 32,
+      "symbol": "SingleValueDescribable.describe()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 14,
+      "symbol": "VideoSource.black",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 15,
+      "symbol": "VideoSource.input(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 16,
+      "symbol": "VideoSource.colorBars",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 17,
+      "symbol": "VideoSource.color(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 18,
+      "symbol": "VideoSource.mediaPlayer(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 19,
+      "symbol": "VideoSource.mediaPlayerKey(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 20,
+      "symbol": "VideoSource.keyMask(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 21,
+      "symbol": "VideoSource.downStreamKeyMask(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 22,
+      "symbol": "VideoSource.superSource",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 23,
+      "symbol": "VideoSource.cleanFeed(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 24,
+      "symbol": "VideoSource.auxiliary(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 25,
+      "symbol": "VideoSource.multiview(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 26,
+      "symbol": "VideoSource.program(me:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 27,
+      "symbol": "VideoSource.preview(me:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 28,
+      "symbol": "VideoSource.unknown(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 124,
+      "symbol": "VideoSource.Kind.black",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 125,
+      "symbol": "VideoSource.Kind.colorBars",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 126,
+      "symbol": "VideoSource.Kind.colorGenerator",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 127,
+      "symbol": "VideoSource.Kind.mediaPlayerFill",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 128,
+      "symbol": "VideoSource.Kind.mediaPlayerKey",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 129,
+      "symbol": "VideoSource.Kind.superSource",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 130,
+      "symbol": "VideoSource.Kind.meOutput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 131,
+      "symbol": "VideoSource.Kind.auxiliary",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 132,
+      "symbol": "VideoSource.Kind.mask",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 135,
+      "symbol": "VideoSource.Kind.sdi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 136,
+      "symbol": "VideoSource.Kind.hdmi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 137,
+      "symbol": "VideoSource.Kind.composite",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 138,
+      "symbol": "VideoSource.Kind.component",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 139,
+      "symbol": "VideoSource.Kind.sVideo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 146,
+      "symbol": "VideoSource.ExternalInterfaces",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 152,
+      "symbol": "VideoSource.ExternalInterfaces.sdi",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 153,
+      "symbol": "VideoSource.ExternalInterfaces.hdmi",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 154,
+      "symbol": "VideoSource.ExternalInterfaces.component",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 155,
+      "symbol": "VideoSource.ExternalInterfaces.composite",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 156,
+      "symbol": "VideoSource.ExternalInterfaces.sVideo",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 158,
+      "symbol": "VideoSource.ExternalInterfaces.none",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 160,
+      "symbol": "VideoSource.ExternalInterfaces.describe()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 172,
+      "symbol": "VideoSource.RoutingOptions",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 178,
+      "symbol": "VideoSource.RoutingOptions.auxiliary",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 179,
+      "symbol": "VideoSource.RoutingOptions.multiviewer",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 180,
+      "symbol": "VideoSource.RoutingOptions.superSourceArt",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 181,
+      "symbol": "VideoSource.RoutingOptions.superSourceBox",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 182,
+      "symbol": "VideoSource.RoutingOptions.keySource",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 184,
+      "symbol": "VideoSource.RoutingOptions.describe()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 196,
+      "symbol": "VideoSource.MixEffects",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 202,
+      "symbol": "VideoSource.MixEffects.me1AndFillSources",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 203,
+      "symbol": "VideoSource.MixEffects.me2AndFillSources",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 205,
+      "symbol": "VideoSource.MixEffects.none",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/VideoSource.swift",
+      "line": 207,
+      "symbol": "VideoSource.MixEffects.describe()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem"
+}

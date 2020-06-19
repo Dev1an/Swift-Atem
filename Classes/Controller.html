@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Controller Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Controller" class="dashAnchor"></a>
+    <a title="Controller Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Atem Docs</a> (54% documented)</p>
+        <p class="header-right"><a href="https://github.com/Dev1an/Swift-Atem"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Atem Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Controller Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/ConnectionState.html">ConnectionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ContextualMessageHandler.html">ContextualMessageHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Controller.html">Controller</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:4Atem13MessageParserC">MessageParser</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PureMessageHandler.html">PureMessageHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Switcher.html">Switcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:4Atem13UploadManagerC">UploadManager</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AtemSize.html">AtemSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Media.html">Media</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Message.html">Message</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Message/Title.html">– Title</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Message/Do.html">– Do</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Message/Did.html">– Did</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Message/Config.html">– Config</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Model.html">Model</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource.html">VideoSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/ExternalInterfaces.html">– ExternalInterfaces</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/RoutingOptions.html">– RoutingOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/MixEffects.html">– MixEffects</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/DidChangeProperties.html">– DidChangeProperties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/VideoSource/DoChangeProperties.html">– DoChangeProperties</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ControllerConnection.html">ControllerConnection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DeserializableMessage.html">DeserializableMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SerializableMessage.html">SerializableMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SingleValueDescribable.html">SingleValueDescribable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SwitcherConnections.html">SwitcherConnections</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/TallyLight.html">TallyLight</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Atem7Addressa">Address</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Atem6Configa">Config</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Atem3Dida">Did</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Atem2Doa">Do</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Atem10RawMessagea">RawMessage</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Controller</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Controller</span></code></pre>
+
+                </div>
+              </div>
+            <p>An interface to</p>
+
+<ul>
+<li>send commands to an ATEM Switcher</li>
+<li>react upon incomming state change messages from the ATEM Switcher</li>
+</ul>
+
+<p>To make an anology with real world devices: this class can be compared to a BlackMagicDesign Control Panel. It is used to control a production switcher.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem10ControllerC7channel3NIO15EventLoopFutureCyAE7Channel_pGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/channel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem10ControllerC7channel3NIO15EventLoopFutureCyAE7Channel_pGSgvp">channel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The underlying <a href="https://github.com/apple/swift-nio">NIO</a> <a href="https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html">Datagram</a> <a href="https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html">Channel</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">channel</span><span class="p">:</span> <span class="kt">EventLoopFuture</span><span class="o">&lt;</span><span class="kt">Channel</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/a630f0b365b4a4cd5768b2797b632fe0514fa6f9/Sources/Atem/Controller.swift#L117">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem10ControllerC6socket14eventLoopGroup5setupAC3NIO13SocketAddressO_AG05EventeF0_pyAA0B10Connection_pXEtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(socket:eventLoopGroup:setup:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem10ControllerC6socket14eventLoopGroup5setupAC3NIO13SocketAddressO_AG05EventeF0_pyAA0B10Connection_pXEtcfc">init(socket:<wbr>eventLoopGroup:<wbr>setup:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start a new Controller that connects to an ATEM Switcher specified by its IP address.</p>
+
+<p>When a connection to a switcher is being initialized it will receive <code><a href="../Enums/Message.html">Message</a></code>s from the switcher to describe its initial state. If you are interested in these messages use the <code>setup</code> parameter to set up handlers for them (see <code><a href="../Protocols/ControllerConnection.html#/s:4Atem20ControllerConnectionP4whenyyyqd__cAA21DeserializableMessageRd__lF">ControllerConnection.when(...)</a></code>). When the connection initiation process is finished the <code>ConnectionInitiationEnd</code> message will be sent. From that moment on you know that a connection is succesfully established.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">socket</span><span class="p">:</span> <span class="kt">SocketAddress</span><span class="p">,</span> <span class="nv">eventLoopGroup</span><span class="p">:</span> <span class="kt">EventLoopGroup</span> <span class="o">=</span> <span class="kt">MultiThreadedEventLoopGroup</span><span class="p">(</span><span class="nv">numberOfThreads</span><span class="p">:</span> <span class="kt">System</span><span class="o">.</span><span class="n">coreCount</span><span class="p">),</span> <span class="nv">setup</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Protocols/ControllerConnection.html">ControllerConnection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span><span class="n">_</span> <span class="k">in</span><span class="p">})</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>socket</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the network socket for the switcher.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventLoopGroup</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the underlying <code>EventLoopGroup</code> that will be used for the network connection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>setup</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a closure that will be called before establishing the connection to the switcher. Use the provided <code><a href="../Protocols/ControllerConnection.html">ControllerConnection</a></code> to register callbacks for incoming messages from the switcher.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/a630f0b365b4a4cd5768b2797b632fe0514fa6f9/Sources/Atem/Controller.swift#L126-L132">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem10ControllerC9ipAddress14eventLoopGroup5setupACSS_3NIO05EventfG0_pyAA0B10Connection_pXEtKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(ipAddress:eventLoopGroup:setup:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem10ControllerC9ipAddress14eventLoopGroup5setupACSS_3NIO05EventfG0_pyAA0B10Connection_pXEtKcfc">init(ipAddress:<wbr>eventLoopGroup:<wbr>setup:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start a new Controller that connects to an ATEM Switcher specified by its IP address.</p>
+
+<p>When a connection to a switcher is being initialized it will receive <code><a href="../Enums/Message.html">Message</a></code>s from the switcher to describe its initial state. If you are interested in these messages use the <code>setup</code> parameter to set up handlers for them (see <code><a href="../Protocols/ControllerConnection.html#/s:4Atem20ControllerConnectionP4whenyyyqd__cAA21DeserializableMessageRd__lF">ControllerConnection.when(...)</a></code>). When the connection initiation process is finished the <code>ConnectionInitiationEnd</code> message will be sent. From that moment on you know that a connection is succesfully established.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">ipAddress</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">eventLoopGroup</span><span class="p">:</span> <span class="kt">EventLoopGroup</span> <span class="o">=</span> <span class="kt">MultiThreadedEventLoopGroup</span><span class="p">(</span><span class="nv">numberOfThreads</span><span class="p">:</span> <span class="kt">System</span><span class="o">.</span><span class="n">coreCount</span><span class="p">),</span> <span class="nv">setup</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Protocols/ControllerConnection.html">ControllerConnection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span><span class="n">_</span> <span class="k">in</span><span class="p">})</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ipAddress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the IPv4 address of the switcher.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventLoopGroup</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the underlying <code>EventLoopGroup</code> that will be used for the network connection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>setup</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a closure that will be called before establishing the connection to the switcher. Use the provided <code><a href="../Protocols/ControllerConnection.html">ControllerConnection</a></code> to register callbacks for incoming messages from the switcher.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/a630f0b365b4a4cd5768b2797b632fe0514fa6f9/Sources/Atem/Controller.swift#L141-L144">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem10ControllerC7address3NIO13SocketAddressOvp"></a>
+                    <a name="//apple_ref/swift/Property/address" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem10ControllerC7address3NIO13SocketAddressOvp">address</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">address</span><span class="p">:</span> <span class="kt">SocketAddress</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/a630f0b365b4a4cd5768b2797b632fe0514fa6f9/Sources/Atem/Controller.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem10ControllerC4send7messageyAA19SerializableMessage_p_tF"></a>
+                    <a name="//apple_ref/swift/Method/send(message:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem10ControllerC4send7messageyAA19SerializableMessage_p_tF">send(message:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends a message to the connected switcher.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">send</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../Protocols/SerializableMessage.html">SerializableMessage</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the message that will be sent to the switcher</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/a630f0b365b4a4cd5768b2797b632fe0514fa6f9/Sources/Atem/Controller.swift#L205-L213">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem10ControllerC11uploadStill4slot4data16uncompressedSizeys6UInt16V_10Foundation4DataVs6UInt32VtF"></a>
+                    <a name="//apple_ref/swift/Method/uploadStill(slot:data:uncompressedSize:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem10ControllerC11uploadStill4slot4data16uncompressedSizeys6UInt16V_10Foundation4DataVs6UInt32VtF">uploadStill(slot:<wbr>data:<wbr>uncompressedSize:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Upload an image to the Media Pool</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">uploadStill</span><span class="p">(</span><span class="nv">slot</span><span class="p">:</span> <span class="kt">UInt16</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">uncompressedSize</span><span class="p">:</span> <span class="kt">UInt32</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>slot</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of the still in the media pool the image will be uploaded to</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Raw YUV data. Use <code>Media.encodeRunLength(data: Data)</code> to convert an RGBA image to the required YUV format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uncompressedSize</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The size of the image before run length encoding</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/a630f0b365b4a4cd5768b2797b632fe0514fa6f9/Sources/Atem/Controller.swift#L224-L233">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Atem10ControllerC11uploadLabel6source10labelImage8longName05shortI0yAA11VideoSourceO_10Foundation4DataVSSSgANtF"></a>
+                    <a name="//apple_ref/swift/Method/uploadLabel(source:labelImage:longName:shortName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Atem10ControllerC11uploadLabel6source10labelImage8longName05shortI0yAA11VideoSourceO_10Foundation4DataVSSSgANtF">uploadLabel(source:<wbr>labelImage:<wbr>longName:<wbr>shortName:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">uploadLabel</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="kt"><a href="../Enums/VideoSource.html">VideoSource</a></span><span class="p">,</span> <span class="nv">labelImage</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">longName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">shortName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Dev1an/Swift-Atem/tree/a630f0b365b4a4cd5768b2797b632fe0514fa6f9/Sources/Atem/Controller.swift#L235-L251">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-06-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
