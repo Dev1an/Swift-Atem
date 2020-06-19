@@ -14,10 +14,17 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
+        include:
+          - os: macos-latest
+            TestOPT: "swift test -v"
+          - os: ubuntu-latest
+            TEST: "swift test -v --enable-test-discovery"
 
     steps:
     - uses: actions/checkout@v2
+    - name: Info
+      run: swift --version && echo $TestOPT
     - name: Build
       run: swift build -v
     - name: Run tests
-      run: swift test -v
+      run: ${{matrix.TEST}}
