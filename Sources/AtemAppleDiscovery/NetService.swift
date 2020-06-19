@@ -5,6 +5,8 @@
 //  Created by Damiaan on 07/06/2020.
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
+
 import Foundation
 import NIO
 
@@ -177,3 +179,6 @@ public class AtemBrowser: NSObject, NetServiceBrowserDelegate, NetServiceDelegat
 //browser.start()
 //
 //RunLoop.main.run()
+
+
+#endif
