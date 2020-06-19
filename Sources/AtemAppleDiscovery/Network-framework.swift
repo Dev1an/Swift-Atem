@@ -5,6 +5,8 @@
 //  Created by Damiaan on 07/06/2020.
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
+
 import Network
 import NIO
 
@@ -34,3 +36,5 @@ enum NetworkDiscovery {
 		}
 	}
 }
+
+#endif
