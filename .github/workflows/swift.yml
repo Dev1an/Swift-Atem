@@ -22,8 +22,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Info
-      run: swift --version && echo $TestOPT
+    - name: Swift version info
+      run: swift --version
     - name: Build
       run: swift build -v
     - name: Run tests
