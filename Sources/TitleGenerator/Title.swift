@@ -5,6 +5,8 @@
 //  Created by Damiaan on 04/06/2020.
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
+
 import SwiftUI
 
 @available(OSX 10.15, *)
@@ -28,3 +30,5 @@ struct Title: View {
 //			.rotationEffect(.degrees(90))
 	}
 }
+
+#endif

@@ -5,6 +5,8 @@
 //  Created by Damiaan on 12/06/2020.
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
+
 import SwiftUI
 import Atem
 
@@ -79,3 +81,5 @@ struct Label: View {
 	}
 
 }
+
+#endif

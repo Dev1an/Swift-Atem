@@ -5,16 +5,24 @@
 //  Created by Damiaan on 12/06/2020.
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
 import AppKit.NSImage
 
-func loadRGBfrom(tiff: String) -> Data {
-	let image = NSImage(contentsOf: URL(fileURLWithPath: tiff))!
+func loadRGBfromTiff(at path: String) -> Data {
+	let image = NSImage(contentsOf: URL(fileURLWithPath: path))!
 
 	let coreGraphics = image.cgImage(forProposedRect: nil, context: nil, hints: nil)!
 	return coreGraphics.dataProvider!.data! as Data
 }
+#else
+func loadRGBfromTiff(at path: String) -> Data {
+	fatalError("loading colors from tiff file not supported")
+}
+#endif
 
-func getRounded(gradient: Data) -> [UInt8] {
+import Foundation
+
+func loadAveragedGridColors(from grid: Data) -> [UInt8] {
 	[UInt8](unsafeUninitializedCapacity: 256) { (buffer, count) in
 		for row in 0..<8 {
 			for col in 0..<32 {
@@ -25,9 +33,9 @@ func getRounded(gradient: Data) -> [UInt8] {
 						let y = row*6 + blockY
 						let coordinate = y*320 + x
 
-						let red = UInt32( gradient[coordinate * 3] )
-						let green = UInt32( gradient[coordinate * 3 + 1] )
-						let blue = UInt32( gradient[coordinate * 3 + 2] )
+						let red = UInt32( grid[coordinate * 3] )
+						let green = UInt32( grid[coordinate * 3 + 1] )
+						let blue = UInt32( grid[coordinate * 3 + 2] )
 						lum += Double(red+green+blue)/120
 					}
 				}
@@ -40,10 +48,10 @@ func getRounded(gradient: Data) -> [UInt8] {
 
 
 func analyzeGrid(filePath: String) {
-	let gradientB = loadRGBfrom(tiff: filePath + "black.tif")
-	let gradientW = loadRGBfrom(tiff: filePath + "white.tif")
-	let gradientBRounded = getRounded(gradient: gradientB)
-	let gradientWRounded = getRounded(gradient: gradientW)
+	let gradientB = loadRGBfromTiff(at: filePath + "black.tif")
+	let gradientW = loadRGBfromTiff(at: filePath + "white.tif")
+	let gradientBRounded = loadAveragedGridColors(from: gradientB)
+	let gradientWRounded = loadAveragedGridColors(from: gradientW)
 
 //	print(gradientBRounded)
 //	print(gradientWRounded)

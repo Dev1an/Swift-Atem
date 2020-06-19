@@ -5,6 +5,8 @@
 //  Created by Damiaan on 21/04/2020.
 //
 
+#if os(iOS) || os(watchOS) || os(tvOS) || os(macOS)
+
 import Atem
 
 if #available(OSX 10.15, *) {
@@ -43,3 +45,7 @@ if #available(OSX 10.15, *) {
 } else {
 	print("Rendering SwiftUI is only available on macOS")
 }
+
+#else
+	print("Rendering SwiftUI is only available on macOS")
+#endif
