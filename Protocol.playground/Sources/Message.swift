@@ -86,7 +86,7 @@ struct AtemType: Serializable {
 	
 	init(with bytes: ArraySlice<UInt8>) throws {
 		// Stores the string constructed from the first non-zero bytes
-		if let string = String(bytes: bytes.prefix(upTo: bytes.index {$0==0} ?? 44), encoding: .utf8) {
+		if let string = String(bytes: bytes.prefix(upTo: bytes.firstIndex {$0==0} ?? 44), encoding: .utf8) {
 			self.string = string
 		} else {
 			throw MessageError.titleNotDeserializable
