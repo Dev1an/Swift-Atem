@@ -1,16 +1,8 @@
 import Foundation
 
-#if os(macOS) || os(iOS)
-let random = arc4random
-#endif
-
 /// Stores all relevant information to keep an ATEM connection alive.
 /// Use this store to interprete incoming packets and construct new outgoing packets.
 public class ConnectionState {
-	#if os(Linux)
-	    private static let seed: Void = srandom(UInt32(time(nil)))
-	#endif
-
 	/// Received packet id's. Contains all the packets that should still be acknowledged
 	var lastRead📦ID: UInt16? {
 		didSet {
@@ -153,7 +145,7 @@ public class ConnectionState {
 	}
 
 	static func id(firstBit: Bool) -> UID {
-		let randomNumber = UInt32(Int(random()) % Int(UInt16.max))
+		let randomNumber = UInt32.random(in: 0 ..< UInt32(UInt16.max))
 		let  firstByte = UInt8((randomNumber & 0x0700) >> 8)
 		let secondByte = UInt8( randomNumber & 0x00FF)
 		if firstBit {
