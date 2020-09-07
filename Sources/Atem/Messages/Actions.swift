@@ -307,7 +307,7 @@ extension Message.Did {
 
 extension Message.Did {
 	/// Informs a controller that the some tally lights might have changed.
-	public struct GetSourceTallies: SerializableMessage {
+	public struct ChangeSourceTallies: SerializableMessage {
 		public static let title = Message.Title(string: "TlSr")
 
 		/// The state of the tally lights for each source of the Atem switcher
