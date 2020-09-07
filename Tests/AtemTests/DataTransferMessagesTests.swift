@@ -65,7 +65,7 @@ class KeyPathEqualityChecker<S: SerializableMessage> {
 		parsed = try S(with: constructed.dataBytes[0...])
 	}
 
-	func compare<B: Equatable>(field: KeyPath<S,B>, file: StaticString = #filePath, line: UInt = #line) {
-		XCTAssertEqual(constructed[keyPath: field], parsed[keyPath: field], file: (file), line: line)
+	func compare<B: Equatable>(field: KeyPath<S,B>, file: StaticString = #file, line: UInt = #line) {
+		XCTAssertEqual(constructed[keyPath: field], parsed[keyPath: field], file: file, line: line)
 	}
 }
