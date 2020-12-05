@@ -36,6 +36,7 @@ public enum Message {
 		case serialising
 		case stringTooLong(String, Int)
 		case titleNotDeserializable
+		case stringNotDecodable(ArraySlice<UInt8>)
 		case unknownModel(UInt8)
 
 		var localizedDescription: String {
@@ -48,6 +49,8 @@ public enum Message {
 				return "Message.Error: serialising"
 			case .unknownModel(let modelNumber):
 				return "Message error: unknown model \(modelNumber)"
+			case .stringNotDecodable(let bytes):
+				return "Message error: unable to decode \(bytes) as UTF8"
 			}
 		}
 	}

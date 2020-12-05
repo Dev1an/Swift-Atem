@@ -305,6 +305,8 @@ extension Message.Did {
 	}
 }
 
+// MARK: Tally lights
+
 extension Message.Did {
 	/// Informs a controller that the some tally lights might have changed.
 	public struct ChangeSourceTallies: SerializableMessage {
@@ -350,6 +352,8 @@ extension Message.Did {
 		}
 	}
 }
+
+// MARK: Key DVE
 
 import Foundation
 extension Message.Do {
@@ -411,3 +415,38 @@ extension Message.Do {
 		}
 	}
 }
+
+// MARK: Change Media Player
+
+public extension Message.Did {
+	struct ChangeMediaPlayerFrameDescription: DeserializableMessage {
+		public static let title = Message.Title(string: "MPfe")
+
+		public let id: MediaPool.ID
+		public let name: String
+
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			let bank = bytes[relative: Position.bank]
+			let frameIndex = UInt16(from: bytes[relative: Position.frameIndex])
+			id = .init(bank: try .decode(from: bank), frame: frameIndex)
+
+			// Read name
+			let nameLength = UInt16(from: bytes[relative: Position.nameLength])
+			let nameBytes = bytes[relative: Position.name( Int(nameLength) )]
+			guard let decodedName = String(bytes: nameBytes, encoding: .utf8) else {
+				throw Message.Error.stringNotDecodable(nameBytes)
+			}
+			name = decodedName
+		}
+
+		public var debugDescription: String { "Media player \(id): '\(name)'" }
+
+		enum Position {
+			static let bank = 0
+			static let frameIndex = 2..<4
+			static let nameLength = 22..<24
+			static let name = { length in nameLength.endIndex ..< nameLength.endIndex + length }
+		}
+	}
+}
+
