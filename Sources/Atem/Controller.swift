@@ -221,13 +221,15 @@ public class Controller {
 	///   - slot: The number of the still in the media pool the image will be uploaded to
 	///   - data: Raw YUV data. Use `Media.encodeRunLength(data: Data)` to convert an RGBA image to the required YUV format.
 	///   - uncompressedSize: The size of the image before run length encoding
-	public func uploadStill(slot: UInt16, data: Data, uncompressedSize: UInt32) {
+	public func uploadStill(slot: UInt16, data: Data, uncompressedSize: UInt32, name: String? = nil, description: String = "") {
 		_ = uploadManager.createTransfer(
 			store: 0,
 			frameNumber: slot,
 			data: data,
 			uncompressedSize: uncompressedSize,
-			mode: .write
+			mode: .write,
+			name: name,
+			description: description
 		)
 		send(message: Do.RequestLockPosition(store: 0, index: slot, type: 1))
 	}
