@@ -35,6 +35,44 @@ extension Message.Config {
 		public var debugDescription: String { return "Version: \(major).\(minor)"}
 	}
 
+	
+	/// Information about the ATEM product
+	public struct ProductName: SerializableMessage {
+		public static let title = Message.Title(string: "_pin")
+		static let namePosition = 0..<44
+		static let tooLongNameCount = namePosition.count + 1
+		static let truncationDots = Array("...".utf8)
+		public let name: String
+
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			// Stores the string constructed from the first non-zero bytes
+			guard let string = String(bytes: bytes.prefix(upTo: bytes[relative: Self.namePosition].firstIndex {$0==0} ?? 44), encoding: .utf8) else {
+				throw Message.Error.titleNotDeserializable
+			}
+			self.name = string
+		}
+
+		public init(name: String) {
+			self.name = name
+		}
+
+		public var dataBytes: [UInt8] {
+			let binaryString = Array(name.utf8).prefix(Self.tooLongNameCount)
+			let fixedString: [UInt8]
+			switch binaryString.count {
+			case Self.tooLongNameCount... :
+				fixedString = binaryString.prefix(Self.namePosition.upperBound - Self.truncationDots.count) + Self.truncationDots
+			default:
+				fixedString = binaryString + Array(repeating: UInt8(0), count: Self.namePosition.count - binaryString.count)
+			}
+			return fixedString
+		}
+
+		public var debugDescription: String {
+			return name
+		}
+	}
+	
 	/// Information about the ATEM product
 	public struct ProductInfo: SerializableMessage {
 		public static let title = Message.Title(string: "_pin")
