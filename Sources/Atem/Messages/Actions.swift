@@ -450,3 +450,261 @@ public extension Message.Did {
 	}
 }
 
+// MARK: - Change Downstream Keyer
+
+extension Message.Do {
+	/// Informs a switcher that the downstream keyer on air status should be set
+	public struct ChangeDownstreamKeyerOnAir: SerializableMessage {
+		public static let title = Message.Title(string: "CDsL")
+
+		public let keyer: UInt8
+		public let onAir: Bool
+
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.keyer = bytes[relative: 0]
+			self.onAir = bytes[relative: 1] == 1
+		}
+
+		public init(to keyer: UInt8, onAir: Bool) {
+			self.keyer = keyer
+			self.onAir = onAir
+		}
+
+		public var dataBytes: [UInt8] {
+			let onAirInt: UInt8 = onAir == true ? 1 : 0
+			return [keyer, onAirInt , 0, 0]
+		}
+
+		public var debugDescription: String {return "Change DSK \(keyer) On Air to \(onAir)"}
+	}
+}
+extension Message.Did {
+	/// Informs a controller that the downstream keyer on air status has changed
+	public struct ChangeDownstreamKeyerOnAir: SerializableMessage {
+		public static let title = Message.Title(string: "DskS")
+
+		public let keyer: UInt8
+		public let onAir: Bool
+		public let inTransition: Bool
+		public let isAutoTransitioning: Bool
+		public let remainingFrames: UInt8
+
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			keyer = bytes[relative: 0]
+			onAir = bytes[relative: 1] == 1
+			inTransition = bytes[relative: 2] == 1
+			isAutoTransitioning = bytes[relative: 3] == 1
+			remainingFrames = bytes[relative: 4]
+		}
+
+		public init(to keyer: UInt8, onAir: Bool, inTransition: Bool, isAutoTransitioning: Bool, remainingFrames: UInt8 = 0) {
+			self.keyer = keyer
+			self.onAir = onAir
+			self.inTransition = inTransition
+			self.isAutoTransitioning = isAutoTransitioning
+			self.remainingFrames = remainingFrames
+		}
+
+		public var dataBytes: [UInt8] {
+			let onAirInt: UInt8 = onAir ? 1 : 0
+			let inTransitionInt: UInt8 = inTransition ? 1 : 0
+			let isAutoTransitioningInt: UInt8 = isAutoTransitioning ? 1 : 0
+			
+			return [keyer, onAirInt, inTransitionInt, isAutoTransitioningInt, remainingFrames, 0, 0, 0]
+		}
+		public var debugDescription: String {
+			return "DSK \(keyer) changed to On Air \(onAir) inTransition \(inTransition) isAutoTransitioning \(isAutoTransitioning) with \(remainingFrames) frames remaining"
+		}
+	}
+}
+
+// MARK: - Downstream Keyer
+
+extension Message.Do {
+	/// Informs a switcher that the downstream keyer fill source should be set
+	public struct ChangeDownstreamKeyerFillSource: SerializableMessage {
+		public static let title = Message.Title(string: "CDsF")
+
+		public let keyer: UInt8
+		public let fillSource: VideoSource
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.keyer = bytes[relative: 0]
+			let fillSourceNumber = UInt16(from: bytes[relative: 2..<4])
+			self.fillSource = try VideoSource.decode(from: fillSourceNumber)
+			
+		}
+
+		public init(to keyer: UInt8, fillSource: VideoSource) {
+			self.keyer = keyer
+			self.fillSource = fillSource
+		}
+
+		public var dataBytes: [UInt8] {
+			return [keyer, 0] + fillSource.rawValue.bytes
+		}
+		public var debugDescription: String {
+			return "Set DSK \(keyer) fillSource to: \(fillSource)"
+		}
+	}
+	
+	/// Informs a switcher that the downstream keyer key source should be set
+	public struct ChangeDownstreamKeyerKeySource: SerializableMessage {
+		public static let title = Message.Title(string: "CDsC")
+
+		public let keyer: UInt8
+		public let keySource: VideoSource
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.keyer = bytes[relative: 0]
+			let keySourceNumber = UInt16(from: bytes[relative: 2..<4])
+			self.keySource = try VideoSource.decode(from: keySourceNumber)
+		}
+
+		public init(to keyer: UInt8, keySource: VideoSource) {
+			self.keyer = keyer
+			self.keySource = keySource
+		}
+
+		public var dataBytes: [UInt8] {
+			return [keyer, 0] + keySource.rawValue.bytes
+		}
+		public var debugDescription: String {
+			return "Set DSK \(keyer) keySource to: \(keySource)"
+		}
+	}
+}
+
+extension Message.Did {
+	/// informs a controller that the Downstream keyer source and fill has changed
+	public struct ChangeDownstreamKeyer: SerializableMessage {
+		public static let title = Message.Title(string: "DskB")
+
+		public let keyer: UInt8
+		public let fillSource: VideoSource
+		public let keySource: VideoSource
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.keyer = bytes[relative: 0]
+			let fillSourceNumber = UInt16(from: bytes[relative: 2..<4])
+			self.fillSource = try VideoSource.decode(from: fillSourceNumber)
+			
+			let keySourceNumber = UInt16(from: bytes[relative: 4..<6])
+			self.keySource = try VideoSource.decode(from: keySourceNumber)
+		}
+
+		public init(to keyer: UInt8, fillSource: VideoSource, keySource: VideoSource) {
+			self.keyer = keyer
+			self.fillSource = fillSource
+			self.keySource = keySource
+		}
+
+		public var dataBytes: [UInt8] {
+			return [keyer, 0] + fillSource.rawValue.bytes + keySource.rawValue.bytes
+		}
+		public var debugDescription: String {
+			return "DSK \(keyer) fillSource: \(fillSource) keySource: \(keySource)"
+		}
+	}
+}
+
+// MARK: - Change Upstream Keyer
+
+extension Message.Do {
+	/// Informs a switcher that the downstream keyer on air status should be set
+	public struct ChangeKeyerOnAir: SerializableMessage {
+		public static let title = Message.Title(string: "CKOn")
+
+		public let mixEffect: UInt8
+		public let keyer: UInt8
+		public let enabled: Bool
+
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.mixEffect = bytes[relative: 0]
+			self.keyer = bytes[relative: 1]
+			self.enabled = bytes[relative: 2] == 1
+		}
+
+		public init(to mixEffect: UInt8, keyer: UInt8, enabled: Bool) {
+			self.mixEffect = mixEffect
+			self.keyer = keyer
+			self.enabled = enabled
+		}
+
+		public var dataBytes: [UInt8] {
+			let enabledInt: UInt8 = enabled == true ? 1 : 0
+			return [mixEffect, keyer, enabledInt , 0]
+		}
+
+		public var debugDescription: String {return "Change M/E \(mixEffect) USK \(keyer) to \(enabled)"}
+	}
+}
+extension Message.Did {
+	/// Informs a controller that the downstream keyer on air status has changed
+	public struct ChangeKeyerOnAir: SerializableMessage {
+		public static let title = Message.Title(string: "KeOn")
+
+		public let mixEffect: UInt8
+		public let keyer: UInt8
+		public let enabled: Bool
+
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.mixEffect = bytes[relative: 0]
+			self.keyer = bytes[relative: 1]
+			self.enabled = bytes[relative: 2] == 1
+		}
+
+		public init(to mixEffect: UInt8, keyer: UInt8, enabled: Bool) {
+			self.mixEffect = mixEffect
+			self.keyer = keyer
+			self.enabled = enabled
+		}
+
+		public var dataBytes: [UInt8] {
+			let enabledInt: UInt8 = enabled == true ? 1 : 0
+			return [mixEffect, keyer, enabledInt , 0]
+		}
+		public var debugDescription: String {return "Change M/E \(mixEffect) USK \(keyer) to \(enabled)"}
+	}
+}
+
+// MARK: - Macro Action
+
+extension Message.Do {
+	/// Informs a switcher that the downstream keyer on air status should be set
+	public struct MacroAction: SerializableMessage {
+		public static let title = Message.Title(string: "MAct")
+
+		public let index: UInt16
+		public let action: UInt8
+
+		enum Action {
+			static let run = 0
+			static let stop = 1
+			static let stopRecording = 2
+			static let insertWait = 3
+			static let continueMacro = 4
+			static let delete = 5
+		}
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.index = UInt16(from: bytes[relative: 0..<2])
+			self.action = bytes[relative: 2]
+		}
+
+		public init(index: UInt16, action: UInt8) {
+			self.index = index
+			self.action = action
+		}
+
+		public var dataBytes: [UInt8] {
+			let indexArray = index.bytes
+			
+			return indexArray + [action, 0]
+		}
+
+		public var debugDescription: String {
+			return "Macro: \(index) action: \(action)"
+		}
+	}
+}
