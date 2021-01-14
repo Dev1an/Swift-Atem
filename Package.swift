@@ -16,7 +16,8 @@ let package = Package(
 		.executable(name: "SourceLabeler", targets: ["SourceLabeler"]),
 		.executable(name: "MessageDecoder", targets: ["MessageDecoder"]),
 		.executable(name: "DSK", targets: ["DSK"]),
-		.executable(name: "USK", targets: ["USK"])
+		.executable(name: "USK", targets: ["USK"]),
+		.executable(name: "Macro", targets: ["Macro"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -37,6 +38,7 @@ let package = Package(
 		.target(name: "MessageDecoder", dependencies: ["Atem"]),
 		.target(name: "DSK", dependencies: ["Atem"]),
 		.target(name: "USK", dependencies: ["Atem"]),
+		.target(name: "Macro", dependencies: ["Atem"]),
         .testTarget(
             name: "AtemTests",
             dependencies: ["Atem"]

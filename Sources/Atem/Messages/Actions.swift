@@ -487,22 +487,22 @@ extension Message.Did {
 		public let onAir: Bool
 		public let inTransition: Bool
 		public let isAutoTransitioning: Bool
-		public let framesRemaining: UInt8
+		public let remainingFrames: UInt8
 
 		public init(with bytes: ArraySlice<UInt8>) throws {
 			keyer = bytes[relative: 0]
 			onAir = bytes[relative: 1] == 1
 			inTransition = bytes[relative: 2] == 1
 			isAutoTransitioning = bytes[relative: 3] == 1
-			framesRemaining = bytes[relative: 4]
+			remainingFrames = bytes[relative: 4]
 		}
 
-		public init(to keyer: UInt8, onAir: Bool, inTransition: Bool, isAutoTransitioning: Bool, framesRemaining: UInt8 = 0) {
+		public init(to keyer: UInt8, onAir: Bool, inTransition: Bool, isAutoTransitioning: Bool, remainingFrames: UInt8 = 0) {
 			self.keyer = keyer
 			self.onAir = onAir
 			self.inTransition = inTransition
 			self.isAutoTransitioning = isAutoTransitioning
-			self.framesRemaining = framesRemaining
+			self.remainingFrames = remainingFrames
 		}
 
 		public var dataBytes: [UInt8] {
@@ -510,10 +510,10 @@ extension Message.Did {
 			let inTransitionInt: UInt8 = inTransition ? 1 : 0
 			let isAutoTransitioningInt: UInt8 = isAutoTransitioning ? 1 : 0
 			
-			return [keyer, onAirInt, inTransitionInt, isAutoTransitioningInt, framesRemaining, 0, 0, 0]
+			return [keyer, onAirInt, inTransitionInt, isAutoTransitioningInt, remainingFrames, 0, 0, 0]
 		}
 		public var debugDescription: String {
-			return "DSK \(keyer) changed to On Air \(onAir) inTransition \(inTransition) isAutoTransitioning \(isAutoTransitioning) with \(framesRemaining) frames remaining"
+			return "DSK \(keyer) changed to On Air \(onAir) inTransition \(inTransition) isAutoTransitioning \(isAutoTransitioning) with \(remainingFrames) frames remaining"
 		}
 	}
 }
@@ -575,5 +575,46 @@ extension Message.Did {
 			return [mixEffect, keyer, enabledInt , 0]
 		}
 		public var debugDescription: String {return "Change M/E \(mixEffect) USK \(keyer) to \(enabled)"}
+	}
+}
+
+// MARK: - Macro Action
+
+extension Message.Do {
+	/// Informs a switcher that the downstream keyer on air status should be set
+	public struct MacroAction: SerializableMessage {
+		public static let title = Message.Title(string: "MAct")
+
+		public let index: UInt16
+		public let action: UInt8
+
+		enum Action {
+			static let run = 0
+			static let stop = 1
+			static let stopRecording = 2
+			static let insertWait = 3
+			static let continueMacro = 4
+			static let delete = 5
+		}
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.index = UInt16(from: bytes[relative: 0..<2])
+			self.action = bytes[relative: 2]
+		}
+
+		public init(index: UInt16, action: UInt8) {
+			self.index = index
+			self.action = action
+		}
+
+		public var dataBytes: [UInt8] {
+			let indexArray = index.bytes
+			
+			return indexArray + [action, 0]
+		}
+
+		public var debugDescription: String {
+			return "Macro: \(index) action: \(action)"
+		}
 	}
 }

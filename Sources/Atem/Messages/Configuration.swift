@@ -234,6 +234,82 @@ extension Message.Config {
 			"Media pool with capacity for \(stillCapacity) stills and \(clipCapacity) clips"
 		}
 	}
+	
+	public struct MacroPool: SerializableMessage {
+		public static let title = Message.Title(string: "_MAC")
+
+		/// The number of macro banks that are available
+		public let banks: UInt8
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			banks = bytes[relative: 0]
+		}
+
+		public init(banks: UInt8) {
+			self.banks = banks
+		}
+
+		public var dataBytes: [UInt8] {
+			return [banks, 0, 0, 0]
+		}
+
+		public var debugDescription: String {
+			"Number of macros: \(banks)"
+		}
+	}
+	
+	public struct MacroProperties: SerializableMessage {
+		public static let title = Message.Title(string: "MPrp")
+		static let defaultText = " ".data(using: .utf8)! + [0]
+		
+		/// The number of macro banks that are available
+		public let macroIndex: UInt8
+		public let isUsed: Bool
+		public let nameLength: UInt16
+		public let descriptionLength: UInt16
+		public let nameBytes: ArraySlice<UInt8>
+		public let descriptionBytes: ArraySlice<UInt8>
+		
+		public var name: String? {
+			String(bytes: nameBytes, encoding: .utf8)
+		}
+		public var description: String? {
+			String(bytes: descriptionBytes, encoding: .utf8)
+		}
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.macroIndex = bytes[relative: 1]
+			self.isUsed = bytes[relative: 2] == 1
+			self.nameLength = UInt16(from: bytes[relative: 4..<6])
+			self.descriptionLength = UInt16(from: bytes[relative: 6..<8])
+			
+			let nameEnd: Int = Int(8 + nameLength)
+			self.nameBytes = bytes[relative: 8..<nameEnd]
+			
+			let descriptionEnd: Int = nameEnd + Int(descriptionLength)
+			
+			self.descriptionBytes = bytes[relative: nameEnd..<descriptionEnd]
+		}
+
+		public init(macroIndex: UInt8, isUsed: Bool, name: String, description: String) {
+			self.macroIndex = macroIndex
+			self.isUsed = isUsed
+			self.nameBytes = ArraySlice(name.data(using: .utf8) ?? MacroProperties.defaultText)
+			self.descriptionBytes = ArraySlice(description.data(using: .utf8) ?? MacroProperties.defaultText)
+			self.nameLength = UInt16(name.count)
+			self.descriptionLength = UInt16(description.count)
+		}
+
+		public var dataBytes: [UInt8] {
+			let isUsedInt: UInt8 = isUsed == true ? 1 : 0
+			
+			return [0, macroIndex, isUsedInt, 0] + nameLength.bytes + descriptionLength.bytes + nameBytes + descriptionBytes
+		}
+
+		public var debugDescription: String {
+			"Macro: \(macroIndex)\nisUsed: \(isUsed)\nName: \(name ?? "No Name")\nDescription: \(description ?? "No Description")\n"
+		}
+	}
 
 	public struct MultiView: SerializableMessage {
 		public static let title = Message.Title(string: "_MvC")
