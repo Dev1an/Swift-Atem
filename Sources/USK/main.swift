@@ -24,7 +24,7 @@ let controller = try Controller(ipAddress: address) { connection in
 
 	connection.when { (connected: Config.InitiationComplete) in
 		print(connected)
-		print("Type 1 or 0 and <enter> to change the Enabled status of the USK 0 on M/E 0")
+		print("Type 1 or 0 and <enter> to change the Enabled status of the USK 1 on M/E 0")
 	}
 
 	connection.whenDisconnected = {

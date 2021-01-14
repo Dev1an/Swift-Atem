@@ -518,6 +518,96 @@ extension Message.Did {
 	}
 }
 
+// MARK: - Downstream Keyer
+
+extension Message.Do {
+	/// Informs a switcher that the downstream keyer fill source should be set
+	public struct ChangeDownstreamKeyerFillSource: SerializableMessage {
+		public static let title = Message.Title(string: "CDsF")
+
+		public let keyer: UInt8
+		public let fillSource: VideoSource
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.keyer = bytes[relative: 0]
+			let fillSourceNumber = UInt16(from: bytes[relative: 2..<4])
+			self.fillSource = try VideoSource.decode(from: fillSourceNumber)
+			
+		}
+
+		public init(to keyer: UInt8, fillSource: VideoSource) {
+			self.keyer = keyer
+			self.fillSource = fillSource
+		}
+
+		public var dataBytes: [UInt8] {
+			return [keyer, 0] + fillSource.rawValue.bytes
+		}
+		public var debugDescription: String {
+			return "Set DSK \(keyer) fillSource to: \(fillSource)"
+		}
+	}
+	
+	/// Informs a switcher that the downstream keyer key source should be set
+	public struct ChangeDownstreamKeyerKeySource: SerializableMessage {
+		public static let title = Message.Title(string: "CDsC")
+
+		public let keyer: UInt8
+		public let keySource: VideoSource
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.keyer = bytes[relative: 0]
+			let keySourceNumber = UInt16(from: bytes[relative: 2..<4])
+			self.keySource = try VideoSource.decode(from: keySourceNumber)
+		}
+
+		public init(to keyer: UInt8, keySource: VideoSource) {
+			self.keyer = keyer
+			self.keySource = keySource
+		}
+
+		public var dataBytes: [UInt8] {
+			return [keyer, 0] + keySource.rawValue.bytes
+		}
+		public var debugDescription: String {
+			return "Set DSK \(keyer) keySource to: \(keySource)"
+		}
+	}
+}
+
+extension Message.Did {
+	/// informs a controller that the Downstream keyer source and fill has changed
+	public struct ChangeDownstreamKeyer: SerializableMessage {
+		public static let title = Message.Title(string: "DskB")
+
+		public let keyer: UInt8
+		public let fillSource: VideoSource
+		public let keySource: VideoSource
+		
+		public init(with bytes: ArraySlice<UInt8>) throws {
+			self.keyer = bytes[relative: 0]
+			let fillSourceNumber = UInt16(from: bytes[relative: 2..<4])
+			self.fillSource = try VideoSource.decode(from: fillSourceNumber)
+			
+			let keySourceNumber = UInt16(from: bytes[relative: 4..<6])
+			self.keySource = try VideoSource.decode(from: keySourceNumber)
+		}
+
+		public init(to keyer: UInt8, fillSource: VideoSource, keySource: VideoSource) {
+			self.keyer = keyer
+			self.fillSource = fillSource
+			self.keySource = keySource
+		}
+
+		public var dataBytes: [UInt8] {
+			return [keyer, 0] + fillSource.rawValue.bytes + keySource.rawValue.bytes
+		}
+		public var debugDescription: String {
+			return "DSK \(keyer) fillSource: \(fillSource) keySource: \(keySource)"
+		}
+	}
+}
+
 // MARK: - Change Upstream Keyer
 
 extension Message.Do {

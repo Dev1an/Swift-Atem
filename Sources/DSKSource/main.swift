@@ -21,10 +21,14 @@ let controller = try Controller(ipAddress: address) { connection in
 	connection.when{ (change: Did.ChangeDownstreamKeyerOnAir) in
 		print(change) // prints: 'Preview bus changed to input(x)'
 	}
+	
+	connection.when{ (change: Did.ChangeDownstreamKeyer) in
+		print(change) // prints: 'Preview bus changed to input(x)'
+	}
 
 	connection.when { (connected: Config.InitiationComplete) in
 		print(connected)
-		print("Type 1 or 0 and <enter> to change the On Air status of the DSK 1")
+		print("Type a source <enter> to change the fill source of the DSK 1")
 	}
 
 	connection.whenDisconnected = {
@@ -40,5 +44,7 @@ while true {
 		continue
 	}
 	
-	controller.send(message: Do.ChangeDownstreamKeyerOnAir(to: 0, onAir: sourceNumber == 1))
+	let fillSource = VideoSource(rawValue: sourceNumber)
+
+	controller.send(message: Do.ChangeDownstreamKeyerFillSource(to: 0, fillSource: fillSource))
 }

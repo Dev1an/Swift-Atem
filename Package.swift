@@ -16,6 +16,7 @@ let package = Package(
 		.executable(name: "SourceLabeler", targets: ["SourceLabeler"]),
 		.executable(name: "MessageDecoder", targets: ["MessageDecoder"]),
 		.executable(name: "DSK", targets: ["DSK"]),
+		.executable(name: "DSKSource", targets: ["DSKSource"]),
 		.executable(name: "USK", targets: ["USK"]),
 		.executable(name: "Macro", targets: ["Macro"]),
 		.executable(name: "ProductName", targets: ["ProductName"])
@@ -38,6 +39,7 @@ let package = Package(
 		.target(name: "SourceLabeler", dependencies: ["Atem"]),
 		.target(name: "MessageDecoder", dependencies: ["Atem"]),
 		.target(name: "DSK", dependencies: ["Atem"]),
+		.target(name: "DSKSource", dependencies: ["Atem"]),
 		.target(name: "USK", dependencies: ["Atem"]),
 		.target(name: "Macro", dependencies: ["Atem"]),
 		.target(name: "ProductName", dependencies: ["Atem"]),
