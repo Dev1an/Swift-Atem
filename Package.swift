@@ -18,7 +18,7 @@ let package = Package(
 		.executable(name: "DSK", targets: ["DSK"]),
 		.executable(name: "USK", targets: ["USK"]),
 		.executable(name: "Macro", targets: ["Macro"]),
-		.executable(name: "ProductInfo", targets: ["ProductInfo"])
+		.executable(name: "ProductName", targets: ["ProductName"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -40,7 +40,7 @@ let package = Package(
 		.target(name: "DSK", dependencies: ["Atem"]),
 		.target(name: "USK", dependencies: ["Atem"]),
 		.target(name: "Macro", dependencies: ["Atem"]),
-		.target(name: "ProductInfo", dependencies: ["Atem"]),
+		.target(name: "ProductName", dependencies: ["Atem"]),
         .testTarget(
             name: "AtemTests",
             dependencies: ["Atem"]
