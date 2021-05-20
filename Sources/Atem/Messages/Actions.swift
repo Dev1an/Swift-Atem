@@ -26,6 +26,27 @@ extension Message.Do {
 	}
 }
 
+extension Message.Do {
+	/// Performs a auto transition on the atem
+	public struct Auto: SerializableMessage {
+		public static let title = Message.Title(string: "DAut")
+		public let debugDescription = "auto"
+		public let atemSize: AtemSize
+
+		public init(with bytes: ArraySlice<UInt8>) {
+			atemSize = AtemSize(rawValue: bytes.first!)!
+		}
+
+		public init(in atemSize: AtemSize) {
+			self.atemSize = atemSize
+		}
+
+		public var dataBytes: [UInt8] {
+			return [atemSize.rawValue] + [0,0,0]
+		}
+	}
+}
+
 // MARK: - Change Preview Bus
 extension Message.Do {
 	/// Informs a switcher that the preview bus should be changed
