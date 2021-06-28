@@ -1,5 +1,5 @@
-/documentation/* /index.html
-/tutorials/* /index.html
+/documentation/* /index.html 200
+/tutorials/* /index.html 200
 
-/data/documentation.json /data/documentation/atem.json
+/data/documentation.json /data/documentation/atem.json 200
 /data/documentation/* /data/documentation/atem/:splat
