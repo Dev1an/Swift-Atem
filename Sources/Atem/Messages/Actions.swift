@@ -5,6 +5,8 @@
 //  Created by Damiaan on 26/05/18.
 //
 
+// MARK: - Cut program/preview
+
 extension Message.Do {
 	/// Performs a cut on the atem
 	public struct Cut: SerializableMessage {
