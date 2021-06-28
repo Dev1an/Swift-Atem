@@ -16,7 +16,7 @@ jobs:
         os: [macos-latest, ubuntu-latest]
         include:
           - os: macos-latest
-            TestOPT: "swift test -v"
+            TEST: "swift test -v"
           - os: ubuntu-latest
             TEST: "swift test -v --enable-test-discovery"
 
