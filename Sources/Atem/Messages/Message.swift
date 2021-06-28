@@ -15,14 +15,18 @@ public enum Message {
 		/// Slice `0 ..< 4`
 		static let position = 0 ..< 4
 
-		/// A `Swift.String` representation of the title
-		public let description: String
 		/// A `UInt32` representation of the title
 		let number: UInt32
 
-		init(string: String) {
-			description = string
-			number = Array(string.utf8).withUnsafeBytes{ $0.load(as: UInt32.self).byteSwapped }
+		init(string: StaticString) {
+			assert(string.utf8CodeUnitCount == 4)
+			number = string.utf8Start.withMemoryRebound(to: UInt32.self, capacity: 1) { $0.pointee.byteSwapped }
+		}
+
+		public var description: String {
+			withUnsafeBytes(of: number.byteSwapped) { pointer in
+				String(bytes: pointer, encoding: .utf8)!
+			}
 		}
 	}
 

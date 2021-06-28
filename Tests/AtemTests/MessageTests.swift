@@ -34,4 +34,10 @@ class MessageTests: XCTestCase {
 			XCTAssertEqual(try Config.ProductInfo(with: bytes).name, trimmedName)
 		}
 	}
+
+	func testTitle() {
+		let four: StaticString = "FOUR"
+		let title = Message.Title(string: four)
+		XCTAssertEqual(title.description, four.description)
+	}
 }
