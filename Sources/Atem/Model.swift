@@ -21,4 +21,8 @@ public enum Model: UInt8 {
 	case constellation
 	case constallation8K
 	case mini
+	case miniPro
+	case miniProISO
+	case miniExtreme
+	case miniExtremeISO
 }
