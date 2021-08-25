@@ -69,9 +69,9 @@ public typealias RawMessage = ArraySlice<UInt8>
 
 /// A utility to parse binary messages and look up corresponding message handlers.
 public class MessageParser {
+	fileprivate var eventRegister = [UInt32: Message.Deserializable.Type]()
 	/// A registry with handlers for each message.
 	/// The keys in the registry are the message names and the values are functions that interprete and react on a message.
-	fileprivate var eventRegister = [UInt32: Message.Deserializable.Type]()
 	fileprivate var handlerRegister = [UInt32: Any]()
 
 	fileprivate final func message(from bytes: RawMessage) throws -> (Message.Deserializable, Any)? {
