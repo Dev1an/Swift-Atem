@@ -5,10 +5,6 @@
 //  Created by Damiaan on 19/04/2020.
 //
 
-public enum AtemSize: UInt8 {
-	case oneME = 0, twoME = 1
-}
-
 import Foundation
 
 extension Message.Config {

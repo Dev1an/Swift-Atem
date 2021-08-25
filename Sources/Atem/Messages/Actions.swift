@@ -12,18 +12,18 @@ extension Message.Do {
 	public struct Cut: SerializableMessage {
 		public static let title = Message.Title(string: "DCut")
 		public let debugDescription = "cut"
-		public let atemSize: AtemSize
+		public let mixEffectBlock: UInt8
 
 		public init(with bytes: ArraySlice<UInt8>) {
-			atemSize = AtemSize(rawValue: bytes.first!)!
+			mixEffectBlock = bytes.first!
 		}
 
-		public init(in atemSize: AtemSize) {
-			self.atemSize = atemSize
+		public init(in mixEffectBlock: UInt8) {
+			self.mixEffectBlock = mixEffectBlock
 		}
 
 		public var dataBytes: [UInt8] {
-			return [atemSize.rawValue] + [0,0,0]
+			return [mixEffectBlock, 0,0,0]
 		}
 	}
 }
