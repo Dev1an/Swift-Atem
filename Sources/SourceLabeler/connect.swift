@@ -12,7 +12,7 @@ func connect(ip: String) throws -> Controller {
 	let initialisation = DispatchGroup()
 	initialisation.enter()
 
-	let controller = try Controller(ipAddress: ip) { connection in
+	let controller = try Controller(forSwitcherAt: ip) { connection in
 		connection.when{ (change: Did.ChangePreviewBus) in
 			print(change) // prints: 'Preview bus changed to input(x)'
 		}

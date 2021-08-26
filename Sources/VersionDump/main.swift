@@ -18,7 +18,7 @@ if CommandLine.arguments.count > 1 {
 }
 print("Trying to connect to switcher with IP addres", address)
 
-let controller = try Controller(ipAddress: address) { connection in
+let controller = try Controller(forSwitcherAt: address) { connection in
 	connection.when { (version: Config.ProtocolVersion) in
 		print(version)
 	}

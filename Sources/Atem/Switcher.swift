@@ -8,14 +8,16 @@
 import Foundation
 import NIO
 
-struct Client {
-	let address: SocketAddress
-	let state: ConnectionState
+extension Switcher {
+	public struct Client {
+		public let address: SocketAddress
+		let state: ConnectionState
+	}
 }
 
 class SwitcherHandler: HandlerWithTimer {
 	var counter: UInt16 = 0
-	var clients = [UInt16: Client]()
+	var clients = [UInt16: Switcher.Client]()
 	var connectionIdUpgrades = [UInt16: UInt16]()
 	var outbox = [NIOAny]()
 	let messageHandler: ContextualMessageHandler
@@ -47,7 +49,7 @@ class SwitcherHandler: HandlerWithTimer {
 			for message in initialMessages {
 				newConnection.send(message: message)
 			}
-			clients[newId] = Client(
+			clients[newId] = Switcher.Client(
 				address: envelope.remoteAddress,
 				state: newConnection
 			)
@@ -92,24 +94,27 @@ class SwitcherHandler: HandlerWithTimer {
 	}
 }
 
-/// An endpoint to interact with BMD ATEM controllers like "Atem Software Control" or any of the hardware control panels.
+/// A software based switcher that sends messages to ATEM Control Panels.
 public class Switcher {
 	let eventLoop: EventLoopGroup
 	
 	/// The underlying [NIO](https://github.com/apple/swift-nio) [Datagram](https://apple.github.io/swift-nio/docs/current/NIO/Classes/DatagramBootstrap.html) [Channel](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/Channel.html)
 	public let channel: EventLoopFuture<Channel>
 	let messageHandler = ContextualMessageHandler()
-	
+	let handler: SwitcherHandler
+
 	/// Start a switcher endpoint that controllers can interact with.
 	///
-	/// Behaviour of this switcher can be defined using the `setup` parameter. This is a function that will be called with a connections handle before the switcher is started. Use this connection parameter to attach handlers for the messages you want to act upon. See `SwitcherConnections` for more information.
+	/// Behaviour of this switcher can be defined using the `setup` parameter. This is a function that will be called with a connections handle before the switcher is started. Use this connection parameter to attach handlers for the messages you want to act upon. See ``SwitcherConnections`` for more information.
 	///
 	/// - Parameters:
 	///   - eventLoopGroup: The Swift NIO event loop group this switcher will run in.
 	///   - setup: A function to setup the behaviour of the switcher.
-	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (SwitcherConnections)->Void) {
+	public init(eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (SwitcherConnections)->Void = {_ in}) {
 		eventLoop = eventLoopGroup
+
 		let handler = SwitcherHandler(handler: messageHandler)
+		self.handler = handler
 		setup(handler)
 		channel = DatagramBootstrap(group: eventLoop)
 			.channelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
@@ -118,13 +123,17 @@ public class Switcher {
 			}
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 9910))
 	}
+
+	public var clients: Dictionary<UInt16,Switcher.Client>.Values {
+		handler.clients.values
+	}
 }
 
 /// Interact with connections to a switcher.
 ///
 /// Used to send messages to all connected controllers and to attach message handlers to incoming `Message`s.
 ///
-/// Handlers are functions that will be executed when a certain type of Message is received by the `Switcher`.
+/// Handlers are functions that will be executed when a ``DeserializableMessage`` is received by the ``Switcher``.
 ///
 public protocol SwitcherConnections {
 	/// Queues a message to be sent to all connected controllers.
@@ -133,13 +142,17 @@ public protocol SwitcherConnections {
 	/// These buffers will be flushed after at most 20ms.
 	func send(_ message: SerializableMessage)
 
-	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called with two parameters: the message itself and the origin of the message.
+	/// Attaches a message handler to a concrete type that implements the ``DeserializableMessage`` protocol.
+	///
+	/// Every time a message of this type comes in, the provided `handler` will be called with two parameters: the message itself and the origin of the message.
 	/// The handler takes one generic argument `message`. The type of this argument indicates the type that this message handler will be attached to.
 	///
 	/// - Parameter handler: The handler to attach
-	/// - Parameter message: The message to which the handler is attached
-	/// - Parameter context: The origin of the message. Use this parameter to reply directly to the sender of the message.
-	func when<M: Message.Deserializable>(_ handler: @escaping (_ message: M, _ context: ConnectionState)->Void)
+	///
+	/// The `handler` is a function that receives the following arguments
+	/// - `message`: The message to handle
+	/// - `context`: The origin of the message. Use this parameter's ``ConnectionState/send(_:asSeparatePackage:)`` method to reply directly to the sender of the message.
+	func when<Message: Atem.Message.Deserializable>(_ handler: @escaping (_ message: Message, _ context: ConnectionState)->Void)
 }
 
 extension SwitcherHandler: SwitcherConnections {

@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -25,14 +25,14 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "Atem", dependencies: ["NIO"]),
-		.target(name: "AtemAppleDiscovery", dependencies: ["NIO"]),
-		.target(name: "VersionDump", dependencies: ["Atem"]),
-		.target(name: "Simulator", dependencies: ["Atem"]),
-		.target(name: "TitleGenerator", dependencies: ["Atem"]),
-		.target(name: "PreviewSwitcher", dependencies: ["Atem"]),
-		.target(name: "SourceLabeler", dependencies: ["Atem"]),
-		.target(name: "MessageDecoder", dependencies: ["Atem"]),
+		.target(name: "Atem", dependencies: [.product(name: "NIO", package: "swift-nio")]),
+		.target(name: "AtemAppleDiscovery", dependencies: [.product(name: "NIO", package: "swift-nio")]),
+		.executableTarget(name: "VersionDump", dependencies: ["Atem"]),
+		.executableTarget(name: "Simulator", dependencies: ["Atem"]),
+		.executableTarget(name: "TitleGenerator", dependencies: ["Atem"]),
+		.executableTarget(name: "PreviewSwitcher", dependencies: ["Atem"]),
+		.executableTarget(name: "SourceLabeler", dependencies: ["Atem"]),
+		.executableTarget(name: "MessageDecoder", dependencies: ["Atem"]),
         .testTarget(
             name: "AtemTests",
             dependencies: ["Atem"]

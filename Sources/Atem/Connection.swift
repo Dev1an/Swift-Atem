@@ -1,8 +1,9 @@
 import Foundation
 
 /// Stores all relevant information to keep an ATEM connection alive.
-/// Use this store to interprete incoming packets and construct new outgoing packets.
-public class ConnectionState {
+///
+/// Used internally by ``Controller`` and ``Switcher`` objects to decide how to interprete incoming packets and construct new outgoing packets.
+public class ConnectionState { // TODO: Make this a struct?
 	/// Received packet id's. Contains all the packets that should still be acknowledged
 	var lastRead📦ID: UInt16? {
 		didSet {
@@ -86,8 +87,14 @@ public class ConnectionState {
 		messageOutBox.append(contentsOf: message)
 	}
 
-	public func send(_ message: SerializableMessage, asSeparatePackage needsSeparatepackage: Bool = false) {
-		send(message: message.serialize(), asSeparatePackage: needsSeparatepackage)
+	/// Sends the specified message.
+	///
+	/// - Parameter message: A message that can be serialized
+	/// - Parameter needsSeparatePackage: Indicates the need to create a new package when transmitting this message over the network
+	///
+	/// Messages are sent in packages. One packet can contain multiple messages. Only use this method when you explicitly need to send your messages in a new packet. Otherwise use
+	public func send(_ message: SerializableMessage, asSeparatePackage needsSeparatePackage: Bool = false) {
+		send(message: message.serialize(), asSeparatePackage: needsSeparatePackage)
 	}
 	
 	/// Returns old packets that aren't acknowledged yet together with new packets

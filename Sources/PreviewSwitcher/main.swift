@@ -17,7 +17,7 @@ if CommandLine.arguments.count > 1 {
 }
 print("Trying to connect to switcher with IP addres", address)
 
-let controller = try Controller(ipAddress: address) { connection in
+let controller = try Controller(forSwitcherAt: address) { connection in
 	connection.when{ (change: Did.ChangePreviewBus) in
 		print(change) // prints: 'Preview bus changed to input(x)'
 	}

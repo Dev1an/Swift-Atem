@@ -14,7 +14,7 @@ class ControllerHandler: HandlerWithTimer {
 	var oldConnectionID: UID?
 	var awaitingConnectionResponse = true
 	let messageHandler: PureMessageHandler
-	public let address: SocketAddress
+	let address: SocketAddress
 
 	public var whenDisconnected: (()->Void)?
 	public var whenError = { (error: Error)->Void in
@@ -103,11 +103,7 @@ class ControllerHandler: HandlerWithTimer {
 
 public typealias Address = SocketAddress
 
-/// An interface to
-///  - send commands to an ATEM Switcher
-///  - react upon incomming state change messages from the ATEM Switcher
-///
-/// To make an anology with real world devices: this class can be compared to a BlackMagicDesign Control Panel. It is used to control a production switcher.
+/// A software based controller that sends messages to an ATEM Switcher.
 public class Controller {
 
 	let eventLoop: EventLoopGroup
@@ -118,7 +114,7 @@ public class Controller {
 
 	/// Start a new Controller that connects to an ATEM Switcher specified by its IP address.
 	///
-	/// When a connection to a switcher is being initialized it will receive `Message`s from the switcher to describe its initial state. If you are interested in these messages use the `setup` parameter to set up handlers for them (see `ControllerConnection.when(...)`). When the connection initiation process is finished the `ConnectionInitiationEnd` message will be sent. From that moment on you know that a connection is succesfully established.
+	/// When a connection to a switcher is being initialized it will receive `Message`s from the switcher to describe its initial state. If you are interested in these messages use the `setup` parameter to set up handlers for them (see ``ControllerConnection``'s ``ControllerConnection/when(_:)``). When the connection initiation process is finished the ``Message/Config/InitiationComplete`` message will be sent. From that moment on you know that a connection is succesfully established.
 
 	/// - Parameter socket: the network socket for the switcher.
 	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
@@ -133,17 +129,18 @@ public class Controller {
 
 	/// Start a new Controller that connects to an ATEM Switcher specified by its IP address.
 	///
-	/// When a connection to a switcher is being initialized it will receive `Message`s from the switcher to describe its initial state. If you are interested in these messages use the `setup` parameter to set up handlers for them (see `ControllerConnection.when(...)`). When the connection initiation process is finished the `ConnectionInitiationEnd` message will be sent. From that moment on you know that a connection is succesfully established.
+	/// When a connection to a switcher is being initialized it will receive `Message`s from the switcher to describe its initial state. If you are interested in these messages use the `setup` parameter to set up handlers for them (see ``ControllerConnection``'s ``ControllerConnection/when(_:)`` method). When the connection initiation process is finished the ``Message/Config/InitiationComplete`` message will be sent. From that moment on you know that a connection is succesfully established.
 
 	/// - Parameter ipAddress: the IPv4 address of the switcher.
 	/// - Parameter eventLoopGroup: the underlying `EventLoopGroup` that will be used for the network connection.
-	/// - Parameter setup: a closure that will be called before establishing the connection to the switcher. Use the provided `ControllerConnection` to register callbacks for incoming messages from the switcher.
-	public convenience init(ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->Void = {_ in}) throws {
+	/// - Parameter setup: a closure that will be called before establishing the connection to the switcher. Use the provided ``ControllerConnection`` to register callbacks for incoming messages from the switcher.
+	public convenience init(forSwitcherAt ipAddress: String, eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount), setup: (ControllerConnection)->Void = {_ in}) throws {
 		let socket = try SocketAddress(ipAddress: ipAddress, port: 9910)
 		self.init(socket: socket, eventLoopGroup: eventLoopGroup, setup: setup)
 	}
 
-	public var address: SocketAddress { handler.address }
+	/// The NIO socket address of the switcher to control.
+	public var switcherAddress: SocketAddress { handler.address }
 
 	func connect() {
 		let channel = DatagramBootstrap(group: eventLoop)
@@ -234,6 +231,14 @@ public class Controller {
 		send(message: Do.RequestLockPosition(store: 0, index: slot, type: 1))
 	}
 
+	/// Change a ``VideoSource``s names and corresponding label image.
+	///
+	/// Some ATEM devices cannot render label images on their own and thus require the controller to render the label images. If the ATEM supports it, it will use the image provided by `labelImage` as an overlay to construct its multiview.
+	/// - Parameters:
+	///   - source: The source id
+	///   - labelImage: The new rendered label for the source to use as an overlay in the multiview
+	///   - longName: The new full name for the source
+	///   - shortName: The new short name for the source
 	public func uploadLabel(source: VideoSource, labelImage: Data, longName: String? = nil, shortName: String? = nil) {
 		if longName == nil && shortName == nil {
 			send(message: VideoSource.DoChangeProperties(input: source.rawValue, longName: String(describing: source), shortName: nil))
@@ -253,7 +258,7 @@ public class Controller {
 	}
 
 	deinit {
-		print("🛑 Shutting down connection", address)
+		print("🛑 Shutting down connection", switcherAddress)
 		handler.active = false
 		channel?.whenSuccess({ (channel) in
 			_ = channel.close()
@@ -261,23 +266,30 @@ public class Controller {
 	}
 }
 
-/// A connection of a controller to a switcher. Use it to interact with the switcher: send messages and attach message handlers for incoming `Message`s.
+/// A connection of a controller to a switcher.
 ///
-/// Message handlers are functions that will be executed when a certain type of Message is received by the `Controller`.
+/// Use it to interact with the switcher: send messages and attach message handlers for incoming ``DeserializableMessage``s.
+///
+/// Message handlers are functions that will be executed when a certain type of Message is received by the ``Controller``.
 ///
 /// Attach a handler to a certain type of `Message` by calling
-/// ```
+/// ```swift
 /// connection.when { message: <MessageType> in
 ///		// Handle your message here
 /// }
 /// ```
-/// Replace `<MessageType>` with a concrete type that conforms to the `Message` protocol (eg: `ProgramBusChanged`).
+/// Replace `<MessageType>` with a concrete type that conforms to the ``DeserializableMessage`` protocol (for example <doc:Message/Did/ChangeProgramBus>). Look at `Receiving messages` in``Controller``'s documentation for an example on how to do this.
 public protocol ControllerConnection: AnyObject {
 	/// Sends a message to the connected switcher.
 	///
 	/// - Parameter message: the message that will be sent to the switcher
 	func send(_ message: SerializableMessage)
 
+	/// Sends the specified messages in a new packet.
+	///
+	/// - Parameter messages: A binary stream of concatenated messages
+	///
+	/// Messages are sent in packages. One packet can contain multiple messages. Only use this method when you explicitly need to send your messages in a new packet. Otherwise use ``send(_:)``. The normal ``send(_:)`` method will coalesce messages from different calls and send the in the same package when time and size permits.
 	func sendSeparately(messages: [UInt8])
 
 	/// A function that will be called when the connection is lost
@@ -286,7 +298,7 @@ public protocol ControllerConnection: AnyObject {
 	/// A function that will be called when an error occurs
 	var whenError: (Error)->Void { get set }
 
-	/// Attaches a message handler to a concrete `Message` type. Every time a message of this type comes in, the provided `handler` will be called.
+	/// Attaches a message handler to a concrete type that implements ``DeserializableMessage``. Every time a message of this type comes in, the provided `handler` will be called.
 	/// The handler takes one generic argument `message`. The type of this argument indicates the type that this message handler will be attached to.
 	///
 	/// - Parameter handler: The handler to attach
