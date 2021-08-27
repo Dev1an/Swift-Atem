@@ -164,8 +164,8 @@ public class Controller {
 		}
 	}
 	
-	lazy var uploadManager: UploadManager = {
-		let manager = UploadManager()
+	lazy var uploadManager: MediaTransferManager = {
+		let manager = MediaTransferManager()
 		var lockedStore: UInt16?
 
 		handler.when { [unowned self] (lock: Did.ObtainLock) in

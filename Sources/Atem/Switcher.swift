@@ -9,7 +9,9 @@ import Foundation
 import NIO
 
 extension Switcher {
+	/// A controller that is connected to a ``Switcher`` instance
 	public struct Client {
+		/// The NIO socket address of the connected client
 		public let address: SocketAddress
 		let state: ConnectionState
 	}
@@ -124,14 +126,25 @@ public class Switcher {
 			.bind(to: try! SocketAddress(ipAddress: "0.0.0.0", port: 9910))
 	}
 
+	/// All the controllers that are connected to this switcher
 	public var clients: Dictionary<UInt16,Switcher.Client>.Values {
 		handler.clients.values
 	}
+
+	/// Sends a message to the all connected clients
+	///
+	/// - Parameter message: the message that will be sent
+	public func send(message: SerializableMessage) {
+		channel.eventLoop.execute {
+			self.handler.send(message)
+		}
+	}
+
 }
 
-/// Interact with connections to a switcher.
+/// A group of connections from a switcher to its connected controllers
 ///
-/// Used to send messages to all connected controllers and to attach message handlers to incoming `Message`s.
+/// Used to send messages to all connected controllers and to attach message handlers for incoming `Message`s.
 ///
 /// Handlers are functions that will be executed when a ``DeserializableMessage`` is received by the ``Switcher``.
 ///

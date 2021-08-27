@@ -5,6 +5,7 @@
 //  Created by Damiaan on 05/12/2020.
 //
 
+/// A namespace for media pool related datastructures
 public enum MediaPool {
 	public enum Bank: RawRepresentable {
 		public typealias RawValue = UInt8
