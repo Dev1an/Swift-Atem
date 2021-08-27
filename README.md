@@ -48,7 +48,7 @@ You are now ready to create atem controllers and switchers 😎 !
 
 ## Usage
 
-This library makes use of Apple's DocC to compile beatiful documentation. Make sure to check it out inside Xcode. If you prefer online docs you can also consult the [API Reference on Netlify](https://swift-atem.netlify.app/documentation/atem)![XcodeDocs](/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Documentation.docc/Resources/XcodeDocs.png)
+This library makes use of Apple's DocC to compile beatiful documentation. Make sure to check it out inside Xcode. If you prefer online docs you can also consult the [API Reference on Netlify](https://swift-atem.netlify.app/documentation/atem)![XcodeDocs](./Sources/Atem/Documentation.docc/Resources/XcodeDocs.png)
 
 ### Controller
 
