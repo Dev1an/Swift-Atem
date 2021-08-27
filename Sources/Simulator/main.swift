@@ -87,4 +87,6 @@ let switcher = Switcher { controllers in
 	
 }
 
-dispatchMain()
+try switcher.channel.wait().closeFuture.wait()
+
+print("switcher channel closed")
