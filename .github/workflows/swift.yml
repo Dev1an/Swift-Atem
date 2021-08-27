@@ -21,10 +21,13 @@ jobs:
             TEST: "swift test -v --enable-test-discovery"
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Swift version info
-      run: swift --version
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: ${{matrix.TEST}}
+     - uses: fwal/setup-swift@v1
+       with:
+         swift-version: '5.4'
+     - uses: actions/checkout@v2
+     - name: Swift version info
+       run: swift --version
+     - name: Build
+       run: swift build -v
+     - name: Run tests
+       run: ${{matrix.TEST}}
