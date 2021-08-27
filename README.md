@@ -28,7 +28,7 @@ When starting a new project: create a Swift package via [SPM](https://swift.org/
 Then add this library to the [package description](https://github.com/apple/swift-package-manager/blob/master/Documentation/PackageDescriptionV4.md#dependencies)'s dependencies
 
 ```swift
-.package(url: "https://github.com/Dev1an/Swift-Atem", from: "1.0.0")
+.package(url: "https://github.com/Dev1an/Swift-Atem", from: "2.0.0")
 ```
 
 And resolve this new dependency
@@ -48,14 +48,14 @@ You are now ready to create atem controllers and switchers 😎 !
 
 ## Usage
 
-After looking at the following examples, study the [API reference](https://dev1an.github.io/Swift-Atem/) for more details.
+This library makes use of Apple's DocC to compile beatiful documentation. Make sure to check it out inside Xcode. If you prefer online docs you can also consult the [API Reference on Netlify](https://swift-atem.netlify.app/documentation/atem)![XcodeDocs](/Users/damiaan/Documents/Projecten/AtemSimulator/Swift-Atem/Sources/Atem/Documentation.docc/Resources/XcodeDocs.png)
 
 ### Controller
 
 This example shows how to create a controller that connects to a swicther at ip address 10.1.0.67 and print a message whenever the preview bus changes.
 
 ```swift
-try Controller(ipAddress: "10.1.0.67") { connection in
+try Controller(forSwitcherAt: "10.1.0.67") { connection in
   connection.when{ (change: PreviewBusChanged) in
     print(change) // prints: 'Preview bus changed to input(x)'
   }
@@ -67,7 +67,7 @@ try Controller(ipAddress: "10.1.0.67") { connection in
 To send a message to the switcher use the `send(...)` method like this:
 
 ```swift
-controller.send(message: ChangeTransitionPosition(to: 5000))
+controller.send(message: Do.ChangeTransitionPosition(to: 5000) )
 ```
 
 ### Switcher
@@ -78,38 +78,38 @@ This snippet is also included in a seperate SPM target "Simulator" (./Sources/Si
 
 ```swift
 let switcher = Switcher { controllers in
-  controllers.when { (change: ChangePreviewBus, _) in
-    controllers.send(
-      PreviewBusChanged(
+	controllers.when { (change: Do.ChangePreviewBus, _) in
+		controllers.send(
+      Did.ChangePreviewBus(
         to: change.previewBus,
         mixEffect: change.mixEffect
       )
     )
   }
-  controllers.when{ (change: ChangeProgramBus, _) in
-    controllers.send(
-      ProgramBusChanged(
+	controllers.when{ (change: Do.ChangeProgramBus, _) in
+		controllers.send(
+      Did.ChangeProgramBus(
         to: change.programBus,
         mixEffect: change.mixEffect
       )
     )
-  }
-  controllers.when { (change: ChangeTransitionPosition, _) in
-    controllers.send(
-      TransitionPositionChanged(
-        to: change.position,
-        remainingFrames: 250 - UInt8(change.position/40),
-        mixEffect: change.mixEffect
-      )
-    )
-  }
-  controllers.when { (change: ChangeAuxiliaryOutput, _) in
-    controllers.send(
-      AuxiliaryOutputChanged(
+	}
+	controllers.when { (change: Do.ChangeTransitionPosition, _) in
+		controllers.send(
+			Did.ChangeTransitionPosition(
+                to: change.position,
+                remainingFrames: 250 - UInt8(change.position/40),
+                mixEffect: change.mixEffect
+            )
+        )
+    }
+	controllers.when { (change: Do.ChangeAuxiliaryOutput, _) in
+		controllers.send(
+      Did.ChangeAuxiliaryOutput(
         source: change.source,
         output: change.output
       )
     )
-  }
+	}
 }
 ```
