@@ -7,7 +7,9 @@
 
 import Foundation
 
-/// Describes the state of a tally light. Possible values are
+/// Describes the state of a tally light.
+///
+/// Possible values are
 ///  - `.off`
 ///  - `.program`
 ///  - `.preview`
