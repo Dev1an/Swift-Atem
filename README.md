@@ -5,7 +5,7 @@
 
 # Atem network protocol implementation
 
-Implementation of BlackMagicDesign's ATEM communication protocol in Swift. It is written on top of Apple's  networking library [NIO](https://github.com/apple/swift-nio) and implements both sides of the protocol: the control panel and the switcher side. This means that you can not only use it to control atem switchers but also to connect to your control panels without the need for a switcher. Opening a whole new world of applications for the Atem control panels. An example can be found at [Atem-Simulator](https://github.com/Dev1an/Atem-Simulator)
+Implementation of BlackMagicDesign's ATEM communication protocol in Swift. It is written on top of Apple's  networking library [NIO](https://github.com/apple/swift-nio) and implements both sides of the protocol: the control panel and the switcher side. This means that you can not only use it to control physical atem switchers but you can also use it to connect your control panels to a self made software switcher without the need for an actual physical switcher. Opening a whole new world of applications for the Atem control panels. An example can be found at [Atem-Simulator](https://github.com/Dev1an/Atem-Simulator)
 
 Starting from version 1.0.0 this package uses Swift 5 and NIO2.
 
@@ -28,7 +28,7 @@ When starting a new project: create a Swift package via [SPM](https://swift.org/
 Then add this library to the [package description](https://github.com/apple/swift-package-manager/blob/master/Documentation/PackageDescriptionV4.md#dependencies)'s dependencies
 
 ```swift
-.package(url: "https://github.com/Dev1an/Swift-Atem", from: "2.0.0")
+.package(url: "https://github.com/Dev1an/Swift-Atem", from: .init(2, 0, 0, prereleaseIdentifiers: ["alpha"]))
 ```
 
 And resolve this new dependency
@@ -48,7 +48,7 @@ You are now ready to create atem controllers and switchers 😎 !
 
 ## Usage
 
-This library makes use of Apple's DocC to compile beatiful documentation. Make sure to check it out inside Xcode. If you prefer online docs you can also consult the [API Reference on Netlify](https://swift-atem.netlify.app/documentation/atem)![XcodeDocs](./Sources/Atem/Documentation.docc/Resources/XcodeDocs.png)
+This library uses Apple's DocC to compile beatiful documentation. Make sure to check it out inside Xcode. If you prefer online docs you can also consult the [API Reference on Netlify](https://swift-atem.netlify.app/documentation/atem)![XcodeDocs](./Sources/Atem/Documentation.docc/Resources/XcodeDocs.png)
 
 ### Controller
 
