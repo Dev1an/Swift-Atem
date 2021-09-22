@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://img.shields.io/badge/swift-5.1-orange.svg" alt="Swift 5.1">
+    <img src="https://img.shields.io/badge/swift-5.5-orange.svg" alt="Swift 5.5">
     <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-brightgreen.svg" alt="Platforms: macOS & Linux">
 </p>
 
