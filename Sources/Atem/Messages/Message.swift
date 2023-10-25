@@ -20,7 +20,7 @@ public enum Message {
 		/// A `UInt32` representation of the title
 		let number: UInt32
 
-		init(string: String) {
+		public init(string: String) {
 			description = string
 			number = Array(string.utf8).withUnsafeBytes{ $0.load(as: UInt32.self).byteSwapped }
 		}
